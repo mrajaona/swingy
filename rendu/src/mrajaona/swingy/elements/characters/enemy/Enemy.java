@@ -1,15 +1,13 @@
-package mrajaona.swingy.elements.characters.hero;
+package mrajaona.swingy.elements.characters.enemy;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import mrajaona.swingy.elements.characters.CharacterModel;
 
-public class Hero extends CharacterModel {
+public class Enemy extends CharacterModel {
 	
 	@NotNull @NotEmpty
-	private String	heroName;
-	@NotNull @NotEmpty
-	private String	heroClass;
+	private String	enemyType;
 	
 }

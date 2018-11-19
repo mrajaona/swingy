@@ -17,7 +17,7 @@ public abstract class CharacterController {
 	// abstract void die();
 	
 	public void updateView() {
-		
+		view.show();
 	}
 	
 }
