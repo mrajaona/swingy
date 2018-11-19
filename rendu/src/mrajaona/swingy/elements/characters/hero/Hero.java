@@ -12,4 +12,9 @@ public class Hero extends CharacterModel {
 	@NotNull @NotEmpty
 	private String	heroClass;
 	
+	public Hero() {
+		super(10, 10, 100);
+		heroName	= "heroName";
+		heroClass	= "heroClass";
+	}
 }

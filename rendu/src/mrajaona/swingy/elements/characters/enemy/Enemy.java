@@ -10,4 +10,15 @@ public class Enemy extends CharacterModel {
 	@NotNull @NotEmpty
 	private String	enemyType;
 	
+	public Enemy(
+			int level,
+			int experience,
+			int baseAttack,
+			int baseDefense,
+			int baseHitPoints
+			) {
+		super(level, experience, baseAttack, baseDefense, baseHitPoints);
+		enemyType	= "enemyType";
+	}
+	
 }
