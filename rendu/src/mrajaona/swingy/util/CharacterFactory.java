@@ -10,8 +10,22 @@ public class CharacterFactory {
 		return hero;
 	}
 	
-	public Enemy	newEnemy() {
-		Enemy enemy = new Enemy();
+	public Enemy	newEnemy(
+			String enemyType,
+			int level,
+			int experience,
+			int baseAttack,
+			int baseDefense,
+			int baseHitPoints
+			) {
+		Enemy enemy = new Enemy(
+				enemyType,
+				level,
+				experience,
+				baseAttack,
+				baseDefense,
+				baseHitPoints
+				);
 		
 		return enemy;
 	}

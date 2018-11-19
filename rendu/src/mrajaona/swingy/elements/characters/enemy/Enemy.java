@@ -11,6 +11,7 @@ public class Enemy extends CharacterModel {
 	private String	enemyType;
 	
 	public Enemy(
+			String enemyType,
 			int level,
 			int experience,
 			int baseAttack,
@@ -18,7 +19,7 @@ public class Enemy extends CharacterModel {
 			int baseHitPoints
 			) {
 		super(level, experience, baseAttack, baseDefense, baseHitPoints);
-		enemyType	= "enemyType";
+		this.enemyType	= enemyType;
 	}
 	
 }

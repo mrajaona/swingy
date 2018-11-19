@@ -67,7 +67,8 @@ public class CharacterModel {
 	public	CharacterModel(
 			int baseAttack,
 			int baseDefense,
-			int baseHitPoints) {
+			int baseHitPoints
+			) {
 		this.level			= 1;
 		this.experience		= 0;
 		this.baseAttack		= baseAttack;
