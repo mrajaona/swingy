@@ -37,7 +37,34 @@ public class HeroFactory {
             WARRIOR,
             new HeroCreator() {
                 public Hero make(final String heroName) {
-                    return (new Hero(heroName, WARRIOR, 10, 10, 100));
+                    return (new Hero(heroName, WARRIOR, 10, 25, 75));
+                }
+            }
+        );
+
+        newMap.put(
+            THIEF,
+            new HeroCreator() {
+                public Hero make(final String heroName) {
+                    return (new Hero(heroName, THIEF, 20, 20, 50));
+                }
+            }
+        );
+
+        newMap.put(
+            MAGE,
+            new HeroCreator() {
+                public Hero make(final String heroName) {
+                    return (new Hero(heroName, MAGE, 30, 10, 50));
+                }
+            }
+        );
+
+        newMap.put(
+            PRIEST,
+            new HeroCreator() {
+                public Hero make(final String heroName) {
+                    return (new Hero(heroName, PRIEST, 10, 10, 150));
                 }
             }
         );

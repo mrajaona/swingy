@@ -12,7 +12,7 @@ public class EnemyFactory {
     // Nested interfaces
 
     private interface EnemyCreator {
-        public Enemy make(final String enemyType, final int enemyLevel);
+        public Enemy make(final int enemyLevel);
     }
 
     // Enemy types
@@ -32,8 +32,17 @@ public class EnemyFactory {
         newMap.put(
             SLIME,
             new EnemyCreator() {
-                public Enemy make(final String enemytype, int enemyLevel) {
-                    return (new Enemy(enemytype, enemyLevel, 100, 10, 10, 100));
+                public Enemy make(int lvl) {
+                    return (new Enemy(SLIME, lvl, lvl * 10, lvl * 1, lvl * 1, lvl * 5));
+                }
+            }
+        );
+
+        newMap.put(
+            GOBLIN,
+            new EnemyCreator() {
+                public Enemy make(int lvl) {
+                    return (new Enemy(GOBLIN, lvl, lvl * 25, lvl * 5, lvl * 5, lvl * 15));
                 }
             }
         );
@@ -50,7 +59,7 @@ public class EnemyFactory {
             return null;
         }
 
-        Enemy enemy = creator.make(enemyType, enemyLevel);
+        Enemy enemy = creator.make(enemyLevel);
 
         return (enemy);
     }
