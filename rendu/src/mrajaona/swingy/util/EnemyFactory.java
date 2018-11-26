@@ -6,7 +6,6 @@ import java.util.Collections;
 
 import mrajaona.swingy.elements.characters.enemy.Enemy;
 
-
 public class EnemyFactory {
 
     // Nested interfaces
