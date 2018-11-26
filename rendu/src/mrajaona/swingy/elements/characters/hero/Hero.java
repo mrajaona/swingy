@@ -12,9 +12,14 @@ public class Hero extends CharacterModel {
 	@NotNull @NotEmpty
 	private String	heroClass;
 	
-	public Hero() {
-		super(10, 10, 100);
-		heroName	= "heroName";
-		heroClass	= "heroClass";
+	public Hero(
+		final String heroName,
+		final String heroClass,
+		final int baseAttack,
+		final int baseDefense,
+		final int baseHitPoints) {
+		super(baseAttack, baseDefense, baseHitPoints);
+		this.heroName	= heroName;
+		this.heroClass	= heroClass;
 	}
 }
