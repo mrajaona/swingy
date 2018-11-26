@@ -9,4 +9,6 @@ public class HeroController extends CharacterController {
 		System.out.println("Attack");
 	}
 
+	// level up : level * 1000 + (level - 1)^2 * 450
+
 }

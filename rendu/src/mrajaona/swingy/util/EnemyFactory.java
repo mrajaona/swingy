@@ -3,10 +3,24 @@ package mrajaona.swingy.util;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import mrajaona.swingy.elements.characters.enemy.Enemy;
 
 public class EnemyFactory {
+
+	private static EnemyFactory factory = new EnemyFactory();
+
+	private EnemyFactory() {}
+
+	public static EnemyFactory getFactory() {
+		return (factory);
+	}
 
     // Nested interfaces
 
@@ -58,9 +72,28 @@ public class EnemyFactory {
             return null;
         }
 
-        Enemy enemy = creator.make(enemyLevel);
+        //Create ValidatorFactory which returns validator
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+         
+        //It validates bean instances
+        Validator validator = factory.getValidator();
 
-        return (enemy);
+        Enemy enemy = creator.make(enemyLevel);
+ 
+        //Validate bean
+        Set<ConstraintViolation<Enemy>> constraintViolations = validator.validate(enemy);
+ 
+        //Show errors
+        if (constraintViolations.size() > 0) {
+            for (ConstraintViolation<Enemy> violation : constraintViolations) {
+                System.out.println(violation.getMessage());
+            }
+            return (null);
+        } else {
+            System.out.println("Valid Object");
+        	return (enemy);
+        }
+
     }
 
 }

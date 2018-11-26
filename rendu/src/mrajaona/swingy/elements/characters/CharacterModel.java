@@ -1,15 +1,16 @@
 package mrajaona.swingy.elements.characters;
 
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 public class CharacterModel {
 
 	// members
 	
-	@Positive(message = "Invalid value")
+	@Positive(message = "Invalid value (level)")
 	private int	level;
-	// @Max(value = level*1000+(level - 1)^2*450, message = "Too much experience")
-	@Positive(message = "Invalid value (experience)")
+	
+	@PositiveOrZero(message = "Invalid value (experience)")
 	private int	experience;
 
 	@Positive(message = "Invalid value (base attack)")

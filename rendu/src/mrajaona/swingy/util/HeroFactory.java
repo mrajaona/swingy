@@ -1,14 +1,28 @@
 package mrajaona.swingy.util;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Collections;
+import java.util.Set;
 
-import mrajaona.swingy.elements.characters.enemy.Enemy;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 import mrajaona.swingy.elements.characters.hero.Hero;
 
 public class HeroFactory {
 	
+    private static HeroFactory factory = new HeroFactory();
+
+    private HeroFactory() {}
+
+    public static HeroFactory getFactory() {
+        return (factory);
+    }
+
     // Nested interfaces
 
     private interface HeroCreator {
@@ -74,14 +88,46 @@ public class HeroFactory {
 
     // Create hero
 
-    public Hero     newHero(final String heroName, final String heroClass) {
-        HeroCreator creator = CREATOR_MAP.get(heroClass);
+    public Hero     newHero() {
+        Scanner inputScanner = new Scanner(System.in);
 
-        if (creator == null) {
-            return null;
+        HeroCreator creator = null;
+        String  heroClass;
+
+        while (creator == null) {
+            System.out.println("Choose your class :");
+            heroClass   = inputScanner.nextLine(); // wait for user input
+            creator     = CREATOR_MAP.get(heroClass);
         }
 
-        Hero hero = creator.make(heroName);
+        //Create ValidatorFactory which returns validator
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+         
+        //It validates bean instances
+        Validator validator = factory.getValidator();
+
+        String heroName;
+        Hero hero = null;
+
+        while (hero == null) {
+            System.out.println("Name your hero :");
+            heroName    = inputScanner.nextLine(); // wait for user input
+            hero   = creator.make(heroName);
+
+            //Validate bean
+            Set<ConstraintViolation<Hero>> constraintViolations = validator.validate(hero);
+     
+            //Show errors
+            if (constraintViolations.size() > 0) {
+                for (ConstraintViolation<Hero> violation : constraintViolations) {
+                    System.out.println(violation.getMessage());
+                }
+                hero = null;
+            } else {
+                System.out.println("Valid Object");
+            }
+
+        }
 
         return (hero);
     }

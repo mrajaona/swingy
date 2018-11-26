@@ -1,13 +1,12 @@
 package mrajaona.swingy.elements.characters.enemy;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import mrajaona.swingy.elements.characters.CharacterModel;
 
 public class Enemy extends CharacterModel {
 	
-	@NotNull @NotEmpty
+	@NotBlank(message = "Please define the enemy type")
 	private String	enemyType;
 	
 	public Enemy(

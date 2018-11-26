@@ -1,15 +1,15 @@
 package mrajaona.swingy.elements.characters.hero;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import mrajaona.swingy.elements.characters.CharacterModel;
 
 public class Hero extends CharacterModel {
 	
-	@NotNull @NotEmpty
+	@NotBlank(message = "Please name your hero")
 	private String	heroName;
-	@NotNull @NotEmpty
+
+	@NotBlank(message = "Please choose a class")
 	private String	heroClass;
 	
 	public Hero(
