@@ -14,6 +14,7 @@ public abstract class CharacterController {
 	// methods
 		
 	public abstract void attack(CharacterController target);
+	// public abstract void levelUp();
 	// abstract void die();
 	
 	public void updateView() {

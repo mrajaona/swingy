@@ -1,9 +1,8 @@
 package mrajaona.swingy.game;
 
-// import java.util.Scanner; // user input on console
-
-import mrajaona.swingy.util.EnemyFactory;
-import mrajaona.swingy.util.HeroFactory;
+import mrajaona.swingy.elements.characters.enemy.EnemyFactory;
+import mrajaona.swingy.elements.characters.hero.Hero;
+import mrajaona.swingy.elements.characters.hero.HeroFactory;
 
 public class Swingy {
 
@@ -22,7 +21,18 @@ public class Swingy {
         EnemyFactory eFactory   = EnemyFactory.getFactory();
         HeroFactory hFactory    = HeroFactory.getFactory();
         eFactory.newEnemy("Slime", 1);
-        hFactory.newHero();
+        Hero hero = hFactory.newHero();
+
+        System.out.println(
+            "Name       : " + hero.getHeroName() + System.lineSeparator() +
+            "Class      : " + hero.getHeroClass() + System.lineSeparator() +
+            "Level      : " + hero.getLevel() + System.lineSeparator() +
+            "Experience : " + hero.getExperience() + System.lineSeparator() +
+            "Base Atk   : " + hero.getBaseAttack() + System.lineSeparator() +
+            "Base Def   : " + hero.getBaseDefense() + System.lineSeparator() +
+            "Base HP    : " + hero.getBaseHitPoints()
+		);
+        
     }
     
 }

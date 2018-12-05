@@ -1,4 +1,4 @@
-package mrajaona.swingy.util;
+package mrajaona.swingy.elements.characters.enemy;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -10,17 +10,15 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import mrajaona.swingy.elements.characters.enemy.Enemy;
-
 public class EnemyFactory {
 
-	private static EnemyFactory factory = new EnemyFactory();
+    private static EnemyFactory factory = new EnemyFactory();
 
-	private EnemyFactory() {}
+    private EnemyFactory() {}
 
-	public static EnemyFactory getFactory() {
-		return (factory);
-	}
+    public static EnemyFactory getFactory() {
+        return (factory);
+    }
 
     // Nested interfaces
 
@@ -30,9 +28,9 @@ public class EnemyFactory {
 
     // Enemy types
 
-    public static final String SLIME       = "Slime";
-    public static final String GOBLIN      = "Goblin";
-	
+    private static final String SLIME           = "Slime";
+    private static final String GOBLIN          = "Goblin";
+    
     private static final String [] enemyTypes    = {
             SLIME,
             GOBLIN
@@ -91,7 +89,7 @@ public class EnemyFactory {
             return (null);
         } else {
             System.out.println("Valid Object");
-        	return (enemy);
+            return (enemy);
         }
 
     }
