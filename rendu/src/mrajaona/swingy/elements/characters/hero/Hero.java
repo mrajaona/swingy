@@ -20,6 +20,12 @@ public class Hero extends CharacterModel {
     @NotBlank(message = "Invalid Class.")
     @Getter @Setter(AccessLevel.PROTECTED) private String  heroClass;
 
+/*
+    @Getter @Setter(AccessLevel.PROTECTED) private Helm     helm;
+    @Getter @Setter(AccessLevel.PROTECTED) private Armor    armor;
+    @Getter @Setter(AccessLevel.PROTECTED) private Weapon   weapon;
+*/
+
     // Hero types
 
     private static final String WARRIOR  = "Warrior";
@@ -70,24 +76,31 @@ public class Hero extends CharacterModel {
 
     */
 
+    // new
     public Hero() {
         super();
     }
 
+    // load
     public Hero(
         final String heroName,
         final String heroClass,
         final int level,
         final int experience,
         final int baseAttack,
+        final int attack,
         final int baseDefense,
-        final int baseHitPoints) {
-        super(level, experience, baseAttack, baseDefense, baseHitPoints);
+        final int defense,
+        final int baseHitPoints,
+        final int maxHitPoints,
+        final int hitPoints
+        ) {
+        super(level, experience, baseAttack, attack, baseDefense, defense, baseHitPoints, maxHitPoints, hitPoints);
         this.heroName   = heroName;
         this.heroClass  = heroClass;
     }
 
-    public void initStats() {
+    protected void initStats() {
         int[] statsArray = BASE_STATS_MAP.get(heroClass);
 
         if (statsArray == null) {
@@ -98,6 +111,7 @@ public class Hero extends CharacterModel {
             setBaseDefense(statsArray[1] * 5);
             setDefense(this.getBaseDefense());
             setBaseHitPoints(statsArray[2] * 5 * 5);
+            setMaxHitPoints(this.getBaseHitPoints());
             setHitPoints(this.getBaseHitPoints());
         }
 

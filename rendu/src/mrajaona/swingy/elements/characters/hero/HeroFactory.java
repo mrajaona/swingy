@@ -20,7 +20,7 @@ public class HeroFactory {
 
     // Create hero
 
-    public Hero    newHero() {
+    public HeroController   newHero() {
         Scanner inputScanner = new Scanner(System.in);
 
         //Create ValidatorFactory which returns validator
@@ -29,7 +29,9 @@ public class HeroFactory {
         //It validates bean instances
         Validator validator = factory.getValidator();
 
-        Hero hero = new Hero();
+        Hero hero                   = new Hero();
+        HeroView view               = new HeroView();
+        HeroController controller   = new HeroController(hero, view);
 
         boolean valid = false;
 
@@ -61,7 +63,7 @@ public class HeroFactory {
 
         }
 
-        return (hero);
+        return (controller);
 
     }
 
