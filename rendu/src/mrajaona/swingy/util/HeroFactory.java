@@ -1,12 +1,15 @@
-package mrajaona.swingy.elements.characters.hero;
+package mrajaona.swingy.util;
 
-import java.util.Scanner;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import mrajaona.swingy.elements.characters.hero.Hero;
+import mrajaona.swingy.elements.characters.hero.HeroController;
+import mrajaona.swingy.elements.characters.hero.HeroView;
 
 public class HeroFactory {
     
@@ -21,7 +24,6 @@ public class HeroFactory {
     // Create hero
 
     public HeroController   newHero() {
-        Scanner inputScanner = new Scanner(System.in);
 
         //Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -37,16 +39,7 @@ public class HeroFactory {
 
         while (valid == false) {
 
-            if (hero.getHeroClass() == null || hero.getHeroClass().trim().isEmpty()) {
-                System.out.println("Choose your class (Warrior, Thief, Mage, Priest) :");
-                hero.setHeroClass(inputScanner.nextLine());
-            }
-            if (hero.getHeroName() == null || hero.getHeroName().trim().isEmpty()) {
-                System.out.println("Name your hero :");
-                hero.setHeroName(inputScanner.nextLine());
-            }
-
-            hero.initStats();
+            controller.initHero();
 
             //Validate bean
             Set<ConstraintViolation<Hero>> constraintViolations = validator.validate(hero);

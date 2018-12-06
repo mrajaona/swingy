@@ -1,7 +1,7 @@
 package mrajaona.swingy.game;
 
 import mrajaona.swingy.elements.characters.hero.HeroController;
-import mrajaona.swingy.elements.characters.hero.HeroFactory;
+import mrajaona.swingy.util.HeroFactory;
 
 public class Swingy {
 

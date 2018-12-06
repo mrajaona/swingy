@@ -1,5 +1,7 @@
 package mrajaona.swingy.elements.characters.hero;
 
+import java.util.Scanner;
+
 import javax.validation.constraints.NotNull;
 
 import mrajaona.swingy.elements.artifacts.Armor;
@@ -13,6 +15,29 @@ public class HeroController extends CharacterController {
     private Hero        model;
     @NotNull
     private HeroView    view;
+
+    @SuppressWarnings("unused")
+    private HeroController() {}
+
+    public HeroController(Hero model, HeroView view) {
+        this.model = model;
+        this.view  = view;
+    }
+
+    public void initHero() {
+        Scanner inputScanner = new Scanner(System.in);
+        
+        if (model.getHeroClass() == null || model.getHeroClass().trim().isEmpty()) {
+            System.out.println("Choose your class (Warrior, Thief, Mage, Priest) :");
+            model.setHeroClass(inputScanner.nextLine());
+        }
+        if (model.getHeroName() == null || model.getHeroName().trim().isEmpty()) {
+            System.out.println("Name your hero :");
+            model.setHeroName(inputScanner.nextLine());
+        }
+
+        model.initStats();
+    }
 
     @Override
     public void attack(CharacterController target) {
@@ -46,14 +71,6 @@ public class HeroController extends CharacterController {
     // level up : level * 1000 + (level - 1)^2 * 450
 
     // ********************************************
-
-    @SuppressWarnings("unused")
-    private HeroController() {}
-
-    public HeroController(Hero model, HeroView view) {
-        this.model = model;
-        this.view  = view;
-    }
 
     @Override
 	public void updateView() {

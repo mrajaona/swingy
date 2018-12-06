@@ -1,5 +1,6 @@
-package mrajaona.swingy.elements.characters.enemy;
+package mrajaona.swingy.util;
 
+/*
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
@@ -10,8 +11,11 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-public class EnemyFactory {
+import mrajaona.swingy.elements.characters.enemy.Enemy;
+*/
 
+public class EnemyFactory {
+/*
     private static EnemyFactory factory = new EnemyFactory();
 
     private EnemyFactory() {}
@@ -93,5 +97,5 @@ public class EnemyFactory {
         }
 
     }
-
+*/
 }
