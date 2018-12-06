@@ -75,5 +75,5 @@ public class HeroController extends CharacterController {
 	public void updateView() {
         view.show(model);
     }
-    
+
 }

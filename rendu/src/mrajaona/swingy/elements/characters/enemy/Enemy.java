@@ -5,10 +5,10 @@ import javax.validation.constraints.NotBlank;
 import mrajaona.swingy.elements.characters.CharacterModel;
 
 public class Enemy extends CharacterModel {
-    
+
     @NotBlank(message = "Please define the enemy type")
     private String  enemyType;
-    
+
     public Enemy(
             String enemyType,
             int level,
@@ -20,5 +20,5 @@ public class Enemy extends CharacterModel {
         super(level, experience, baseAttack, baseDefense, baseHitPoints);
         this.enemyType  = enemyType;
     }
-    
+
 }

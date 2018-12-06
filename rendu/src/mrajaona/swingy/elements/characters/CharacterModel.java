@@ -10,10 +10,10 @@ import lombok.Setter;
 public class CharacterModel {
 
     // members
-    
+
     @Positive(message = "Invalid value (level)")
     @Setter(AccessLevel.PROTECTED) @Getter private int level;
-    
+
     @PositiveOrZero(message = "Invalid value (experience)")
     @Setter(AccessLevel.PROTECTED) @Getter private int experience;
 
@@ -23,7 +23,7 @@ public class CharacterModel {
     @Setter(AccessLevel.PROTECTED) @Getter private int baseDefense;
     @Positive(message = "Invalid value (base hit points)")
     @Setter(AccessLevel.PROTECTED) @Getter private int baseHitPoints;
-    
+
     @PositiveOrZero(message = "Invalid value (attack)")
     @Setter(AccessLevel.PROTECTED) @Getter private int attack;
     @PositiveOrZero(message = "Invalid value (defense)")
@@ -44,10 +44,10 @@ public class CharacterModel {
         this.baseDefense    = 0;
         this.defense        = this.baseDefense;
         this.baseHitPoints  = 1;
-        this.maxHitPoints   = this.baseHitPoints;  
-        this.hitPoints      = this.baseHitPoints;  
+        this.maxHitPoints   = this.baseHitPoints;
+        this.hitPoints      = this.baseHitPoints;
     }
-    
+
     // new enemy
     public  CharacterModel(
             int level,
@@ -63,7 +63,7 @@ public class CharacterModel {
         this.baseDefense    = baseDefense;
         this.defense        = this.baseDefense;
         this.baseHitPoints  = baseHitPoints;
-        this.maxHitPoints   = this.baseHitPoints;  
+        this.maxHitPoints   = this.baseHitPoints;
         this.hitPoints      = this.baseHitPoints;
     }
 
@@ -86,7 +86,7 @@ public class CharacterModel {
         this.baseDefense    = baseDefense;
         this.defense        = defense;
         this.baseHitPoints  = baseHitPoints;
-        this.maxHitPoints   = maxHitPoints;  
+        this.maxHitPoints   = maxHitPoints;
         this.hitPoints      = hitPoints;
     }
 

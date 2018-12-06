@@ -13,7 +13,7 @@ import mrajaona.swingy.elements.characters.hero.HeroController;
 import mrajaona.swingy.elements.characters.hero.HeroView;
 
 public class HeroFactory {
-    
+
     private static HeroFactory factory = new HeroFactory();
 
     private HeroFactory() {}
@@ -28,7 +28,7 @@ public class HeroFactory {
 
         //Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-         
+
         //It validates bean instances
         Validator validator = factory.getValidator();
 
@@ -46,7 +46,7 @@ public class HeroFactory {
 
             //Validate bean
             Set<ConstraintViolation<Hero>> constraintViolations = validator.validate(hero);
-     
+
             //Show errors
             if (constraintViolations.size() > 0) {
                 for (ConstraintViolation<Hero> violation : constraintViolations) {

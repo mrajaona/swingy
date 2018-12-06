@@ -32,7 +32,7 @@ public class Hero extends CharacterModel {
     private static final String THIEF    = "Thief";
     private static final String MAGE     = "Mage";
     private static final String PRIEST   = "Priest";
-    
+
     private static final String [] heroTypes    = {
         WARRIOR,
         THIEF,

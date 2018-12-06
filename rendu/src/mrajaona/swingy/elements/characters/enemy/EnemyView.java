@@ -7,7 +7,7 @@ public class EnemyView implements CharacterView {
 
 	@Override
 	public void show(CharacterModel model) {
-		
+
 	}
-	
+
 }

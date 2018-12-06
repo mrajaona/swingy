@@ -22,5 +22,5 @@ public class HeroView implements CharacterView {
             "HP         : " + hero.getHitPoints()
         );
     }
-    
+
 }

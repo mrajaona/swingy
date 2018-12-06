@@ -34,7 +34,7 @@ public class EnemyFactory {
 
     private static final String SLIME           = "Slime";
     private static final String GOBLIN          = "Goblin";
-    
+
     private static final String [] enemyTypes    = {
             SLIME,
             GOBLIN
@@ -76,15 +76,15 @@ public class EnemyFactory {
 
         //Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-         
+
         //It validates bean instances
         Validator validator = factory.getValidator();
 
         Enemy enemy = creator.make(enemyLevel);
- 
+
         //Validate bean
         Set<ConstraintViolation<Enemy>> constraintViolations = validator.validate(enemy);
- 
+
         //Show errors
         if (constraintViolations.size() > 0) {
             for (ConstraintViolation<Enemy> violation : constraintViolations) {
