@@ -42,39 +42,34 @@ public class Hero extends CharacterModel {
 
     // Hero base stats
 
-    protected static final Map <String, int[]> BASE_STATS_MAP = initBaseStatsMap();
-    private static final Map <String, int[]> initBaseStatsMap() {
-        Map <String, int[]> newMap = new HashMap <String, int[]> (heroTypes.length);
+    private static enum BaseStats {
+        WARRIOR_BASE_STATS(2, 5, 3),
+        THIEF_BASE_STATS(4, 4, 2),
+        MAGE_BASE_STATS(6, 2, 2),
+        PRIEST_BASE_STATS(2, 2, 6);
 
-        newMap.put(
-            WARRIOR,
-            new int[] {2, 5, 3}
-        );
+        int atk;
+        int def;
+        int hp;
 
-        newMap.put(
-            THIEF,
-            new int[] {4, 4, 2}
-        );
+        private BaseStats(int atk, int def, int hp) {
+            this.atk = atk;
+            this.def = def;
+            this.hp  = hp;
+        }
+    }
 
-        newMap.put(
-            MAGE,
-            new int[] {6, 2, 2}
-        );
+    protected static final Map <String, BaseStats> BASE_STATS_MAP = initBaseStatsMap();
+    private static final Map <String, BaseStats> initBaseStatsMap() {
+        Map <String, BaseStats> newMap = new HashMap <String, BaseStats> (heroTypes.length);
 
-        newMap.put(
-            PRIEST,
-            new int[] {2, 2, 6}
-        );
+        newMap.put(WARRIOR, BaseStats.WARRIOR_BASE_STATS);
+        newMap.put(THIEF,   BaseStats.THIEF_BASE_STATS);
+        newMap.put(MAGE,    BaseStats.MAGE_BASE_STATS);
+        newMap.put(PRIEST,  BaseStats.PRIEST_BASE_STATS);
 
         return (Collections.unmodifiableMap(newMap));
     }
-
-    /*
-        atk, def, hp
-        base: nb * 5
-        hp: base * 5
-
-    */
 
     // new
     public Hero() {
@@ -101,16 +96,16 @@ public class Hero extends CharacterModel {
     }
 
     protected void initStats() {
-        int[] statsArray = BASE_STATS_MAP.get(heroClass);
+        BaseStats stats = BASE_STATS_MAP.get(heroClass);
 
-        if (statsArray == null) {
+        if (stats == null) {
             heroClass = new String();
         } else {
-            setBaseAttack(statsArray[0] * 5);
+            setBaseAttack(stats.atk * 5);
             setAttack(this.getBaseAttack());
-            setBaseDefense(statsArray[1] * 5);
+            setBaseDefense(stats.def * 5);
             setDefense(this.getBaseDefense());
-            setBaseHitPoints(statsArray[2] * 5 * 5);
+            setBaseHitPoints(stats.hp * 5 * 5);
             setMaxHitPoints(this.getBaseHitPoints());
             setHitPoints(this.getBaseHitPoints());
         }
