@@ -1,5 +1,6 @@
 package mrajaona.swingy.util;
 
+import java.util.Scanner;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -31,6 +32,8 @@ public class HeroFactory {
         //It validates bean instances
         Validator validator = factory.getValidator();
 
+        Scanner inputScanner = new Scanner(System.in);
+
         Hero hero                   = new Hero();
         HeroView view               = new HeroView();
         HeroController controller   = new HeroController(hero, view);
@@ -39,7 +42,7 @@ public class HeroFactory {
 
         while (valid == false) {
 
-            controller.initHero();
+            controller.initHero(inputScanner);
 
             //Validate bean
             Set<ConstraintViolation<Hero>> constraintViolations = validator.validate(hero);
@@ -55,6 +58,8 @@ public class HeroFactory {
             }
 
         }
+
+        inputScanner.close();
 
         return (controller);
 

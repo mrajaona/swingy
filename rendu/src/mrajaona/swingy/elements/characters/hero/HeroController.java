@@ -24,9 +24,8 @@ public class HeroController extends CharacterController {
         this.view  = view;
     }
 
-    public void initHero() {
-        Scanner inputScanner = new Scanner(System.in);
-        
+    public void initHero(Scanner inputScanner) {
+
         if (model.getHeroClass() == null || model.getHeroClass().trim().isEmpty()) {
             System.out.println("Choose your class (Warrior, Thief, Mage, Priest) :");
             model.setHeroClass(inputScanner.nextLine());
