@@ -36,13 +36,11 @@ public class Hero extends CharacterModel {
     @Getter @Setter(AccessLevel.PROTECTED) private Weapon   weapon;
 */
 
-    // new
     Hero() {
         super();
     }
 
-    // load
-    public Hero(HeroBuilder builder) {
+    Hero(HeroBuilder builder) {
         super(builder.getLevel(),
             builder.getExperience(),
             builder.getBaseAttack(), builder.getAttack(),

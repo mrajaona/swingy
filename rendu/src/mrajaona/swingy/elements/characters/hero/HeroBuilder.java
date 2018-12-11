@@ -33,11 +33,11 @@ class HeroBuilder {
     @NotBlank(message = "Invalid Class.")
     @Getter private String  heroClass;
 
-/*
+    /*
     @Getter private Helm     helm;
     @Getter private Armor    armor;
     @Getter private Weapon   weapon;
-*/
+    */
 
     @Positive(message = "Invalid value (level)")
     @Getter private int level         = 1;
@@ -64,7 +64,7 @@ class HeroBuilder {
     // builder setters
 
     protected HeroBuilder setHeroName(String value) {
-    heroName = value;
+        heroName = value;
         return (this);
     }
 
@@ -73,7 +73,7 @@ class HeroBuilder {
         return (this);
     }
 
-/*
+    /*
     protected HeroBuilder setHelm(Helm value) {
         helm = value;
         return (this);
@@ -88,7 +88,7 @@ class HeroBuilder {
         weapon = value;
         return (this);
     }
-*/
+    */
 
     protected HeroBuilder setLevel(int value) {
         level = value;
@@ -242,6 +242,5 @@ class HeroBuilder {
         }
 
     }
-
 
 }

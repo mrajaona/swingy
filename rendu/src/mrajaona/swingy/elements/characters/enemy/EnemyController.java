@@ -4,12 +4,22 @@ import javax.validation.constraints.NotNull;
 
 import mrajaona.swingy.elements.characters.CharacterController;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 public class EnemyController extends CharacterController {
 
     @NotNull
-    private Enemy        model;
+    @Getter(AccessLevel.PROTECTED) private Enemy        model;
     @NotNull
-    private EnemyView    view;
+    @Getter(AccessLevel.PROTECTED) private EnemyView    view;
+
+    private EnemyController() {}
+
+    public EnemyController(final String enemyType, final int enemyLevel) {
+        this.model = EnemyBuilder.getBuilder().newEnemy(enemyType, enemyLevel);
+        this.view  = new EnemyView();
+    }
 
 	@Override
 	public void attack(CharacterController target) {

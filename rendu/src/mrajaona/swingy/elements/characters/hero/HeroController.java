@@ -28,13 +28,6 @@ public class HeroController extends CharacterController {
         this.view  = new HeroView();
     }
 
-/*
-    public HeroController(saveFile) {
-        this.model = new Hero();
-        this.view  = new HeroView();
-    }
-*/
-
     @Override
     public void attack(CharacterController target) {
         System.out.println("Attack");
