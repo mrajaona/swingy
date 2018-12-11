@@ -16,7 +16,6 @@ import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 
 class HeroBuilder {
 
@@ -29,38 +28,112 @@ class HeroBuilder {
     }
 
     @NotBlank(message = "Your hero needs a name.")
-    @Getter @Setter(AccessLevel.PROTECTED) private String  heroName;
+    @Getter private String  heroName;
 
     @NotBlank(message = "Invalid Class.")
-    @Getter @Setter(AccessLevel.PROTECTED) private String  heroClass;
+    @Getter private String  heroClass;
 
 /*
-    @Getter @Setter(AccessLevel.PROTECTED) private Helm     helm;
-    @Getter @Setter(AccessLevel.PROTECTED) private Armor    armor;
-    @Getter @Setter(AccessLevel.PROTECTED) private Weapon   weapon;
+    @Getter private Helm     helm;
+    @Getter private Armor    armor;
+    @Getter private Weapon   weapon;
 */
 
     @Positive(message = "Invalid value (level)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int level         = 1;
+    @Getter private int level         = 1;
 
     @PositiveOrZero(message = "Invalid value (experience)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int experience    = 0;
+    @Getter private int experience    = 0;
 
     @PositiveOrZero(message = "Invalid value (base attack)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int baseAttack    = 0;
+    @Getter private int baseAttack    = 0;
     @PositiveOrZero(message = "Invalid value (base defense)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int baseDefense   = 0;
+    @Getter private int baseDefense   = 0;
     @Positive(message = "Invalid value (base hit points)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int baseHitPoints = 1;
+    @Getter private int baseHitPoints = 1;
 
     @PositiveOrZero(message = "Invalid value (attack)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int attack        = 0;
+    @Getter private int attack        = 0;
     @PositiveOrZero(message = "Invalid value (defense)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int defense       = 0;
+    @Getter private int defense       = 0;
     @PositiveOrZero(message = "Invalid value (max hit points)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int maxHitPoints  = 0;
+    @Getter private int maxHitPoints  = 0;
     @PositiveOrZero(message = "Invalid value (hit points)")
-    @Getter @Setter(AccessLevel.PROTECTED) private int hitPoints     = 0;
+    @Getter private int hitPoints     = 0;
+
+    // builder setters
+
+    protected HeroBuilder setHeroName(String value) {
+    heroName = value;
+        return (this);
+    }
+
+    protected HeroBuilder setHeroClass(String value) {
+        heroClass = value;
+        return (this);
+    }
+
+/*
+    protected HeroBuilder setHelm(Helm value) {
+        helm = value;
+        return (this);
+    }
+
+    protected HeroBuilder setArmor(Armor value) {
+        armor = value;
+        return (this);
+    }
+
+    protected HeroBuilder setWeapon(Weapon value) {
+        weapon = value;
+        return (this);
+    }
+*/
+
+    protected HeroBuilder setLevel(int value) {
+        level = value;
+        return (this);
+    }
+
+    protected HeroBuilder setExperience(int value) {
+        experience = value;
+        return (this);
+    }
+
+    protected HeroBuilder setBaseAttack(int value) {
+    baseAttack = value;
+        return (this);
+    }
+
+    protected HeroBuilder setBaseDefense(int value) {
+        baseDefense = value;
+        return (this);
+    }
+
+    protected HeroBuilder setBaseHitPoints(int value) {
+        baseHitPoints = value;
+        return (this);
+    }
+
+    protected HeroBuilder setAttack(int value) {
+        attack = value;
+        return (this);
+    }
+
+    protected HeroBuilder setDefense(int value) {
+        defense = value;
+        return (this);
+    }
+
+    protected HeroBuilder setMaxHitPoints(int value) {
+        maxHitPoints = value;
+        return (this);
+    }
+
+    protected HeroBuilder setHitPoints(int value) {
+        hitPoints = value;
+        return (this);
+    }
 
     // Hero types
 
