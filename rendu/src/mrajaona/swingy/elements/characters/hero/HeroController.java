@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Getter;
+
 import mrajaona.swingy.elements.artifacts.Armor;
 import mrajaona.swingy.elements.artifacts.Helm;
 import mrajaona.swingy.elements.artifacts.Weapon;
@@ -12,9 +14,9 @@ import mrajaona.swingy.elements.characters.CharacterController;
 public class HeroController extends CharacterController {
 
     @NotNull
-    private Hero        model;
+    @Getter private Hero        model;
     @NotNull
-    private HeroView    view;
+    @Getter private HeroView    view;
 
     public HeroController(Hero model) {
         this.model = model;
