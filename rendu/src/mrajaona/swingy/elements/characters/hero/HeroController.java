@@ -16,27 +16,22 @@ public class HeroController extends CharacterController {
     @NotNull
     private HeroView    view;
 
-    @SuppressWarnings("unused")
-    private HeroController() {}
-
-    public HeroController(Hero model, HeroView view) {
+    public HeroController(Hero model) {
         this.model = model;
-        this.view  = view;
+        this.view  = new HeroView();
     }
 
-    public void initHero(Scanner inputScanner) {
-
-        if (model.getHeroClass() == null || model.getHeroClass().trim().isEmpty()) {
-            System.out.println("Choose your class (Warrior, Thief, Mage, Priest) :");
-            model.setHeroClass(inputScanner.nextLine());
-        }
-        if (model.getHeroName() == null || model.getHeroName().trim().isEmpty()) {
-            System.out.println("Name your hero :");
-            model.setHeroName(inputScanner.nextLine());
-        }
-
-        model.initStats();
+    public HeroController() {
+        this.model = HeroBuilder.getBuilder().newHero();
+        this.view  = new HeroView();
     }
+
+/*
+    public HeroController(saveFile) {
+        this.model = new Hero();
+        this.view  = new HeroView();
+    }
+*/
 
     @Override
     public void attack(CharacterController target) {

@@ -1,7 +1,6 @@
 package mrajaona.swingy.game;
 
 import mrajaona.swingy.elements.characters.hero.HeroController;
-import mrajaona.swingy.util.HeroFactory;
 
 public class Swingy {
 
@@ -9,8 +8,7 @@ public class Swingy {
 
         System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 
-        HeroFactory hFactory          = HeroFactory.getFactory();
-        HeroController heroController = hFactory.newHero();
+        HeroController heroController = new HeroController();
 
         heroController.updateView();
 

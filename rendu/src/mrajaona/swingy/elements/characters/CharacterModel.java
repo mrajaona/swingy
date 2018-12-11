@@ -12,26 +12,26 @@ public class CharacterModel {
     // members
 
     @Positive(message = "Invalid value (level)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int level;
+    @Getter @Setter(AccessLevel.PROTECTED) private int level;
 
     @PositiveOrZero(message = "Invalid value (experience)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int experience;
+    @Getter @Setter(AccessLevel.PROTECTED) private int experience;
 
     @PositiveOrZero(message = "Invalid value (base attack)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int baseAttack;
+    @Getter @Setter(AccessLevel.PROTECTED) private int baseAttack;
     @PositiveOrZero(message = "Invalid value (base defense)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int baseDefense;
+    @Getter @Setter(AccessLevel.PROTECTED) private int baseDefense;
     @Positive(message = "Invalid value (base hit points)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int baseHitPoints;
+    @Getter @Setter(AccessLevel.PROTECTED) private int baseHitPoints;
 
     @PositiveOrZero(message = "Invalid value (attack)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int attack;
+    @Getter @Setter(AccessLevel.PROTECTED) private int attack;
     @PositiveOrZero(message = "Invalid value (defense)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int defense;
+    @Getter @Setter(AccessLevel.PROTECTED) private int defense;
     @PositiveOrZero(message = "Invalid value (max hit points)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int maxHitPoints;
+    @Getter @Setter(AccessLevel.PROTECTED) private int maxHitPoints;
     @PositiveOrZero(message = "Invalid value (hit points)")
-    @Setter(AccessLevel.PROTECTED) @Getter private int hitPoints;
+    @Getter @Setter(AccessLevel.PROTECTED) private int hitPoints;
 
     // constructors
 
