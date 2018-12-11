@@ -3,6 +3,8 @@ package mrajaona.swingy.elements.characters;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
+import com.j256.ormlite.field.DatabaseField;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,25 +13,41 @@ public class CharacterModel {
 
     // members
 
+    @DatabaseField(canBeNull = false)
     @Positive(message = "Invalid value (level)")
     @Getter @Setter(AccessLevel.PROTECTED) private int level;
 
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (experience)")
     @Getter @Setter(AccessLevel.PROTECTED) private int experience;
 
+
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (base attack)")
     @Getter @Setter(AccessLevel.PROTECTED) private int baseAttack;
+
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (base defense)")
     @Getter @Setter(AccessLevel.PROTECTED) private int baseDefense;
+
+    @DatabaseField(canBeNull = false)
     @Positive(message = "Invalid value (base hit points)")
     @Getter @Setter(AccessLevel.PROTECTED) private int baseHitPoints;
 
+
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (attack)")
     @Getter @Setter(AccessLevel.PROTECTED) private int attack;
+
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (defense)")
     @Getter @Setter(AccessLevel.PROTECTED) private int defense;
+
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (max hit points)")
     @Getter @Setter(AccessLevel.PROTECTED) private int maxHitPoints;
+
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (hit points)")
     @Getter @Setter(AccessLevel.PROTECTED) private int hitPoints;
 

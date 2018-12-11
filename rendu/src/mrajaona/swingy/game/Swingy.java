@@ -1,17 +1,25 @@
 package mrajaona.swingy.game;
 
 import mrajaona.swingy.elements.characters.hero.HeroController;
+import mrajaona.swingy.save.DatabaseManager;
 
 public class Swingy {
 
     public static void main(String[] args) {
 
-        System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
+        try {
+            DatabaseManager dbManager = DatabaseManager.getManager();
+            dbManager.openConnection();
 
-        HeroController heroController = new HeroController();
+            System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 
-        heroController.updateView();
+            HeroController heroController = new HeroController();
 
+            heroController.updateView();
+            dbManager.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
