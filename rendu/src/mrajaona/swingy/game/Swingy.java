@@ -2,6 +2,7 @@ package mrajaona.swingy.game;
 
 import java.sql.SQLException;
 
+import mrajaona.swingy.elements.characters.hero.Hero;
 import mrajaona.swingy.elements.characters.hero.HeroController;
 import mrajaona.swingy.save.DatabaseManager;
 
@@ -16,8 +17,16 @@ public class Swingy {
         System.out.println("New hero created.");
     }
 
-    private static void loadHero() {
+    private static void loadHero(long id) throws SQLException {
+        Hero hero = dbManager.load(id);
 
+        if (hero == null) {
+            System.out.println("No hero found.");
+        }
+
+        heroController = new HeroController(hero);
+        heroController.updateView();
+        System.out.println("Hero loaded.");
     }
 
     private static void saveHero() throws SQLException {
@@ -44,6 +53,21 @@ public class Swingy {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+            dbManager = DatabaseManager.getManager();
+            dbManager.openConnection();
+
+            System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
+
+            loadHero(1);
+            saveHero();
+
+            dbManager.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

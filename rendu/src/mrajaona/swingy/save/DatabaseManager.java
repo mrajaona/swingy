@@ -2,6 +2,7 @@ package mrajaona.swingy.save;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -32,12 +33,14 @@ public class DatabaseManager {
         heroDao = DaoManager.createDao(connectionSource, Hero.class);
     }
 
-    public void listHeroes() {
-        // use connectionSource here
+    public List<Hero> listHeroes() throws SQLException {
+        // For medium sized or large tables, this may load a lot of objects into memory so you should consider using the iterator() method instead.
+        List<Hero> heroList = heroDao.queryForAll();
+        return (heroList);
     }
 
-    public void load() {
-        // use connectionSource here
+    public Hero load(long id) throws SQLException {
+        return (heroDao.queryForId(id));
     }
 
     public void save(Hero hero) throws SQLException {
