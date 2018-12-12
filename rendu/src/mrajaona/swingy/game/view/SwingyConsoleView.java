@@ -1,4 +1,4 @@
-package mrajaona.swingy.game;
+package mrajaona.swingy.game.view;
 
 public class SwingyConsoleView implements SwingyView {
 

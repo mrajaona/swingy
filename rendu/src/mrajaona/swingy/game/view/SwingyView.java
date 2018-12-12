@@ -1,4 +1,4 @@
-package mrajaona.swingy.game;
+package mrajaona.swingy.game.view;
 
 public interface SwingyView {
 	abstract public void println(String text);

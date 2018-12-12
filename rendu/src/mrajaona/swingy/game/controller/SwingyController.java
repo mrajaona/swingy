@@ -1,10 +1,12 @@
-package mrajaona.swingy.game;
+package mrajaona.swingy.game.controller;
 
 import java.sql.SQLException;
 
 import mrajaona.swingy.elements.characters.enemy.EnemyController;
 import mrajaona.swingy.elements.characters.hero.Hero;
 import mrajaona.swingy.elements.characters.hero.HeroController;
+import mrajaona.swingy.game.model.Swingy;
+import mrajaona.swingy.game.view.SwingyView;
 import mrajaona.swingy.save.DatabaseManager;
 
 import lombok.AccessLevel;

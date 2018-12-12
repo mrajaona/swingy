@@ -1,4 +1,4 @@
-package mrajaona.swingy.game;
+package mrajaona.swingy.game.model;
 
 import mrajaona.swingy.elements.characters.enemy.EnemyController;
 import mrajaona.swingy.elements.characters.hero.HeroController;
