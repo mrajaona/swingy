@@ -1,11 +1,31 @@
 package mrajaona.swingy.builder;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
+import lombok.Getter;
+import mrajaona.swingy.data.artifact.ArmorData;
+import mrajaona.swingy.data.artifact.HelmData;
+import mrajaona.swingy.data.artifact.WeaponData;
+import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.view.helper.BuildHelper;
+
 /*
 ** Hero builder
 ** Creates and verifies new Hero data
 */
 
-public class Hero {
+public class HeroBuilder {
 
     private static HeroBuilder builder = new HeroBuilder();
 
@@ -21,9 +41,9 @@ public class Hero {
     @NotBlank(message = "Invalid Class.")
     @Getter private String  heroClass;
 
-    @Getter private Helm     helm;
-    @Getter private Armor    armor;
-    @Getter private Weapon   weapon;
+    @Getter private HelmData     helm;
+    @Getter private ArmorData    armor;
+    @Getter private WeaponData   weapon;
 
     @Positive(message = "Invalid value (level)")
     @Getter private int level         = 1;
@@ -59,17 +79,17 @@ public class Hero {
         return (this);
     }
 
-    public HeroBuilder setHelm(Helm value) {
+    public HeroBuilder setHelm(HelmData value) {
         helm = value;
         return (this);
     }
 
-    public HeroBuilder setArmor(Armor value) {
+    public HeroBuilder setArmor(ArmorData value) {
         armor = value;
         return (this);
     }
 
-    public HeroBuilder setWeapon(Weapon value) {
+    public HeroBuilder setWeapon(WeaponData value) {
         weapon = value;
         return (this);
     }
@@ -166,28 +186,23 @@ public class Hero {
 
     // Creation
 
-    Hero newHero() {
-        Scanner inputScanner = new Scanner(System.in);
-        Hero hero = null;
+    HeroData newHero() {
+
+        HeroData hero = null;
 
         while (hero == null) {
-            if (heroClass == null || heroClass.trim().isEmpty()) {
-                System.out.println("Choose your class (Warrior, Thief, Mage, Priest) :");
-                heroClass = inputScanner.nextLine();
-            }
-            if (heroName == null || heroName.trim().isEmpty()) {
-                System.out.println("Name your hero :");
-                heroName = inputScanner.nextLine();
-            }
+            if (heroClass == null || heroClass.trim().isEmpty())
+                heroClass = BuildHelper.ask("Choose your class (Warrior, Thief, Mage, Priest) :");
+            if (heroName == null || heroName.trim().isEmpty())
+                heroName = BuildHelper.ask("Name your hero :");
 
             hero = build(true);
         }
 
-        inputScanner.close();
         return (hero);
     }
 
-    Hero loadHero(Hero loaded) {
+    HeroData loadHero(HeroData loaded) {
         return (
             setHeroName(loaded.getHeroName())
             .setHeroClass(loaded.getHeroClass())
@@ -204,10 +219,10 @@ public class Hero {
             .setMaxHitPoints(loaded.getMaxHitPoints())
             .setHitPoints(loaded.getHitPoints())
             .build(false)
-            )
+            );
     }
 
-    Hero build(boolean init) {
+    HeroData build(boolean init) {
 
         if (init == true) {
             BaseStats stats = BASE_STATS_MAP.get(heroClass);
@@ -242,7 +257,7 @@ public class Hero {
             return (null);
         } else {
             System.out.println("Valid Object");
-            return (new Hero(this));
+            return (new HeroData(this));
         }
 
     }

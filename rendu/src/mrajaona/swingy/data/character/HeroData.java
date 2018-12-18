@@ -1,4 +1,16 @@
-package mrajaona.swingy.data;
+package mrajaona.swingy.data.character;
+
+import javax.validation.constraints.NotBlank;
+
+import com.j256.ormlite.field.DatabaseField;
+
+import lombok.Getter;
+import lombok.Setter;
+import mrajaona.swingy.builder.HeroBuilder;
+import mrajaona.swingy.data.artifact.ArmorData;
+import mrajaona.swingy.data.artifact.HelmData;
+import mrajaona.swingy.data.artifact.WeaponData;
+import lombok.AccessLevel;
 
 /*
 ** Data for Hero
@@ -6,7 +18,7 @@ package mrajaona.swingy.data;
 ** Constructed with the Hero builder
 */
 
-public class Hero extends Character {
+public class HeroData extends CharacterData {
 
     @DatabaseField(generatedId = true)
     @Getter private long id;
@@ -19,21 +31,24 @@ public class Hero extends Character {
     @NotBlank(message = "Invalid Class.")
     @Getter private String  heroClass;
 
-    @DatabaseField
-    @Getter @Setter(AccessLevel.PROTECTED) private Helm     helm;
+    @DatabaseField(canBeNull = true)
+    @Getter @Setter private HelmData     helm;
 
-    @DatabaseField
-    @Getter @Setter(AccessLevel.PROTECTED) private Armor    armor;
+    @DatabaseField(canBeNull = true)
+    @Getter @Setter private ArmorData    armor;
 
-    @DatabaseField
-    @Getter @Setter(AccessLevel.PROTECTED) private Weapon   weapon;
+    @DatabaseField(canBeNull = true)
+    @Getter @Setter private WeaponData   weapon;
+
+    @Getter @Setter private int coordX;
+    @Getter @Setter private int coordY;
 
     // necessary for ORMLite
-    Hero() {
+    HeroData() {
         super();
     }
 
-    Hero(mrajaona.swingy.builder.Hero builder) {
+    public HeroData(HeroBuilder builder) {
         super(builder.getLevel(),
             builder.getExperience(),
             builder.getBaseAttack(), builder.getAttack(),

@@ -9,7 +9,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
-import mrajaona.swingy.elements.characters.hero.Hero;
+import mrajaona.swingy.data.character.HeroData;
 
 /*
 ** Singleton
@@ -19,7 +19,7 @@ import mrajaona.swingy.elements.characters.hero.Hero;
 public class Save {
 
     private static Save manager     = new Save();
-    private Dao<Hero, Long> heroDao = null;
+    private Dao<HeroData, Long> heroDao = null;
 
     private Save() {}
 
@@ -36,8 +36,8 @@ public class Save {
         if (connectionSource == null)
             connectionSource = new JdbcPooledConnectionSource(DATABASE_URL);
 
-        TableUtils.createTableIfNotExists(connectionSource, Hero.class);
-        heroDao = DaoManager.createDao(connectionSource, Hero.class);
+        TableUtils.createTableIfNotExists(connectionSource, HeroData.class);
+        heroDao = DaoManager.createDao(connectionSource, HeroData.class);
     }
 
     public void closeConnection() throws IOException {
@@ -47,7 +47,7 @@ public class Save {
 
     // ----- Edit db
 
-    public void save(Hero hero) throws SQLException {
+    public void save(HeroData hero) throws SQLException {
         Dao.CreateOrUpdateStatus status = heroDao.createOrUpdate(hero);
         System.out.println(
             "created: " + status.isCreated() + System.lineSeparator() +
@@ -57,19 +57,19 @@ public class Save {
 
     }
 
-    public void delete(Hero hero) throws SQLException {
+    public void delete(HeroData hero) throws SQLException {
         heroDao.delete(hero);
     }
 
     // ----- Find in db
 
-    public List<Hero> listHeroes() throws SQLException {
+    public List<HeroData> listHeroes() throws SQLException {
         // For medium sized or large tables, this may load a lot of objects into memory so you should consider using the iterator() method instead.
-        List<Hero> heroList = heroDao.queryForAll();
+        List<HeroData> heroList = heroDao.queryForAll();
         return (heroList);
     }
 
-    public Hero load(long id) throws SQLException {
+    public HeroData load(long id) throws SQLException {
         return (heroDao.queryForId(id));
     }
 

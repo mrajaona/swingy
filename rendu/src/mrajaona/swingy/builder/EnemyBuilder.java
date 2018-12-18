@@ -1,10 +1,26 @@
 package mrajaona.swingy.builder;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
+import lombok.Getter;
+import mrajaona.swingy.data.character.EnemyData;
+
 /*
 ** Enemy builder
 ** Creates and verifies new Enemy data
 */
-public class Enemy {
+public class EnemyBuilder {
 
     private static EnemyBuilder builder = new EnemyBuilder();
 
@@ -130,7 +146,7 @@ public class Enemy {
 
     // Creation
 
-    Enemy newEnemy(final String enemyType, final int enemyLevel) {
+    EnemyData newEnemy(final String enemyType, final int enemyLevel) {
         BaseStats stats = BASE_STATS_MAP.get(enemyType);
         if (stats == null)
             return (null);
@@ -148,7 +164,7 @@ public class Enemy {
         .build();
     }
 
-    Enemy build() {
+    EnemyData build() {
 
         //Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -167,7 +183,7 @@ public class Enemy {
             return (null);
         } else {
             System.out.println("Valid Object");
-            return (new Enemy(this));
+            return (new EnemyData(this));
         }
 
     }

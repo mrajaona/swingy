@@ -1,4 +1,12 @@
-package mrajaona.swingy.data;
+package mrajaona.swingy.data.character;
+
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
+import com.j256.ormlite.field.DatabaseField;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /*
 ** Data for Character
@@ -6,7 +14,7 @@ package mrajaona.swingy.data;
 ** Used in the Hero and Enemy datas
 */
 
-public class Character {
+public class CharacterData {
 
     // members
 
@@ -47,11 +55,11 @@ public class Character {
     @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (hit points)")
     @Getter @Setter private int hitPoints;
-
+    
     // constructors
 
     // new
-    public CharacterModel() {
+    public CharacterData() {
         this.level          = 1;
         this.experience     = 0;
         this.baseAttack     = 0;
@@ -64,7 +72,7 @@ public class Character {
     }
 
     // new enemy
-    public  CharacterModel(
+    public  CharacterData(
             int level,
             int experience,
             int baseAttack,
@@ -83,7 +91,7 @@ public class Character {
     }
 
     // load
-    public  CharacterModel(
+    public  CharacterData(
             int level,
             int experience,
             int baseAttack,

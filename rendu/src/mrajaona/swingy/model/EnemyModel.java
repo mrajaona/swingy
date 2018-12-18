@@ -5,6 +5,6 @@ package mrajaona.swingy.model;
 ** Manipulates Enemy data
 */
 
-public class Enemy extends Character {
+public class EnemyModel extends CharacterModel {
 
 }

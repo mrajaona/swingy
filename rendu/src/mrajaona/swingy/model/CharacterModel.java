@@ -6,7 +6,7 @@ package mrajaona.swingy.model;
 ** Used in the Hero and Enemy models
 */
 
-class Character extends Character {
+class CharacterModel {
 
     public void fullRecover() {
         ;

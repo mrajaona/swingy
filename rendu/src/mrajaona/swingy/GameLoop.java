@@ -15,18 +15,18 @@ public class GameLoop {
 
     public static ViewType viewType = ViewType.VIEW_TYPE_CONSOLE;
 
-    public void game(String[] args) {
+    private void game(String[] args) {
 
         if (args.length != 1)
             return ;
 
         try {
 
-            switch(arg[0]) {
-                case ViewType.VIEW_TYPE_GUI :
+            switch(args[0]) {
+                case VIEW_TYPE_GUI :
                     viewType = ViewType.VIEW_TYPE_GUI;
                     break;
-                case ViewType.VIEW_TYPE_CONSOLE :
+                case VIEW_TYPE_CONSOLE :
                     viewType = ViewType.VIEW_TYPE_CONSOLE;
                     break;
                 default :
@@ -34,7 +34,7 @@ public class GameLoop {
                     break;
             }
 
-        	DatabaseManager dbManager = DatabaseManager.getManager();
+        	Save dbManager = Save.getManager();
             dbManager.openConnection();
 
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
@@ -53,7 +53,7 @@ public class GameLoop {
 
     // Creates an instance of the game
     public static void main(String[] args) {
-        new SwingyController().game(args);
+        (new GameLoop()).game(args);
     }
 
 }
