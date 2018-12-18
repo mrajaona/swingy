@@ -186,7 +186,7 @@ public class HeroBuilder {
 
     // Creation
 
-    HeroData newHero() {
+    public HeroData newHero() {
 
         HeroData hero = null;
 
@@ -202,7 +202,7 @@ public class HeroBuilder {
         return (hero);
     }
 
-    HeroData loadHero(HeroData loaded) {
+    public HeroData loadHero(HeroData loaded) {
         return (
             setHeroName(loaded.getHeroName())
             .setHeroClass(loaded.getHeroClass())
@@ -222,7 +222,7 @@ public class HeroBuilder {
             );
     }
 
-    HeroData build(boolean init) {
+    private HeroData build(boolean init) {
 
         if (init == true) {
             BaseStats stats = BASE_STATS_MAP.get(heroClass);

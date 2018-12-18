@@ -3,6 +3,7 @@ package mrajaona.swingy.data.character;
 import javax.validation.constraints.NotBlank;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import lombok.AccessLevel;
 ** Constructed with the Hero builder
 */
 
+@DatabaseTable(tableName = "heroes")
 public class HeroData extends CharacterData {
 
     @DatabaseField(generatedId = true)
@@ -31,13 +33,13 @@ public class HeroData extends CharacterData {
     @NotBlank(message = "Invalid Class.")
     @Getter private String  heroClass;
 
-    @DatabaseField(canBeNull = true)
+    // @DatabaseField(canBeNull = true)
     @Getter @Setter private HelmData     helm;
 
-    @DatabaseField(canBeNull = true)
+    // @DatabaseField(canBeNull = true)
     @Getter @Setter private ArmorData    armor;
 
-    @DatabaseField(canBeNull = true)
+    // @DatabaseField(canBeNull = true)
     @Getter @Setter private WeaponData   weapon;
 
     @Getter @Setter private int coordX;

@@ -1,10 +1,25 @@
 package mrajaona.swingy;
 
+import java.util.Scanner;
+
+import lombok.Getter;
+import lombok.Setter;
+import mrajaona.swingy.controller.TestController;
+import mrajaona.swingy.data.character.HeroData;
+
 /*
 ** Main loop for the game
 */
 
 public class GameLoop {
+
+    private static GameLoop loop = new GameLoop();
+
+    private GameLoop() {}
+
+    public static GameLoop getLoop() {
+        return (loop);
+    }
 
     public static final String VIEW_TYPE_GUI     = "gui";
     public static final String VIEW_TYPE_CONSOLE = "console";
@@ -15,7 +30,10 @@ public class GameLoop {
 
     public static ViewType viewType = ViewType.VIEW_TYPE_CONSOLE;
 
-    private void game(String[] args) {
+    @Getter @Setter public static HeroData hero;
+    @Getter public static Scanner inputScanner = new Scanner(System.in);
+
+    public void game(String[] args) {
 
         if (args.length != 1)
             return ;
@@ -34,26 +52,16 @@ public class GameLoop {
                     break;
             }
 
-        	Save dbManager = Save.getManager();
-            dbManager.openConnection();
-
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 
-            // newHero();
-            // loadHero(1);
-            // saveHero();
-
-            dbManager.closeConnection();
+            TestController.getController().newHero();
+            // TestController.loadHero(1);
+            TestController.getController().saveHero();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    }
-
-    // Creates an instance of the game
-    public static void main(String[] args) {
-        (new GameLoop()).game(args);
     }
 
 }

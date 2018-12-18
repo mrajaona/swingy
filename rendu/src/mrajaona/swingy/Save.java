@@ -32,7 +32,7 @@ public class Save {
     private final static String DATABASE_URL = "jdbc:sqlite:src/main/resources/swingy.db";
     private static JdbcPooledConnectionSource connectionSource = null;
 
-    public void openConnection() throws SQLException {
+    private void openConnection() throws SQLException {
         if (connectionSource == null)
             connectionSource = new JdbcPooledConnectionSource(DATABASE_URL);
 
@@ -40,37 +40,47 @@ public class Save {
         heroDao = DaoManager.createDao(connectionSource, HeroData.class);
     }
 
-    public void closeConnection() throws IOException {
+    private void closeConnection() throws IOException {
         connectionSource.close();
         connectionSource = null;
     }
 
     // ----- Edit db
 
-    public void save(HeroData hero) throws SQLException {
+    public void save() throws SQLException, IOException {
+        HeroData hero = GameLoop.getHero();
+
+        openConnection();
         Dao.CreateOrUpdateStatus status = heroDao.createOrUpdate(hero);
         System.out.println(
             "created: " + status.isCreated() + System.lineSeparator() +
             "updated: " + status.isUpdated() + System.lineSeparator() +
             "modified: " + status.getNumLinesChanged()
             );
-
+        closeConnection();
     }
 
-    public void delete(HeroData hero) throws SQLException {
+    public void delete(HeroData hero) throws SQLException, IOException {
+        openConnection();
         heroDao.delete(hero);
+        closeConnection();
     }
 
     // ----- Find in db
 
-    public List<HeroData> listHeroes() throws SQLException {
+    public List<HeroData> listHeroes() throws SQLException, IOException {
+        openConnection();
         // For medium sized or large tables, this may load a lot of objects into memory so you should consider using the iterator() method instead.
         List<HeroData> heroList = heroDao.queryForAll();
+        closeConnection();
         return (heroList);
     }
 
-    public HeroData load(long id) throws SQLException {
-        return (heroDao.queryForId(id));
+    public HeroData load(long id) throws SQLException, IOException {
+        openConnection();
+        HeroData hero = heroDao.queryForId(id);
+        closeConnection();
+        return (hero);
     }
 
 }
