@@ -1,4 +1,4 @@
-package mrajaona.swingy.model;
+package mrajaona.swingy.model.character;
 
 /*
 ** Character Model

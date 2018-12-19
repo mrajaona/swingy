@@ -10,11 +10,13 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
 import mrajaona.swingy.data.artifact.ArmorData;
+import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.HeroData;
@@ -35,14 +37,19 @@ public class HeroBuilder {
         return (builder);
     }
 
+    @Getter private long id = 0;
+
     @NotBlank(message = "Your hero needs a name.")
     @Getter private String  heroName;
 
     @NotBlank(message = "Invalid Class.")
     @Getter private String  heroClass;
 
+    @NotNull(message = "Missing helm info")
     @Getter private HelmData     helm;
+    @NotNull(message = "Missing armor info")
     @Getter private ArmorData    armor;
+    @NotNull(message = "Missing weapon info")
     @Getter private WeaponData   weapon;
 
     @Positive(message = "Invalid value (level)")
@@ -68,6 +75,11 @@ public class HeroBuilder {
     @Getter private int hitPoints     = 0;
 
     // builder setters
+
+    public HeroBuilder setId(long value) {
+        id = value;
+        return (this);
+    }
 
     public HeroBuilder setHeroName(String value) {
         heroName = value;
@@ -204,11 +216,12 @@ public class HeroBuilder {
 
     public HeroData loadHero(HeroData loaded) {
         return (
-            setHeroName(loaded.getHeroName())
+            setId(loaded.getId())
+            .setHeroName(loaded.getHeroName())
             .setHeroClass(loaded.getHeroClass())
-            .setHelm(loaded.getHelm())
-            .setArmor(loaded.getArmor())
-            .setWeapon(loaded.getWeapon())
+            .setHelm(new HelmData(loaded.getHelm()))
+            .setArmor(new ArmorData(loaded.getArmor()))
+            .setWeapon(new WeaponData(loaded.getWeapon()))
             .setLevel(loaded.getLevel())
             .setExperience(loaded.getExperience())
             .setBaseAttack(loaded.getBaseAttack())
@@ -237,6 +250,10 @@ public class HeroBuilder {
                 baseHitPoints = stats.hp * 5 * 5;
                 maxHitPoints  = baseHitPoints;
                 hitPoints     = baseHitPoints;
+
+                helm   = new HelmData(ArtifactData.NO_ARTIFACT_NAME, 0);
+                armor  = new ArmorData(ArtifactData.NO_ARTIFACT_NAME, 0);
+                weapon = new WeaponData(ArtifactData.NO_ARTIFACT_NAME, 0);
             }
         }
 
@@ -247,15 +264,42 @@ public class HeroBuilder {
         Validator validator = factory.getValidator();
 
         //Validate bean
-        Set<ConstraintViolation<HeroBuilder>> constraintViolations = validator.validate(this);
+        Set<ConstraintViolation<HelmData>> helmConstraintViolations       = validator.validate(helm);
+        Set<ConstraintViolation<ArmorData>> armorConstraintViolations     = validator.validate(armor);
+        Set<ConstraintViolation<WeaponData>> weaponConstraintViolations   = validator.validate(weapon);
+        Set<ConstraintViolation<HeroBuilder>> heroConstraintViolations    = validator.validate(this);
+
+        boolean error = false;
 
         //Show errors
-        if (constraintViolations.size() > 0) {
-            for (ConstraintViolation<HeroBuilder> violation : constraintViolations) {
+        if (helmConstraintViolations.size() > 0) {
+            for (ConstraintViolation<HelmData> violation : helmConstraintViolations) {
                 System.out.println(violation.getMessage());
             }
+            error = true;
+        }
+        if (armorConstraintViolations.size() > 0) {
+            for (ConstraintViolation<ArmorData> violation : armorConstraintViolations) {
+                System.out.println(violation.getMessage());
+            }
+            error = true;
+        }
+        if (weaponConstraintViolations.size() > 0) {
+            for (ConstraintViolation<WeaponData> violation : weaponConstraintViolations) {
+                System.out.println(violation.getMessage());
+            }
+            error = true;
+        }
+        if (heroConstraintViolations.size() > 0) {
+            for (ConstraintViolation<HeroBuilder> violation : heroConstraintViolations) {
+                System.out.println(violation.getMessage());
+            }
+            error = true;
+        }
+
+        if (error == true)
             return (null);
-        } else {
+        else {
             System.out.println("Valid Object");
             return (new HeroData(this));
         }

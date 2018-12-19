@@ -33,13 +33,13 @@ public class HeroData extends CharacterData {
     @NotBlank(message = "Invalid Class.")
     @Getter private String  heroClass;
 
-    // @DatabaseField(canBeNull = true)
+    @DatabaseField(foreign = true)
     @Getter @Setter private HelmData     helm;
 
-    // @DatabaseField(canBeNull = true)
+    @DatabaseField(foreign = true)
     @Getter @Setter private ArmorData    armor;
 
-    // @DatabaseField(canBeNull = true)
+    @DatabaseField(foreign = true)
     @Getter @Setter private WeaponData   weapon;
 
     @Getter @Setter private int coordX;
@@ -56,8 +56,13 @@ public class HeroData extends CharacterData {
             builder.getBaseAttack(), builder.getAttack(),
             builder.getBaseDefense(), builder.getDefense(),
             builder.getBaseHitPoints(), builder.getMaxHitPoints(), builder.getHitPoints());
+        if (builder.getId() != 0)
+            this.id = builder.getId();
         this.heroName   = builder.getHeroName();
         this.heroClass  = builder.getHeroClass();
+        this.helm       = new HelmData(builder.getHelm());
+        this.armor      = new ArmorData(builder.getArmor());
+        this.weapon     = new WeaponData(builder.getWeapon());
     }
 
 }

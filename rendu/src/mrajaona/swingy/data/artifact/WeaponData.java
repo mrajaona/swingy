@@ -11,4 +11,8 @@ public class WeaponData extends ArtifactData {
         super(name, modifier);
     }
 
+    public WeaponData(WeaponData data) {
+        super(data.getId(), data.getName(), data.getModifier());
+    }
+
 }

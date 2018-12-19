@@ -11,4 +11,8 @@ public class HelmData extends ArtifactData {
         super(name, modifier);
     }
 
+    public HelmData(HelmData data) {
+        super(data.getId(), data.getName(), data.getModifier());
+    }
+
 }

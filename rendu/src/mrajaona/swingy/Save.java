@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.HeroData;
 
 /*
@@ -18,8 +19,9 @@ import mrajaona.swingy.data.character.HeroData;
 
 public class Save {
 
-    private static Save manager     = new Save();
-    private Dao<HeroData, Long> heroDao = null;
+    private static Save manager                 = new Save();
+    private Dao<HeroData, Long> heroDao         = null;
+    private Dao<ArtifactData, Long> artifactDao = null;
 
     private Save() {}
 
@@ -38,6 +40,10 @@ public class Save {
 
         TableUtils.createTableIfNotExists(connectionSource, HeroData.class);
         heroDao = DaoManager.createDao(connectionSource, HeroData.class);
+
+        TableUtils.createTableIfNotExists(connectionSource, ArtifactData.class);
+        artifactDao = DaoManager.createDao(connectionSource, ArtifactData.class);
+
     }
 
     private void closeConnection() throws IOException {
@@ -51,6 +57,11 @@ public class Save {
         HeroData hero = GameLoop.getHero();
 
         openConnection();
+
+        Dao.CreateOrUpdateStatus statusHelm   = artifactDao.createOrUpdate(hero.getHelm());
+        Dao.CreateOrUpdateStatus statusArmor  = artifactDao.createOrUpdate(hero.getArmor());
+        Dao.CreateOrUpdateStatus statusWeapon = artifactDao.createOrUpdate(hero.getWeapon());
+
         Dao.CreateOrUpdateStatus status = heroDao.createOrUpdate(hero);
         System.out.println(
             "created: " + status.isCreated() + System.lineSeparator() +
@@ -62,6 +73,11 @@ public class Save {
 
     public void delete(HeroData hero) throws SQLException, IOException {
         openConnection();
+
+        artifactDao.delete(hero.getHelm());
+        artifactDao.delete(hero.getArmor());
+        artifactDao.delete(hero.getWeapon());
+
         heroDao.delete(hero);
         closeConnection();
     }
@@ -79,6 +95,11 @@ public class Save {
     public HeroData load(long id) throws SQLException, IOException {
         openConnection();
         HeroData hero = heroDao.queryForId(id);
+
+        artifactDao.refresh(hero.getHelm());
+        artifactDao.refresh(hero.getArmor());
+        artifactDao.refresh(hero.getWeapon());
+
         closeConnection();
         return (hero);
     }

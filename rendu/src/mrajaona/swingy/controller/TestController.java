@@ -6,6 +6,10 @@ import java.sql.SQLException;
 import mrajaona.swingy.GameLoop;
 import mrajaona.swingy.Save;
 import mrajaona.swingy.builder.HeroBuilder;
+import mrajaona.swingy.view.helper.MainHelper;
+import mrajaona.swingy.data.artifact.WeaponData;
+import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.model.artifact.WeaponModel;
 
 public class TestController {
 
@@ -33,6 +37,36 @@ public class TestController {
 
 	public void saveHero() throws SQLException, IOException {
 		Save.getManager().save();
+	}
+
+	public void printHero() {
+		HeroData hero = GameLoop.getHero();
+        MainHelper.show(
+            "Name       : " + hero.getHeroName()      + System.lineSeparator() +
+            "Class      : " + hero.getHeroClass()     + System.lineSeparator() +
+            "Level      : " + hero.getLevel()         + System.lineSeparator() +
+            "Experience : " + hero.getExperience()    + System.lineSeparator() +
+
+            "Helm       : " + hero.getHelm().getName() + " (" + hero.getHelm().getModifier() + ")" + System.lineSeparator() +
+            "Armor      : " + hero.getArmor().getName() + " (" + hero.getArmor().getModifier() + ")" + System.lineSeparator() +
+            "Weapon     : " + hero.getWeapon().getName() + " (" + hero.getWeapon().getModifier() + ")" + System.lineSeparator() +
+
+            "Base Atk   : " + hero.getBaseAttack()    + System.lineSeparator() +
+            "Atk        : " + hero.getAttack()        + System.lineSeparator() +
+            "Base Def   : " + hero.getBaseDefense()   + System.lineSeparator() +
+            "Def        : " + hero.getDefense()       + System.lineSeparator() +
+            "Base HP    : " + hero.getBaseHitPoints() + System.lineSeparator() +
+            "Max HP     : " + hero.getMaxHitPoints()  + System.lineSeparator() +
+            "HP         : " + hero.getHitPoints()
+        );
+	}
+
+	public void changeWeapon() {
+		WeaponModel.getModel().equip(new WeaponData("Sword", 10));
+	}
+
+	public void removeWeapon() {
+		WeaponModel.getModel().remove();
 	}
 
 }

@@ -1,19 +1,52 @@
 package mrajaona.swingy.data.artifact;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import lombok.Getter;
 import lombok.Setter;
 
+@DatabaseTable(tableName = "artifacts")
 public class ArtifactData {
 
-    @Getter @Setter String name;
+	@DatabaseField(generatedId = true)
+    @Getter private long id;
 
-    @Getter @Setter int modifier;
+	@DatabaseField(canBeNull = false)
+    @NotBlank(message = "Missing artifact name")
+    @Getter @Setter private String name;
+
+	@DatabaseField(canBeNull = false)
+	@PositiveOrZero(message = "Invalid artifact modifier")
+    @Getter @Setter private int modifier;
+
+    public static final String NO_ARTIFACT_NAME = "none";
+
+    // necessary for ORMLite
+    ArtifactData() {}
+
+    public ArtifactData(long id, String name, int modifier) {
+		this.id       = id;
+        this.name     = name;
+        this.modifier = modifier;
+    }
 
     public ArtifactData(String name, int modifier) {
         this.name     = name;
         this.modifier = modifier;
+    }
+
+    public void change(String name, int modifier) {
+        this.name     = name;
+        this.modifier = modifier;
+    }
+
+    public void remove() {
+    	name     = NO_ARTIFACT_NAME;
+    	modifier = 0;
     }
 
 }
