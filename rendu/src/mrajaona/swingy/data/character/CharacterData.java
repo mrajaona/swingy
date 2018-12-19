@@ -55,7 +55,7 @@ public class CharacterData {
     @DatabaseField(canBeNull = false)
     @PositiveOrZero(message = "Invalid value (hit points)")
     @Getter @Setter private int hitPoints;
-    
+
     // constructors
 
     // new

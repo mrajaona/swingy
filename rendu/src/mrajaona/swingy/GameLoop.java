@@ -54,10 +54,10 @@ public class GameLoop {
 
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 
-            //TestController.getController().newHero();
+            // TestController.getController().newHero();
             TestController.getController().loadHero(1);
             TestController.getController().printHero();
-            TestController.getController().changeWeapon();
+            TestController.getController().removeWeapon();
             TestController.getController().printHero();
             TestController.getController().saveHero();
 

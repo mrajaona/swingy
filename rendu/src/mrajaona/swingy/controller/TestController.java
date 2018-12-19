@@ -9,7 +9,7 @@ import mrajaona.swingy.builder.HeroBuilder;
 import mrajaona.swingy.view.helper.MainHelper;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.HeroData;
-import mrajaona.swingy.model.artifact.WeaponModel;
+import mrajaona.swingy.model.character.HeroModel;
 
 public class TestController {
 
@@ -42,6 +42,7 @@ public class TestController {
 	public void printHero() {
 		HeroData hero = GameLoop.getHero();
         MainHelper.show(
+        	System.lineSeparator() +
             "Name       : " + hero.getHeroName()      + System.lineSeparator() +
             "Class      : " + hero.getHeroClass()     + System.lineSeparator() +
             "Level      : " + hero.getLevel()         + System.lineSeparator() +
@@ -57,16 +58,16 @@ public class TestController {
             "Def        : " + hero.getDefense()       + System.lineSeparator() +
             "Base HP    : " + hero.getBaseHitPoints() + System.lineSeparator() +
             "Max HP     : " + hero.getMaxHitPoints()  + System.lineSeparator() +
-            "HP         : " + hero.getHitPoints()
+            "HP         : " + hero.getHitPoints()     + System.lineSeparator()
         );
 	}
 
 	public void changeWeapon() {
-		WeaponModel.getModel().equip(new WeaponData("Sword", 10));
+		HeroModel.getModel().equip(new WeaponData("Sword", 10));
 	}
 
 	public void removeWeapon() {
-		WeaponModel.getModel().remove();
+		HeroModel.getModel().unequip(GameLoop.getHero().getWeapon());
 	}
 
 }
