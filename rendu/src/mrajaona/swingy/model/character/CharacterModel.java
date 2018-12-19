@@ -6,22 +6,12 @@ package mrajaona.swingy.model.character;
 ** Used in the Hero and Enemy models
 */
 
-class CharacterModel {
+interface CharacterModel {
 
-    public void fullRecover() {
-        ;
-    }
-
-    public void recoverHP(int amount) {
-        ;
-    }
-
-    public void loseHP(int amount) {
-        ;
-    }
-
-    public void beAttacked(int enemyAtk) {
-        ;
-    }
+    public void fullRecover();
+    public void recoverHP(int amount);
+    public void loseHP(int amount);
+    public void beAttacked(int enemyAtk);
+    public void die();
 
 }

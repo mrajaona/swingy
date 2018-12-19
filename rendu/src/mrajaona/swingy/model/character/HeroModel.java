@@ -15,7 +15,7 @@ import mrajaona.swingy.model.artifact.WeaponModel;
 ** Manipulates Hero data
 */
 
-public class HeroModel extends CharacterModel {
+public class HeroModel implements CharacterModel {
 
     private static HeroModel model = new HeroModel();
 
@@ -83,6 +83,42 @@ public class HeroModel extends CharacterModel {
 
     public void fight(EnemyData enemy) {
 
+    }
+
+    @Override
+    public void fullRecover() {
+        HeroData hero = GameLoop.getHero();
+        hero.setHitPoints(hero.getMaxHitPoints());
+    }
+
+    @Override
+    public void recoverHP(int amount) {
+        HeroData hero = GameLoop.getHero();
+
+        hero.setHitPoints(hero.getHitPoints() + amount);
+        if (hero.getHitPoints() > hero.getMaxHitPoints())
+            hero.setHitPoints(hero.getMaxHitPoints());
+    }
+
+    @Override
+    public void loseHP(int amount) {
+        HeroData hero = GameLoop.getHero();
+
+        hero.setHitPoints(hero.getHitPoints() - amount);
+        if (hero.getHitPoints() < 0) {
+            hero.setHitPoints(0);
+        }
+    }
+
+    @Override
+    public void beAttacked(int enemyAtk) {
+        HeroData hero = GameLoop.getHero();
+        loseHP(enemyAtk - hero.getDefense());
+    }
+
+    @Override
+    public void die() {
+        ;
     }
 
 }

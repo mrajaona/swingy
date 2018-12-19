@@ -5,6 +5,7 @@ import java.util.Scanner;
 import lombok.Getter;
 import lombok.Setter;
 import mrajaona.swingy.controller.TestController;
+import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
 
 /*
@@ -31,6 +32,11 @@ public class GameLoop {
     public static ViewType viewType = ViewType.VIEW_TYPE_CONSOLE;
 
     @Getter @Setter public static HeroData hero;
+    // current enemy
+    @Getter @Setter public static EnemyData enemy;
+    // all enemies on map
+    // TODO : map
+
     @Getter public static Scanner inputScanner = new Scanner(System.in);
 
     public void game(String[] args) {
@@ -57,8 +63,8 @@ public class GameLoop {
             // TestController.getController().newHero();
             TestController.getController().loadHero(1);
             TestController.getController().printHero();
-            TestController.getController().removeWeapon();
-            TestController.getController().printHero();
+            // TestController.getController().removeWeapon();
+            // TestController.getController().printHero();
             TestController.getController().saveHero();
 
         } catch (Exception e) {
