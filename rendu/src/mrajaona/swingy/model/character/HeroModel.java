@@ -1,6 +1,6 @@
 package mrajaona.swingy.model.character;
 
-import mrajaona.swingy.GameLoop;
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
@@ -64,7 +64,7 @@ public class HeroModel implements CharacterModel {
     }
 
     private void updateStats() {
-        HeroData hero = GameLoop.getHero();
+        HeroData hero = GameData.getHero();
 
         hero.setAttack(hero.getBaseAttack() + hero.getWeapon().getModifier());
         hero.setDefense(hero.getBaseDefense() + hero.getArmor().getModifier());
@@ -87,13 +87,13 @@ public class HeroModel implements CharacterModel {
 
     @Override
     public void fullRecover() {
-        HeroData hero = GameLoop.getHero();
+        HeroData hero = GameData.getHero();
         hero.setHitPoints(hero.getMaxHitPoints());
     }
 
     @Override
     public void recoverHP(int amount) {
-        HeroData hero = GameLoop.getHero();
+        HeroData hero = GameData.getHero();
 
         hero.setHitPoints(hero.getHitPoints() + amount);
         if (hero.getHitPoints() > hero.getMaxHitPoints())
@@ -102,7 +102,7 @@ public class HeroModel implements CharacterModel {
 
     @Override
     public void loseHP(int amount) {
-        HeroData hero = GameLoop.getHero();
+        HeroData hero = GameData.getHero();
 
         hero.setHitPoints(hero.getHitPoints() - amount);
         if (hero.getHitPoints() < 0) {
@@ -112,7 +112,7 @@ public class HeroModel implements CharacterModel {
 
     @Override
     public void beAttacked(int enemyAtk) {
-        HeroData hero = GameLoop.getHero();
+        HeroData hero = GameData.getHero();
         loseHP(enemyAtk - hero.getDefense());
     }
 

@@ -3,9 +3,9 @@ package mrajaona.swingy.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import mrajaona.swingy.GameLoop;
+import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.Save;
-import mrajaona.swingy.builder.HeroBuilder;
 import mrajaona.swingy.view.helper.MainHelper;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.HeroData;
@@ -22,17 +22,11 @@ public class TestController {
     }
 
 	public void newHero() {
-		GameLoop.setHero(
-			HeroBuilder.getBuilder().newHero()
-			);
+		GameModel.getModel().createHero();
 	}
 
 	public void loadHero(long id) throws SQLException, IOException {
-		GameLoop.setHero(
-			HeroBuilder.getBuilder().loadHero(
-				Save.getManager().load(id)
-				)
-			);
+		GameModel.getModel().loadHero(id);
 	}
 
 	public void saveHero() throws SQLException, IOException {
@@ -40,7 +34,7 @@ public class TestController {
 	}
 
 	public void printHero() {
-		HeroData hero = GameLoop.getHero();
+		HeroData hero = GameData.getHero();
         MainHelper.show(
         	System.lineSeparator() +
             "Name       : " + hero.getHeroName()      + System.lineSeparator() +
@@ -67,7 +61,7 @@ public class TestController {
 	}
 
 	public void removeWeapon() {
-		HeroModel.getModel().unequip(GameLoop.getHero().getWeapon());
+		HeroModel.getModel().unequip(GameData.getHero().getWeapon());
 	}
 
 }

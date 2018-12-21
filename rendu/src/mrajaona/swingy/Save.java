@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.HeroData;
 
@@ -54,7 +55,7 @@ public class Save {
     // ----- Edit db
 
     public void save() throws SQLException, IOException {
-        HeroData hero = GameLoop.getHero();
+        HeroData hero = GameData.getHero();
 
         openConnection();
 

@@ -1,6 +1,6 @@
 package mrajaona.swingy.model.artifact;
 
-import mrajaona.swingy.GameLoop;
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.WeaponData;
 
 public class WeaponModel implements ArtifactModel {
@@ -14,12 +14,12 @@ public class WeaponModel implements ArtifactModel {
     }
 
 	public void equip(WeaponData weapon) {
-		GameLoop.getHero().getWeapon().change(weapon.getName(), weapon.getModifier());
+		GameData.getHero().getWeapon().change(weapon.getName(), weapon.getModifier());
 	}
 
 	@Override
 	public void remove() {
-		GameLoop.getHero().getWeapon().remove();
+		GameData.getHero().getWeapon().remove();
 	}
 
 }
