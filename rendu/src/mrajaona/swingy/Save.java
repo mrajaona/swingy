@@ -64,6 +64,7 @@ public class Save {
         Dao.CreateOrUpdateStatus statusWeapon = artifactDao.createOrUpdate(hero.getWeapon());
 
         Dao.CreateOrUpdateStatus status = heroDao.createOrUpdate(hero);
+        // DEBUG
         System.out.println(
             "created: " + status.isCreated() + System.lineSeparator() +
             "updated: " + status.isUpdated() + System.lineSeparator() +

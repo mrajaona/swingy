@@ -26,11 +26,11 @@ public class HeroData extends CharacterData {
     @Getter private long id;
 
     @DatabaseField(canBeNull = false)
-    @NotBlank(message = "Your hero needs a name.")
+    // @NotBlank
     @Getter private String  heroName;
 
     @DatabaseField(canBeNull = false)
-    @NotBlank(message = "Invalid Class.")
+    // @NotBlank
     @Getter private String  heroClass;
 
     @DatabaseField(foreign = true)

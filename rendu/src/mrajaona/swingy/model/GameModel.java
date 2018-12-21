@@ -32,13 +32,12 @@ public class GameModel {
 			);
     }
 
-    public void changeViewType(Util.ViewType newType) {
-    	if (newType == null)
-    		; // throw exception
-    	else {
+    public void changeViewType(String newType) {
+
+        if (newType != Util.VIEW_TYPE_GUI && newType != Util.VIEW_TYPE_CONSOLE)
+            ; // Exception
+        else
     		GameData.setViewType(newType);
-    		// update view
-    	}
     }
 
 }

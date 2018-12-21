@@ -15,6 +15,8 @@ public class ArtifactData {
 	@DatabaseField(generatedId = true)
     @Getter private long id;
 
+    // TODO : localization
+
 	@DatabaseField(canBeNull = false)
     @NotBlank(message = "Missing artifact name")
     @Getter @Setter private String name;

@@ -13,7 +13,7 @@ import mrajaona.swingy.builder.EnemyBuilder;
 
 public class EnemyData extends CharacterData {
 
-    @NotBlank(message = "Please define the enemy type")
+    // @NotBlank
     @Getter private String  enemyType;
 
     @SuppressWarnings("unused")

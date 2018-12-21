@@ -28,17 +28,7 @@ public class GameLoop {
 
         try {
 
-            switch(args[0]) {
-                case Util.VIEW_TYPE_GUI :
-                    GameModel.getModel().changeViewType(Util.ViewType.VIEW_TYPE_GUI);
-                    break;
-                case Util.VIEW_TYPE_CONSOLE :
-                    GameModel.getModel().changeViewType(Util.ViewType.VIEW_TYPE_CONSOLE);
-                    break;
-                default :
-                    // Exception
-                    break;
-            }
+            GameModel.getModel().changeViewType(args[0]);
 
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 

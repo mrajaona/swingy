@@ -16,44 +16,46 @@ import lombok.Setter;
 
 public class CharacterData {
 
+    // TODO : localization
+
     // members
 
     @DatabaseField(canBeNull = false)
-    @Positive(message = "Invalid value (level)")
+    // @Positive
     @Getter @Setter private int level;
 
     @DatabaseField(canBeNull = false)
-    @PositiveOrZero(message = "Invalid value (experience)")
+    // @PositiveOrZero
     @Getter @Setter private int experience;
 
 
     @DatabaseField(canBeNull = false)
-    @PositiveOrZero(message = "Invalid value (base attack)")
+    // @PositiveOrZero
     @Getter @Setter private int baseAttack;
 
     @DatabaseField(canBeNull = false)
-    @PositiveOrZero(message = "Invalid value (base defense)")
+    // @PositiveOrZero
     @Getter @Setter private int baseDefense;
 
     @DatabaseField(canBeNull = false)
-    @Positive(message = "Invalid value (base hit points)")
+    // @Positive
     @Getter @Setter private int baseHitPoints;
 
 
     @DatabaseField(canBeNull = false)
-    @PositiveOrZero(message = "Invalid value (attack)")
+    // @PositiveOrZero
     @Getter @Setter private int attack;
 
     @DatabaseField(canBeNull = false)
-    @PositiveOrZero(message = "Invalid value (defense)")
+    // @PositiveOrZero
     @Getter @Setter private int defense;
 
     @DatabaseField(canBeNull = false)
-    @PositiveOrZero(message = "Invalid value (max hit points)")
+    // @PositiveOrZero
     @Getter @Setter private int maxHitPoints;
 
     @DatabaseField(canBeNull = false)
-    @PositiveOrZero(message = "Invalid value (hit points)")
+    // @PositiveOrZero
     @Getter @Setter private int hitPoints;
 
     // constructors

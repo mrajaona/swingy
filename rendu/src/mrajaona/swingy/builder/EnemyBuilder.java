@@ -14,6 +14,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
+import mrajaona.swingy.Util;
 import mrajaona.swingy.data.character.EnemyData;
 
 /*
@@ -29,6 +30,8 @@ public class EnemyBuilder {
     public static EnemyBuilder getBuilder() {
         return (builder);
     }
+
+    // TODO : localization
 
     @NotBlank(message = "Please define the enemy type")
     @Getter private String  enemyType;
@@ -107,56 +110,19 @@ public class EnemyBuilder {
         return (this);
     }
 
-    // Enemy types
-
-    private static final String SLIME           = "Slime";
-    private static final String GOBLIN          = "Goblin";
-
-    private static final String [] enemyTypes   = {
-            SLIME,
-            GOBLIN
-    } ;
-
-    private static enum BaseStats {
-        SLIME_BASE_STATS(10, 1, 1, 10),
-        GOBLIN_BASE_STATS(25, 5, 5, 15);
-
-        int exp;
-        int atk;
-        int def;
-        int hp;
-
-        private BaseStats(int exp, int atk, int def, int hp) {
-            this.exp = exp;
-            this.atk = atk;
-            this.def = def;
-            this.hp  = hp;
-        }
-    }
-
-    protected static final Map <String, BaseStats> BASE_STATS_MAP = initBaseStatsMap();
-    private static final Map <String, BaseStats> initBaseStatsMap() {
-        Map <String, BaseStats> newMap = new HashMap <String, BaseStats> (enemyTypes.length);
-
-        newMap.put(SLIME, BaseStats.SLIME_BASE_STATS);
-        newMap.put(GOBLIN,   BaseStats.GOBLIN_BASE_STATS);
-
-        return (Collections.unmodifiableMap(newMap));
-    }
-
     // Creation
 
     EnemyData newEnemy(final String enemyType, final int enemyLevel) {
-        BaseStats stats = BASE_STATS_MAP.get(enemyType);
+        Util.EnemyBaseStats stats = Util.ENEMY_BASE_STATS_MAP.get(enemyType);
         if (stats == null)
             return (null);
 
         return this.setEnemyType(enemyType)
         .setLevel(enemyLevel)
-        .setExperience(level * stats.exp)
-        .setBaseAttack(level * stats.atk)
-        .setBaseDefense(level * stats.def)
-        .setBaseHitPoints(level * stats.hp)
+        .setExperience(level * stats.getExp())
+        .setBaseAttack(level * stats.getAtk())
+        .setBaseDefense(level * stats.getDef())
+        .setBaseHitPoints(level * stats.getHp())
         .setAttack(baseAttack)
         .setDefense(baseDefense)
         .setMaxHitPoints(baseHitPoints)
@@ -182,7 +148,7 @@ public class EnemyBuilder {
             }
             return (null);
         } else {
-            System.out.println("Valid Object");
+            System.out.println("Valid Object"); // DEBUG
             return (new EnemyData(this));
         }
 

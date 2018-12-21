@@ -15,6 +15,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
+import mrajaona.swingy.Util;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
@@ -38,6 +39,8 @@ public class HeroBuilder {
     }
 
     @Getter private long id = 0;
+
+    // TODO : localization
 
     @NotBlank(message = "Your hero needs a name.")
     @Getter private String  heroName;
@@ -151,56 +154,13 @@ public class HeroBuilder {
         return (this);
     }
 
-    // Hero types
-
-    private static final String WARRIOR  = "Warrior";
-    private static final String THIEF    = "Thief";
-    private static final String MAGE     = "Mage";
-    private static final String PRIEST   = "Priest";
-
-    private static final String [] heroTypes    = {
-        WARRIOR,
-        THIEF,
-        MAGE,
-        PRIEST
-    } ;
-
-    // Hero base stats
-
-    private static enum BaseStats {
-        WARRIOR_BASE_STATS(2, 5, 3),
-        THIEF_BASE_STATS(4, 4, 2),
-        MAGE_BASE_STATS(6, 2, 2),
-        PRIEST_BASE_STATS(2, 2, 6);
-
-        int atk;
-        int def;
-        int hp;
-
-        private BaseStats(int atk, int def, int hp) {
-            this.atk = atk;
-            this.def = def;
-            this.hp  = hp;
-        }
-    }
-
-    public static final Map <String, BaseStats> BASE_STATS_MAP = initBaseStatsMap();
-    private static final Map <String, BaseStats> initBaseStatsMap() {
-        Map <String, BaseStats> newMap = new HashMap <String, BaseStats> (heroTypes.length);
-
-        newMap.put(WARRIOR, BaseStats.WARRIOR_BASE_STATS);
-        newMap.put(THIEF,   BaseStats.THIEF_BASE_STATS);
-        newMap.put(MAGE,    BaseStats.MAGE_BASE_STATS);
-        newMap.put(PRIEST,  BaseStats.PRIEST_BASE_STATS);
-
-        return (Collections.unmodifiableMap(newMap));
-    }
-
     // Creation
 
     public HeroData newHero() {
 
         HeroData hero = null;
+
+        // TODO : localization
 
         while (hero == null) {
             if (heroClass == null || heroClass.trim().isEmpty())
@@ -238,16 +198,16 @@ public class HeroBuilder {
     private HeroData build(boolean init) {
 
         if (init == true) {
-            BaseStats stats = BASE_STATS_MAP.get(heroClass);
+            Util.HeroBaseStats stats = Util.HERO_BASE_STATS_MAP.get(heroClass);
 
             if (stats == null) {
                 heroClass = new String();
             } else {
-                baseAttack    = stats.atk * 5;
+                baseAttack    = stats.getAtk() * 5;
                 attack        = baseAttack;
-                baseDefense   = stats.def * 5;
+                baseDefense   = stats.getDef() * 5;
                 defense       = baseDefense;
-                baseHitPoints = stats.hp * 5 * 5;
+                baseHitPoints = stats.getHp() * 5 * 5;
                 maxHitPoints  = baseHitPoints;
                 hitPoints     = baseHitPoints;
 
@@ -300,7 +260,7 @@ public class HeroBuilder {
         if (error == true)
             return (null);
         else {
-            System.out.println("Valid Object");
+            System.out.println("Valid Object"); // DEBUG
             return (new HeroData(this));
         }
 
