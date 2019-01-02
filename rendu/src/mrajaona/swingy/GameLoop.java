@@ -1,10 +1,8 @@
 package mrajaona.swingy;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Locale;
+
 import mrajaona.swingy.controller.TestController;
-import mrajaona.swingy.data.character.EnemyData;
-import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.model.GameModel;
 
 /*
@@ -30,14 +28,17 @@ public class GameLoop {
 
             GameModel.getModel().changeViewType(args[0]);
 
+            // "en", "fr"
+            GameModel.getModel().setLocale(new Locale("en"));
+
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 
-            // TestController.getController().newHero();
-            TestController.getController().loadHero(1);
+            TestController.getController().newHero();
+            // TestController.getController().loadHero(1);
             TestController.getController().printHero();
             // TestController.getController().removeWeapon();
             // TestController.getController().printHero();
-            TestController.getController().saveHero();
+            // TestController.getController().saveHero();
 
         } catch (Exception e) {
             e.printStackTrace();

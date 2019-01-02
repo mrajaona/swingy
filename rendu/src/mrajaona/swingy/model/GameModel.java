@@ -2,6 +2,8 @@ package mrajaona.swingy.model;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.builder.HeroBuilder;
@@ -16,6 +18,11 @@ public class GameModel {
 
     public static GameModel getModel() {
         return (model);
+    }
+
+    public void setLocale(Locale newLocale) {
+        GameData.setLocale(newLocale);
+        GameData.setResBundle( ResourceBundle.getBundle("mrajaona.swingy.locale.LocaleResource", newLocale) );
     }
 
     public void createHero() {

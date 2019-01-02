@@ -1,5 +1,7 @@
 package mrajaona.swingy.data;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import lombok.Getter;
@@ -18,12 +20,15 @@ public class GameData {
         return (data);
     }
 
-    @Getter public static Scanner inputScanner      = new Scanner(System.in);
-    @Getter @Setter public static String viewType   = Util.VIEW_TYPE_CONSOLE;
+    @Getter @Setter private static Locale          locale;
+    @Getter @Setter private static ResourceBundle  resBundle;
 
-    @Getter @Setter public static HeroData hero;
+    @Getter         private static Scanner inputScanner = new Scanner(System.in);
+    @Getter @Setter private static String viewType      = Util.VIEW_TYPE_CONSOLE;
+
+    @Getter @Setter private static HeroData hero;
     // current enemy
-    @Getter @Setter public static EnemyData enemy;
+    @Getter @Setter private static EnemyData enemy;
     // all enemies on map
     // TODO : map
 

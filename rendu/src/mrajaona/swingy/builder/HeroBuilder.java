@@ -3,6 +3,7 @@ package mrajaona.swingy.builder;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -16,6 +17,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
 import mrajaona.swingy.Util;
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
@@ -160,13 +162,13 @@ public class HeroBuilder {
 
         HeroData hero = null;
 
-        // TODO : localization
+        ResourceBundle locale = GameData.getData().getResBundle();
 
         while (hero == null) {
             if (heroClass == null || heroClass.trim().isEmpty())
-                heroClass = BuildHelper.ask("Choose your class (Warrior, Thief, Mage, Priest) :");
+                heroClass = BuildHelper.ask(locale.getString("CreateHeroClass"));
             if (heroName == null || heroName.trim().isEmpty())
-                heroName = BuildHelper.ask("Name your hero :");
+                heroName = BuildHelper.ask(locale.getString("CreateHeroName"));
 
             hero = build(true);
         }
