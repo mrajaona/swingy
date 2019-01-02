@@ -29,7 +29,7 @@ public class GameLoop {
             GameModel.getModel().changeViewType(args[0]);
 
             // "en", "fr"
-            GameModel.getModel().setLocale(new Locale("en"));
+            GameModel.getModel().setLocale(new Locale("fr"));
 
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 

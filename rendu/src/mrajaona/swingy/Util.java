@@ -8,13 +8,13 @@ import lombok.Getter;
 
 public class Util {
 
-	// UI
+    // UI
 
     public static final String VIEW_TYPE_GUI     = "gui";
     public static final String VIEW_TYPE_CONSOLE = "console";
     public static final String [] viewTypes  = {
-    	VIEW_TYPE_GUI,
-    	VIEW_TYPE_CONSOLE
+        VIEW_TYPE_GUI,
+        VIEW_TYPE_CONSOLE
     } ;
 
     // Directions

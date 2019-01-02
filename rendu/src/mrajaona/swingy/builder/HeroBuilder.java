@@ -162,13 +162,16 @@ public class HeroBuilder {
 
         HeroData hero = null;
 
-        ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.LocaleResource", GameData.getData().getLocale() );
+        ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.CreateHeroResource", GameData.getData().getLocale() );
 
         while (hero == null) {
-            if (heroClass == null || heroClass.trim().isEmpty())
+            if (heroClass == null || heroClass.trim().isEmpty()) {
                 heroClass = BuildHelper.ask(locale.getString("CreateHeroClass"));
-            if (heroName == null || heroName.trim().isEmpty())
+                // TODO : delocalize class
+            }
+            if (heroName == null || heroName.trim().isEmpty()) {
                 heroName = BuildHelper.ask(locale.getString("CreateHeroName"));
+            }
 
             hero = build(true);
         }
