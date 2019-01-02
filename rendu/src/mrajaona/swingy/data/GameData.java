@@ -21,7 +21,6 @@ public class GameData {
     }
 
     @Getter @Setter private static Locale          locale;
-    @Getter @Setter private static ResourceBundle  resBundle;
 
     @Getter         private static Scanner inputScanner = new Scanner(System.in);
     @Getter @Setter private static String viewType      = Util.VIEW_TYPE_CONSOLE;

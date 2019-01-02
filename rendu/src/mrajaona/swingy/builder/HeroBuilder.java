@@ -162,7 +162,7 @@ public class HeroBuilder {
 
         HeroData hero = null;
 
-        ResourceBundle locale = GameData.getData().getResBundle();
+        ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.LocaleResource", GameData.getData().getLocale() );
 
         while (hero == null) {
             if (heroClass == null || heroClass.trim().isEmpty())

@@ -22,7 +22,6 @@ public class GameModel {
 
     public void setLocale(Locale newLocale) {
         GameData.setLocale(newLocale);
-        GameData.setResBundle( ResourceBundle.getBundle("mrajaona.swingy.locale.LocaleResource", newLocale) );
     }
 
     public void createHero() {
