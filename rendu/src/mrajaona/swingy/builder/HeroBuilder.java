@@ -16,13 +16,14 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
-import mrajaona.swingy.Util;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.util.ResourceMap;
+import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.helper.BuildHelper;
 
 /*
@@ -44,39 +45,39 @@ public class HeroBuilder {
 
     // TODO : localization
 
-    @NotBlank(message = "Your hero needs a name.")
+    @NotBlank
     @Getter private String  heroName;
 
-    @NotBlank(message = "Invalid Class.")
+    @NotBlank
     @Getter private String  heroClass;
 
-    @NotNull(message = "Missing helm info")
+    @NotNull
     @Getter private HelmData     helm;
-    @NotNull(message = "Missing armor info")
+    @NotNull
     @Getter private ArmorData    armor;
-    @NotNull(message = "Missing weapon info")
+    @NotNull
     @Getter private WeaponData   weapon;
 
-    @Positive(message = "Invalid value (level)")
+    @Positive
     @Getter private int level         = 1;
 
-    @PositiveOrZero(message = "Invalid value (experience)")
+    @PositiveOrZero
     @Getter private int experience    = 0;
 
-    @PositiveOrZero(message = "Invalid value (base attack)")
+    @PositiveOrZero
     @Getter private int baseAttack    = 0;
-    @PositiveOrZero(message = "Invalid value (base defense)")
+    @PositiveOrZero
     @Getter private int baseDefense   = 0;
-    @Positive(message = "Invalid value (base hit points)")
+    @Positive
     @Getter private int baseHitPoints = 1;
 
-    @PositiveOrZero(message = "Invalid value (attack)")
+    @PositiveOrZero
     @Getter private int attack        = 0;
-    @PositiveOrZero(message = "Invalid value (defense)")
+    @PositiveOrZero
     @Getter private int defense       = 0;
-    @PositiveOrZero(message = "Invalid value (max hit points)")
+    @PositiveOrZero
     @Getter private int maxHitPoints  = 0;
-    @PositiveOrZero(message = "Invalid value (hit points)")
+    @PositiveOrZero
     @Getter private int hitPoints     = 0;
 
     // builder setters
@@ -162,12 +163,11 @@ public class HeroBuilder {
 
         HeroData hero = null;
 
-        ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.CreateHeroResource", GameData.getData().getLocale() );
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
 
         while (hero == null) {
             if (heroClass == null || heroClass.trim().isEmpty()) {
                 heroClass = BuildHelper.ask(locale.getString("CreateHeroClass"));
-                // TODO : delocalize class
             }
             if (heroName == null || heroName.trim().isEmpty()) {
                 heroName = BuildHelper.ask(locale.getString("CreateHeroName"));
@@ -202,8 +202,23 @@ public class HeroBuilder {
 
     private HeroData build(boolean init) {
 
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
+
+        // TODO : delocalize heroClass
+        ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
+        String      tmp = map.getKeyByValue(heroClass);
+
+        heroClass = tmp != null ? tmp : new String();
+
         if (init == true) {
             Util.HeroBaseStats stats = Util.HERO_BASE_STATS_MAP.get(heroClass);
+
+            if (helm == null)
+                helm   = new HelmData(ArtifactData.NO_ARTIFACT_NAME, 0);
+            if (armor == null)
+                armor  = new ArmorData(ArtifactData.NO_ARTIFACT_NAME, 0);
+            if (weapon == null)
+                weapon = new WeaponData(ArtifactData.NO_ARTIFACT_NAME, 0);
 
             if (stats == null) {
                 heroClass = new String();
@@ -215,10 +230,6 @@ public class HeroBuilder {
                 baseHitPoints = stats.getHp() * 5 * 5;
                 maxHitPoints  = baseHitPoints;
                 hitPoints     = baseHitPoints;
-
-                helm   = new HelmData(ArtifactData.NO_ARTIFACT_NAME, 0);
-                armor  = new ArmorData(ArtifactData.NO_ARTIFACT_NAME, 0);
-                weapon = new WeaponData(ArtifactData.NO_ARTIFACT_NAME, 0);
             }
         }
 
@@ -238,27 +249,23 @@ public class HeroBuilder {
 
         //Show errors
         if (helmConstraintViolations.size() > 0) {
-            for (ConstraintViolation<HelmData> violation : helmConstraintViolations) {
-                System.out.println(violation.getMessage());
-            }
+            // TODO : Exception
+            System.out.println("Invalid helm");
             error = true;
         }
         if (armorConstraintViolations.size() > 0) {
-            for (ConstraintViolation<ArmorData> violation : armorConstraintViolations) {
-                System.out.println(violation.getMessage());
-            }
+            // TODO : Exception
+            System.out.println("Invalid armor");
             error = true;
         }
         if (weaponConstraintViolations.size() > 0) {
-            for (ConstraintViolation<WeaponData> violation : weaponConstraintViolations) {
-                System.out.println(violation.getMessage());
-            }
+            // TODO : Exception
+            System.out.println("Invalid weapon");
             error = true;
         }
         if (heroConstraintViolations.size() > 0) {
-            for (ConstraintViolation<HeroBuilder> violation : heroConstraintViolations) {
-                System.out.println(violation.getMessage());
-            }
+            // TODO : Exception
+            System.out.println("Invalid hero");
             error = true;
         }
 

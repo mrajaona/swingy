@@ -14,8 +14,8 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
-import mrajaona.swingy.Util;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.util.Util;
 
 /*
 ** Enemy builder
@@ -33,29 +33,29 @@ public class EnemyBuilder {
 
     // TODO : localization
 
-    @NotBlank(message = "Please define the enemy type")
+    @NotBlank
     @Getter private String  enemyType;
 
-    @Positive(message = "Invalid value (level)")
+    @Positive
     @Getter private int level         = 1;
 
-    @PositiveOrZero(message = "Invalid value (experience)")
+    @PositiveOrZero
     @Getter private int experience    = 0;
 
-    @PositiveOrZero(message = "Invalid value (base attack)")
+    @PositiveOrZero
     @Getter private int baseAttack    = 0;
-    @PositiveOrZero(message = "Invalid value (base defense)")
+    @PositiveOrZero
     @Getter private int baseDefense   = 0;
-    @Positive(message = "Invalid value (base hit points)")
+    @Positive
     @Getter private int baseHitPoints = 1;
 
-    @PositiveOrZero(message = "Invalid value (attack)")
+    @PositiveOrZero
     @Getter private int attack        = 0;
-    @PositiveOrZero(message = "Invalid value (defense)")
+    @PositiveOrZero
     @Getter private int defense       = 0;
-    @PositiveOrZero(message = "Invalid value (max hit points)")
+    @PositiveOrZero
     @Getter private int maxHitPoints  = 0;
-    @PositiveOrZero(message = "Invalid value (hit points)")
+    @PositiveOrZero
     @Getter private int hitPoints     = 0;
 
     // builder setters
@@ -143,9 +143,8 @@ public class EnemyBuilder {
 
         //Show errors
         if (constraintViolations.size() > 0) {
-            for (ConstraintViolation<EnemyBuilder> violation : constraintViolations) {
-                System.out.println(violation.getMessage());
-            }
+            // TODO : Exception
+            System.out.println("Invalid enemy");
             return (null);
         } else {
             System.out.println("Valid Object"); // DEBUG

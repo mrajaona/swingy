@@ -18,11 +18,11 @@ public class ArtifactData {
     // TODO : localization
 
 	@DatabaseField(canBeNull = false)
-    @NotBlank(message = "Missing artifact name")
+    @NotBlank
     @Getter @Setter private String name;
 
 	@DatabaseField(canBeNull = false)
-	@PositiveOrZero(message = "Invalid artifact modifier")
+	@PositiveOrZero
     @Getter @Setter private int modifier;
 
     public static final String NO_ARTIFACT_NAME = "none";

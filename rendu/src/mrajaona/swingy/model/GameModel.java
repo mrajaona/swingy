@@ -6,9 +6,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.util.Util;
 import mrajaona.swingy.builder.HeroBuilder;
 import mrajaona.swingy.Save;
-import mrajaona.swingy.Util;
 
 public class GameModel {
 

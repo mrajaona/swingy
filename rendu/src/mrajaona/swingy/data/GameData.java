@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 import lombok.Getter;
 import lombok.Setter;
-import mrajaona.swingy.Util;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.util.Util;
 
 public class GameData {
 

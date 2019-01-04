@@ -13,7 +13,9 @@ public class GameLoop {
 
     private static GameLoop loop = new GameLoop();
 
-    private GameLoop() {}
+    private GameLoop() {
+    	Locale.setDefault(new Locale("en"));
+    }
 
     public static GameLoop getLoop() {
         return (loop);

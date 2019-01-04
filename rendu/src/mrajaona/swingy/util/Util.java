@@ -1,4 +1,4 @@
-package mrajaona.swingy;
+package mrajaona.swingy.util;
 
 import java.util.Collections;
 import java.util.HashMap;
