@@ -1,5 +1,5 @@
 package mrajaona.swingy.view.gui;
 
-public class GUIGameStart {
+public class GUIStatus {
 
 }

@@ -43,11 +43,26 @@ public class MainGameController {
                                             { Save.getManager().save(); }
                 public void run(String arg) { invalid(); }
             });
-        map.put("exit", new Cmd() {
+        map.put("exit", new Cmd() { // TODO
                 public void run()           { ; }
                 public void run(String arg) { invalid(); }
             });
-
+        map.put("help", new Cmd() { // TODO
+                public void run()           { ; }
+                public void run(String arg) { invalid(); }
+            });
+        map.put("gui", new Cmd() { // TODO
+                public void run()           { ; }
+                public void run(String arg) { invalid(); }
+            });
+        map.put("console", new Cmd() { // TODO
+                public void run()           { ; }
+                public void run(String arg) { invalid(); }
+            });
+        map.put("language", new Cmd() { // TODO
+                public void run()           { invalid(); }
+                public void run(String arg) { ; }
+            });
         return Collections.unmodifiableMap(map);
     }
 
