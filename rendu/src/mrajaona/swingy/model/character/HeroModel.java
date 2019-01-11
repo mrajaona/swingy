@@ -1,6 +1,7 @@
 package mrajaona.swingy.model.character;
 
 import java.lang.Math;
+import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
@@ -12,25 +13,21 @@ import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.artifact.ArmorModel;
 import mrajaona.swingy.model.artifact.HelmModel;
 import mrajaona.swingy.model.artifact.WeaponModel;
+import mrajaona.swingy.view.helper.MainHelper;
 
 /*
 ** Hero Model
 ** Manipulates Hero data
 */
 
-public class HeroModel implements CharacterModel {
+public class HeroModel {
 
-    private static HeroModel model = new HeroModel();
+    @SuppressWarnings("unused")
+    private HeroModel() {}
 
     private static int HERO_MAX_LVL = 100;
 
-    private HeroModel() {}
-
-    public static HeroModel getModel() {
-        return (model);
-    }
-
-    public void earnExp(int amount) {
+    public static void earnExp(int amount) {
         HeroData hero = GameData.getHero();
         double exp      = hero.getExperience() + amount;
         double expToLvl = hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450;
@@ -43,42 +40,42 @@ public class HeroModel implements CharacterModel {
         hero.setExperience(exp);
     }
 
-    public void levelUp(HeroData hero) {
+    public static void levelUp(HeroData hero) {
         hero.setLevel(hero.getLevel() + 1);
         fullRecover();
     }
 
-    public void equip(HelmData helm) {
-        HelmModel.getModel().equip(helm);
+    public static void equip(HelmData helm) {
+        HelmModel.equip(helm);
         updateStats();
     }
 
-    public void equip(ArmorData armor) {
-        ArmorModel.getModel().equip(armor);
+    public static void equip(ArmorData armor) {
+        ArmorModel.equip(armor);
         updateStats();
     }
 
-    public void equip(WeaponData weapon) {
-        WeaponModel.getModel().equip(weapon);
+    public static void equip(WeaponData weapon) {
+        WeaponModel.equip(weapon);
         updateStats();
     }
 
-    public void unequip(HelmData helm) {
-        HelmModel.getModel().remove();
+    public static void unequip(HelmData helm) {
+        HelmModel.remove();
         updateStats();
     }
 
-    public void unequip(ArmorData armor) {
-        ArmorModel.getModel().remove();
+    public static void unequip(ArmorData armor) {
+        ArmorModel.remove();
         updateStats();
     }
 
-    public void unequip(WeaponData weapon) {
-        WeaponModel.getModel().remove();
+    public static void unequip(WeaponData weapon) {
+        WeaponModel.remove();
         updateStats();
     }
 
-    private void updateStats() {
+    private static void updateStats() {
         HeroData hero = GameData.getHero();
 
         hero.setAttack(hero.getBaseAttack() + hero.getWeapon().getModifier());
@@ -88,26 +85,55 @@ public class HeroModel implements CharacterModel {
             hero.setHitPoints(hero.getMaxHitPoints());
     }
 
-    public void move(String direction) {
-        GameMapModel.getModel().move(direction);
+    public static void viewStats() {
+        HeroData hero = GameData.getHero();
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+        ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
+
+        MainHelper.show(
+            System.lineSeparator() +
+            locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
+            locale.getString("class")         + " : " + hero.getHeroClass() + System.lineSeparator() +
+            locale.getString("level")         + " : " + hero.getLevel() + System.lineSeparator() +
+            locale.getString("experience")    + " : " + hero.getExperience() + System.lineSeparator() +
+
+            locale.getString("helm")          + " : " + artifactLocale.getString(hero.getHelm().getName())   + " (" + hero.getHelm().getModifier()   + ")" + System.lineSeparator() +
+            locale.getString("armor")         + " : " + artifactLocale.getString(hero.getArmor().getName())  + " (" + hero.getArmor().getModifier()  + ")" + System.lineSeparator() +
+            locale.getString("weapon")        + " : " + artifactLocale.getString(hero.getWeapon().getName()) + " (" + hero.getWeapon().getModifier() + ")" + System.lineSeparator() +
+
+            locale.getString("baseAttack")    + " : " + hero.getBaseAttack() + System.lineSeparator() +
+            locale.getString("attack")        + " : " + hero.getAttack() + System.lineSeparator() +
+            locale.getString("baseDefense")   + " : " + hero.getBaseDefense() + System.lineSeparator() +
+            locale.getString("defense")       + " : " + hero.getDefense() + System.lineSeparator() +
+            locale.getString("baseHitPoints") + " : " + hero.getBaseHitPoints() + System.lineSeparator() +
+            locale.getString("maxHitPoints")  + " : " + hero.getMaxHitPoints() + System.lineSeparator() +
+            locale.getString("hitPoints")     + " : " + hero.getHitPoints() + System.lineSeparator()
+        );
     }
 
-    public void run() {
-
+    public static void move(String direction) {
+        GameMapModel.move(direction);
     }
 
-    public void fight(EnemyData enemy) {
-
+    public static void run() {
+        if ( (Math.random() * 10) % 2 == 0) // 1/2
+            GameMapModel.goBack();
+        else
+            fight();
     }
 
-    @Override
-    public void fullRecover() {
+    public static void fight() {
+        // EnemyController
+    }
+
+    // Character methods
+
+    public static void fullRecover() {
         HeroData hero = GameData.getHero();
         hero.setHitPoints(hero.getMaxHitPoints());
     }
 
-    @Override
-    public void recoverHP(int amount) {
+    public static void recoverHP(int amount) {
         HeroData hero = GameData.getHero();
 
         hero.setHitPoints(hero.getHitPoints() + amount);
@@ -115,8 +141,7 @@ public class HeroModel implements CharacterModel {
             hero.setHitPoints(hero.getMaxHitPoints());
     }
 
-    @Override
-    public void loseHP(int amount) {
+    public static void loseHP(int amount) {
         HeroData hero = GameData.getHero();
 
         hero.setHitPoints(hero.getHitPoints() - amount);
@@ -125,14 +150,12 @@ public class HeroModel implements CharacterModel {
         }
     }
 
-    @Override
-    public void beAttacked(int enemyAtk) {
+    public static void beAttacked(int enemyAtk) {
         HeroData hero = GameData.getHero();
         loseHP(enemyAtk - hero.getDefense());
     }
 
-    @Override
-    public void die() {
+    public static void die() {
         ;
     }
 

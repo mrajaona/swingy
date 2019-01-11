@@ -12,25 +12,20 @@ import mrajaona.swingy.Save;
 
 public class GameModel {
 
-    private static GameModel model = new GameModel();
-
+    @SuppressWarnings("unused")
     private GameModel() {}
 
-    public static GameModel getModel() {
-        return (model);
-    }
-
-    public void setLocale(Locale newLocale) {
+    public static void setLocale(Locale newLocale) {
         GameData.setLocale(newLocale);
     }
 
-    public void createHero() {
+    public static void createHero() {
 		GameData.setHero(
 			HeroBuilder.getBuilder().newHero()
 			);
     }
 
-    public void loadHero(long id) throws SQLException, IOException {
+    public static void loadHero(long id) throws SQLException, IOException {
 		GameData.setHero(
 			HeroBuilder.getBuilder().loadHero(
 				Save.getManager().load(id)
@@ -38,8 +33,7 @@ public class GameModel {
 			);
     }
 
-    public void changeViewType(String newType) {
-
+    public static void changeViewType(String newType) {
         if (newType != Util.VIEW_TYPE_GUI && newType != Util.VIEW_TYPE_CONSOLE)
             ; // Exception
         else

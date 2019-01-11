@@ -3,22 +3,16 @@ package mrajaona.swingy.model.artifact;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.WeaponData;
 
-public class WeaponModel implements ArtifactModel {
+public class WeaponModel {
 
-    private static WeaponModel model = new WeaponModel();
+	@SuppressWarnings("unused")
+	private WeaponModel() {}
 
-    private WeaponModel() {}
-
-    public static WeaponModel getModel() {
-        return (model);
-    }
-
-	public void equip(WeaponData weapon) {
+	public static void equip(WeaponData weapon) {
 		GameData.getHero().getWeapon().change(weapon.getName(), weapon.getModifier());
 	}
 
-	@Override
-	public void remove() {
+	public static void remove() {
 		GameData.getHero().getWeapon().remove();
 	}
 

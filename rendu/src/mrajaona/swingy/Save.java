@@ -57,6 +57,9 @@ public class Save {
     public void save() throws SQLException, IOException {
         HeroData hero = GameData.getHero();
 
+        if (hero == null)
+            return ;
+
         openConnection();
 
         Dao.CreateOrUpdateStatus statusHelm   = artifactDao.createOrUpdate(hero.getHelm());
@@ -74,6 +77,9 @@ public class Save {
     }
 
     public void delete(HeroData hero) throws SQLException, IOException {
+        if (hero == null)
+            return ;
+
         openConnection();
 
         artifactDao.delete(hero.getHelm());
@@ -98,9 +104,11 @@ public class Save {
         openConnection();
         HeroData hero = heroDao.queryForId(id);
 
-        artifactDao.refresh(hero.getHelm());
-        artifactDao.refresh(hero.getArmor());
-        artifactDao.refresh(hero.getWeapon());
+        if (hero != null) {
+            artifactDao.refresh(hero.getHelm());
+            artifactDao.refresh(hero.getArmor());
+            artifactDao.refresh(hero.getWeapon());
+        }
 
         closeConnection();
         return (hero);

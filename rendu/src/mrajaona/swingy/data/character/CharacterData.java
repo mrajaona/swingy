@@ -42,20 +42,12 @@ public class CharacterData {
     @Getter @Setter private int baseHitPoints;
 
 
-    @DatabaseField(canBeNull = false)
-    // @PositiveOrZero
     @Getter @Setter private int attack;
 
-    @DatabaseField(canBeNull = false)
-    // @PositiveOrZero
     @Getter @Setter private int defense;
 
-    @DatabaseField(canBeNull = false)
-    // @PositiveOrZero
     @Getter @Setter private int maxHitPoints;
 
-    @DatabaseField(canBeNull = false)
-    // @PositiveOrZero
     @Getter @Setter private int hitPoints;
 
     // constructors

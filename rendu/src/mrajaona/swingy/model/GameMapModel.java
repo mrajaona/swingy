@@ -13,20 +13,15 @@ import mrajaona.swingy.util.ResourceMap;
 
 public class GameMapModel {
 
-    private static GameMapModel model = new GameMapModel();
-
+    @SuppressWarnings("unused")
     private GameMapModel() {}
 
-    public static GameMapModel getModel() {
-        return (model);
-    }
-
-    GameMapData initMap() {
-        return (new GameMapData(GameData.getHero().getLevel()));
+    public static GameMapData initMap() {
+        return ( new GameMapData(GameData.getHero().getLevel()) );
     }
 
     // move hero
-    public void move(String direction) {
+    public static void move(String direction) {
         // delocalize direction
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
         ResourceMap resMap    = (ResourceMap) locale.getObject("DirectionList");
@@ -68,6 +63,10 @@ public class GameMapModel {
         }
 
 
+    }
+
+    public static void goBack() {
+        GameData.getMap().goBack();
     }
 
 }

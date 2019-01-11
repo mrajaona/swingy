@@ -2,8 +2,11 @@ package mrajaona.swingy;
 
 import java.util.Locale;
 
-import mrajaona.swingy.controller.TestController;
+import mrajaona.swingy.controller.MainGameController;
+import mrajaona.swingy.controller.TitleScreenController;
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.model.GameModel;
+import mrajaona.swingy.view.helper.MainHelper;
 
 /*
 ** Main loop for the game
@@ -28,20 +31,23 @@ public class GameLoop {
 
         try {
 
-            GameModel.getModel().changeViewType(args[0]);
+            GameModel.changeViewType(args[0]);
 
             // "en", "fr"
-            GameModel.getModel().setLocale(new Locale("en"));
+            GameModel.setLocale(new Locale("en"));
 
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 
-            TestController.getController().newHero();
-            // TestController.getController().loadHero(1);
-            TestController.getController().changeWeapon();
-            TestController.getController().printHero();
-            // TestController.getController().removeWeapon();
-            // TestController.getController().printHero();
-            // TestController.getController().saveHero();
+            String[] line;
+            while (GameData.getHero() == null) {
+                MainHelper.show("Title screen"); // Debug // TODO
+                line = MainHelper.getInput();
+                TitleScreenController.run(line);
+            }
+            while (true) { // exit
+                line = MainHelper.getInput();
+                MainGameController.run(line);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,7 +20,7 @@ public class GameData {
         return (data);
     }
 
-    @Getter @Setter private static Locale          locale;
+    @Getter @Setter private static Locale locale;
 
     @Getter         private static Scanner inputScanner = new Scanner(System.in);
     @Getter @Setter private static String viewType      = Util.VIEW_TYPE_CONSOLE;
@@ -30,4 +30,5 @@ public class GameData {
     @Getter @Setter private static EnemyData enemy;
 
     @Getter @Setter private static GameMapData map;
+
 }

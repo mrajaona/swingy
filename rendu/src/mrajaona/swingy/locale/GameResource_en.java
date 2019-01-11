@@ -1,0 +1,14 @@
+package mrajaona.swingy.locale;
+
+import java.util.ListResourceBundle;
+
+public class GameResource_en extends ListResourceBundle {
+
+    protected Object[][] getContents() {
+        return new Object[][] {
+            /* Strings */
+            {"msgGetInput", "What do you want to do ?"},
+       };
+    }
+
+}

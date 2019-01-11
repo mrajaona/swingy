@@ -5,38 +5,30 @@ package mrajaona.swingy.model.character;
 ** Manipulates Enemy data
 */
 
-public class EnemyModel implements CharacterModel {
+public class EnemyModel {
 
-    private static EnemyModel model = new EnemyModel();
-
+    @SuppressWarnings("unused")
     private EnemyModel() {}
 
-    public static EnemyModel getModel() {
-        return (model);
-    }
+    // Character methods
 
-    @Override
-    public void fullRecover() {
+    public static void fullRecover() {
         ;
     }
 
-    @Override
-    public void recoverHP(int amount) {
+    public static void recoverHP(int amount) {
         ;
     }
 
-    @Override
-    public void loseHP(int amount) {
+    public static void loseHP(int amount) {
         ;
     }
 
-    @Override
-    public void beAttacked(int enemyAtk) {
+    public static void beAttacked(int enemyAtk) {
         ;
     }
 
-    @Override
-    public void die() {
+    public static void die() {
         ;
     }
 

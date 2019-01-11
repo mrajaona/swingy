@@ -13,6 +13,7 @@ public class GameMapData {
     @Getter private int size;
 
     private int[] heroCoord;
+    private int[] prevCoord;
     /* x = 0 is west ** y = 0 is south */
 
     @SuppressWarnings("unused")
@@ -31,6 +32,7 @@ public class GameMapData {
     }
 
     public void setCoordX(int value) {
+        prevCoord[0] = heroCoord[0];
         heroCoord[0] = value;
     }
 
@@ -39,7 +41,13 @@ public class GameMapData {
     }
 
     public void setCoordY(int value) {
+        prevCoord[1] = heroCoord[1];
         heroCoord[1] = value;
+    }
+
+    public void goBack() {
+        heroCoord[0] = prevCoord[0];
+        heroCoord[1] = prevCoord[1];
     }
 
 }

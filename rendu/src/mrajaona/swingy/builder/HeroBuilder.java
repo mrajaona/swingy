@@ -125,7 +125,7 @@ public class HeroBuilder {
     }
 
     public HeroBuilder setBaseAttack(int value) {
-    baseAttack = value;
+        baseAttack = value;
         return (this);
     }
 
@@ -182,24 +182,26 @@ public class HeroBuilder {
     }
 
     public HeroData loadHero(HeroData loaded) {
+        if (loaded == null)
+            return (null);
+
         return (
-            setId(loaded.getId())
-            .setHeroName(loaded.getHeroName())
-            .setHeroClass(loaded.getHeroClass())
-            .setHelm(new HelmData(loaded.getHelm()))
-            .setArmor(new ArmorData(loaded.getArmor()))
-            .setWeapon(new WeaponData(loaded.getWeapon()))
-            .setLevel(loaded.getLevel())
-            .setExperience(loaded.getExperience())
-            .setBaseAttack(loaded.getBaseAttack())
-            .setBaseDefense(loaded.getBaseDefense())
-            .setBaseHitPoints(loaded.getBaseHitPoints())
-            .setAttack(loaded.getAttack())
-            .setDefense(loaded.getDefense())
-            .setMaxHitPoints(loaded.getMaxHitPoints())
-            .setHitPoints(loaded.getHitPoints())
-            .build(false)
-            );
+        setId(loaded.getId())
+        .setHeroName      (loaded.getHeroName())
+        .setHeroClass     (loaded.getHeroClass())
+        .setLevel         (loaded.getLevel())
+        .setExperience    (loaded.getExperience())
+        .setBaseAttack    (loaded.getBaseAttack())
+        .setBaseDefense   (loaded.getBaseDefense())
+        .setBaseHitPoints (loaded.getBaseHitPoints())
+        .setHelm          (new HelmData(loaded.getHelm()))
+        .setArmor         (new ArmorData(loaded.getArmor()))
+        .setWeapon        (new WeaponData(loaded.getWeapon()))
+        .setAttack        (baseAttack + weapon.getModifier())
+        .setDefense       (baseDefense + armor.getModifier())
+        .setMaxHitPoints  (baseHitPoints + helm.getModifier())
+        .setHitPoints     (maxHitPoints)
+        .build(false));
     }
 
     private HeroData build(boolean init) {
