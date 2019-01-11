@@ -37,6 +37,7 @@ public class GameLoop {
 
             TestController.getController().newHero();
             // TestController.getController().loadHero(1);
+            TestController.getController().changeWeapon();
             TestController.getController().printHero();
             // TestController.getController().removeWeapon();
             // TestController.getController().printHero();

@@ -2,7 +2,7 @@ package mrajaona.swingy.locale;
 
 import java.util.ListResourceBundle;
 
-public class ArtifactRessource_en extends ListResourceBundle {
+public class ArtifactResource_en extends ListResourceBundle {
 
     protected Object[][] getContents() {
         return new Object[][] {
