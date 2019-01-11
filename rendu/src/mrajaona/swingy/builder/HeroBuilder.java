@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
+import org.hibernate.validator.constraints.Range;
+
 import lombok.Getter;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
@@ -58,11 +60,11 @@ public class HeroBuilder {
     @NotNull
     @Getter private WeaponData   weapon;
 
-    @Positive
+    @Range(min=1, max=100)
     @Getter private int level         = 1;
 
     @PositiveOrZero
-    @Getter private int experience    = 0;
+    @Getter private double experience    = 0;
 
     @PositiveOrZero
     @Getter private int baseAttack    = 0;
@@ -117,7 +119,7 @@ public class HeroBuilder {
         return (this);
     }
 
-    public HeroBuilder setExperience(int value) {
+    public HeroBuilder setExperience(double value) {
         experience = value;
         return (this);
     }
@@ -204,7 +206,7 @@ public class HeroBuilder {
 
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
 
-        // TODO : delocalize heroClass
+        // delocalize heroClass
         ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
         String      tmp = map.getKeyByValue(heroClass);
 

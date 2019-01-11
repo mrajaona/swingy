@@ -26,7 +26,7 @@ public class CharacterData {
 
     @DatabaseField(canBeNull = false)
     // @PositiveOrZero
-    @Getter @Setter private int experience;
+    @Getter @Setter private double experience;
 
 
     @DatabaseField(canBeNull = false)
@@ -76,7 +76,7 @@ public class CharacterData {
     // new enemy
     public  CharacterData(
             int level,
-            int experience,
+            double experience,
             int baseAttack,
             int baseDefense,
             int baseHitPoints
@@ -95,7 +95,7 @@ public class CharacterData {
     // load
     public  CharacterData(
             int level,
-            int experience,
+            double experience,
             int baseAttack,
             int attack,
             int baseDefense,

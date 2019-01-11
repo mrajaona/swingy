@@ -40,9 +40,6 @@ public class HeroData extends CharacterData {
     @DatabaseField(foreign = true)
     @Getter @Setter private WeaponData   weapon;
 
-    @Getter @Setter private int coordX;
-    @Getter @Setter private int coordY;
-
     // necessary for ORMLite
     HeroData() {
         super();

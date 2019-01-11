@@ -1,13 +1,13 @@
 package mrajaona.swingy.data;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import lombok.Getter;
 import lombok.Setter;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.util.Util;
 
 public class GameData {
@@ -28,7 +28,6 @@ public class GameData {
     @Getter @Setter private static HeroData hero;
     // current enemy
     @Getter @Setter private static EnemyData enemy;
-    // all enemies on map
-    // TODO : map
 
+    @Getter @Setter private static GameMapData map;
 }

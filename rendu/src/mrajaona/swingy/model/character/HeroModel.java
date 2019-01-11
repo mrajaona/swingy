@@ -1,11 +1,14 @@
 package mrajaona.swingy.model.character;
 
+import java.lang.Math;
+
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.artifact.ArmorModel;
 import mrajaona.swingy.model.artifact.HelmModel;
 import mrajaona.swingy.model.artifact.WeaponModel;
@@ -19,6 +22,8 @@ public class HeroModel implements CharacterModel {
 
     private static HeroModel model = new HeroModel();
 
+    private static int HERO_MAX_LVL = 100;
+
     private HeroModel() {}
 
     public static HeroModel getModel() {
@@ -26,11 +31,21 @@ public class HeroModel implements CharacterModel {
     }
 
     public void earnExp(int amount) {
+        HeroData hero = GameData.getHero();
+        double exp      = hero.getExperience() + amount;
+        double expToLvl = hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450;
 
+        if (exp >= expToLvl) {
+            levelUp(hero);
+            exp -= expToLvl;
+        }
+
+        hero.setExperience(exp);
     }
 
-    public void levelUp() {
-
+    public void levelUp(HeroData hero) {
+        hero.setLevel(hero.getLevel() + 1);
+        fullRecover();
     }
 
     public void equip(HelmData helm) {
@@ -74,7 +89,7 @@ public class HeroModel implements CharacterModel {
     }
 
     public void move(String direction) {
-
+        GameMapModel.getModel().move(direction);
     }
 
     public void run() {
