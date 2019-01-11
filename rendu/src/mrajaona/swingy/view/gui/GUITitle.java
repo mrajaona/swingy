@@ -1,26 +1,46 @@
 package mrajaona.swingy.view.gui;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class GUITitle {
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
+
+    private static GUITitle screen = new GUITitle();
+
+    @SuppressWarnings("unused")
+    private GUITitle() {
+        controlPanel = new JPanel();
+        newButton = new JButton("New game");
+        loadButton = new JButton("Load game");
+
+        controlPanel.setLayout(new FlowLayout());
+
+        controlPanel.add(newButton);
+        controlPanel.add(loadButton);
+    }
+
+    public static GUITitle getScreen() {
+        return (screen);
+    }
+
+    private static JPanel controlPanel;
+    private static JButton newButton;
+    private static JButton loadButton;
+
     public static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("HelloWorldSwing");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*
+        Window.getWindow().getFrame().removeAll();
+        Window.getWindow().getFrame().revalidate();
+        Window.getWindow().getFrame().repaint();
+        */
 
-        //Add the ubiquitous "Hello World" label.
-        JLabel label = new JLabel("Hello World");
-        frame.getContentPane().add(label);
+        Window.getWindow().getFrame().setLayout(new GridLayout(3, 1));
 
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
+        Window.getWindow().getFrame().add(controlPanel);
+        Window.getWindow().show();
     }
 
 }
