@@ -25,7 +25,7 @@ public class ArtifactData {
 	@PositiveOrZero
     @Getter @Setter private int modifier;
 
-    public static final String NO_ARTIFACT_NAME = "none";
+    public static final String NO_ARTIFACT_KEY = "none";
 
     // necessary for ORMLite
     ArtifactData() {}
@@ -47,7 +47,7 @@ public class ArtifactData {
     }
 
     public void remove() {
-    	name     = NO_ARTIFACT_NAME;
+    	name     = NO_ARTIFACT_KEY;
     	modifier = 0;
     }
 

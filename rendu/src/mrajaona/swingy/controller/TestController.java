@@ -2,6 +2,7 @@ package mrajaona.swingy.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.model.GameModel;
@@ -35,24 +36,26 @@ public class TestController {
 
 	public void printHero() {
 		HeroData hero = GameData.getHero();
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+
         MainHelper.show(
         	System.lineSeparator() +
-            "Name       : " + hero.getHeroName()      + System.lineSeparator() +
-            "Class      : " + hero.getHeroClass()     + System.lineSeparator() +
-            "Level      : " + hero.getLevel()         + System.lineSeparator() +
-            "Experience : " + hero.getExperience()    + System.lineSeparator() +
+            locale.getString("name") + " :" + hero.getHeroName()      + System.lineSeparator() +
+            locale.getString("class") + " :" + hero.getHeroClass()     + System.lineSeparator() +
+            locale.getString("level") + " :" + hero.getLevel()         + System.lineSeparator() +
+            locale.getString("experience") + " :" + hero.getExperience()    + System.lineSeparator() +
 
-            "Helm       : " + hero.getHelm().getName() + " (" + hero.getHelm().getModifier() + ")" + System.lineSeparator() +
-            "Armor      : " + hero.getArmor().getName() + " (" + hero.getArmor().getModifier() + ")" + System.lineSeparator() +
-            "Weapon     : " + hero.getWeapon().getName() + " (" + hero.getWeapon().getModifier() + ")" + System.lineSeparator() +
+            locale.getString("helm") + " :" + hero.getHelm().getName() + " (" + hero.getHelm().getModifier() + ")" + System.lineSeparator() +
+            locale.getString("armor") + " :" + hero.getArmor().getName() + " (" + hero.getArmor().getModifier() + ")" + System.lineSeparator() +
+            locale.getString("weapon") + " :" + hero.getWeapon().getName() + " (" + hero.getWeapon().getModifier() + ")" + System.lineSeparator() +
 
-            "Base Atk   : " + hero.getBaseAttack()    + System.lineSeparator() +
-            "Atk        : " + hero.getAttack()        + System.lineSeparator() +
-            "Base Def   : " + hero.getBaseDefense()   + System.lineSeparator() +
-            "Def        : " + hero.getDefense()       + System.lineSeparator() +
-            "Base HP    : " + hero.getBaseHitPoints() + System.lineSeparator() +
-            "Max HP     : " + hero.getMaxHitPoints()  + System.lineSeparator() +
-            "HP         : " + hero.getHitPoints()     + System.lineSeparator()
+            locale.getString("baseAttack") + " :" + hero.getBaseAttack()    + System.lineSeparator() +
+            locale.getString("attack") + " :" + hero.getAttack()        + System.lineSeparator() +
+            locale.getString("baseDefense") + " :" + hero.getBaseDefense()   + System.lineSeparator() +
+            locale.getString("defense") + " :" + hero.getDefense()       + System.lineSeparator() +
+            locale.getString("baseHitPoints") + " :" + hero.getBaseHitPoints() + System.lineSeparator() +
+            locale.getString("maxHitPoints") + " :" + hero.getMaxHitPoints()  + System.lineSeparator() +
+            locale.getString("hitPoints") + " :" + hero.getHitPoints()     + System.lineSeparator()
         );
 	}
 

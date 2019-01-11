@@ -17,25 +17,12 @@ public class Util {
         VIEW_TYPE_CONSOLE
     } ;
 
-    // Directions
-
-    public static final String DIRECTION_NORTH   = "north";
-    public static final String DIRECTION_SOUTH   = "south";
-    public static final String DIRECTION_EAST    = "east";
-    public static final String DIRECTION_WEST    = "west";
-    public static final String [] directions     = {
-        DIRECTION_NORTH,
-        DIRECTION_SOUTH,
-        DIRECTION_EAST,
-        DIRECTION_WEST
-    } ;
-
     // Hero types
 
-    public static final String HERO_WARRIOR  = "Warrior";
-    public static final String HERO_THIEF    = "Thief";
-    public static final String HERO_MAGE     = "Mage";
-    public static final String HERO_PRIEST   = "Priest";
+    public static final String HERO_WARRIOR  = "warrior";
+    public static final String HERO_THIEF    = "thief";
+    public static final String HERO_MAGE     = "mage";
+    public static final String HERO_PRIEST   = "priest";
     public static final String [] heroTypes  = {
         HERO_WARRIOR,
         HERO_THIEF,
@@ -76,8 +63,8 @@ public class Util {
 
     // Enemy types
 
-    public static final String ENEMY_SLIME   = "Slime";
-    public static final String ENEMY_GOBLIN  = "Goblin";
+    public static final String ENEMY_SLIME   = "slime";
+    public static final String ENEMY_GOBLIN  = "goblin";
     public static final String [] enemyTypes = {
             ENEMY_SLIME,
             ENEMY_GOBLIN

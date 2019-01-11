@@ -31,7 +31,7 @@ public class GameLoop {
             GameModel.getModel().changeViewType(args[0]);
 
             // "en", "fr"
-            GameModel.getModel().setLocale(new Locale("fr"));
+            GameModel.getModel().setLocale(new Locale("en"));
 
             System.out.println("Hello Maven!" + System.lineSeparator() + "Welcome to Swingy!");
 

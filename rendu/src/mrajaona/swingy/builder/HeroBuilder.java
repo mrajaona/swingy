@@ -167,10 +167,10 @@ public class HeroBuilder {
 
         while (hero == null) {
             if (heroClass == null || heroClass.trim().isEmpty()) {
-                heroClass = BuildHelper.ask(locale.getString("CreateHeroClass"));
+                heroClass = BuildHelper.ask(locale.getString("msgCreateHeroClass"));
             }
             if (heroName == null || heroName.trim().isEmpty()) {
-                heroName = BuildHelper.ask(locale.getString("CreateHeroName"));
+                heroName = BuildHelper.ask(locale.getString("msgCreateHeroName"));
             }
 
             hero = build(true);
@@ -214,11 +214,11 @@ public class HeroBuilder {
             Util.HeroBaseStats stats = Util.HERO_BASE_STATS_MAP.get(heroClass);
 
             if (helm == null)
-                helm   = new HelmData(ArtifactData.NO_ARTIFACT_NAME, 0);
+                helm   = new HelmData(ArtifactData.NO_ARTIFACT_KEY, 0);
             if (armor == null)
-                armor  = new ArmorData(ArtifactData.NO_ARTIFACT_NAME, 0);
+                armor  = new ArmorData(ArtifactData.NO_ARTIFACT_KEY, 0);
             if (weapon == null)
-                weapon = new WeaponData(ArtifactData.NO_ARTIFACT_NAME, 0);
+                weapon = new WeaponData(ArtifactData.NO_ARTIFACT_KEY, 0);
 
             if (stats == null) {
                 heroClass = new String();

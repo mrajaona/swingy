@@ -6,13 +6,11 @@ import mrajaona.swingy.util.ResourceMap;
 
 public class HeroResource_en extends ListResourceBundle {
 
-
-
     protected Object[][] getContents() {
         return new Object[][] {
             /* Strings */
-            {"CreateHeroClass", "Choose your class (Warrior, Thief, Mage, Priest) :"},
-            {"CreateHeroName", "Name your hero :"},
+            {"msgCreateHeroClass", "Choose your class (warrior, thief, mage, priest) :"},
+            {"msgCreateHeroName", "Name your hero :"},
 
             /* Objects */
             // Classes
@@ -20,10 +18,10 @@ public class HeroResource_en extends ListResourceBundle {
                 "ClassesList",
                 new ResourceMap(
                     new String[][] {
-                        {"Warrior", "Warrior"},
-                        {"Thief", "Thief"},
-                        {"Mage", "Mage"},
-                        {"Priest", "Priest"},
+                        {"warrior", "warrior"},
+                        {"thief", "thief"},
+                        {"mage", "mage"},
+                        {"priest", "priest"},
                     }
                 )
             },

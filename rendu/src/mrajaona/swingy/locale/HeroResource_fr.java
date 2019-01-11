@@ -11,8 +11,8 @@ public class HeroResource_fr extends ListResourceBundle {
     protected Object[][] getContents() {
         return new Object[][] {
             /* Strings */
-            {"CreateHeroClass", "Choisissez votre classe (Guerrier, Voleur, Magicien, Pretre) :"},
-            {"CreateHeroName", "Nommez votre hero :"},
+            {"msgCreateHeroClass", "Choisissez votre classe (guerrier, voleur, magicien, pretre) :"},
+            {"msgCreateHeroName", "Nommez votre hero :"},
 
             /* Objects */
             // Classes
@@ -20,10 +20,10 @@ public class HeroResource_fr extends ListResourceBundle {
                 "ClassesList",
                 new ResourceMap(
                     new String[][] {
-                        {"Warrior", "Guerrier"},
-                        {"Thief", "Voleur"},
-                        {"Mage", "Magicien"},
-                        {"Priest", "Pretre"},
+                        {"warrior", "guerrier"},
+                        {"thief",   "voleur"},
+                        {"mage",    "magicien"},
+                        {"priest",  "pretre"},
                     }
                 )
             },

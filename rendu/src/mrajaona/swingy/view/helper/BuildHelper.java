@@ -10,7 +10,7 @@ public class BuildHelper {
     public static String ask(String message) {
         ConsoleView.println(message);
         String answer = GameData.getInputScanner().nextLine();
-        return (answer);
+        return (answer); // TODO : lowercase
     }
 
 }
