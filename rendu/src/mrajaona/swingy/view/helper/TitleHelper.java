@@ -14,6 +14,14 @@ public class TitleHelper {
     @SuppressWarnings("unused")
     private TitleHelper() {}
 
+    public static void newHero() {
+        System.out.println("new");
+    }
+
+    public static void loadHero() {
+        System.out.println("load");
+    }
+
     public static void show()  throws SQLException, IOException {
         if (GameData.getViewType().equals(Util.VIEW_TYPE_CONSOLE)) {
             String[] line;

@@ -1,5 +1,7 @@
 package mrajaona.swingy.view.gui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 import lombok.Getter;
@@ -22,9 +24,15 @@ public class Window {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(
-            400, // width
+            600, // width
             500  // height
         );
+        frame.setMinimumSize(
+    		new Dimension(
+        		600, // width
+            	500  // height
+            )
+    	);
         frame.setLayout(null);
     }
 
