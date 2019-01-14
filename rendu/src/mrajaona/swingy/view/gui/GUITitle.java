@@ -17,28 +17,28 @@ import mrajaona.swingy.view.helper.TitleHelper;
 
 public class GUITitle {
 
-    private static GUITitle screen = new GUITitle();
+    private static GUITitle    screen = new GUITitle();
 
-    private static JSplitPane loadPanel;
+    private static JSplitPane  loadPanel;
 
     private static JScrollPane heroListScrollPane;
-    private static JTextArea heroList; // TODO
+    private static JTextArea   heroList; // TODO // Probably need something else
 
     private static JScrollPane heroStatsScrollPane;
-    private static JTextArea statsField;
+    private static JTextArea   statsField;
 
-    private static JPanel controlPanel;
-    private static JButton newButton;
-    private static JButton loadButton;
+    private static JPanel      controlPanel;
+    private static JButton     newButton;
+    private static JButton     loadButton;
 
     @SuppressWarnings("unused")
     private GUITitle() {
         // Hero list
-        heroList = new JTextArea();
-        heroListScrollPane = new JScrollPane(heroList);
+        heroList            = new JTextArea();
+        heroListScrollPane  = new JScrollPane(heroList);
 
         // Hero stats
-        statsField = new JTextArea();
+        statsField          = new JTextArea();
         heroStatsScrollPane = new JScrollPane(statsField);
 
         // Panel for hero info
@@ -56,13 +56,13 @@ public class GUITitle {
         controlPanel.setLayout(new FlowLayout());
 
         newButton = new JButton("New game");
-        loadButton = new JButton("Load game");
-
         newButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 TitleHelper.newHero();
             }
         });
+
+        loadButton = new JButton("Load game");
         loadButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 TitleHelper.loadHero();
@@ -87,18 +87,18 @@ public class GUITitle {
         Window.getWindow().getFrame().setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        c.fill = GridBagConstraints.BOTH;
-        c.gridy = 0;
+        c.fill    = GridBagConstraints.BOTH;
+        c.gridy   = 0;
         c.weightx = 1;
         c.weighty = 1;
-        c.insets = new Insets(5, 5, 2, 5);
+        c.insets  = new Insets(5, 5, 2, 5);
         Window.getWindow().getFrame().add(loadPanel, c);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridy = 1;
+        c.fill    = GridBagConstraints.HORIZONTAL;
+        c.gridy   = 1;
         c.weightx = 0;
         c.weighty = 0;
-        c.insets = new Insets(0,0,0,0);
+        c.insets  = new Insets(0,0,0,0);
         Window.getWindow().getFrame().add(controlPanel, c);
 
         Window.getWindow().show();
