@@ -18,8 +18,12 @@ public class TitleHelper {
         System.out.println("new");
     }
 
-    public static void loadHero() {
+    public static void loadHero(long id) {
         System.out.println("load");
+    }
+
+    public static void deleteHero(long id) {
+        System.out.println("delete");
     }
 
     public static void show()  throws SQLException, IOException {

@@ -19,7 +19,7 @@ public class StatResource_en extends ListResourceBundle {
             {"baseDefense",   "Base DEF"},
             {"baseHitPoints", "Base HP"},
             {"attack",        "ATK"},
-            {"defense",       "ATK"},
+            {"defense",       "DEF"},
             {"maxHitPoints",  "Max HP"},
             {"hitPoints",     "HP"},
        };

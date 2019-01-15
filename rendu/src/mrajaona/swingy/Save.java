@@ -2,6 +2,7 @@ package mrajaona.swingy;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -77,17 +78,19 @@ public class Save {
         closeConnection();
     }
 
-    public void delete(HeroData hero) throws SQLException, IOException {
-        if (hero == null)
-            return ;
-
+    public void delete(long id) throws SQLException, IOException {
         openConnection();
 
-        artifactDao.delete(hero.getHelm());
-        artifactDao.delete(hero.getArmor());
-        artifactDao.delete(hero.getWeapon());
+        HeroData hero = heroDao.queryForId(id);
 
-        heroDao.delete(hero);
+        if (hero != null) {
+            artifactDao.delete(hero.getHelm());
+            artifactDao.delete(hero.getArmor());
+            artifactDao.delete(hero.getWeapon());
+
+            heroDao.delete(hero);
+        }
+
         closeConnection();
     }
 
@@ -97,6 +100,16 @@ public class Save {
         openConnection();
         // For medium sized or large tables, this may load a lot of objects into memory so you should consider using the iterator() method instead.
         List<HeroData> heroList = heroDao.queryForAll();
+
+        Iterator<HeroData> heroIterator = heroList.iterator();
+        while (heroIterator.hasNext()) {
+            HeroData hero = heroIterator.next();
+
+            artifactDao.refresh(hero.getHelm());
+            artifactDao.refresh(hero.getArmor());
+            artifactDao.refresh(hero.getWeapon());
+        }
+
         closeConnection();
         return (new Vector<HeroData>(heroList));
     }

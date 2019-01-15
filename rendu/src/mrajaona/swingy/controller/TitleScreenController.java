@@ -14,7 +14,7 @@ public class TitleScreenController {
     private TitleScreenController() {}
 
     public interface Cmd {
-        public void run();
+        public void run()           throws SQLException, IOException;
         public void run(String arg) throws SQLException, IOException;
     }
 
@@ -28,7 +28,8 @@ public class TitleScreenController {
 
         // Title screen
         map.put("new", new Cmd() {
-                public void run()           { GameModel.createHero(); }
+                public void run() throws SQLException, IOException
+                                            { GameModel.createHero(); }
                 public void run(String arg) { invalid(); }
             });
         map.put("load", new Cmd() {
@@ -36,7 +37,11 @@ public class TitleScreenController {
                 public void run(String arg) throws SQLException, IOException
                                             { GameModel.loadHero(Integer.parseInt(arg)); }
             });
-
+        map.put("delete", new Cmd() {
+                public void run()           { invalid(); }
+                public void run(String arg) throws SQLException, IOException
+                                            { GameModel.deleteHero(Integer.parseInt(arg)); }
+            });
         return Collections.unmodifiableMap(map);
     }
 

@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.builder.HeroBuilder;
 import mrajaona.swingy.Save;
@@ -19,10 +20,11 @@ public class GameModel {
         GameData.setLocale(newLocale);
     }
 
-    public static void createHero() {
+    public static void createHero() throws SQLException, IOException {
 		GameData.setHero(
 			HeroBuilder.getBuilder().newHero()
 			);
+        Save.getManager().save();
     }
 
     public static void loadHero(long id) throws SQLException, IOException {
@@ -31,6 +33,10 @@ public class GameModel {
 				Save.getManager().load(id)
 				)
 			);
+    }
+
+    public static void deleteHero(long id) throws SQLException, IOException {
+        Save.getManager().delete(id);
     }
 
     public static void changeViewType(String newType) {
