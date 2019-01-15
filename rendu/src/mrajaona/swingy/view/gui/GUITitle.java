@@ -65,7 +65,12 @@ public class GUITitle {
             heroList.setCellRenderer(new HeroListCellRenderer());
             heroList.addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent e) {
-                    statsTable.updateTable(heroList.getSelectedValue());
+                    HeroData hero = heroList.getSelectedValue();
+
+                    loadButton.setEnabled(hero == null ? false : true);
+                    deleteButton.setEnabled(hero == null ? false : true);
+
+                    statsTable.updateTable(hero);
                 }
             });
             heroListScrollPane  = new JScrollPane(heroList);
@@ -93,17 +98,17 @@ public class GUITitle {
             });
 
             loadButton = new JButton("Load");
+            loadButton.setEnabled(false);
             loadButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    // TODO : disable if no hero selected
                     TitleHelper.loadHero(heroList.getSelectedValue().getId());
                 }
             });
 
             deleteButton = new JButton("Delete");
+            deleteButton.setEnabled(false);
             deleteButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    // TODO : disable if no hero selected
                     TitleHelper.deleteHero(heroList.getSelectedValue().getId());
                 }
             });
@@ -228,7 +233,6 @@ public class GUITitle {
     }
 
     // Class for heroList custom renderer
-
     private class HeroListCellRenderer extends JLabel implements ListCellRenderer<Object> {
 		private static final long serialVersionUID = 1L;
 
