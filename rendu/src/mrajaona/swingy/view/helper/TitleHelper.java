@@ -16,14 +16,25 @@ public class TitleHelper {
 
     public static void newHero() {
         System.out.println("new");
+        /*
+        GameModel.createHero();
+        // TODO : StartGame
+        */
     }
 
     public static void loadHero(long id) {
-        System.out.println("load");
+        System.out.println("load " + id);
+        /*
+        GameModel.loadHero(id);
+        // TODO : Start game
+        */
     }
 
     public static void deleteHero(long id) {
-        System.out.println("delete");
+        System.out.println("delete " + id);
+        /*
+        GameModel.deleteHero(id);
+        */
     }
 
     public static void show()  throws SQLException, IOException {

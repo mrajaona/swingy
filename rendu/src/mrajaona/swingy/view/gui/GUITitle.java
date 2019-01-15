@@ -7,10 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,30 +22,30 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import mrajaona.swingy.Save;
-import mrajaona.swingy.view.helper.TitleHelper;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.view.helper.TitleHelper;
 
 public class GUITitle {
 
-    private static GUITitle        screen = new GUITitle();
+    private static GUITitle         screen = new GUITitle();
 
-    private static JSplitPane      loadPanel;
+    private static JSplitPane       loadPanel;
 
-    private static JScrollPane     heroStatsScrollPane;
-    private static JTable          statsField;
-    private static StatsTableModel statsTable;
+    private static JScrollPane      heroStatsScrollPane;
+    private static JTable           statsField;
+    private static StatsTableModel  statsTable;
 
-    private static JScrollPane     heroListScrollPane;
-    private static JList<HeroData> heroList;
+    private static JScrollPane      heroListScrollPane;
+    private static DefaultListModel<HeroData> heroListModel;
+    private static JList<HeroData>  heroList;
 
-    private static JPanel          controlPanel;
-    private static JButton         newButton;
-    private static JButton         loadButton;
-    private static JButton         deleteButton;
+    private static JPanel           controlPanel;
+    private static JButton          newButton;
+    private static JButton          loadButton;
+    private static JButton          deleteButton;
 
     private GUITitle() {
         try {
@@ -58,7 +57,16 @@ public class GUITitle {
             heroStatsScrollPane = new JScrollPane(statsField);
 
             // Hero list
-            heroList            = new JList<HeroData>(Save.getManager().listHeroes());
+            heroListModel       = new DefaultListModel<HeroData>();
+            {
+	            Object[] list = Save.getManager().listHeroes().toArray();
+	            if (list == null)
+                    ; // exception
+	            for (int i = 0 ; i < list.length ; i++) {
+	                heroListModel.addElement((HeroData) list[i]);
+                }
+            }
+            heroList            = new JList<HeroData>(heroListModel);
             heroList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             heroList.setLayoutOrientation(JList.VERTICAL);
             heroList.setVisibleRowCount(-1);
@@ -110,6 +118,7 @@ public class GUITitle {
             deleteButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     TitleHelper.deleteHero(heroList.getSelectedValue().getId());
+                    ((DefaultListModel) heroList.getModel()).removeElementAt(heroList.getSelectedIndex());
                 }
             });
 
@@ -195,10 +204,7 @@ public class GUITitle {
             data[8][0] = locale.getString("defense");
             data[9][0] = locale.getString("maxHitPoints");
 
-            if (hero != null)
-                updateTable(hero);
-            else
-                resetTable();
+            updateTable(hero);
         }
 
         public void resetTable() {
@@ -208,6 +214,11 @@ public class GUITitle {
         }
 
         public void updateTable(HeroData hero) {
+            if (hero == null) {
+                resetTable();
+                return ;
+            }
+
             ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
             ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
 
