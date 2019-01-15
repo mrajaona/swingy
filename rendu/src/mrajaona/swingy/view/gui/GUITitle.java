@@ -50,81 +50,102 @@ public class GUITitle {
     private GUITitle() {
         try {
             // Hero stats
-            statsTable          = new StatsTableModel();
-            statsField          = new JTable(statsTable);
-            statsField.setShowGrid(false);
-            statsField.setTableHeader(null);
-            heroStatsScrollPane = new JScrollPane(statsField);
+            {
+                statsTable          = new StatsTableModel();
+                statsField          = new JTable(statsTable);
+                {
+                    statsField.setShowGrid(false);
+                    statsField.setTableHeader(null);
+                }
+                heroStatsScrollPane = new JScrollPane(statsField);
+            }
 
             // Hero list
-            heroListModel       = new DefaultListModel<HeroData>();
             {
-	            Object[] list = Save.getManager().listHeroes().toArray();
-	            if (list == null)
-                    ; // exception
-	            for (int i = 0 ; i < list.length ; i++) {
-	                heroListModel.addElement((HeroData) list[i]);
+                heroListModel       = new DefaultListModel<HeroData>();
+                {
+    	            Object[] list = Save.getManager().listHeroes().toArray();
+    	            if (list == null)
+                        ; // exception
+    	            for (int i = 0 ; i < list.length ; i++) {
+    	                heroListModel.addElement((HeroData) list[i]);
+                    }
                 }
+                heroList            = new JList<HeroData>(heroListModel);
+                {
+                    heroList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    heroList.setLayoutOrientation(JList.VERTICAL);
+                    heroList.setVisibleRowCount(-1);
+                    heroList.setCellRenderer(new HeroListCellRenderer());
+                    heroList.addListSelectionListener(new ListSelectionListener() {
+                        public void valueChanged(ListSelectionEvent e) {
+                            HeroData hero = heroList.getSelectedValue();
+
+                            loadButton.setEnabled(hero == null ? false : true);
+                            deleteButton.setEnabled(hero == null ? false : true);
+
+                            statsTable.updateTable(hero);
+                        }
+                    });
+                }
+                heroListScrollPane  = new JScrollPane(heroList);
             }
-            heroList            = new JList<HeroData>(heroListModel);
-            heroList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            heroList.setLayoutOrientation(JList.VERTICAL);
-            heroList.setVisibleRowCount(-1);
-            heroList.setCellRenderer(new HeroListCellRenderer());
-            heroList.addListSelectionListener(new ListSelectionListener() {
-                public void valueChanged(ListSelectionEvent e) {
-                    HeroData hero = heroList.getSelectedValue();
-
-                    loadButton.setEnabled(hero == null ? false : true);
-                    deleteButton.setEnabled(hero == null ? false : true);
-
-                    statsTable.updateTable(hero);
-                }
-            });
-            heroListScrollPane  = new JScrollPane(heroList);
 
             // Panel for hero info
-            loadPanel = new JSplitPane(
-                JSplitPane.HORIZONTAL_SPLIT,
-                false,
-                heroListScrollPane,
-                heroStatsScrollPane
-            );
-            loadPanel.setOneTouchExpandable(false);
-            loadPanel.setContinuousLayout(true);
-            loadPanel.setDividerLocation(200);
+            {
+                    loadPanel = new JSplitPane(
+                    JSplitPane.HORIZONTAL_SPLIT,
+                    false,
+                    heroListScrollPane,
+                    heroStatsScrollPane
+                );
+                loadPanel.setOneTouchExpandable(false);
+                loadPanel.setContinuousLayout(true);
+                loadPanel.setDividerLocation(200);
+            }
 
             // Panel for buttons
-            controlPanel = new JPanel();
-            controlPanel.setLayout(new FlowLayout());
+            {
+                controlPanel = new JPanel();
+                controlPanel.setLayout(new FlowLayout());
 
-            newButton = new JButton("New game");
-            newButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    TitleHelper.newHero();
+                // new game button
+                {
+                    newButton = new JButton("New game");
+                    newButton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            TitleHelper.newHero();
+                        }
+                    });
                 }
-            });
 
-            loadButton = new JButton("Load");
-            loadButton.setEnabled(false);
-            loadButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    TitleHelper.loadHero(heroList.getSelectedValue().getId());
+                // load button
+                {
+                    loadButton = new JButton("Load");
+                    loadButton.setEnabled(false);
+                    loadButton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            TitleHelper.loadHero(heroList.getSelectedValue().getId());
+                        }
+                    });
                 }
-            });
 
-            deleteButton = new JButton("Delete");
-            deleteButton.setEnabled(false);
-            deleteButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    TitleHelper.deleteHero(heroList.getSelectedValue().getId());
-                    ((DefaultListModel) heroList.getModel()).removeElementAt(heroList.getSelectedIndex());
+                // delete button
+                {
+                    deleteButton = new JButton("Delete");
+                    deleteButton.setEnabled(false);
+                    deleteButton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            TitleHelper.deleteHero(heroList.getSelectedValue().getId());
+                            ((DefaultListModel) heroList.getModel()).removeElementAt(heroList.getSelectedIndex());
+                        }
+                    });
                 }
-            });
 
-            controlPanel.add(newButton);
-            controlPanel.add(loadButton);
-            controlPanel.add(deleteButton);
+                controlPanel.add(newButton);
+                controlPanel.add(loadButton);
+                controlPanel.add(deleteButton);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -145,20 +166,22 @@ public class GUITitle {
         Window.getWindow().getFrame().setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        c.fill    = GridBagConstraints.BOTH;
-        c.gridy   = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-        c.insets  = new Insets(5, 5, 2, 5);
-        Window.getWindow().getFrame().add(loadPanel, c);
-
-        c.fill    = GridBagConstraints.HORIZONTAL;
-        c.gridy   = 1;
-        c.weightx = 0;
-        c.weighty = 0;
-        c.insets  = new Insets(0,0,0,0);
-        Window.getWindow().getFrame().add(controlPanel, c);
-
+        {
+            c.fill    = GridBagConstraints.BOTH;
+            c.gridy   = 0;
+            c.weightx = 1;
+            c.weighty = 1;
+            c.insets  = new Insets(5, 5, 2, 5);
+            Window.getWindow().getFrame().add(loadPanel, c);
+        }
+        {
+            c.fill    = GridBagConstraints.HORIZONTAL;
+            c.gridy   = 1;
+            c.weightx = 0;
+            c.weighty = 0;
+            c.insets  = new Insets(0,0,0,0);
+            Window.getWindow().getFrame().add(controlPanel, c);
+        }
         Window.getWindow().show();
     }
 
