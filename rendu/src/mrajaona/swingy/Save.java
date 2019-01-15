@@ -3,6 +3,7 @@ package mrajaona.swingy;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -92,12 +93,12 @@ public class Save {
 
     // ----- Find in db
 
-    public List<HeroData> listHeroes() throws SQLException, IOException {
+    public Vector<HeroData> listHeroes() throws SQLException, IOException {
         openConnection();
         // For medium sized or large tables, this may load a lot of objects into memory so you should consider using the iterator() method instead.
         List<HeroData> heroList = heroDao.queryForAll();
         closeConnection();
-        return (heroList);
+        return (new Vector<HeroData>(heroList));
     }
 
     public HeroData load(long id) throws SQLException, IOException {
