@@ -31,6 +31,10 @@ public class BuildHelper {
         GameModel.changeScreen(Util.GameScreen.MAIN);
     }
 
+    public static void prev() throws SQLException, IOException {
+        GameModel.changeScreen(Util.GameScreen.TITLE);
+    }
+
     public static void create(String heroClass, String heroName) throws SQLException, IOException {
         GameModel.createHero(heroClass, heroName);
     }

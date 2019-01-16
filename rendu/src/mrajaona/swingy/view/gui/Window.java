@@ -77,6 +77,9 @@ public class Window {
     }
 
     public void show(Util.GameScreen screen) {
+    	// TODO reset previous screen
+    	// Except for Main / Menu
+
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
         frame.setVisible(true);
@@ -84,6 +87,10 @@ public class Window {
 
     public void hide() {
     	frame.setVisible(false);
+    }
+
+    public void localize() {
+    	// TODO
     }
 
 }

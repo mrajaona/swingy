@@ -63,11 +63,11 @@ public class GUITitle {
             {
                 heroListModel       = new DefaultListModel<HeroData>();
                 {
-    	            Object[] list = Save.getManager().listHeroes().toArray();
-    	            if (list == null)
+                    Object[] list = Save.getManager().listHeroes().toArray();
+                    if (list == null)
                         ; // exception
-    	            for (int i = 0 ; i < list.length ; i++) {
-    	                heroListModel.addElement((HeroData) list[i]);
+                    for (int i = 0 ; i < list.length ; i++) {
+                        heroListModel.addElement((HeroData) list[i]);
                     }
                 }
                 heroList            = new JList<HeroData>(heroListModel);
@@ -146,11 +146,11 @@ public class GUITitle {
                     deleteButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
-								TitleHelper.deleteHero(heroList.getSelectedValue().getId());
-							} catch (Exception e) {
+                                TitleHelper.deleteHero(heroList.getSelectedValue().getId());
+                            } catch (Exception e) {
                                 e.printStackTrace();
                                 System.exit(1);
-							}
+                            }
                             ((DefaultListModel<HeroData>) heroList.getModel()).removeElementAt(heroList.getSelectedIndex());
                         }
                     });
@@ -168,6 +168,11 @@ public class GUITitle {
 
     public static GUITitle getScreen() {
         return (screen);
+    }
+
+    public static void reset() {
+        heroList.clearSelection();
+        statsTable.resetTable();
     }
 
     public static void localize() {
@@ -196,8 +201,8 @@ public class GUITitle {
 
     // Class for statsField custom table
     private class StatsTableModel extends AbstractTableModel {
- 		private static final long serialVersionUID = 1L;
-		private String[] columnNames = {
+        private static final long serialVersionUID = 1L;
+        private String[] columnNames = {
             "key",
             "value"
         };
@@ -277,10 +282,10 @@ public class GUITitle {
 
     // Class for heroList custom renderer
     private class HeroListCellRenderer extends JLabel implements ListCellRenderer<Object> {
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		@SuppressWarnings("unused")
-		public HeroListCellRenderer() {
+        @SuppressWarnings("unused")
+        public HeroListCellRenderer() {
             setOpaque(true);
             setHorizontalAlignment(LEFT);
         }

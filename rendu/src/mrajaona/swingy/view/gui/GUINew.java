@@ -6,14 +6,19 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import mrajaona.swingy.util.Util;
+import mrajaona.swingy.view.helper.BuildHelper;
 
 public class GUINew {
 
@@ -44,15 +49,41 @@ public class GUINew {
                     classLabel   = new JLabel("Class");
                     classField   = new JComboBox<String>(Util.heroTypes); // TODO : localize
                     classField.setSelectedIndex(0);
-                        // String className = (String) classField.getSelectedItem();
-
                 }
                 // Name setting
                 {
                     nameLabel   = new JLabel("Name");
                     nameField   = new JTextField(20);
                     nameField.setEditable(true);
-                        // String heroName = nameField.getText();
+
+                    nameField.getDocument().addDocumentListener(new DocumentListener() {
+                        @Override
+                        public void changedUpdate(DocumentEvent event) {
+                        }
+
+    					@Override
+    					public void insertUpdate(DocumentEvent e) {
+                            String heroName = nameField.getText();
+
+                            if (heroName == null || heroName.trim().isEmpty()) {
+                                createButton.setEnabled(false);
+                            } else {
+                                createButton.setEnabled(true);
+                            }
+
+    					}
+
+    					@Override
+    					public void removeUpdate(DocumentEvent e) {
+                            String heroName = nameField.getText();
+
+                            if (heroName == null || heroName.trim().isEmpty()) {
+                                createButton.setEnabled(false);
+                            } else {
+                                createButton.setEnabled(true);
+                            }
+    					}
+                    });
                 }
 
                 {
@@ -96,20 +127,32 @@ public class GUINew {
                 // new game button
                 {
                     createButton = new JButton("Create");
+                    createButton.setEnabled(false);
                     createButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
-                            // BuildHelper.create(class, name);
+                            String className = (String) classField.getSelectedItem();
+                            String heroName = nameField.getText().trim();
+                            try {
+                                BuildHelper.create(className, heroName);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                System.exit(1);
+                            }
                         }
                     });
                 }
 
-                // load button
+                // cancel button
                 {
                     cancelButton = new JButton("Cancel");
-                    cancelButton.setEnabled(false);
                     cancelButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
-                            // TODO : go to title screen
+                            try {
+                                BuildHelper.prev();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                System.exit(1);
+                            }
                         }
                     });
                 }
@@ -127,8 +170,18 @@ public class GUINew {
         return (screen);
     }
 
+    public static void reset() {
+        classField.setSelectedIndex(0);
+        nameField.setText(new String());
+    }
+
     public static void localize() {
         // TODO : localize buttons and labels
+        /*
+        JTextField.removeAllItems();
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
+        ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
+        */
     }
 
     public static void initPanel(JPanel panel) {
