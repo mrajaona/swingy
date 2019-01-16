@@ -29,22 +29,22 @@ import mrajaona.swingy.view.helper.TitleHelper;
 
 public class GUITitle {
 
-    private static GUITitle         screen = new GUITitle();
+    private static GUITitle                   screen = new GUITitle();
 
-    private static JSplitPane       loadPanel;
+    private static JSplitPane                 loadPanel;
 
-    private static JScrollPane      heroStatsScrollPane;
-    private static JTable           statsField;
-    private static StatsTableModel  statsTable;
+    private static JScrollPane                heroStatsScrollPane;
+    private static JTable                     statsField;
+    private static StatsTableModel            statsTable;
 
-    private static JScrollPane      heroListScrollPane;
+    private static JScrollPane                heroListScrollPane;
     private static DefaultListModel<HeroData> heroListModel;
-    private static JList<HeroData>  heroList;
+    private static JList<HeroData>            heroList;
 
-    private static JPanel           controlPanel;
-    private static JButton          newButton;
-    private static JButton          loadButton;
-    private static JButton          deleteButton;
+    private static JPanel                     controlPanel;
+    private static JButton                    newButton;
+    private static JButton                    loadButton;
+    private static JButton                    deleteButton;
 
     private GUITitle() {
         try {
@@ -170,6 +170,10 @@ public class GUITitle {
         return (screen);
     }
 
+    public static void localize() {
+        // TODO : localize buttons and labels
+    }
+
     public static void initPanel(JPanel panel) {
         GridBagConstraints c = new GridBagConstraints();
         {
@@ -185,7 +189,7 @@ public class GUITitle {
             c.gridy   = 1;
             c.weightx = 0;
             c.weighty = 0;
-            c.insets  = new Insets(0,0,0,0);
+            c.insets  = new Insets(0, 0, 0, 0);
             panel.add(controlPanel, c);
         }
     }

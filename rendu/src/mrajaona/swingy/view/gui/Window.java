@@ -79,9 +79,6 @@ public class Window {
     public void show(Util.GameScreen screen) {
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
-
-        System.out.println(screen.toString());
-
         frame.setVisible(true);
     }
 
