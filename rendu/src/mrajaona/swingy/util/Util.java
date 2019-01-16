@@ -10,12 +10,38 @@ public class Util {
 
     // UI
 
-    public static final String VIEW_TYPE_GUI     = "gui";
-    public static final String VIEW_TYPE_CONSOLE = "console";
-    public static final String [] viewTypes  = {
-        VIEW_TYPE_GUI,
-        VIEW_TYPE_CONSOLE
+    public enum ViewTypes {
+        GUI("gui"),
+        CONSOLE("console");
+
+        String view;
+
+    	private ViewTypes(String view) {
+            this.view = view;
+        }
+
+        String getView() {
+            return (view);
+        }
+
+        public static ViewTypes getKeyByValue(String value) {
+            for ( ViewTypes v : ViewTypes.values() ) {
+                if (v.getView().equals(value))
+                    return (v);
+            }
+
+            return null;
+        }
+
     } ;
+
+    public enum GameScreen {
+        TITLE,
+        MAIN,
+        // MENU,
+        WIN,
+        LOSE
+    }
 
     // Hero types
 

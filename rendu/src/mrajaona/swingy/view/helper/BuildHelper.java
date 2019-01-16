@@ -12,10 +12,10 @@ public class BuildHelper {
     private BuildHelper() {}
 
     public static String ask(String message) {
-        if (GameData.getViewType().equals(Util.VIEW_TYPE_CONSOLE)) {
+        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
             return (ConsoleView.getLowerCaseInput());
-        } else if (GameData.getViewType().equals(Util.VIEW_TYPE_GUI)) {
+        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
             ;
         } else {
             // Exception

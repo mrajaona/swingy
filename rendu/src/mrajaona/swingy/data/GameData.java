@@ -9,6 +9,7 @@ import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.GameScreen;
 
 public class GameData {
 
@@ -23,12 +24,14 @@ public class GameData {
     @Getter @Setter private static Locale locale;
 
     @Getter         private static Scanner inputScanner = new Scanner(System.in);
-    @Getter @Setter private static String viewType      = Util.VIEW_TYPE_CONSOLE;
+    @Getter @Setter private static Util.ViewTypes viewType   = Util.ViewTypes.CONSOLE;
 
     @Getter @Setter private static HeroData hero;
     // current enemy
     @Getter @Setter private static EnemyData enemy;
 
     @Getter @Setter private static GameMapData map;
+
+    @Getter @Setter private static GameScreen screen    = GameScreen.TITLE;
 
 }

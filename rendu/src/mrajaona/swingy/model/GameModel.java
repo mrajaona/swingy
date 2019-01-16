@@ -40,11 +40,12 @@ public class GameModel {
     }
 
     public static void changeViewType(String newType) {
-        if (!newType.equals(Util.VIEW_TYPE_GUI) && !newType.equals(Util.VIEW_TYPE_CONSOLE)) {
+        Util.ViewTypes tmp = Util.ViewTypes.getKeyByValue(newType);
+
+        if (tmp == null) {
             ; // Exception
-        }
-        else {
-    		GameData.setViewType(newType);
+        } else {
+            GameData.setViewType(tmp);
         }
     }
 

@@ -38,7 +38,7 @@ public class TitleHelper {
     }
 
     public static void show()  throws SQLException, IOException {
-        if (GameData.getViewType().equals(Util.VIEW_TYPE_CONSOLE)) {
+        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
             String[] line;
 
             ConsoleView.println("Title"); // Debug // TODO
@@ -47,7 +47,7 @@ public class TitleHelper {
                 line = MainHelper.getInput();
                 TitleScreenController.run(line);
             }
-        } else if (GameData.getViewType().equals(Util.VIEW_TYPE_GUI)) {
+        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
             //Schedule a job for the event-dispatching thread:
             //creating and showing this application's GUI.
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
