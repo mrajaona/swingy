@@ -3,6 +3,7 @@ package mrajaona.swingy.view.helper;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import mrajaona.swingy.Save;
 import mrajaona.swingy.controller.TitleScreenController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.model.GameModel;
@@ -14,6 +15,10 @@ public class TitleHelper {
 
     @SuppressWarnings("unused")
     private TitleHelper() {}
+
+    public static Object[] getHeroesList() throws SQLException, IOException {
+        return ( Save.getManager().listHeroes().toArray() );
+    }
 
     public static void newHero() throws SQLException, IOException {
         GameModel.changeScreen(Util.GameScreen.NEW);

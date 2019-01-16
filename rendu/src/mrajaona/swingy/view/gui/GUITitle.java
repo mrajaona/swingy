@@ -22,7 +22,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
-import mrajaona.swingy.Save;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.view.helper.TitleHelper;
@@ -63,7 +62,7 @@ public class GUITitle {
             {
                 heroListModel       = new DefaultListModel<HeroData>();
                 {
-                    Object[] list = Save.getManager().listHeroes().toArray();
+                    Object[] list = TitleHelper.getHeroesList();
                     if (list == null)
                         ; // exception
                     for (int i = 0 ; i < list.length ; i++) {
