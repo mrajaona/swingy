@@ -8,7 +8,7 @@ import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.console.ConsoleView;
-import mrajaona.swingy.view.gui.GUITitle;
+import mrajaona.swingy.view.gui.Window;
 
 public class TitleHelper {
 
@@ -43,7 +43,7 @@ public class TitleHelper {
         } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    GUITitle.createAndShowGUI();
+                    Window.getWindow().show(Util.GameScreen.TITLE);
                 }
             });
         } else {

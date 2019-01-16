@@ -3,12 +3,9 @@ package mrajaona.swingy.view.gui;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javax.swing.DefaultListModel;
@@ -173,17 +170,15 @@ public class GUITitle {
         return (screen);
     }
 
-    public static void createAndShowGUI() {
-        Window.getWindow().getFrame().setLayout(new GridBagLayout());
+    public static void initPanel(JPanel panel) {
         GridBagConstraints c = new GridBagConstraints();
-
         {
             c.fill    = GridBagConstraints.BOTH;
             c.gridy   = 0;
             c.weightx = 1;
             c.weighty = 1;
             c.insets  = new Insets(5, 5, 2, 5);
-            Window.getWindow().getFrame().add(loadPanel, c);
+            panel.add(loadPanel, c);
         }
         {
             c.fill    = GridBagConstraints.HORIZONTAL;
@@ -191,9 +186,8 @@ public class GUITitle {
             c.weightx = 0;
             c.weighty = 0;
             c.insets  = new Insets(0,0,0,0);
-            Window.getWindow().getFrame().add(controlPanel, c);
+            panel.add(controlPanel, c);
         }
-        Window.getWindow().show();
     }
 
     // Class for statsField custom table

@@ -8,7 +8,7 @@ import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.console.ConsoleView;
-import mrajaona.swingy.view.gui.GUINew;
+import mrajaona.swingy.view.gui.Window;
 
 public class BuildHelper {
 
@@ -41,7 +41,7 @@ public class BuildHelper {
         } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    GUINew.createAndShowGUI();
+                    Window.getWindow().show(Util.GameScreen.NEW);
                 }
             });
         } else {

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.util.Util;
+import mrajaona.swingy.view.helper.BuildHelper;
 import mrajaona.swingy.view.helper.MainHelper;
 import mrajaona.swingy.view.helper.TitleHelper;
 
@@ -17,6 +18,9 @@ public class View {
         switch (screen) {
             case TITLE :
                 TitleHelper.show();
+                break;
+            case NEW :
+                BuildHelper.show();
                 break;
             case MAIN :
                 MainHelper.show();

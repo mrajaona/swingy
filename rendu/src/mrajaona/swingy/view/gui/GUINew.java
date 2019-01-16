@@ -2,7 +2,6 @@ package mrajaona.swingy.view.gui;
 
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,23 +62,16 @@ public class GUINew {
         return (screen);
     }
 
-    public static void createAndShowGUI() {
-        Window.getWindow().getFrame().removeAll();
-        Window.getWindow().getFrame().revalidate();
-        Window.getWindow().getFrame().repaint();
-
-        Window.getWindow().getFrame().setLayout(new GridBagLayout());
+    public static void initPanel(JPanel panel) {
         GridBagConstraints c = new GridBagConstraints();
-
         {
             c.fill    = GridBagConstraints.HORIZONTAL;
             c.gridy   = 0;
             c.weightx = 0;
             c.weighty = 0;
             c.insets  = new Insets(0,0,0,0);
-            Window.getWindow().getFrame().add(controlPanel, c);
+            panel.add(controlPanel, c);
         }
-        Window.getWindow().show();
     }
 
 }
