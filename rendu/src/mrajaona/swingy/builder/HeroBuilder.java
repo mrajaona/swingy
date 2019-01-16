@@ -181,6 +181,22 @@ public class HeroBuilder {
         return (hero);
     }
 
+    public HeroData newHero(String heroClass, String heroName) {
+
+        HeroData hero = null;
+
+            if ( (heroClass == null || heroClass.trim().isEmpty())
+                || (heroName == null || heroName.trim().isEmpty()) )
+                return null;
+
+        this.heroClass = heroClass;
+        this.heroName = heroName;
+
+        hero = build(true);
+
+        return (hero);
+    }
+
     public HeroData loadHero(HeroData loaded) {
         if (loaded == null)
             return (null);

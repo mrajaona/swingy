@@ -90,7 +90,7 @@ public class HeroModel {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
         ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
 
-        MainHelper.show(
+        MainHelper.print(
             System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
             locale.getString("class")         + " : " + hero.getHeroClass() + System.lineSeparator() +

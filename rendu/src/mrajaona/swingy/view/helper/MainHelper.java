@@ -1,5 +1,7 @@
 package mrajaona.swingy.view.helper;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
@@ -11,7 +13,8 @@ public class MainHelper {
     @SuppressWarnings("unused")
     private MainHelper() {}
 
-    public static void show(String message) {
+
+    public static void print(String message) {
         ConsoleView.println(message);
     }
 
@@ -36,6 +39,14 @@ public class MainHelper {
             // Exception
         }
         return (null);
+    }
+
+    public static void show() throws SQLException, IOException {
+        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
+        } else {
+            // Exception
+        }
     }
 
 }

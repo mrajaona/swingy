@@ -2,24 +2,22 @@ package mrajaona.swingy;
 
 import java.util.Locale;
 
-import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.model.GameModel;
-import mrajaona.swingy.view.helper.MainHelper;
-import mrajaona.swingy.view.helper.TitleHelper;
+import mrajaona.swingy.view.View;
 
 /*
 ** Main loop for the game
 */
 
-public class GameLoop {
+public class Game {
 
-    private static GameLoop loop = new GameLoop();
+    private static Game loop = new Game();
 
-    private GameLoop() {
+    private Game() {
     	Locale.setDefault(new Locale("en"));
     }
 
-    public static GameLoop getLoop() {
+    public static Game getLoop() {
         return (loop);
     }
 
@@ -36,7 +34,7 @@ public class GameLoop {
             // "en", "fr"
             GameModel.setLocale(new Locale("en"));
 
-            TitleHelper.show();
+            View.show();
 /*
             String[] line;
             while (true) { // exit

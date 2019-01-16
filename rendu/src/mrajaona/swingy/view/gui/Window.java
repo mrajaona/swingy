@@ -36,6 +36,12 @@ public class Window {
         frame.setLayout(null);
     }
 
+    public void clear() {
+        Window.getWindow().getFrame().removeAll();
+        Window.getWindow().getFrame().revalidate();
+        Window.getWindow().getFrame().repaint();
+    }
+
     public void show() {
         frame.setVisible(true);
     }

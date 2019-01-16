@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javax.swing.DefaultListModel;
@@ -113,8 +115,13 @@ public class GUITitle {
                 {
                     newButton = new JButton("New game");
                     newButton.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            TitleHelper.newHero();
+                        public void actionPerformed(ActionEvent event) {
+                            try {
+                                TitleHelper.newHero();
+                            }  catch (Exception e) {
+                                e.printStackTrace();
+                                System.exit(1);
+                            }
                         }
                     });
                 }
@@ -124,8 +131,13 @@ public class GUITitle {
                     loadButton = new JButton("Load");
                     loadButton.setEnabled(false);
                     loadButton.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            TitleHelper.loadHero(heroList.getSelectedValue().getId());
+                        public void actionPerformed(ActionEvent event) {
+                            try {
+                                TitleHelper.loadHero(heroList.getSelectedValue().getId());
+                            }  catch (Exception e) {
+                                e.printStackTrace();
+                                System.exit(1);
+                            }
                         }
                     });
                 }
@@ -135,9 +147,14 @@ public class GUITitle {
                     deleteButton = new JButton("Delete");
                     deleteButton.setEnabled(false);
                     deleteButton.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            TitleHelper.deleteHero(heroList.getSelectedValue().getId());
-                            ((DefaultListModel) heroList.getModel()).removeElementAt(heroList.getSelectedIndex());
+                        public void actionPerformed(ActionEvent event) {
+                            try {
+								TitleHelper.deleteHero(heroList.getSelectedValue().getId());
+							} catch (Exception e) {
+                                e.printStackTrace();
+                                System.exit(1);
+							}
+                            ((DefaultListModel<HeroData>) heroList.getModel()).removeElementAt(heroList.getSelectedIndex());
                         }
                     });
                 }
@@ -157,12 +174,6 @@ public class GUITitle {
     }
 
     public static void createAndShowGUI() {
-        /*
-        Window.getWindow().getFrame().removeAll();
-        Window.getWindow().getFrame().revalidate();
-        Window.getWindow().getFrame().repaint();
-        */
-
         Window.getWindow().getFrame().setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -284,19 +295,19 @@ public class GUITitle {
             boolean  cellHasFocus
         ) {
 
-        if (isSelected) {
-            setBackground(list.getSelectionBackground());
-            setForeground(list.getSelectionForeground());
-        } else {
-            setBackground(list.getBackground());
-            setForeground(list.getForeground());
-        }
+            if (isSelected) {
+                setBackground(list.getSelectionBackground());
+                setForeground(list.getSelectionForeground());
+            } else {
+                setBackground(list.getBackground());
+                setForeground(list.getForeground());
+            }
 
-        HeroData data = (HeroData) value;
+            HeroData data = (HeroData) value;
 
-        setText(data.getHeroName());
+            setText(data.getHeroName());
 
-        return this;
+            return this;
         }
     }
 

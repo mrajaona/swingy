@@ -6,6 +6,6 @@ public class Main {
 
     // Creates an instance of the game
     public static void main(String[] args) {
-        GameLoop.getLoop().game(args);
+        Game.getLoop().game(args);
     }
 }

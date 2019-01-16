@@ -37,8 +37,9 @@ public class Util {
 
     public enum GameScreen {
         TITLE,
+        NEW,
         MAIN,
-        // MENU,
+        MENU,
         WIN,
         LOSE
     }
