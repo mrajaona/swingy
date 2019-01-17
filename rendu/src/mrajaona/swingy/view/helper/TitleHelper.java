@@ -38,7 +38,10 @@ public class TitleHelper {
 
             ConsoleView.println("< SWINGY >"); // Title // TODO
 
-            while (GameData.getHero() == null) {
+            while (
+                GameData.getViewType().equals(Util.ViewTypes.CONSOLE)
+                && GameData.getHero() == null
+                ) {
                 line = MainHelper.getInput();
                 TitleScreenController.run(line);
                 // TODO : check view type change

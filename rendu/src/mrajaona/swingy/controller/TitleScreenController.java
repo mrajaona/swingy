@@ -7,17 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrajaona.swingy.model.GameModel;
+import mrajaona.swingy.util.CommonCmd;
 import mrajaona.swingy.util.Util;
 
-public class TitleScreenController {
+public class TitleScreenController extends CommonCmd {
 
     @SuppressWarnings("unused")
     private TitleScreenController() {}
-
-    public interface Cmd {
-        public void run()           throws SQLException, IOException;
-        public void run(String arg) throws SQLException, IOException;
-    }
 
     private static void invalid() {
         // error
@@ -26,6 +22,8 @@ public class TitleScreenController {
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
         Map<String, Cmd> map = new HashMap<String, Cmd>();
+
+        map.putAll(getCommonCmdMap());
 
         // Title screen
         map.put("new", new Cmd() {

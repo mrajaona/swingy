@@ -8,18 +8,14 @@ import java.util.Map;
 
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.character.HeroModel;
+import mrajaona.swingy.util.CommonCmd;
 import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.util.Util;
 
-public class MainGameController {
+public class MainGameController extends CommonCmd {
 
     @SuppressWarnings("unused")
     private MainGameController() {}
-
-    public interface Cmd {
-        public void run() throws SQLException, IOException;
-        public void run(String arg);
-    }
 
     private static void invalid() {
         // error
@@ -28,6 +24,8 @@ public class MainGameController {
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
         Map<String, Cmd> map = new HashMap<String, Cmd>();
+
+        map.putAll(getCommonCmdMap());
 
         // On the map
         map.put("move", new Cmd() {
@@ -44,28 +42,7 @@ public class MainGameController {
                                             { SaveManager.getManager().save(); }
                 public void run(String arg) { invalid(); }
             });
-        map.put("exit", new Cmd() { // TODO
-                public void run()           { ; }
-                public void run(String arg) { invalid(); }
-            });
-        map.put("help", new Cmd() { // TODO
-                public void run()           { ; }
-                public void run(String arg) { invalid(); }
-            });
-        map.put("gui", new Cmd() { // TODO
-                public void run()           throws SQLException, IOException
-                                            { GameModel.changeViewType(Util.ViewTypes.GUI); }
-                public void run(String arg) { invalid(); }
-            });
-        map.put("console", new Cmd() { // TODO
-                public void run()           throws SQLException, IOException
-                                            { GameModel.changeViewType(Util.ViewTypes.CONSOLE); }
-                public void run(String arg) { invalid(); }
-            });
-        map.put("language", new Cmd() { // TODO
-                public void run()           { invalid(); }
-                public void run(String arg) { GameModel.setLocale(arg); }
-            });
+
         return Collections.unmodifiableMap(map);
     }
 
