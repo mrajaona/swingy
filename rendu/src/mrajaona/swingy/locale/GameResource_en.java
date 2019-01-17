@@ -8,6 +8,27 @@ public class GameResource_en extends ListResourceBundle {
         return new Object[][] {
             /* Strings */
             {"msgGetInput", "What do you want to do ?"},
+
+            /* commands */
+            // common
+            {"exit", ""},
+            {"help", ""},
+            {"gui", ""},
+            {"console", ""},
+            {"language", ""},
+
+            // title
+            {"new", ""},
+            {"load", ""},
+            {"delete", ""},
+
+            // new
+            {"create", ""},
+
+            // main
+            {"move", ""},
+            {"status", ""},
+            {"save", ""},
        };
     }
 
