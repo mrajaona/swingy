@@ -10,8 +10,8 @@ public class ResourceMap {
     final Map<String, String> map;
 
     @SuppressWarnings("unused")
-	private ResourceMap() {
-    	map = null;
+    private ResourceMap() {
+        map = null;
     }
 
     public ResourceMap(String[][] data) {
@@ -22,15 +22,19 @@ public class ResourceMap {
     }
 
     public String getKeyByValue(String value) {
-    	if (!map.containsValue(value))
-    		return null;
+        if (!map.containsValue(value))
+            return null;
 
-	    for ( Entry<String, String> entry : map.entrySet()) {
-	        if (Objects.equals(value, entry.getValue())) {
-	            return entry.getKey();
-	        }
-	    }
-	    return null;
-	}
+        for ( Entry<String, String> entry : map.entrySet()) {
+            if (Objects.equals(value, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    public String get(String value) {
+        return (map.get(value));
+    }
 
 }

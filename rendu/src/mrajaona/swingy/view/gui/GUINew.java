@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.helper.BuildHelper;
 
@@ -46,13 +49,12 @@ public class GUINew {
 
                 // Class setting
                 {
-                    classLabel   = new JLabel("Class");
-                    classField   = new JComboBox<String>(Util.heroTypes); // TODO : localize
-                    classField.setSelectedIndex(0);
+                    classLabel   = new JLabel();
+                    classField   = new JComboBox<String>(); // TODO : localize
                 }
                 // Name setting
                 {
-                    nameLabel   = new JLabel("Name");
+                    nameLabel   = new JLabel();
                     nameField   = new JTextField(20);
                     nameField.setEditable(true);
 
@@ -94,7 +96,7 @@ public class GUINew {
                     c.anchor  = GridBagConstraints.LINE_START;
                     paramsPanel.add(classLabel, c);
                 }
-                {
+                { // here
                     c.fill    = GridBagConstraints.HORIZONTAL;
                     c.gridx   = 1;
                     c.gridy   = 0;
@@ -126,7 +128,7 @@ public class GUINew {
 
                 // new game button
                 {
-                    createButton = new JButton("Create");
+                    createButton = new JButton();
                     createButton.setEnabled(false);
                     createButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
@@ -144,7 +146,7 @@ public class GUINew {
 
                 // cancel button
                 {
-                    cancelButton = new JButton("Cancel");
+                    cancelButton = new JButton();
                     cancelButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
@@ -159,6 +161,8 @@ public class GUINew {
 
                 controlPanel.add(createButton);
                 controlPanel.add(cancelButton);
+
+                localize();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,12 +180,32 @@ public class GUINew {
     }
 
     public static void localize() {
-        // TODO : localize buttons and labels
-        /*
-        JTextField.removeAllItems();
+        ResourceBundle statsLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+
+        classLabel.setText(statsLocale.getString("class"));
+        nameLabel.setText(statsLocale.getString("name"));
+
+        createButton.setText(locale.getString("createButton"));
+        cancelButton.setText(locale.getString("cancelButton"));
+
+        localizeTextField();
+    }
+
+    private static void localizeTextField() {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
         ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
-        */
+
+        String[] heroTypes = Util.heroTypes;
+
+        int index = (classField != null && classField.getSelectedIndex() >= 0) ? classField.getSelectedIndex() : 0;
+        classField.removeAllItems();
+
+        for (int i = 0 ; i < heroTypes.length ; i++) {
+            classField.addItem(map.get(heroTypes[i]));
+        }
+
+        classField.setSelectedIndex(index);
     }
 
     public static void initPanel(JPanel panel) {

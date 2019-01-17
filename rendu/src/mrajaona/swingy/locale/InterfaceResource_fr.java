@@ -2,7 +2,7 @@ package mrajaona.swingy.locale;
 
 import java.util.ListResourceBundle;
 
-public class InterfaceResource_en extends ListResourceBundle {
+public class InterfaceResource_fr extends ListResourceBundle {
 
     protected Object[][] getContents() {
         return new Object[][] {
@@ -11,14 +11,14 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"console", "console"},
 
             // Title
-            {"newButton", "New game"},
-            {"loadButton", "Load"},
-            {"deleteButton", "Delete"},
+            {"newButton", "Nouveau"},
+            {"loadButton", "Charger"},
+            {"deleteButton", "Supprimer"},
 
             // New
-            {"createButton", "Create"},
-            {"cancelButton", "Cancel"}
-       };
+            {"createButton", "Creer"},
+            {"cancelButton", "Annuler"}
+        };
     }
 
 }

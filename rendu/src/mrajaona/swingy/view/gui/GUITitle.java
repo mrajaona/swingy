@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import javax.swing.DefaultListModel;
@@ -24,6 +25,7 @@ import javax.swing.table.AbstractTableModel;
 
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.view.helper.TitleHelper;
 
 public class GUITitle {
@@ -44,6 +46,8 @@ public class GUITitle {
     private static JButton                    newButton;
     private static JButton                    loadButton;
     private static JButton                    deleteButton;
+
+    private static DecimalFormat              format = new DecimalFormat("#");
 
     private GUITitle() {
         try {
@@ -109,7 +113,7 @@ public class GUITitle {
 
                 // new game button
                 {
-                    newButton = new JButton("New game");
+                    newButton = new JButton();
                     newButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
@@ -124,7 +128,7 @@ public class GUITitle {
 
                 // load button
                 {
-                    loadButton = new JButton("Load");
+                    loadButton = new JButton();
                     loadButton.setEnabled(false);
                     loadButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
@@ -140,7 +144,7 @@ public class GUITitle {
 
                 // delete button
                 {
-                    deleteButton = new JButton("Delete");
+                    deleteButton = new JButton();
                     deleteButton.setEnabled(false);
                     deleteButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
@@ -158,6 +162,8 @@ public class GUITitle {
                 controlPanel.add(newButton);
                 controlPanel.add(loadButton);
                 controlPanel.add(deleteButton);
+
+                localize();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,7 +181,13 @@ public class GUITitle {
     }
 
     public static void localize() {
-        // TODO : localize buttons and labels
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+
+        newButton.setText(locale.getString("newButton"));
+        loadButton.setText(locale.getString("loadButton"));
+        deleteButton.setText(locale.getString("deleteButton"));
+
+        statsTable.updateLocale(heroList.getSelectedValue());
     }
 
     public static void initPanel(JPanel panel) {
@@ -255,13 +267,13 @@ public class GUITitle {
                 return ;
             }
 
-            ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+            ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
             ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
 
             data[0][1] = hero.getHeroName();
-            data[1][1] = hero.getHeroClass();
+            data[1][1] = ((ResourceMap) locale.getObject("ClassesList")).get(hero.getHeroClass());
             data[2][1] = Integer.toString(hero.getLevel());
-            data[3][1] = Double.toString(hero.getExperience());
+            data[3][1] = format.format(hero.getExperience());
             data[4][1] = artifactLocale.getString(hero.getHelm().getName())   + " (" + Integer.toString(hero.getHelm().getModifier())   + ")";
             data[5][1] = artifactLocale.getString(hero.getArmor().getName())  + " (" + Integer.toString(hero.getArmor().getModifier())  + ")";
             data[6][1] = artifactLocale.getString(hero.getWeapon().getName()) + " (" + Integer.toString(hero.getWeapon().getModifier()) + ")";
