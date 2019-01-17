@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import mrajaona.swingy.controller.NewHeroController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.Util;
@@ -135,7 +136,7 @@ public class GUINew {
                             String className = (String) classField.getSelectedItem();
                             String heroName = nameField.getText().trim();
                             try {
-                                BuildHelper.create(className, heroName);
+                                NewHeroController.create(className, heroName);
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 System.exit(1);

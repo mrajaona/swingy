@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.console.ConsoleView;
+import mrajaona.swingy.view.gui.Window;
 
 public class MainHelper {
 
@@ -43,7 +45,18 @@ public class MainHelper {
 
     public static void show() throws SQLException, IOException {
         if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
+            String[] line;
+
+            while (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) { // TODO
+                line = MainHelper.getInput();
+                MainGameController.run(line);
+            }
         } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    Window.getWindow().show(Util.GameScreen.MAIN);
+                }
+            });
         } else {
             // Exception
         }

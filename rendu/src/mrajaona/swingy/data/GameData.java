@@ -23,8 +23,8 @@ public class GameData {
 
     @Getter @Setter private static Locale locale;
 
-    @Getter         private static Scanner inputScanner = new Scanner(System.in);
-    @Getter @Setter private static Util.ViewTypes viewType   = Util.ViewTypes.CONSOLE;
+    @Getter         private static Scanner inputScanner    = new Scanner(System.in);
+    @Getter @Setter private static Util.ViewTypes viewType = Util.ViewTypes.CONSOLE;
 
     @Getter @Setter private static HeroData hero;
     // current enemy
@@ -32,6 +32,6 @@ public class GameData {
 
     @Getter @Setter private static GameMapData map;
 
-    @Getter @Setter private static GameScreen screen    = GameScreen.TITLE;
+    @Getter @Setter private static GameScreen screen       = GameScreen.TITLE;
 
 }

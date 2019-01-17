@@ -15,6 +15,9 @@ public class View {
 
     public static void show() throws SQLException, IOException {
         Util.GameScreen screen = GameData.getScreen();
+
+        System.out.println(screen.name());
+
         switch (screen) {
             case TITLE :
                 TitleHelper.show();

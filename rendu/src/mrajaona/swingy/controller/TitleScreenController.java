@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrajaona.swingy.model.GameModel;
+import mrajaona.swingy.util.Util;
 
 public class TitleScreenController {
 
@@ -29,18 +30,18 @@ public class TitleScreenController {
         // Title screen
         map.put("new", new Cmd() {
                 public void run() throws SQLException, IOException
-                                            { GameModel.createHero(); }
+                                            { GameModel.changeScreen(Util.GameScreen.NEW); }
                 public void run(String arg) { invalid(); }
             });
         map.put("load", new Cmd() {
                 public void run()           { invalid(); }
                 public void run(String arg) throws SQLException, IOException
-                                            { GameModel.loadHero(Integer.parseInt(arg)); }
+                                            { GameModel.loadHero(Long.parseLong(arg)); }
             });
         map.put("delete", new Cmd() {
                 public void run()           { invalid(); }
                 public void run(String arg) throws SQLException, IOException
-                                            { GameModel.deleteHero(Integer.parseInt(arg)); }
+                                            { GameModel.deleteHero(Long.parseLong(arg)); }
             });
         return Collections.unmodifiableMap(map);
     }

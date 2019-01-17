@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import mrajaona.swingy.Save;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.character.HeroModel;
+import mrajaona.swingy.util.SaveManager;
+import mrajaona.swingy.util.Util;
 
 public class MainGameController {
 
@@ -40,7 +41,7 @@ public class MainGameController {
 
         map.put("save", new Cmd() {
                 public void run()           throws SQLException, IOException
-                                            { Save.getManager().save(); }
+                                            { SaveManager.getManager().save(); }
                 public void run(String arg) { invalid(); }
             });
         map.put("exit", new Cmd() { // TODO
@@ -52,16 +53,18 @@ public class MainGameController {
                 public void run(String arg) { invalid(); }
             });
         map.put("gui", new Cmd() { // TODO
-                public void run()           { ; }
+                public void run()           throws SQLException, IOException
+                                            { GameModel.changeViewType(Util.ViewTypes.GUI); }
                 public void run(String arg) { invalid(); }
             });
         map.put("console", new Cmd() { // TODO
-                public void run()           { ; }
+                public void run()           throws SQLException, IOException
+                                            { GameModel.changeViewType(Util.ViewTypes.CONSOLE); }
                 public void run(String arg) { invalid(); }
             });
         map.put("language", new Cmd() { // TODO
                 public void run()           { invalid(); }
-                public void run(String arg) { ; }
+                public void run(String arg) { GameModel.setLocale(arg); }
             });
         return Collections.unmodifiableMap(map);
     }

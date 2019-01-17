@@ -1,4 +1,4 @@
-package mrajaona.swingy;
+package mrajaona.swingy.util;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,15 +19,15 @@ import mrajaona.swingy.data.character.HeroData;
 ** Manages saved Hero data
 */
 
-public class Save {
+public class SaveManager {
 
-    private static Save manager                 = new Save();
+    private static SaveManager manager                 = new SaveManager();
     private Dao<HeroData, Long> heroDao         = null;
     private Dao<ArtifactData, Long> artifactDao = null;
 
-    private Save() {}
+    private SaveManager() {}
 
-    public static Save getManager() {
+    public static SaveManager getManager() {
         return (manager);
     }
 

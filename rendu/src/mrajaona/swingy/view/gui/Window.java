@@ -77,8 +77,8 @@ public class Window {
     }
 
     public void show(Util.GameScreen screen) {
-    	// TODO reset previous screen
-    	// Except for Main / Menu
+		// TODO reset previous screen data
+		// Except menu - main
 
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());

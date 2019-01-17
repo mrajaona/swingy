@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
+import mrajaona.swingy.controller.TitleScreenController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.util.ResourceMap;
@@ -117,7 +118,10 @@ public class GUITitle {
                     newButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
-                                TitleHelper.newHero();
+                                String[] args = {
+                                    "new"
+                                };
+                                TitleScreenController.run(args);
                             }  catch (Exception e) {
                                 e.printStackTrace();
                                 System.exit(1);
@@ -133,7 +137,11 @@ public class GUITitle {
                     loadButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
-                                TitleHelper.loadHero(heroList.getSelectedValue().getId());
+                                String[] args = {
+                                    "load",
+                                    String.valueOf(heroList.getSelectedValue().getId())
+                                };
+                                TitleScreenController.run(args);
                             }  catch (Exception e) {
                                 e.printStackTrace();
                                 System.exit(1);
@@ -149,7 +157,11 @@ public class GUITitle {
                     deleteButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
-                                TitleHelper.deleteHero(heroList.getSelectedValue().getId());
+                                String[] args = {
+                                    "delete",
+                                    String.valueOf(heroList.getSelectedValue().getId())
+                                };
+                                TitleScreenController.run(args);
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 System.exit(1);

@@ -3,7 +3,6 @@ package mrajaona.swingy;
 import java.util.Locale;
 
 import mrajaona.swingy.model.GameModel;
-import mrajaona.swingy.view.View;
 
 /*
 ** Main loop for the game
@@ -27,21 +26,7 @@ public class Game {
             return ;
 
         try {
-
-            GameModel.changeViewType(args[0]);
-
-            // TODO
-            // "en", "fr"
-            GameModel.setLocale(new Locale("en"));
-
-            View.show();
-/*
-            String[] line;
-            while (true) { // exit
-                line = MainHelper.getInput();
-                MainGameController.run(line);
-            }
-*/
+            GameModel.init(new Locale("en"), args[0]);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
