@@ -52,8 +52,8 @@ public class GameMapModel {
                 break ;
         }
 
-            // Debug
-            System.out.println( "x: " + Integer.toString(map.getCoordX()) + System.lineSeparator() + "y: " + Integer.toString(map.getCoordY()) );
+        // Debug
+        System.out.println( "x: " + Integer.toString(map.getCoordX()) + System.lineSeparator() + "y: " + Integer.toString(map.getCoordY()) );
 
         // check border
         int x = map.getCoordX();
