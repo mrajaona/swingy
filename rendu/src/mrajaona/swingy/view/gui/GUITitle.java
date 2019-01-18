@@ -31,24 +31,24 @@ import mrajaona.swingy.view.helper.TitleHelper;
 
 public class GUITitle {
 
-    private static GUITitle                   screen = new GUITitle();
+    private static GUITitle            screen = new GUITitle();
 
-    private static JSplitPane                 loadPanel;
+    private JSplitPane                 loadPanel;
 
-    private static JScrollPane                heroStatsScrollPane;
-    private static JTable                     statsField;
-    private static StatsTableModel            statsTable;
+    private JScrollPane                heroStatsScrollPane;
+    private JTable                     statsField;
+    private StatsTableModel            statsTable;
 
-    private static JScrollPane                heroListScrollPane;
-    private static DefaultListModel<HeroData> heroListModel;
-    private static JList<HeroData>            heroList;
+    private JScrollPane                heroListScrollPane;
+    private DefaultListModel<HeroData> heroListModel;
+    private JList<HeroData>            heroList;
 
-    private static JPanel                     controlPanel;
-    private static JButton                    newButton;
-    private static JButton                    loadButton;
-    private static JButton                    deleteButton;
+    private JPanel                     controlPanel;
+    private JButton                    newButton;
+    private JButton                    loadButton;
+    private JButton                    deleteButton;
 
-    private static DecimalFormat              format = new DecimalFormat("#");
+    private DecimalFormat              format = new DecimalFormat("#");
 
     private GUITitle() {
         try {
@@ -104,7 +104,7 @@ public class GUITitle {
                 );
                 loadPanel.setOneTouchExpandable(false);
                 loadPanel.setContinuousLayout(true);
-                loadPanel.setDividerLocation(200);
+                loadPanel.setDividerLocation(100);
             }
 
             // Panel for buttons
@@ -187,12 +187,12 @@ public class GUITitle {
         return (screen);
     }
 
-    public static void reset() {
+    public void reset() {
         heroList.clearSelection();
         statsTable.resetTable();
     }
 
-    public static void localize() {
+    public void localize() {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
 
         newButton.setText(locale.getString("newButton"));
@@ -202,7 +202,7 @@ public class GUITitle {
         statsTable.updateLocale(heroList.getSelectedValue());
     }
 
-    public static void initPanel(JPanel panel) {
+    public void initPanel(JPanel panel) {
         GridBagConstraints c = new GridBagConstraints();
         {
             c.fill    = GridBagConstraints.BOTH;

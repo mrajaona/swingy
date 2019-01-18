@@ -11,24 +11,24 @@ public class GameResource_en extends ListResourceBundle {
 
             /* commands */
             // common
-            {"exit", ""},
-            {"help", ""},
-            {"gui", ""},
-            {"console", ""},
+            {"exit",     ""},
+            {"help",     ""},
+            {"gui",      ""},
+            {"console",  ""},
             {"language", ""},
 
             // title
-            {"new", ""},
-            {"load", ""},
-            {"delete", ""},
+            {"new",      ""},
+            {"load",     ""},
+            {"delete",   ""},
 
             // new
-            {"create", ""},
+            {"create",   ""},
 
             // main
-            {"move", ""},
-            {"status", ""},
-            {"save", ""},
+            {"move",     ""},
+            {"status",   ""},
+            {"save",     ""},
        };
     }
 

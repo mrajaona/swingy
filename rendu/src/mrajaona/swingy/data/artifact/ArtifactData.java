@@ -8,6 +8,8 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import lombok.Getter;
 import lombok.Setter;
+import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.ArtifactType;
 
 @DatabaseTable(tableName = "artifacts")
 public class ArtifactData {
@@ -25,20 +27,24 @@ public class ArtifactData {
 	@PositiveOrZero
     @Getter @Setter private int modifier;
 
+    private Util.ArtifactType type;
+
     public static final String NO_ARTIFACT_KEY = "none";
 
     // necessary for ORMLite
     ArtifactData() {}
 
-    public ArtifactData(long id, String name, int modifier) {
+    public ArtifactData(long id, String name, int modifier, ArtifactType type) {
 		this.id       = id;
         this.name     = name;
         this.modifier = modifier;
+        this.type     = type;
     }
 
-    public ArtifactData(String name, int modifier) {
+    public ArtifactData(String name, int modifier, Util.ArtifactType type) {
         this.name     = name;
         this.modifier = modifier;
+        this.type     = type;
     }
 
     public void change(String name, int modifier) {

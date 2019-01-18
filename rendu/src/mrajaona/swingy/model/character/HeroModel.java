@@ -13,6 +13,7 @@ import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.artifact.ArmorModel;
 import mrajaona.swingy.model.artifact.HelmModel;
 import mrajaona.swingy.model.artifact.WeaponModel;
+import mrajaona.swingy.view.gui.GUIMain;
 import mrajaona.swingy.view.helper.MainHelper;
 
 /*
@@ -28,7 +29,7 @@ public class HeroModel {
     private static int HERO_MAX_LVL = 100;
 
     public static void earnExp(int amount) {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
         double exp      = hero.getExperience() + amount;
         double expToLvl = hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450;
 
@@ -76,17 +77,19 @@ public class HeroModel {
     }
 
     private static void updateStats() {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
 
         hero.setAttack(hero.getBaseAttack() + hero.getWeapon().getModifier());
         hero.setDefense(hero.getBaseDefense() + hero.getArmor().getModifier());
         hero.setMaxHitPoints(hero.getBaseHitPoints() + hero.getHelm().getModifier());
         if (hero.getHitPoints() > hero.getMaxHitPoints())
             hero.setHitPoints(hero.getMaxHitPoints());
+
+        updateUI();
     }
 
     public static void viewStats() {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
         ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
 
@@ -129,12 +132,12 @@ public class HeroModel {
     // Character methods
 
     public static void fullRecover() {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
         hero.setHitPoints(hero.getMaxHitPoints());
     }
 
     public static void recoverHP(int amount) {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
 
         hero.setHitPoints(hero.getHitPoints() + amount);
         if (hero.getHitPoints() > hero.getMaxHitPoints())
@@ -142,7 +145,7 @@ public class HeroModel {
     }
 
     public static void loseHP(int amount) {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
 
         hero.setHitPoints(hero.getHitPoints() - amount);
         if (hero.getHitPoints() < 0) {
@@ -151,12 +154,16 @@ public class HeroModel {
     }
 
     public static void beAttacked(int enemyAtk) {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
         loseHP(enemyAtk - hero.getDefense());
     }
 
     public static void die() {
         ;
+    }
+
+    private static void updateUI() {
+        GUIMain.getScreen().updateTable();
     }
 
 }

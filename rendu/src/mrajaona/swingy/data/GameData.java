@@ -8,6 +8,7 @@ import lombok.Setter;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.data.GameMapData;
+import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.util.Util.GameScreen;
 
@@ -21,17 +22,19 @@ public class GameData {
         return (data);
     }
 
-    @Getter @Setter private static Locale locale;
+    @Getter @Setter private Locale locale;
 
-    @Getter         private static Scanner inputScanner    = new Scanner(System.in);
-    @Getter @Setter private static Util.ViewTypes viewType = Util.ViewTypes.CONSOLE;
+    @Getter         private Scanner inputScanner    = new Scanner(System.in);
+    @Getter @Setter private Util.ViewTypes viewType = Util.ViewTypes.CONSOLE;
 
-    @Getter @Setter private static HeroData hero;
+    @Getter @Setter private HeroData hero;
     // current enemy
-    @Getter @Setter private static EnemyData enemy;
+    @Getter @Setter private EnemyData enemy;
+    // dropped artifact
+    @Getter @Setter private ArtifactData artifact;
 
-    @Getter @Setter private static GameMapData map;
+    @Getter @Setter private GameMapData map;
 
-    @Getter @Setter private static GameScreen screen       = GameScreen.TITLE;
+    @Getter @Setter private GameScreen screen       = GameScreen.TITLE;
 
 }

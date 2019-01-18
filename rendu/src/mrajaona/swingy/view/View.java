@@ -14,7 +14,7 @@ public class View {
 	private View() {}
 
     public static void show() throws SQLException, IOException {
-        Util.GameScreen screen = GameData.getScreen();
+        Util.GameScreen screen = GameData.getData().getScreen();
 
         System.out.println(screen.name());
 

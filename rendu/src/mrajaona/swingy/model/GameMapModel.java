@@ -17,7 +17,7 @@ public class GameMapModel {
     private GameMapModel() {}
 
     public static GameMapData initMap() {
-        return ( new GameMapData(GameData.getHero().getLevel()) );
+        return ( new GameMapData(GameData.getData().getHero().getLevel()) );
     }
 
     // move hero
@@ -32,7 +32,7 @@ public class GameMapModel {
             return ;
         }
 
-        GameMapData map = GameData.getMap();
+        GameMapData map = GameData.getData().getMap();
 
         switch(direction) {
             case "north" :
@@ -56,8 +56,8 @@ public class GameMapModel {
         int x = map.getCoordX();
         int y = map.getCoordY();
         if (
-               x == 0 || x == (GameData.getMap().getSize() - 1)
-            || y == 0 || y == (GameData.getMap().getSize() - 1)
+               x == 0 || x == (GameData.getData().getMap().getSize() - 1)
+            || y == 0 || y == (GameData.getData().getMap().getSize() - 1)
         ) {
             // TODO : win
         }
@@ -66,7 +66,7 @@ public class GameMapModel {
     }
 
     public static void goBack() {
-        GameData.getMap().goBack();
+        GameData.getData().getMap().goBack();
     }
 
 }

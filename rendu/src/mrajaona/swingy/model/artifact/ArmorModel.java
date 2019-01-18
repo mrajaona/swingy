@@ -9,11 +9,11 @@ public class ArmorModel {
     private ArmorModel() {}
 
 	public static void equip(ArmorData armor) {
-		GameData.getHero().getArmor().change(armor.getName(), armor.getModifier());
+		GameData.getData().getHero().getArmor().change(armor.getName(), armor.getModifier());
 	}
 
 	public static void remove() {
-		GameData.getHero().getArmor().remove();
+		GameData.getData().getHero().getArmor().remove();
 	}
 
 }

@@ -16,10 +16,10 @@ public class BuildHelper {
     private BuildHelper() {}
 
     public static String ask(String message) {
-        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        if (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
             return (ConsoleView.getLowerCaseInput());
-        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
+        } else if (GameData.getData().getViewType().equals(Util.ViewTypes.GUI)) {
             ;
         } else {
             // Exception
@@ -36,9 +36,9 @@ public class BuildHelper {
     }
 
     public static void show() throws SQLException, IOException {
-        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        if (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) {
             GameModel.createHero();
-        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
+        } else if (GameData.getData().getViewType().equals(Util.ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     Window.getWindow().show(Util.GameScreen.NEW);

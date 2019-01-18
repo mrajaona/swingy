@@ -33,20 +33,20 @@ public class TitleHelper {
     }
 
     public static void show() throws SQLException, IOException {
-        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        if (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) {
             String[] line;
 
             ConsoleView.println("< SWINGY >"); // Title // TODO
 
             while (
-                GameData.getViewType().equals(Util.ViewTypes.CONSOLE)
-                && GameData.getHero() == null
+                GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)
+                && GameData.getData().getHero() == null
                 ) {
                 line = MainHelper.getInput();
                 TitleScreenController.run(line);
                 // TODO : check view type change
             }
-        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
+        } else if (GameData.getData().getViewType().equals(Util.ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     Window.getWindow().show(Util.GameScreen.TITLE);

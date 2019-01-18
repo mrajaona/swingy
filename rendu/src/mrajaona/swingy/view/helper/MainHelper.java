@@ -24,7 +24,7 @@ public class MainHelper {
         String   raw   = ask(
         	ResourceBundle.getBundle(
         		"mrajaona.swingy.locale.GameResource",
-        		GameData.getData().getLocale() )
+        		GameData.getData().getData().getLocale() )
         	.getString("msgGetInput")
         	);
         String[] split = raw.split("[ \t\n\r]");
@@ -32,10 +32,10 @@ public class MainHelper {
     }
 
     public static String ask(String message) {
-        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        if (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
             return (ConsoleView.getLowerCaseInput());
-        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
+        } else if (GameData.getData().getViewType().equals(Util.ViewTypes.GUI)) {
             ;
         } else {
             // Exception
@@ -44,14 +44,14 @@ public class MainHelper {
     }
 
     public static void show() throws SQLException, IOException {
-        if (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        if (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) {
             String[] line;
 
-            while (GameData.getViewType().equals(Util.ViewTypes.CONSOLE)) { // TODO
+            while (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) { // TODO
                 line = MainHelper.getInput();
                 MainGameController.run(line);
             }
-        } else if (GameData.getViewType().equals(Util.ViewTypes.GUI)) {
+        } else if (GameData.getData().getViewType().equals(Util.ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     Window.getWindow().show(Util.GameScreen.MAIN);

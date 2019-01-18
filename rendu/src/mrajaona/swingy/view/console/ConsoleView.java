@@ -17,11 +17,11 @@ public class ConsoleView {
     // Input
 
     public static String getRawInput() {
-        return (GameData.getInputScanner().nextLine());
+        return (GameData.getData().getInputScanner().nextLine());
     }
 
     public static String getLowerCaseInput() {
-        return (GameData.getInputScanner().nextLine().toLowerCase(GameData.getLocale()));
+        return (GameData.getData().getInputScanner().nextLine().toLowerCase(GameData.getData().getLocale()));
     }
 
     public static String[] getSplitInput() {

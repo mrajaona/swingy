@@ -35,13 +35,25 @@ public class Util {
 
     } ;
 
+    public enum ArtifactType {
+        ARMOR,
+        HELM,
+        WEAPON
+    }
+
     public enum GameScreen {
         TITLE,
         NEW,
         MAIN,
-        MENU,
         WIN,
-        LOSE
+        LOSE, // SubScreen ?
+        MENU // TODO
+    }
+
+    public enum SubScreen {
+        MAIN,
+        BATTLE,
+        LOOT
     }
 
     // Hero types

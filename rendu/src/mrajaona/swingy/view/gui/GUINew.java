@@ -26,18 +26,18 @@ import mrajaona.swingy.view.helper.BuildHelper;
 
 public class GUINew {
 
-    private static GUINew    screen = new GUINew();
+    private static GUINew     screen = new GUINew();
 
-    private static JPanel    paramsPanel;
+    private JPanel    paramsPanel;
 
-    private static JComboBox<String> classField;
-    private static JLabel            classLabel;
-    private static JTextField        nameField;
-    private static JLabel            nameLabel;
+    private JComboBox<String> classField;
+    private JLabel            classLabel;
+    private JTextField        nameField;
+    private JLabel            nameLabel;
 
-    private static JPanel    controlPanel;
-    private static JButton   createButton;
-    private static JButton   cancelButton;
+    private JPanel    controlPanel;
+    private JButton   createButton;
+    private JButton   cancelButton;
 
     private GUINew() {
         try {
@@ -175,12 +175,12 @@ public class GUINew {
         return (screen);
     }
 
-    public static void reset() {
+    public void reset() {
         classField.setSelectedIndex(0);
         nameField.setText(new String());
     }
 
-    public static void localize() {
+    public void localize() {
         ResourceBundle statsLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
 
@@ -193,7 +193,7 @@ public class GUINew {
         localizeTextField();
     }
 
-    private static void localizeTextField() {
+    private void localizeTextField() {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
         ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
 
@@ -209,7 +209,7 @@ public class GUINew {
         classField.setSelectedIndex(index);
     }
 
-    public static void initPanel(JPanel panel) {
+    public void initPanel(JPanel panel) {
         GridBagConstraints c = new GridBagConstraints();
         {
             c.fill    = GridBagConstraints.HORIZONTAL;

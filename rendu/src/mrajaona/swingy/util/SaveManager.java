@@ -56,7 +56,7 @@ public class SaveManager {
     // ----- Edit db
 
     public void save() throws SQLException, IOException {
-        HeroData hero = GameData.getHero();
+        HeroData hero = GameData.getData().getHero();
 
         if (hero == null)
             return ;

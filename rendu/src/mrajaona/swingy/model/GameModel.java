@@ -11,6 +11,7 @@ import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.View;
+import mrajaona.swingy.view.gui.GUIMain;
 import mrajaona.swingy.view.gui.Window;
 import mrajaona.swingy.view.helper.BuildHelper;
 import mrajaona.swingy.builder.HeroBuilder;
@@ -21,12 +22,12 @@ public class GameModel {
     private GameModel() {}
 
     public static void init (Locale locale, String viewType) throws SQLException, IOException {
-        GameData.setLocale(locale); // "en", "fr"
+        GameData.getData().setLocale(locale); // "en", "fr"
         changeViewType(viewType);
     }
 
     public static void setLocale(Locale newLocale) {
-        GameData.setLocale(newLocale);
+        GameData.getData().setLocale(newLocale);
         // TODO : update view
     }
 
@@ -43,27 +44,30 @@ public class GameModel {
     }
 
     public static void createHero() throws SQLException, IOException {
-        GameData.setHero(
+        GameData.getData().setHero(
             HeroBuilder.getBuilder().newHero()
             );
+        GUIMain.getScreen().updateTable();
         SaveManager.getManager().save();
         BuildHelper.next();
     }
 
     public static void createHero(String heroClass, String heroName) throws SQLException, IOException {
-        GameData.setHero(
+        GameData.getData().setHero(
             HeroBuilder.getBuilder().newHero(heroClass, heroName)
             );
+        GUIMain.getScreen().updateTable();
         SaveManager.getManager().save();
         BuildHelper.next();
     }
 
     public static void loadHero(long id) throws SQLException, IOException {
-        GameData.setHero(
+        GameData.getData().setHero(
             HeroBuilder.getBuilder().loadHero(
                 SaveManager.getManager().load(id)
                 )
             );
+        GUIMain.getScreen().updateTable();
         BuildHelper.next();
     }
 
@@ -85,7 +89,7 @@ public class GameModel {
         if (newType == null) {
             ; // Exception
         } else {
-            GameData.setViewType(newType);
+            GameData.getData().setViewType(newType);
 
             // hide gui if view type changed
             if (newType != Util.ViewTypes.GUI)
@@ -97,7 +101,7 @@ public class GameModel {
     }
 
     public static void changeScreen(Util.GameScreen screen) throws SQLException, IOException {
-        GameData.setScreen(screen);
+        GameData.getData().setScreen(screen);
         View.show();
     }
 

@@ -11,13 +11,19 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"console", "console"},
 
             // Title
-            {"newButton", "New game"},
-            {"loadButton", "Load"},
+            {"newButton",    "New game"},
+            {"loadButton",   "Load"},
             {"deleteButton", "Delete"},
 
             // New
             {"createButton", "Create"},
-            {"cancelButton", "Cancel"}
+            {"cancelButton", "Cancel"},
+
+            // Main
+            {"fightButton",  "Fight"},
+            {"runButton",    "Run"},
+            {"equipButton",  "Equip"},
+            {"leaveButton", "Leave"},
        };
     }
 

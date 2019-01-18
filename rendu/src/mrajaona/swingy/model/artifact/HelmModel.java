@@ -9,11 +9,11 @@ public class HelmModel {
     private HelmModel() {}
 
 	public static void equip(HelmData helm) {
-		GameData.getHero().getHelm().change(helm.getName(), helm.getModifier());
+		GameData.getData().getHero().getHelm().change(helm.getName(), helm.getModifier());
 	}
 
 	public static void remove() {
-		GameData.getHero().getHelm().remove();
+		GameData.getData().getHero().getHelm().remove();
 	}
 
 }
