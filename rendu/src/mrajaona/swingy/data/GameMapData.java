@@ -8,16 +8,16 @@ import lombok.Getter;
 */
 
 public class GameMapData {
-    // Enemies
+    // Todo : Enemies
 
     @Getter private int size;
 
-    private int[] heroCoord;
-    private int[] prevCoord;
+    private int[] heroCoord = new int[2];
+    private int[] prevCoord = new int[2];
     /* x = 0 is west ** y = 0 is south */
 
     @SuppressWarnings("unused")
-	private GameMapData() {}
+    private GameMapData() {}
 
     public GameMapData(int level) {
         size = (level - 1) * 5 + 10 - (level % 2);

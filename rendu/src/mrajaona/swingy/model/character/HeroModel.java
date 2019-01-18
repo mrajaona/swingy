@@ -115,6 +115,7 @@ public class HeroModel {
     }
 
     public static void move(String direction) {
+        // TODO : check map exists
         GameMapModel.move(direction);
     }
 

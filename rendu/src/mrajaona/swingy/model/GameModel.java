@@ -49,7 +49,7 @@ public class GameModel {
             );
         GUIMain.getScreen().updateTable();
         SaveManager.getManager().save();
-        BuildHelper.next();
+        generateMap();
     }
 
     public static void createHero(String heroClass, String heroName) throws SQLException, IOException {
@@ -58,7 +58,7 @@ public class GameModel {
             );
         GUIMain.getScreen().updateTable();
         SaveManager.getManager().save();
-        BuildHelper.next();
+        generateMap();
     }
 
     public static void loadHero(long id) throws SQLException, IOException {
@@ -68,7 +68,7 @@ public class GameModel {
                 )
             );
         GUIMain.getScreen().updateTable();
-        BuildHelper.next();
+        generateMap();
     }
 
     public static void deleteHero(long id) throws SQLException, IOException {
@@ -103,6 +103,12 @@ public class GameModel {
     public static void changeScreen(Util.GameScreen screen) throws SQLException, IOException {
         GameData.getData().setScreen(screen);
         View.show();
+    }
+
+    public static void generateMap() throws SQLException, IOException {
+        GameData.getData().setMap( GameMapModel.initMap() );
+
+        changeScreen(Util.GameScreen.MAIN);
     }
 
 }

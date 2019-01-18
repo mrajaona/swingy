@@ -27,10 +27,6 @@ public class BuildHelper {
         return (null);
     }
 
-    public static void next() throws SQLException, IOException {
-        GameModel.changeScreen(Util.GameScreen.MAIN);
-    }
-
     public static void prev() throws SQLException, IOException {
         GameModel.changeScreen(Util.GameScreen.TITLE);
     }
