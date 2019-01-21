@@ -6,7 +6,8 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.data.GameData;
-import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.GameScreen;
+import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.console.ConsoleView;
 import mrajaona.swingy.view.gui.Window;
 
@@ -24,7 +25,7 @@ public class MainHelper {
         String   raw   = ask(
         	ResourceBundle.getBundle(
         		"mrajaona.swingy.locale.GameResource",
-        		GameData.getData().getData().getLocale() )
+        		GameData.getData().getLocale() )
         	.getString("msgGetInput")
         	);
         String[] split = raw.split("[ \t\n\r]");
@@ -32,10 +33,10 @@ public class MainHelper {
     }
 
     public static String ask(String message) {
-        if (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
             return (ConsoleView.getLowerCaseInput());
-        } else if (GameData.getData().getViewType().equals(Util.ViewTypes.GUI)) {
+        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
             // Exception
@@ -44,17 +45,17 @@ public class MainHelper {
     }
 
     public static void show() throws SQLException, IOException {
-        if (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) {
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             String[] line;
 
-            while (GameData.getData().getViewType().equals(Util.ViewTypes.CONSOLE)) { // TODO
+            while (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) { // TODO
                 line = MainHelper.getInput();
                 MainGameController.run(line);
             }
-        } else if (GameData.getData().getViewType().equals(Util.ViewTypes.GUI)) {
+        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    Window.getWindow().show(Util.GameScreen.MAIN);
+                    Window.getWindow().show(GameScreen.MAIN);
                 }
             });
         } else {

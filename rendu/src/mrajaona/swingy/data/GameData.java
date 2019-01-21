@@ -5,12 +5,11 @@ import java.util.Scanner;
 
 import lombok.Getter;
 import lombok.Setter;
+import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
-import mrajaona.swingy.data.GameMapData;
-import mrajaona.swingy.data.artifact.ArtifactData;
-import mrajaona.swingy.util.Util;
 import mrajaona.swingy.util.Util.GameScreen;
+import mrajaona.swingy.util.Util.ViewTypes;
 
 public class GameData {
 
@@ -25,7 +24,9 @@ public class GameData {
     @Getter @Setter private Locale locale;
 
     @Getter         private Scanner inputScanner    = new Scanner(System.in);
-    @Getter @Setter private Util.ViewTypes viewType = Util.ViewTypes.CONSOLE;
+    @Getter @Setter private ViewTypes viewType      = ViewTypes.CONSOLE;
+
+    @Getter @Setter private SaveFileData saveFile;
 
     @Getter @Setter private HeroData hero;
     // current enemy

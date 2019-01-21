@@ -8,6 +8,7 @@ import java.util.Map;
 
 import lombok.Getter;
 import mrajaona.swingy.model.GameModel;
+import mrajaona.swingy.util.Util.ViewTypes;
 
 public class CommonCmd {
 
@@ -34,12 +35,12 @@ public class CommonCmd {
             });
         map.put("gui", new Cmd() { // TODO
                 public void run()           throws SQLException, IOException
-                                            { GameModel.changeViewType(Util.ViewTypes.GUI); }
+                                            { GameModel.changeViewType(ViewTypes.GUI); }
                 public void run(String arg) { invalid(); }
             });
         map.put("console", new Cmd() { // TODO
                 public void run()           throws SQLException, IOException
-                                            { GameModel.changeViewType(Util.ViewTypes.CONSOLE); }
+                                            { GameModel.changeViewType(ViewTypes.CONSOLE); }
                 public void run(String arg) { invalid(); }
             });
         map.put("language", new Cmd() { // TODO

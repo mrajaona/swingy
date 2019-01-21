@@ -1,8 +1,5 @@
 package mrajaona.swingy.builder;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -24,6 +21,7 @@ import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.model.character.HeroModel;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.helper.BuildHelper;
@@ -34,14 +32,6 @@ import mrajaona.swingy.view.helper.BuildHelper;
 */
 
 public class HeroBuilder {
-
-    private static HeroBuilder builder = new HeroBuilder();
-
-    private HeroBuilder() {}
-
-    public static HeroBuilder getBuilder() {
-        return (builder);
-    }
 
     @Getter private long id = 0;
 
@@ -60,7 +50,7 @@ public class HeroBuilder {
     @NotNull
     @Getter private WeaponData   weapon;
 
-    @Range(min=1, max=100)
+    @Range(min=1, max=HeroModel.HERO_MAX_LVL)
     @Getter private int level         = 1;
 
     @PositiveOrZero
@@ -292,7 +282,7 @@ public class HeroBuilder {
         if (error == true)
             return (null);
         else {
-            System.out.println("Valid Object"); // DEBUG
+            System.out.println("Valid hero"); // DEBUG
             return (new HeroData(this));
         }
 

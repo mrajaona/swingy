@@ -8,7 +8,7 @@ import java.util.Map;
 
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.CommonCmd;
-import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.GameScreen;
 
 public class TitleScreenController extends CommonCmd {
 
@@ -23,18 +23,18 @@ public class TitleScreenController extends CommonCmd {
     private static Map<String, Cmd> initMap() {
         Map<String, Cmd> map = new HashMap<String, Cmd>();
 
-        map.putAll(getCommonCmdMap());
+        map.putAll(CommonCmd.getCommonCmdMap());
 
         // Title screen
         map.put("new", new Cmd() {
                 public void run() throws SQLException, IOException
-                                            { GameModel.changeScreen(Util.GameScreen.NEW); }
+                                            { GameModel.changeScreen(GameScreen.NEW); }
                 public void run(String arg) { invalid(); }
             });
         map.put("load", new Cmd() {
                 public void run()           { invalid(); }
                 public void run(String arg) throws SQLException, IOException
-                                            { GameModel.loadHero(Long.parseLong(arg)); }
+                                            { GameModel.loadFile(Long.parseLong(arg)); }
             });
         map.put("delete", new Cmd() {
                 public void run()           { invalid(); }

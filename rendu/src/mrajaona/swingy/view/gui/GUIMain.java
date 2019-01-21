@@ -24,7 +24,7 @@ import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.util.ResourceMap;
-import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.SubScreen;
 
 public class GUIMain {
 
@@ -40,8 +40,6 @@ public class GUIMain {
     private JScrollPane     heroStatsScrollPane;
     private JTable          statsField;
     private StatsTableModel statsTable;
-
-    private JPanel          controlPanel;
 
     private JPanel          cards;
 
@@ -303,11 +301,11 @@ public class GUIMain {
                 //Create the panel that contains the "cards".
                 cards = new JPanel(new CardLayout());
                 {
-                    cards.add(mainPanel,   Util.SubScreen.MAIN.toString());
-                    cards.add(battlePanel, Util.SubScreen.BATTLE.toString());
-                    cards.add(lootPanel,   Util.SubScreen.LOOT.toString());
+                    cards.add(mainPanel,   SubScreen.MAIN.toString());
+                    cards.add(battlePanel, SubScreen.BATTLE.toString());
+                    cards.add(lootPanel,   SubScreen.LOOT.toString());
                 }
-                show(Util.SubScreen.MAIN);
+                show(SubScreen.MAIN);
             }
 
             // Panel for hero info and controls
@@ -347,7 +345,7 @@ public class GUIMain {
         return (screen);
     }
 
-    public void show(Util.SubScreen screen) {
+    public void show(SubScreen screen) {
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
     }

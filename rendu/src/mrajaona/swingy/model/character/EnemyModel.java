@@ -29,6 +29,9 @@ public class EnemyModel {
     }
 
     public static void die() {
+        // remove from map
+        // remove from game data
+        // drop artifact
         ;
     }
 

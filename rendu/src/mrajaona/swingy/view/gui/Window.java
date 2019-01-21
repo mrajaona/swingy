@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import lombok.Getter;
-import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.GameScreen;
 
 public class Window {
 
@@ -62,11 +62,11 @@ public class Window {
             //Create the panel that contains the "cards".
             cards = new JPanel(new CardLayout());
             {
-                cards.add(titlePanel,   Util.GameScreen.TITLE.toString());
-                cards.add(newHeroPanel, Util.GameScreen.NEW.toString());
-                cards.add(mainPanel,    Util.GameScreen.MAIN.toString());
-                cards.add(winPanel,     Util.GameScreen.WIN.toString());
-                cards.add(losePanel,    Util.GameScreen.LOSE.toString());
+                cards.add(titlePanel,   GameScreen.TITLE.toString());
+                cards.add(newHeroPanel, GameScreen.NEW.toString());
+                cards.add(mainPanel,    GameScreen.MAIN.toString());
+                cards.add(winPanel,     GameScreen.WIN.toString());
+                cards.add(losePanel,    GameScreen.LOSE.toString());
             }
         }
 
@@ -86,13 +86,13 @@ public class Window {
         );
     }
 
-    public void show(Util.GameScreen screen) {
+    public void show(GameScreen screen) {
         // TODO reset previous screen data
         // Except menu - main
 
         if (
-            screen.equals(Util.GameScreen.MAIN)
-            || screen.equals(Util.GameScreen.MENU)
+            screen.equals(GameScreen.MAIN)
+            || screen.equals(GameScreen.MENU)
             ) {
             resize(800, 500);
         } else {

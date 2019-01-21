@@ -3,18 +3,18 @@ package mrajaona.swingy.view;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import mrajaona.swingy.data.GameData;
-import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.view.helper.BuildHelper;
 import mrajaona.swingy.view.helper.MainHelper;
 import mrajaona.swingy.view.helper.TitleHelper;
+import mrajaona.swingy.data.GameData;
 
 public class View {
 	@SuppressWarnings("unused")
 	private View() {}
 
     public static void show() throws SQLException, IOException {
-        Util.GameScreen screen = GameData.getData().getScreen();
+        GameScreen screen = GameData.getData().getScreen();
 
         System.out.println(screen.name());
 

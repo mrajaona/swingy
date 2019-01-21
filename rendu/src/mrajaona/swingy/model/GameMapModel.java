@@ -16,8 +16,25 @@ public class GameMapModel {
     @SuppressWarnings("unused")
     private GameMapModel() {}
 
-    public static GameMapData initMap() {
-        return ( new GameMapData(GameData.getData().getHero().getLevel()) );
+    public static void initMap() {
+        GameMapData map = GameData.getData().getMap();
+        int level       = GameData.getData().getHero().getLevel();
+
+        map.setLevel(level);
+
+        int size = (level - 1) * 5 + 10 - (level % 2);
+        map.setSize(size);
+
+        // place hero at the center of the map
+        map.initCoord(size / 2, size / 2);
+    }
+
+    public static void clear() {
+        GameMapData map = GameData.getData().getMap();
+
+        map.setLevel(0);
+        map.cleanCoord();
+        map.getEnemies().clear();
     }
 
     // move hero
@@ -63,6 +80,9 @@ public class GameMapModel {
             || y == 0 || y == (GameData.getData().getMap().getSize() - 1)
         ) {
             // TODO : win
+
+            // Debug
+            System.out.println( "YOU WIN" );
         }
 
 

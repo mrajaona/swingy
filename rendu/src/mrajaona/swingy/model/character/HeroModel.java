@@ -1,13 +1,12 @@
 package mrajaona.swingy.model.character;
 
-import java.lang.Math;
 import java.util.ResourceBundle;
 
+import lombok.Getter;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
-import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.artifact.ArmorModel;
@@ -26,7 +25,7 @@ public class HeroModel {
     @SuppressWarnings("unused")
     private HeroModel() {}
 
-    private static int HERO_MAX_LVL = 100;
+    public final static int HERO_MAX_LVL = 100;
 
     public static void earnExp(int amount) {
         HeroData hero = GameData.getData().getHero();
@@ -34,16 +33,22 @@ public class HeroModel {
         double expToLvl = hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450;
 
         if (exp >= expToLvl) {
-            levelUp(hero);
-            exp -= expToLvl;
+            if (hero.getLevel() < HERO_MAX_LVL) {
+                levelUp(hero);
+                exp -= expToLvl;
+            } else {
+                exp = expToLvl;
+            }
         }
 
         hero.setExperience(exp);
     }
 
     public static void levelUp(HeroData hero) {
-        hero.setLevel(hero.getLevel() + 1);
-        fullRecover();
+    	if (hero.getLevel() < HERO_MAX_LVL) {
+            hero.setLevel(hero.getLevel() + 1);
+            fullRecover();
+    	}
     }
 
     public static void equip(HelmData helm) {

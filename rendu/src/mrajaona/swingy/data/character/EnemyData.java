@@ -1,7 +1,5 @@
 package mrajaona.swingy.data.character;
 
-import javax.validation.constraints.NotBlank;
-
 import lombok.Getter;
 import mrajaona.swingy.builder.EnemyBuilder;
 

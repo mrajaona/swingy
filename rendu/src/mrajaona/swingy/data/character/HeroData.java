@@ -1,7 +1,5 @@
 package mrajaona.swingy.data.character;
 
-import javax.validation.constraints.NotBlank;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -11,7 +9,6 @@ import mrajaona.swingy.builder.HeroBuilder;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
-import lombok.AccessLevel;
 
 /*
 ** Data for Hero

@@ -1,8 +1,5 @@
 package mrajaona.swingy.data.character;
 
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
-
 import com.j256.ormlite.field.DatabaseField;
 
 import lombok.Getter;

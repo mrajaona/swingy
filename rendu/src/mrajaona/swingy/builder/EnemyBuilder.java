@@ -1,8 +1,5 @@
 package mrajaona.swingy.builder;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -22,14 +19,6 @@ import mrajaona.swingy.util.Util;
 ** Creates and verifies new Enemy data
 */
 public class EnemyBuilder {
-
-    private static EnemyBuilder builder = new EnemyBuilder();
-
-    private EnemyBuilder() {}
-
-    public static EnemyBuilder getBuilder() {
-        return (builder);
-    }
 
     // TODO : localization
 
@@ -112,7 +101,7 @@ public class EnemyBuilder {
 
     // Creation
 
-    EnemyData newEnemy(final String enemyType, final int enemyLevel) {
+    public EnemyData newEnemy(final String enemyType, final int enemyLevel) {
         Util.EnemyBaseStats stats = Util.ENEMY_BASE_STATS_MAP.get(enemyType);
         if (stats == null)
             return (null);
@@ -130,7 +119,7 @@ public class EnemyBuilder {
         .build();
     }
 
-    EnemyData build() {
+    public EnemyData build() {
 
         //Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -147,7 +136,7 @@ public class EnemyBuilder {
             System.out.println("Invalid enemy");
             return (null);
         } else {
-            System.out.println("Valid Object"); // DEBUG
+            System.out.println("Valid enemy"); // DEBUG
             return (new EnemyData(this));
         }
 
