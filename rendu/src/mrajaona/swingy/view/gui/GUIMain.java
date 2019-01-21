@@ -64,7 +64,7 @@ public class GUIMain {
 
             // Console
             {
-                consoleArea = new JTextArea("Testing some text");
+                consoleArea = new JTextArea();
                 consolePane = new JScrollPane(consoleArea);
             }
 
@@ -325,7 +325,7 @@ public class GUIMain {
                 mainPane = new JSplitPane(
                     JSplitPane.HORIZONTAL_SPLIT,
                     false,
-                    consoleArea,
+                    consolePane,
                     utilPane
                 );
                 mainPane.setOneTouchExpandable(false);
@@ -364,6 +364,10 @@ public class GUIMain {
         leaveButton.setText(locale.getString("leaveButton"));
 
         statsTable.updateLocale();
+    }
+
+    public void log(String msg) {
+        consoleArea.append(msg + System.lineSeparator());
     }
 
     public void initPanel(JPanel panel) {

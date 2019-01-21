@@ -1,5 +1,7 @@
 package mrajaona.swingy.model.character;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import lombok.Getter;
@@ -98,7 +100,7 @@ public class HeroModel {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
         ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
 
-        MainHelper.print(
+        MainHelper.printMsg(
             System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
             locale.getString("class")         + " : " + hero.getHeroClass() + System.lineSeparator() +
@@ -119,7 +121,7 @@ public class HeroModel {
         );
     }
 
-    public static void move(String direction) {
+    public static void move(String direction) throws SQLException, IOException {
         // TODO : check map exists
         GameMapModel.move(direction);
     }

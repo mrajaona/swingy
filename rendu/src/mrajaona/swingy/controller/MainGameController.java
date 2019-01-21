@@ -9,14 +9,15 @@ import java.util.Map;
 import mrajaona.swingy.model.character.HeroModel;
 import mrajaona.swingy.util.CommonCmd;
 import mrajaona.swingy.util.SaveManager;
+import mrajaona.swingy.view.helper.MainHelper;
 
 public class MainGameController extends CommonCmd {
 
     @SuppressWarnings("unused")
     private MainGameController() {}
 
-    private static void invalid() {
-        // error
+    private static void invalid() throws SQLException, IOException {
+        MainHelper.waitForInput();
     }
 
     private static Map<String, Cmd> cmdMap = initMap();
@@ -27,18 +28,29 @@ public class MainGameController extends CommonCmd {
 
         // On the map
         map.put("move", new Cmd() {
-                public void run()           { invalid(); }
-                public void run(String arg) { HeroModel.move(arg); }
+                public void run()           throws SQLException, IOException
+                { invalid(); }
+                public void run(String arg) throws SQLException, IOException
+                { HeroModel.move(arg); }
             });
         map.put("status", new Cmd() {
-                public void run()           { HeroModel.viewStats(); }
-                public void run(String arg) { invalid(); }
+                public void run()           throws SQLException, IOException
+                {
+                    HeroModel.viewStats();
+                    MainHelper.waitForInput();
+                }
+                public void run(String arg) throws SQLException, IOException
+                { invalid(); }
             });
 
         map.put("save", new Cmd() {
                 public void run()           throws SQLException, IOException
-                                            { SaveManager.getManager().save(); }
-                public void run(String arg) { invalid(); }
+                {
+                    SaveManager.getManager().save();
+                    MainHelper.waitForInput();
+                }
+                public void run(String arg) throws SQLException, IOException
+                { invalid(); }
             });
 
         return Collections.unmodifiableMap(map);

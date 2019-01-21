@@ -9,14 +9,15 @@ import java.util.Map;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.CommonCmd;
 import mrajaona.swingy.util.Util.GameScreen;
+import mrajaona.swingy.view.helper.TitleHelper;
 
 public class TitleScreenController extends CommonCmd {
 
     @SuppressWarnings("unused")
     private TitleScreenController() {}
 
-    private static void invalid() {
-        // error
+    private static void invalid() throws SQLException, IOException {
+        TitleHelper.waitForInput();
     }
 
     private static Map<String, Cmd> cmdMap = initMap();
@@ -27,19 +28,25 @@ public class TitleScreenController extends CommonCmd {
 
         // Title screen
         map.put("new", new Cmd() {
-                public void run() throws SQLException, IOException
-                                            { GameModel.changeScreen(GameScreen.NEW); }
-                public void run(String arg) { invalid(); }
+                public void run()           throws SQLException, IOException
+                { GameModel.changeScreen(GameScreen.NEW); }
+                public void run(String arg) throws SQLException, IOException
+                                            { invalid(); }
             });
         map.put("load", new Cmd() {
-                public void run()           { invalid(); }
+                public void run()           throws SQLException, IOException
+                { invalid(); }
                 public void run(String arg) throws SQLException, IOException
-                                            { GameModel.loadFile(Long.parseLong(arg)); }
+                { GameModel.loadFile(Long.parseLong(arg)); }
             });
         map.put("delete", new Cmd() {
-                public void run()           { invalid(); }
+                public void run()           throws SQLException, IOException
+                { invalid(); }
                 public void run(String arg) throws SQLException, IOException
-                                            { GameModel.deleteHero(Long.parseLong(arg)); }
+                {
+                    GameModel.deleteHero(Long.parseLong(arg));
+                    TitleHelper.waitForInput();
+                }
             });
         return Collections.unmodifiableMap(map);
     }

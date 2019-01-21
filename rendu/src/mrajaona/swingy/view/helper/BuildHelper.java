@@ -15,12 +15,23 @@ public class BuildHelper {
     @SuppressWarnings("unused")
     private BuildHelper() {}
 
-    public static String ask(String message) {
+    public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
+        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
+            ; // No place to print
+        } else {
+            // TODO : Exception
+        }
+    }
+
+    public static String ask(String message) {
+        printMsg(message);
+
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             return (ConsoleView.getLowerCaseInput());
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            ;
+            ; // GUI waits for user to click somewhere
         } else {
             // TODO : Exception
         }
@@ -33,6 +44,7 @@ public class BuildHelper {
 
     public static void show() throws SQLException, IOException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            Window.getWindow().hide();
             GameModel.createHero();
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {

@@ -1,10 +1,13 @@
 package mrajaona.swingy.model;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.util.ResourceMap;
+import mrajaona.swingy.view.helper.MainHelper;
 
 /*
 ** GameMap Model
@@ -54,7 +57,7 @@ public class GameMapModel {
     }
 
     // move hero
-    public static void move(String direction) {
+    public static void move(String direction) throws SQLException, IOException {
         // delocalize direction
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
         ResourceMap resMap    = (ResourceMap) locale.getObject("DirectionList");
@@ -103,6 +106,8 @@ public class GameMapModel {
 
             // Debug
             System.out.println( "YOU WIN" );
+        } else {
+            MainHelper.waitForInput(); // Keep playing
         }
 
     }

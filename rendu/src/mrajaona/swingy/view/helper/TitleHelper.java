@@ -2,6 +2,7 @@ package mrajaona.swingy.view.helper;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.TitleScreenController;
 import mrajaona.swingy.data.GameData;
@@ -17,6 +18,16 @@ public class TitleHelper {
     @SuppressWarnings("unused")
     private TitleHelper() {}
 
+    public static void printMsg(String message) {
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ConsoleView.println(message);
+        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
+            ; // No place to print
+        } else {
+            // TODO : Exception
+        }
+    }
+
     public static Object[] getHeroesList() throws SQLException, IOException {
         return ( SaveManager.getManager().listHeroes().toArray() );
     }
@@ -29,24 +40,35 @@ public class TitleHelper {
         GameModel.loadFile(id);
     }
 
-    public static void deleteHero(long id) throws SQLException, IOException  {
+    public static void deleteHero(long id) throws SQLException, IOException {
         GameModel.deleteHero(id);
+    }
+
+    public static void waitForInput() throws SQLException, IOException {
+        printMsg(
+                ResourceBundle.getBundle(
+                    "mrajaona.swingy.locale.GameResource",
+                    GameData.getData().getLocale() )
+                .getString("msgGetInput")
+                );
+
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            String[] line;
+
+            while (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+                line = ConsoleView.getSplitInput();
+                TitleScreenController.run(line);
+            }
+        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
+            ; // GUI waits for user to click somewhere
+        } else {
+            // TODO : Exception
+        }
     }
 
     public static void show() throws SQLException, IOException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
-            String[] line;
-
-            ConsoleView.println("< SWINGY >"); // Title // TODO
-
-            while (
-                GameData.getData().getViewType().equals(ViewTypes.CONSOLE)
-                && GameData.getData().getHero() == null
-                ) {
-                line = MainHelper.getInput();
-                TitleScreenController.run(line);
-                // TODO : check view type change
-            }
+            Window.getWindow().hide();
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
@@ -56,6 +78,11 @@ public class TitleHelper {
         } else {
             // TODO : Exception
         }
+
+        printMsg("< SWINGY >"); // Title // TODO
+
+        waitForInput();
+
     }
 
 }
