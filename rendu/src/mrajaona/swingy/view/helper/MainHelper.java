@@ -39,7 +39,7 @@ public class MainHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
-            // Exception
+            // TODO : Exception
         }
         return (null);
     }
@@ -59,7 +59,7 @@ public class MainHelper {
                 }
             });
         } else {
-            // Exception
+            // TODO : Exception
         }
     }
 

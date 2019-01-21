@@ -22,7 +22,7 @@ public class BuildHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
-            // Exception
+            // TODO : Exception
         }
         return (null);
     }
@@ -41,7 +41,7 @@ public class BuildHelper {
                 }
             });
         } else {
-            // Exception
+            // TODO : Exception
         }
     }
 

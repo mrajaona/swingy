@@ -39,7 +39,7 @@ public class GameModel {
             // TODO : update view
 
         } catch (IllformedLocaleException e) {
-            // todo / invalid language format
+            // TODO : invalid language format
         }
     }
 
@@ -106,7 +106,7 @@ public class GameModel {
         ViewTypes tmp = ViewTypes.getKeyByValue(newType);
 
         if (tmp == null) {
-            ; // Exception
+            ; // TODO : Exception
         } else {
             changeViewType(tmp);
         }
@@ -114,7 +114,7 @@ public class GameModel {
 
     public static void changeViewType(ViewTypes newType) throws SQLException, IOException {
         if (newType == null) {
-            ; // Exception
+            ; // TODO : Exception
         } else {
             GameData.getData().setViewType(newType);
 

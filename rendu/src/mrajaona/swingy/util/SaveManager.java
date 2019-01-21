@@ -187,7 +187,7 @@ public class SaveManager {
         List<SaveFileData> result = queryBuilder.query();
 
         if (result == null || result.size() > 1)  {
-            // Exception
+            // TODO : Exception
             return (null);
         } else if (result.size() == 0) {
         	// Wrong id ; possible in console view ;
@@ -209,7 +209,7 @@ public class SaveManager {
             artifactDao.refresh(hero.getArmor());
             artifactDao.refresh(hero.getWeapon());
         } else {
-            // Exception
+            // TODO : Exception
         }
 
         GameMapData map = saveFile.getMap();
@@ -218,7 +218,7 @@ public class SaveManager {
         if (map != null) {
             // update enemies
         } else {
-            // Exception
+            // TODO : Exception
         }
 
         closeConnection();

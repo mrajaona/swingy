@@ -89,7 +89,7 @@ public class GameMapModel {
         System.out.println( "x: " + Integer.toString(map.getCoordX()) + System.lineSeparator() + "y: " + Integer.toString(map.getCoordY()) );
 
         if (!checkCoord(GameData.getData().getMap().getHeroCoord())) {
-            // Exception
+            // TODO : Exception
         }
 
         // check border
