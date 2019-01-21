@@ -1,5 +1,7 @@
 package mrajaona.swingy.data;
 
+import javax.validation.Valid;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -15,9 +17,11 @@ public class SaveFileData {
     @Getter private long id;
 
     @DatabaseField(foreign = true)
+    @Valid
     @Getter @Setter private HeroData	hero;
 
     @DatabaseField(foreign = true)
+    @Valid
     @Getter @Setter private GameMapData map;
 
     // necessary for ORMLite

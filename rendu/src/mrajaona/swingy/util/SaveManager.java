@@ -86,6 +86,7 @@ public class SaveManager {
         if (saveFile == null) {
         	SaveFileBuilder builder = new SaveFileBuilder();
             saveFile = builder.newFile(hero, map);
+            GameData.getData().setSaveFile(saveFile);
         } else {
             SaveFileModel.updateFile(hero, map);
         }
@@ -192,9 +193,6 @@ public class SaveManager {
         	// Wrong id ; possible in console view ;
             return (null);
         }
-
-
-        // java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 
         SaveFileData saveFile = result.get(0);
 

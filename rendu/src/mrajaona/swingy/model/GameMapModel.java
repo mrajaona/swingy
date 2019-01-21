@@ -37,6 +37,22 @@ public class GameMapModel {
         map.getEnemies().clear();
     }
 
+    public static boolean checkCoord(int[] coord) {
+        int size = GameData.getData().getMap().getSize();
+        return (checkCoord(coord, size));
+    }
+
+    public static boolean checkCoord(int[] coord, int size) {
+        if (
+            coord == null
+            || coord.length != 2
+            || !(coord[0] >= 0 && coord[0] < size)
+            || !(coord[1] >= 0 && coord[1] < size)
+            )
+            return (false);
+        return (true);
+    }
+
     // move hero
     public static void move(String direction) {
         // delocalize direction
@@ -72,6 +88,10 @@ public class GameMapModel {
         // Debug
         System.out.println( "x: " + Integer.toString(map.getCoordX()) + System.lineSeparator() + "y: " + Integer.toString(map.getCoordY()) );
 
+        if (!checkCoord(GameData.getData().getMap().getHeroCoord())) {
+            // Exception
+        }
+
         // check border
         int x = map.getCoordX();
         int y = map.getCoordY();
@@ -84,7 +104,6 @@ public class GameMapModel {
             // Debug
             System.out.println( "YOU WIN" );
         }
-
 
     }
 

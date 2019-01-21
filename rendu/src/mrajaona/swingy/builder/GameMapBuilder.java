@@ -8,14 +8,17 @@ import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
 import lombok.Getter;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.model.GameMapModel;
 
 public class GameMapBuilder {
 
@@ -27,18 +30,16 @@ public class GameMapBuilder {
     @Range(min=5, max=505)
     @Getter private int size;
 
-    @NotNull // length == 2
-    // @Valid // @PositiveOrZero
+    @Valid
     @Getter private int[] heroCoord = new int[2];
-    @NotNull
-    // @Valid // @PositiveOrZero
+    @NotEmpty @Size(min=2, max=2)
     @Getter private int[] prevCoord = new int[2];
     /* x = 0 is west ** y = 0 is south */
 
     // TODO : enemies positions
     @NotNull
     @Getter private HashMap<EnemyData, int[]> enemies;
-    // map.put(enemy, coords);
+    // map.put(enemy, coord);
 
     public GameMapBuilder setId(long id) {
         this.id = id;
@@ -52,25 +53,19 @@ public class GameMapBuilder {
         return (this);
     }
 
-    public GameMapBuilder setHeroCoord(int[] coords) {
-        if (coords.length != 2) {
-            // Exception
-        }
+    public GameMapBuilder setHeroCoord(int[] coord) {
         return (
             setHeroCoord(
-                coords[0],
-                coords[1]
+                coord[0],
+                coord[1]
                 ));
     }
 
-    public GameMapBuilder setPrevCoord(int[] coords) {
-        if (coords.length != 2) {
-            // Exception
-        }
+    public GameMapBuilder setPrevCoord(int[] coord) {
         return (
             setPrevCoord(
-                coords[0],
-                coords[1]
+                coord[0],
+                coord[1]
                 ));
     }
 
@@ -110,11 +105,13 @@ public class GameMapBuilder {
             // TODO : Exception
             System.out.println("Invalid map");
             error = true;
-
-            for(ConstraintViolation<GameMapBuilder> violation : mapConstraintViolations) {
-                System.out.println(violation.getPropertyPath() + " : " + violation.getMessage());
-            }
-
+        } else if (
+            !GameMapModel.checkCoord(heroCoord, size)
+            || !GameMapModel.checkCoord(prevCoord, size)
+            ) {
+            // TODO : Exception
+            System.out.println("Invalid map");
+            error = true;
         }
 
         if (error == true)
