@@ -9,6 +9,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -37,7 +38,7 @@ public class HeroBuilder {
 
     // TODO : localization
 
-    @NotBlank
+    @NotBlank @Pattern(regexp = "^[A-Za-z ]+$")
     @Getter private String  heroName;
 
     @NotBlank
@@ -164,7 +165,6 @@ public class HeroBuilder {
             if (heroName == null || heroName.trim().isEmpty()) {
                 heroName = BuildHelper.ask(locale.getString("msgCreateHeroName"));
             }
-
             hero = build(true);
         }
 
@@ -255,6 +255,8 @@ public class HeroBuilder {
         Set<ConstraintViolation<WeaponData>> weaponConstraintViolations   = validator.validate(weapon);
         Set<ConstraintViolation<HeroBuilder>> heroConstraintViolations    = validator.validate(this);
 
+        Set<ConstraintViolation<HeroBuilder>> invalidName = validator.validateProperty(this, "heroName");
+
         boolean error = false;
 
         //Show errors
@@ -278,6 +280,13 @@ public class HeroBuilder {
             System.out.println("Invalid hero");
             error = true;
         }
+
+        if (invalidName.size() > 0) {
+            System.out.println("Invalid name");
+            heroName = new String();
+            error = true;
+        }
+
 
         if (error == true)
             return (null);

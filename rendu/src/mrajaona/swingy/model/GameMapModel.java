@@ -2,10 +2,12 @@ package mrajaona.swingy.model;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
+import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.view.helper.MainHelper;
 
@@ -35,7 +37,28 @@ public class GameMapModel {
     }
 
     private static void generateEnemies() {
+        int mapLevel = GameData.getData().getMap().getLevel();
+        int mapSize  = GameData.getData().getMap().getSize();
+        HashMap<EnemyData, int[]> enemies = new HashMap<EnemyData, int[]>();
+
         // TODO
+        for (int y = 0 ; y < mapSize ; y++) {
+            for (int x = 0 ; x < mapSize ; x++) {
+//                if (conditions) {
+
+//                    String enemyType = Util.enemyTypes[/*random*/ % Util.enemyTypes.length];
+//                    int enemyLevel = mapLevel + (/* +- rand 3 lvl */) // min 1
+/*
+                    enemies.add(
+                        new EnemyBuilder().newEnemy(type, level),
+                        new int[] = {x, y}
+                    );
+                }
+*/
+
+            }
+        // GameData.getData().getMap().setEnemies(enemies);
+        }
     }
 
     public static void clear() {
@@ -94,12 +117,14 @@ public class GameMapModel {
                 break ;
         }
 
-        MainHelper.printMsg(
-            GameData.getData().getHero().getHeroName()
-            + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
-                                        GameData.getData().getLocale() ).getString("msgMove")
-            + direction + " (" + Integer.toString(map.getCoordX()) + ", " + Integer.toString(map.getCoordY()) + ")."
-        );
+        String msg = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgMove")
+        .replace("<hero>", GameData.getData().getHero().getHeroName())
+        .replace("<direction>", direction)
+        .replace("<x>", Integer.toString(map.getCoordX()))
+        .replace("<y>", Integer.toString(map.getCoordY()))
+        ;
+
+        MainHelper.printMsg(msg);
 
         if (!checkCoord(GameData.getData().getMap().getHeroCoord())) {
             // TODO : Exception
@@ -126,7 +151,7 @@ public class GameMapModel {
 
     private static boolean checkWin() {
     	GameMapData map = GameData.getData().getMap();
-    	
+
         // check border
         int x = map.getCoordX();
         int y = map.getCoordY();

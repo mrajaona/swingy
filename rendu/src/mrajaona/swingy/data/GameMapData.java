@@ -63,6 +63,10 @@ public class GameMapData {
         this.enemies      = new HashMap<EnemyData, int[]>(builder.getEnemies());
     }
 
+    public void setEnemies(HashMap<EnemyData, int[]> enemies) {
+        this.enemies = new HashMap<EnemyData, int[]>(enemies);
+    }
+
     public int getCoordX() {
         return (heroCoord[0]);
     }

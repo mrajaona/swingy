@@ -14,23 +14,18 @@ public class HelmModel {
 
     public static void equip(HelmData helm) {
         GameData.getData().getHero().getHelm().change(helm.getName(), helm.getModifier());
-        MainHelper.printMsg(
-            GameData.getData().getHero().getHeroName()
-            + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
-                                        GameData.getData().getLocale() ).getString("msgEquip")
-            + helm.getName() +"."
-        );
+        String msg = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgEquip")
+            .replace("<hero>", GameData.getData().getHero().getHeroName())
+            .replace("<artifact>", helm.getName());
+        MainHelper.printMsg(msg);
     }
 
     public static void remove() {
         ArtifactData artifact = GameData.getData().getHero().getHelm();
-
-        MainHelper.printMsg(
-            GameData.getData().getHero().getHeroName()
-            + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
-                                        GameData.getData().getLocale() ).getString("msgUnequip")
-            + artifact.getName() +"."
-        );
+        String msg = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgUnquip")
+            .replace("<hero>", GameData.getData().getHero().getHeroName())
+            .replace("<artifact>", artifact.getName());
+        MainHelper.printMsg(msg);
         artifact.remove();
     }
 

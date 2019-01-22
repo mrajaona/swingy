@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -85,6 +87,27 @@ public class GUINew {
                             }
     					}
                     });
+
+                    nameField.addKeyListener(new KeyListener() {
+						@Override
+						public void keyTyped(KeyEvent e) {
+                            char c = e.getKeyChar();
+                            if(Character.isLetter(c) || c == ' ' || Character.isISOControl(c))
+                                ; // valid key
+                            else
+                                e.consume(); // prevent unauthorized characters
+						}
+
+						@Override
+						public void keyPressed(KeyEvent e) {}
+
+						@Override
+						public void keyReleased(KeyEvent e) {
+                            if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                                createButton.doClick();
+                        }
+                    });
+
                 }
 
                 {

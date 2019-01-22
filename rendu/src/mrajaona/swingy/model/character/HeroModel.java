@@ -49,12 +49,10 @@ public class HeroModel {
     public static void levelUp(HeroData hero) {
     	if (hero.getLevel() < HERO_MAX_LVL) {
             hero.setLevel(hero.getLevel() + 1);
-            MainHelper.printMsg(
-                GameData.getData().getHero().getHeroName()
-                + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
-                                            GameData.getData().getLocale() ).getString("msgLvlUp")
-                + hero.getLevel() +" !"
-            );
+            String msg = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgLvlUp")
+                .replace("<hero>", GameData.getData().getHero().getHeroName())
+                .replace("<level>", Integer.toString(hero.getLevel()));
+            MainHelper.printMsg(msg);
             fullRecover();
     	}
     }
@@ -135,18 +133,20 @@ public class HeroModel {
     public static void run() {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
 
-        MainHelper.printMsg(
-            GameData.getData().getHero().getHeroName()
-            + locale.getString("msgRun")
-        );
-
+        {
+	        String msg = locale.getString("msgRun")
+	            .replace("<hero>", GameData.getData().getHero().getHeroName());
+	        MainHelper.printMsg(msg);
+        }
         // TODO : wait for more suspense
 
         if ( (Math.random() * 10) % 2 == 0) { // 1/2
-            MainHelper.printMsg(locale.getString("msgRunSuccess"));
+            String msg = locale.getString("msgRunSuccess");
+            MainHelper.printMsg(msg);
             GameMapModel.goBack();
         } else {
-            MainHelper.printMsg(locale.getString("msgRunFail"));
+            String msg = locale.getString("msgRunFail");
+            MainHelper.printMsg(msg);
             fight();
         }
     }
@@ -186,11 +186,9 @@ public class HeroModel {
     }
 
     public static void die() {
-        MainHelper.printMsg(
-            GameData.getData().getHero().getHeroName()
-            + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
-                                        GameData.getData().getLocale() ).getString("msgDied")
-        );
+        String msg = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgDied")
+        .replace("<subject>", GameData.getData().getHero().getHeroName());
+        MainHelper.printMsg(msg);
     }
 
     private static void updateUI() {

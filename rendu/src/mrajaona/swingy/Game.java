@@ -5,22 +5,22 @@ import java.util.Locale;
 import mrajaona.swingy.model.GameModel;
 
 /*
-** Main loop for the game
+** Main method for the game
 */
 
 public class Game {
 
-    private static Game loop = new Game();
+    private static Game game = new Game();
 
     private Game() {
     	Locale.setDefault(new Locale("en"));
     }
 
-    public static Game getLoop() {
-        return (loop);
+    public static Game getGame() {
+        return (game);
     }
 
-    public void game(String[] args) {
+    public void play(String[] args) {
 
         if (args.length != 1)
             return ;

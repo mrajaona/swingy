@@ -8,26 +8,24 @@ public class GameResource_en extends ListResourceBundle {
         return new Object[][] {
             /* Strings */
             {"msgGetInput",   "What do you want to do ?"},
-            {"msgMove",       " moves "},
+            {"msgMove",       "<hero> moves <direction> (<x>, <y>)."},
 
-            {"msgEncounterA", "A wild "},
-            {"msgEncounterB", " appeared !"},
+            {"msgEncounterA", "A wild level <level> <enemy> appeared !"},
 
-            {"msgRun",        " tries to run..."},
+            {"msgRun",        "<hero> tries to run..."},
             {"msgRunFail",    "...but fails."},
             {"msgRunSuccess", "...and succeeds !"},
 
-            {"msgAttack",     " attacked"},
-            {"msgDamageA",    " takes "},
-            {"msgDamageB",    " damage."},
-            {"msgDied",       " died."},
+            {"msgAttack",     "<subject> attacks."},
+            {"msgDamage",     "<target> takes <hp> damage."},
+            {"msgDied",       "<subject> died."},
 
-            {"msgDrop",       "The enemy dropped a "},
-            {"msgEquip",      " equips the "},
-            {"msgUnequip",      " unequips the "},
+            {"msgDrop",       "The enemy dropped a <artifact>"},
+            {"msgEquip",      "<hero> equips the <artifact>"},
+            {"msgUnequip",    "<hero> unequips the <artifact>"},
             {"msgLeave",      "The artifact magically vanishes."},
 
-            {"msgLvlUp",      " is now level "},
+            {"msgLvlUp",      "<hero> is now level <level> !"},
 
             {"msgSave",       "Game saved."},
 
