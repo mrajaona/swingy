@@ -11,7 +11,7 @@ import mrajaona.swingy.builder.EnemyBuilder;
 
 public class EnemyData extends CharacterData {
 
-    @Getter private String  enemyType;
+    @Getter private String       enemyType;
 
     @SuppressWarnings("unused")
 	private EnemyData() {

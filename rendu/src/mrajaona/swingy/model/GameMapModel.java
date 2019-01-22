@@ -30,6 +30,12 @@ public class GameMapModel {
 
         // place hero at the center of the map
         map.initCoord(size / 2, size / 2);
+
+        generateEnemies();
+    }
+
+    private static void generateEnemies() {
+        // TODO
     }
 
     public static void clear() {
@@ -88,13 +94,39 @@ public class GameMapModel {
                 break ;
         }
 
-        // Debug
-        System.out.println( "x: " + Integer.toString(map.getCoordX()) + System.lineSeparator() + "y: " + Integer.toString(map.getCoordY()) );
+        MainHelper.printMsg(
+            GameData.getData().getHero().getHeroName()
+            + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
+                                        GameData.getData().getLocale() ).getString("msgMove")
+            + direction + " (" + Integer.toString(map.getCoordX()) + ", " + Integer.toString(map.getCoordY()) + ")."
+        );
 
         if (!checkCoord(GameData.getData().getMap().getHeroCoord())) {
             // TODO : Exception
+            return ;
         }
 
+        checkPosition();
+    }
+
+    private static void checkPosition() throws SQLException, IOException {
+        if (checkWin()) {
+            // TODO : win screen
+            MainHelper.printMsg( "YOU WIN" );
+        } else if (checkEnemy()) {
+            // TODO : Battle
+        } else {
+            MainHelper.waitForInput(); // Keep playing
+        }
+    }
+
+    private static boolean checkEnemy() {
+        return (false);
+    }
+
+    private static boolean checkWin() {
+    	GameMapData map = GameData.getData().getMap();
+    	
         // check border
         int x = map.getCoordX();
         int y = map.getCoordY();
@@ -102,15 +134,12 @@ public class GameMapModel {
                x == 0 || x == (GameData.getData().getMap().getSize() - 1)
             || y == 0 || y == (GameData.getData().getMap().getSize() - 1)
         ) {
-            // TODO : win
-
-            // Debug
-            System.out.println( "YOU WIN" );
-        } else {
-            MainHelper.waitForInput(); // Keep playing
+            return (true);
         }
 
+        return (false);
     }
+
 
     public static void goBack() {
         GameData.getData().getMap().goBack();

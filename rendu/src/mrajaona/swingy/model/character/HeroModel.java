@@ -49,6 +49,12 @@ public class HeroModel {
     public static void levelUp(HeroData hero) {
     	if (hero.getLevel() < HERO_MAX_LVL) {
             hero.setLevel(hero.getLevel() + 1);
+            MainHelper.printMsg(
+                GameData.getData().getHero().getHeroName()
+                + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
+                                            GameData.getData().getLocale() ).getString("msgLvlUp")
+                + hero.getLevel() +" !"
+            );
             fullRecover();
     	}
     }
@@ -127,14 +133,27 @@ public class HeroModel {
     }
 
     public static void run() {
-        if ( (Math.random() * 10) % 2 == 0) // 1/2
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
+
+        MainHelper.printMsg(
+            GameData.getData().getHero().getHeroName()
+            + locale.getString("msgRun")
+        );
+
+        // TODO : wait for more suspense
+
+        if ( (Math.random() * 10) % 2 == 0) { // 1/2
+            MainHelper.printMsg(locale.getString("msgRunSuccess"));
             GameMapModel.goBack();
-        else
+        } else {
+            MainHelper.printMsg(locale.getString("msgRunFail"));
             fight();
+        }
     }
 
     public static void fight() {
         // EnemyController
+        // TODO : loop until someone dies
     }
 
     // Character methods
@@ -167,7 +186,11 @@ public class HeroModel {
     }
 
     public static void die() {
-        ;
+        MainHelper.printMsg(
+            GameData.getData().getHero().getHeroName()
+            + ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource",
+                                        GameData.getData().getLocale() ).getString("msgDied")
+        );
     }
 
     private static void updateUI() {
