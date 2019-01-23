@@ -14,7 +14,7 @@ import lombok.Setter;
 
 public class Coord implements Serializable {
 
-	private static final long serialVersionUID = 7470261414487830806L;
+    private static final long serialVersionUID = 7470261414487830806L;
 
     @PositiveOrZero
     @Getter @Setter private int x;

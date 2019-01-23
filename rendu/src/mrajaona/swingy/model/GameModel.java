@@ -97,8 +97,8 @@ public class GameModel {
         SaveFileBuilder sfBuilder = new SaveFileBuilder();
         GameData.getData().setSaveFile(
             sfBuilder.loadFile(
-            	SaveManager.getManager().load(heroId)
-            		));
+                SaveManager.getManager().load(heroId)
+                    ));
 
         if (GameData.getData().getSaveFile() == null) {
             System.out.println("Could not load file for Hero id " + heroId); // Debug // TODO : vrai message

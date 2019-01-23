@@ -17,9 +17,9 @@ public class CharacterData implements Serializable {
 
     // members
 
-	private static final long serialVersionUID = 2098570252469453413L;
+    private static final long serialVersionUID = 2098570252469453413L;
 
-	@DatabaseField(canBeNull = false)
+    @DatabaseField(canBeNull = false)
     // @Positive
     @Getter @Setter private int level;
 

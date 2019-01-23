@@ -16,16 +16,16 @@ public class ArtifactData implements Serializable {
 
     // TODO : localization
 
-	private static final long serialVersionUID = 5018899939736022531L;
+    private static final long serialVersionUID = 5018899939736022531L;
 
-	@NotBlank
+    @NotBlank
     @Getter @Setter private String name;
 
-	@PositiveOrZero
+    @PositiveOrZero
     @Getter @Setter private int modifier;
 
     @SuppressWarnings("unused")
-	@Getter private transient ArtifactType type;
+    @Getter private transient ArtifactType type;
 
     public static final String NO_ARTIFACT_KEY = "none";
 
@@ -44,8 +44,8 @@ public class ArtifactData implements Serializable {
     }
 
     public void remove() {
-    	name     = NO_ARTIFACT_KEY;
-    	modifier = 0;
+        name     = NO_ARTIFACT_KEY;
+        modifier = 0;
     }
 
 }

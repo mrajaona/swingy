@@ -18,7 +18,7 @@ public class SaveFileData {
 
     @DatabaseField(foreign = true)
     @Valid
-    @Getter @Setter private HeroData	hero;
+    @Getter @Setter private HeroData    hero;
 
     @DatabaseField(foreign = true)
     @Valid
@@ -30,8 +30,8 @@ public class SaveFileData {
     public SaveFileData(SaveFileBuilder builder) {
         if (builder.getId() != 0)
             this.id = builder.getId();
-       	this.hero = builder.getHero();
-    	this.map  = builder.getMap();
+        this.hero = builder.getHero();
+        this.map  = builder.getMap();
     }
 
 }

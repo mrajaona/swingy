@@ -73,13 +73,13 @@ public class SaveManager {
 
         GameMapData  map      = GameData.getData().getMap();
         if (map == null) {
-        	GameMapBuilder builder = new GameMapBuilder();
-        	map = builder.newMap();
+            GameMapBuilder builder = new GameMapBuilder();
+            map = builder.newMap();
         }
 
         SaveFileData saveFile = GameData.getData().getSaveFile();
         if (saveFile == null) {
-        	SaveFileBuilder builder = new SaveFileBuilder();
+            SaveFileBuilder builder = new SaveFileBuilder();
             saveFile = builder.newFile(hero, map);
             GameData.getData().setSaveFile(saveFile);
         } else {
@@ -168,7 +168,7 @@ public class SaveManager {
             // TODO : Exception
             return (null);
         } else if (result.size() == 0) {
-        	// Wrong id ; possible in console view ;
+            // Wrong id ; possible in console view ;
             return (null);
         }
 

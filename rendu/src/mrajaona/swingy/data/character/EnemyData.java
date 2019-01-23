@@ -17,16 +17,16 @@ import mrajaona.swingy.builder.EnemyBuilder;
 @DatabaseTable(tableName = "enemies")
 public class EnemyData extends CharacterData implements Serializable {
 
-	private static final long serialVersionUID = 4476601624225562551L;
+    private static final long serialVersionUID = 4476601624225562551L;
 
-	@DatabaseField(generatedId = true)
+    @DatabaseField(generatedId = true)
     @Getter private long id;
 
     @DatabaseField(canBeNull = false)
     @Getter private String       enemyType;
 
     @SuppressWarnings("unused")
-	private EnemyData() {
+    private EnemyData() {
         super();
     }
 

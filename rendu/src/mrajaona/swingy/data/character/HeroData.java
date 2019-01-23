@@ -20,9 +20,9 @@ import mrajaona.swingy.data.artifact.WeaponData;
 @DatabaseTable(tableName = "heroes")
 public class HeroData extends CharacterData {
 
-	private static final long serialVersionUID = -3707747501395187023L;
+    private static final long serialVersionUID = -3707747501395187023L;
 
-	@DatabaseField(generatedId = true)
+    @DatabaseField(generatedId = true)
     @Getter private long id;
 
     @DatabaseField(canBeNull = false)

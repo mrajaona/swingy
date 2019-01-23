@@ -10,8 +10,8 @@ import mrajaona.swingy.view.helper.TitleHelper;
 import mrajaona.swingy.data.GameData;
 
 public class View {
-	@SuppressWarnings("unused")
-	private View() {}
+    @SuppressWarnings("unused")
+    private View() {}
 
     public static void show() throws SQLException, IOException {
         GameScreen screen = GameData.getData().getScreen();

@@ -16,7 +16,7 @@ public class Util {
 
         String view;
 
-    	private ViewTypes(String view) {
+        private ViewTypes(String view) {
             this.view = view;
         }
 

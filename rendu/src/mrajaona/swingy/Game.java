@@ -13,7 +13,7 @@ public class Game {
     private static Game game = new Game();
 
     private Game() {
-    	Locale.setDefault(new Locale("en"));
+        Locale.setDefault(new Locale("en"));
     }
 
     public static Game getGame() {

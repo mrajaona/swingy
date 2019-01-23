@@ -64,8 +64,8 @@ public class GUINew {
                         public void changedUpdate(DocumentEvent event) {
                         }
 
-    					@Override
-    					public void insertUpdate(DocumentEvent e) {
+                        @Override
+                        public void insertUpdate(DocumentEvent e) {
                             String heroName = nameField.getText();
 
                             if (heroName == null || heroName.trim().isEmpty()) {
@@ -74,10 +74,10 @@ public class GUINew {
                                 createButton.setEnabled(true);
                             }
 
-    					}
+                        }
 
-    					@Override
-    					public void removeUpdate(DocumentEvent e) {
+                        @Override
+                        public void removeUpdate(DocumentEvent e) {
                             String heroName = nameField.getText();
 
                             if (heroName == null || heroName.trim().isEmpty()) {
@@ -85,24 +85,24 @@ public class GUINew {
                             } else {
                                 createButton.setEnabled(true);
                             }
-    					}
+                        }
                     });
 
                     nameField.addKeyListener(new KeyListener() {
-						@Override
-						public void keyTyped(KeyEvent e) {
+                        @Override
+                        public void keyTyped(KeyEvent e) {
                             char c = e.getKeyChar();
                             if(Character.isLetter(c) || c == ' ' || Character.isISOControl(c))
                                 ; // valid key
                             else
                                 e.consume(); // prevent unauthorized characters
-						}
+                        }
 
-						@Override
-						public void keyPressed(KeyEvent e) {}
+                        @Override
+                        public void keyPressed(KeyEvent e) {}
 
-						@Override
-						public void keyReleased(KeyEvent e) {
+                        @Override
+                        public void keyReleased(KeyEvent e) {
                             if (e.getKeyCode() == KeyEvent.VK_ENTER)
                                 createButton.doClick();
                         }

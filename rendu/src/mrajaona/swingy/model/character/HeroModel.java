@@ -49,7 +49,7 @@ public class HeroModel {
     }
 
     public static void levelUp(HeroData hero) {
-    	if (hero.getLevel() < HERO_MAX_LVL) {
+        if (hero.getLevel() < HERO_MAX_LVL) {
             hero.setLevel(hero.getLevel() + 1);
             String msg = String.format(
                 ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgLvlUp"),
@@ -58,7 +58,7 @@ public class HeroModel {
                 );
             MainHelper.printMsg(msg);
             fullRecover();
-    	}
+        }
     }
 
     public static void equip(ArtifactData artifact) {
@@ -145,11 +145,11 @@ public class HeroModel {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
 
         {
-	        String msg = String.format(
+            String msg = String.format(
                 locale.getString("msgRun"),
-	            GameData.getData().getHero().getHeroName() // %1$s
+                GameData.getData().getHero().getHeroName() // %1$s
                 );
-	        MainHelper.printMsg(msg);
+            MainHelper.printMsg(msg);
         }
 
         Random rand = new Random();

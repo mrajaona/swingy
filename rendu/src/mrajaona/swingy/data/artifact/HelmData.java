@@ -4,9 +4,9 @@ import mrajaona.swingy.util.Util.ArtifactType;
 
 public class HelmData extends ArtifactData {
 
-	private static final long serialVersionUID = 2825389860641051359L;
+    private static final long serialVersionUID = 2825389860641051359L;
 
-	public HelmData() {
+    public HelmData() {
         // TODO : generate random
         super("Random", 0, ArtifactType.HELM);
     }

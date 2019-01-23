@@ -11,10 +11,10 @@ public class SaveFileModel {
     private SaveFileModel() {}
 
     public static void updateFile(HeroData hero, GameMapData map) {
-    	SaveFileData data = GameData.getData().getSaveFile();
+        SaveFileData data = GameData.getData().getSaveFile();
 
-    	data.setHero(hero);
-    	data.setMap(map);
+        data.setHero(hero);
+        data.setMap(map);
     }
 
 }
