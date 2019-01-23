@@ -9,6 +9,8 @@ import mrajaona.swingy.builder.GameMapBuilder;
 import mrajaona.swingy.builder.HeroBuilder;
 import mrajaona.swingy.builder.SaveFileBuilder;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.data.artifact.ArtifactData;
+import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
@@ -41,6 +43,22 @@ public class GameModel {
         } catch (IllformedLocaleException e) {
             // TODO : invalid language format
         }
+    }
+
+    public static void enemyEncounter(EnemyData enemy) {
+        GameData.getData().setEnemy(enemy);
+    }
+
+    public static void enemyEncounterEnd() {
+        GameData.getData().setEnemy(null);
+    }
+
+    public static void drop(ArtifactData artifact) {
+        GameData.getData().setArtifact(artifact);
+    }
+
+    public static void noDrop() {
+        GameData.getData().setArtifact(null);
     }
 
     public static void createHero() throws SQLException, IOException {

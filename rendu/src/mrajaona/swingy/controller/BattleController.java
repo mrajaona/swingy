@@ -1,5 +1,7 @@
 package mrajaona.swingy.controller;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +14,7 @@ public class BattleController {
     private BattleController() {}
 
     public interface Cmd {
-        public void run();
+        public void run() throws SQLException, IOException;
     }
 
     private static void invalid() {
@@ -25,7 +27,8 @@ public class BattleController {
 
         // enemy encounter
         map.put("run", new Cmd() {
-                public void run()           { HeroModel.run(); }
+                public void run() throws    SQLException, IOException
+                                            { HeroModel.run(); }
             });
         map.put("fight", new Cmd() {
                 public void run()           { HeroModel.fight(); }
@@ -34,7 +37,7 @@ public class BattleController {
         return Collections.unmodifiableMap(map);
     }
 
-    public static void run(String[] args) {
+    public static void run(String[] args) throws SQLException, IOException {
         if (args.length <= 0 || args.length > 1) {
             invalid();
             return;

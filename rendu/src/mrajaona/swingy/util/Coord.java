@@ -22,8 +22,8 @@ public class Coord implements Serializable {
     @PositiveOrZero
     @Getter @Setter private int y;
 
-    private transient ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    private transient Validator validator      = factory.getValidator();
+    private static transient ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    private static transient Validator validator      = factory.getValidator();
 
     /*
     ** x = 0 is west
@@ -37,9 +37,7 @@ public class Coord implements Serializable {
     }
 
     public Coord(int x, int y) {
-        this.x = x;
-        this.y = y;
-        validate();
+        setCoords(x, y);
     }
 
     public void setCoords(Coord newCoord) {
@@ -65,8 +63,6 @@ public class Coord implements Serializable {
     // For using as HashMap key
     @Override
     public boolean equals(Object obj) {
-        System.out.println("Comparing Coord");
-
         if (!(obj instanceof Coord))
             return false;
         if (obj == this)
@@ -78,7 +74,6 @@ public class Coord implements Serializable {
 
     @Override
     public int hashCode() {
-        System.out.println("hashCode");
         return (x + y);
     }
 

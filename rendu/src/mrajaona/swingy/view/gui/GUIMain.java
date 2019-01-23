@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -85,7 +86,6 @@ public class GUIMain {
                 // Main panel
                 {
                     mainPanel   = new JPanel(new GridBagLayout());
-                    // north button
                     {
                         northButton = new JButton("N");
                         northButton.addActionListener(new ActionListener() {
@@ -221,10 +221,9 @@ public class GUIMain {
                                 }
                             }
                         });
+                        fightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                         fightButton.setAlignmentY(Component.CENTER_ALIGNMENT);
                     }
-                    battlePanel.add(fightButton);
-
                     // run button
                     {
                         runButton = new JButton();
@@ -241,9 +240,15 @@ public class GUIMain {
                                 }
                             }
                         });
+                        runButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                         runButton.setAlignmentY(Component.CENTER_ALIGNMENT);
                     }
+
+                    battlePanel.add(Box.createVerticalGlue());
+                    battlePanel.add(fightButton);
+                    battlePanel.add(Box.createVerticalGlue());
                     battlePanel.add(runButton);
+                    battlePanel.add(Box.createVerticalGlue());
                 }
 
                 // Loot panel
@@ -275,8 +280,6 @@ public class GUIMain {
                         });
                         equipButton.setAlignmentY(Component.CENTER_ALIGNMENT);
                     }
-                    lootPanel.add(equipButton);
-
                     // leave button
                     {
                         leaveButton = new JButton();
@@ -295,7 +298,12 @@ public class GUIMain {
                         });
                         leaveButton.setAlignmentY(Component.CENTER_ALIGNMENT);
                     }
+
+                    lootPanel.add(Box.createVerticalGlue());
+                    lootPanel.add(equipButton);
+                    lootPanel.add(Box.createVerticalGlue());
                     lootPanel.add(leaveButton);
+                    lootPanel.add(Box.createVerticalGlue());
                 }
 
                 //Create the panel that contains the "cards".

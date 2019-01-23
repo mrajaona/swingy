@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import mrajaona.swingy.controller.BattleController;
+import mrajaona.swingy.controller.LootController;
 import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.util.Util.GameScreen;
+import mrajaona.swingy.util.Util.SubScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.console.ConsoleView;
 import mrajaona.swingy.view.gui.GUIMain;
@@ -39,7 +42,13 @@ public class MainHelper {
             String[] line;
 
             line = ConsoleView.getSplitInput();
-            MainGameController.run(line);
+
+            if (GameData.getData().getEnemy() != null)
+                BattleController.run(line);
+            else if (GameData.getData().getArtifact() != null)
+                LootController.run(line);
+            else
+                MainGameController.run(line);
 
             waitForInput();
 
@@ -50,7 +59,18 @@ public class MainHelper {
         }
     }
 
+    public static void changeSubScreen() {
+            if (GameData.getData().getEnemy() != null)
+                GUIMain.getScreen().show(SubScreen.BATTLE);
+            else if (GameData.getData().getArtifact() != null)
+                GUIMain.getScreen().show(SubScreen.LOOT);
+            else
+                GUIMain.getScreen().show(SubScreen.MAIN);
+    }
+
     public static void show() throws SQLException, IOException {
+        changeSubScreen();
+
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {

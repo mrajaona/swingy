@@ -2,15 +2,17 @@ package mrajaona.swingy.model.character;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 
-import lombok.Getter;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
+import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.model.GameMapModel;
+import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.artifact.ArmorModel;
 import mrajaona.swingy.model.artifact.HelmModel;
 import mrajaona.swingy.model.artifact.WeaponModel;
@@ -59,33 +61,40 @@ public class HeroModel {
     	}
     }
 
-    public static void equip(HelmData helm) {
-        HelmModel.equip(helm);
+    public static void equip(ArtifactData artifact) {
+        switch(artifact.getType()) {
+            case HELM :
+                HelmModel.equip((HelmData) artifact);
+                break ;
+            case ARMOR :
+                ArmorModel.equip((ArmorData) artifact);
+                break ;
+            case WEAPON :
+                WeaponModel.equip((WeaponData) artifact);
+                break ;
+            default :
+                // Exception
+                break;
+        }
+        GameModel.noDrop();
         updateStats();
     }
 
-    public static void equip(ArmorData armor) {
-        ArmorModel.equip(armor);
-        updateStats();
-    }
-
-    public static void equip(WeaponData weapon) {
-        WeaponModel.equip(weapon);
-        updateStats();
-    }
-
-    public static void unequip(HelmData helm) {
-        HelmModel.remove();
-        updateStats();
-    }
-
-    public static void unequip(ArmorData armor) {
-        ArmorModel.remove();
-        updateStats();
-    }
-
-    public static void unequip(WeaponData weapon) {
-        WeaponModel.remove();
+    public static void unequip(ArtifactData artifact) {
+        switch(artifact.getType()) {
+            case HELM :
+                ((HelmData) artifact).remove();
+                break ;
+            case ARMOR :
+                ((ArmorData) artifact).remove();
+                break ;
+            case WEAPON :
+                ((WeaponData) artifact).remove();
+                break ;
+            default :
+                // Exception
+                break;
+        }
         updateStats();
     }
 
@@ -132,7 +141,7 @@ public class HeroModel {
         GameMapModel.move(direction);
     }
 
-    public static void run() {
+    public static void run() throws SQLException, IOException {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
 
         {
@@ -142,9 +151,10 @@ public class HeroModel {
                 );
 	        MainHelper.printMsg(msg);
         }
-        // TODO : wait for more suspense
 
-        if ( (Math.random() * 10) % 2 == 0) { // 1/2
+        Random rand = new Random();
+
+        if ( rand.nextInt(2) == 0) { // 1/2
             String msg = locale.getString("msgRunSuccess");
             MainHelper.printMsg(msg);
             GameMapModel.goBack();

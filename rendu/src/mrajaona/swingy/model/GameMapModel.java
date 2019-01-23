@@ -154,7 +154,7 @@ public class GameMapModel {
             // TODO : win screen
             MainHelper.printMsg( "YOU WIN" );
         } else if (checkEnemy()) {
-            // TODO : Battle
+            MainHelper.changeSubScreen();
         } else {
             MainHelper.waitForInput(); // Keep playing
         }
@@ -167,6 +167,8 @@ public class GameMapModel {
         EnemyData enemy = enemies.get(map.getHeroCoord());
 
         if (enemy != null) {
+            GameModel.enemyEncounter(enemy);
+
             // Todo : localize enemy type
             String msg = String.format(
                 ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgEncounter"),
@@ -176,8 +178,6 @@ public class GameMapModel {
 
             MainHelper.printMsg(msg);
             return (true);
-        } else {
-            MainHelper.printMsg("No enemy here.");
         }
 
         return (false);
@@ -200,9 +200,17 @@ public class GameMapModel {
         return (false);
     }
 
-
-    public static void goBack() {
+    public static void goBack() throws SQLException, IOException {
         GameData.getData().getMap().goBack();
+
+        GameModel.enemyEncounterEnd();
+        MainHelper.changeSubScreen();
+
+        checkPosition();
+    }
+
+    public static void enemyDied() {
+        GameData.getData().getMap().removeEnemy();
     }
 
 }

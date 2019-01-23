@@ -25,7 +25,7 @@ public class ArtifactData implements Serializable {
     @Getter @Setter private int modifier;
 
     @SuppressWarnings("unused")
-	private transient ArtifactType type;
+	@Getter private transient ArtifactType type;
 
     public static final String NO_ARTIFACT_KEY = "none";
 

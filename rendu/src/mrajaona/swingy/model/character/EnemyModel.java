@@ -1,5 +1,8 @@
 package mrajaona.swingy.model.character;
 
+import mrajaona.swingy.model.GameMapModel;
+import mrajaona.swingy.model.GameModel;
+
 /*
 ** Enemy Model
 ** Manipulates Enemy data
@@ -29,10 +32,12 @@ public class EnemyModel {
     }
 
     public static void die() {
-        // remove from map
         // remove from game data
-        // drop artifact
-        ;
+        GameModel.enemyEncounterEnd();
+        // remove from map
+        GameMapModel.enemyDied();
+        // TODO : drop artifact
+        GameModel.drop(null);
     }
 
 }

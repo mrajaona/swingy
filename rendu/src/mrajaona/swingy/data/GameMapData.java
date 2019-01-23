@@ -92,8 +92,9 @@ public class GameMapData {
         prevCoord.setCoords(x, y);
     }
 
-    public void enemyDied(EnemyData enemy) {
-        enemies.remove(enemy);
+    public void removeEnemy() {
+        // remove enemy at current position
+        enemies.remove(heroCoord);
     }
 
 }
