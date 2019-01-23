@@ -8,24 +8,24 @@ public class GameResource_en extends ListResourceBundle {
         return new Object[][] {
             /* Strings */
             {"msgGetInput",   "What do you want to do ?"},
-            {"msgMove",       "<hero> moves <direction> (<x>, <y>)."},
+            {"msgMove",       "%1$s moves %2$s (%3$d, %4$d)."}, // hero name, direction, x, y
 
-            {"msgEncounterA", "A wild level <level> <enemy> appeared !"},
+            {"msgEncounterA", "A wild level %1$d %2%s appeared !"}, // level, enemy type
 
-            {"msgRun",        "<hero> tries to run..."},
+            {"msgRun",        "%1$s tries to run..."}, // hero name
             {"msgRunFail",    "...but fails."},
             {"msgRunSuccess", "...and succeeds !"},
 
-            {"msgAttack",     "<subject> attacks."},
-            {"msgDamage",     "<target> takes <hp> damage."},
-            {"msgDied",       "<subject> died."},
+            {"msgAttack",     "%1%s attacks."}, // hero name / enemy type
+            {"msgDamage",     "%1$s takes %2$d damage."}, // hero name / enemy type, damage
+            {"msgDied",       "%1$s died."}, // hero name / enemy type
 
-            {"msgDrop",       "The enemy dropped a <artifact>"},
-            {"msgEquip",      "<hero> equips the <artifact>"},
-            {"msgUnequip",    "<hero> unequips the <artifact>"},
+            {"msgDrop",       "The enemy dropped a %1$s"}, // artifact name
+            {"msgEquip",      "%1$s equips the %2$s"}, // hero name, artifact name
+            {"msgUnequip",    "%1$s unequips the %1$s"}, // hero name, artifact name
             {"msgLeave",      "The artifact magically vanishes."},
 
-            {"msgLvlUp",      "<hero> is now level <level> !"},
+            {"msgLvlUp",      "%1$s is now level %2$d !"}, // hero name, level
 
             {"msgSave",       "Game saved."},
 

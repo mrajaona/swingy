@@ -90,16 +90,16 @@ public class GameMapModel {
         // delocalize direction
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
         ResourceMap resMap    = (ResourceMap) locale.getObject("DirectionList");
-        direction             = resMap.getKeyByValue(direction);
+        String dir            = resMap.getKeyByValue(direction);
 
-        if (direction == null) {
+        if (dir == null) {
             ; // TODO : Error : bad input
             return ;
         }
 
         GameMapData map = GameData.getData().getMap();
 
-        switch(direction) {
+        switch(dir) {
             case "north" :
                 map.setCoordX( map.getCoordX() + 1 );
                 break ;
@@ -117,12 +117,13 @@ public class GameMapModel {
                 break ;
         }
 
-        String msg = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgMove")
-        .replace("<hero>", GameData.getData().getHero().getHeroName())
-        .replace("<direction>", direction)
-        .replace("<x>", Integer.toString(map.getCoordX()))
-        .replace("<y>", Integer.toString(map.getCoordY()))
-        ;
+        String msg = String.format(
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgMove"),
+            GameData.getData().getHero().getHeroName(), // %1$s
+            direction, // %2$s // localized
+            map.getCoordX(), // %3$d
+            map.getCoordY() // %4$d
+        );
 
         MainHelper.printMsg(msg);
 
