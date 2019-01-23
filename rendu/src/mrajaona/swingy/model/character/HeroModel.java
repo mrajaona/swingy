@@ -10,6 +10,7 @@ import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
+import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.GameModel;
@@ -31,7 +32,7 @@ public class HeroModel {
 
     public final static int HERO_MAX_LVL = 100;
 
-    public static void earnExp(int amount) {
+    public static void earnExp(double amount) {
         HeroData hero = GameData.getData().getHero();
         double exp      = hero.getExperience() + amount;
         double expToLvl = hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450;
@@ -46,6 +47,7 @@ public class HeroModel {
         }
 
         hero.setExperience(exp);
+        updateUI();
     }
 
     public static void levelUp(HeroData hero) {
@@ -57,7 +59,7 @@ public class HeroModel {
                 hero.getLevel() // %2$d
                 );
             MainHelper.printMsg(msg);
-            fullRecover();
+            CharacterModel.fullRecover(hero);
         }
     }
 
@@ -166,37 +168,21 @@ public class HeroModel {
     }
 
     public static void fight() {
-        // EnemyController
-        // TODO : loop until someone dies
-    }
+        HeroData  hero  = GameData.getData().getHero();
+        EnemyData enemy = GameData.getData().getEnemy();
 
-    // Character methods
-
-    public static void fullRecover() {
-        HeroData hero = GameData.getData().getHero();
-        hero.setHitPoints(hero.getMaxHitPoints());
-    }
-
-    public static void recoverHP(int amount) {
-        HeroData hero = GameData.getData().getHero();
-
-        hero.setHitPoints(hero.getHitPoints() + amount);
-        if (hero.getHitPoints() > hero.getMaxHitPoints())
-            hero.setHitPoints(hero.getMaxHitPoints());
-    }
-
-    public static void loseHP(int amount) {
-        HeroData hero = GameData.getData().getHero();
-
-        hero.setHitPoints(hero.getHitPoints() - amount);
-        if (hero.getHitPoints() < 0) {
-            hero.setHitPoints(0);
+        while (!CharacterModel.isDead(hero) && !CharacterModel.isDead(enemy)) {
+            CharacterModel.fight(hero, enemy);
         }
-    }
 
-    public static void beAttacked(int enemyAtk) {
-        HeroData hero = GameData.getData().getHero();
-        loseHP(enemyAtk - hero.getDefense());
+        if (CharacterModel.isDead(hero))
+            die();
+        else if (CharacterModel.isDead(enemy))
+            EnemyModel.die();
+        else {
+            // Exception
+        }
+
     }
 
     public static void die() {

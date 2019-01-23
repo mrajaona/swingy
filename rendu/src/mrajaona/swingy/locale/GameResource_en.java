@@ -16,7 +16,7 @@ public class GameResource_en extends ListResourceBundle {
             {"msgRunFail",    "...but fails."},
             {"msgRunSuccess", "...and succeeds !"},
 
-            {"msgAttack",     "%1%s attacks."}, // hero name / enemy type
+            {"msgAttack",     "%1$s attacks."}, // hero name / enemy type
             {"msgDamage",     "%1$s takes %2$d damage."}, // hero name / enemy type, damage
             {"msgDied",       "%1$s died."}, // hero name / enemy type
 

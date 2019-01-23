@@ -202,14 +202,12 @@ public class GameMapModel {
 
     public static void goBack() throws SQLException, IOException {
         GameData.getData().getMap().goBack();
-
         GameModel.enemyEncounterEnd();
-        MainHelper.changeSubScreen();
-
         checkPosition();
     }
 
     public static void enemyDied() {
+        GameModel.enemyEncounterEnd(); // remove from game data
         GameData.getData().getMap().removeEnemy();
     }
 

@@ -17,6 +17,7 @@ import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.View;
 import mrajaona.swingy.view.gui.GUIMain;
 import mrajaona.swingy.view.gui.Window;
+import mrajaona.swingy.view.helper.MainHelper;
 
 public class GameModel {
 
@@ -47,18 +48,22 @@ public class GameModel {
 
     public static void enemyEncounter(EnemyData enemy) {
         GameData.getData().setEnemy(enemy);
+        MainHelper.changeSubScreen();
     }
 
     public static void enemyEncounterEnd() {
         GameData.getData().setEnemy(null);
+        MainHelper.changeSubScreen();
     }
 
     public static void drop(ArtifactData artifact) {
         GameData.getData().setArtifact(artifact);
+        MainHelper.changeSubScreen();
     }
 
     public static void noDrop() {
         GameData.getData().setArtifact(null);
+        MainHelper.changeSubScreen();
     }
 
     public static void createHero() throws SQLException, IOException {
