@@ -1,5 +1,10 @@
 package mrajaona.swingy.data.character;
 
+import java.io.Serializable;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import lombok.Getter;
 import mrajaona.swingy.builder.EnemyBuilder;
 
@@ -9,8 +14,15 @@ import mrajaona.swingy.builder.EnemyBuilder;
 ** Constructed with the Enemy builder
 */
 
-public class EnemyData extends CharacterData {
+@DatabaseTable(tableName = "enemies")
+public class EnemyData extends CharacterData implements Serializable {
 
+	private static final long serialVersionUID = 4476601624225562551L;
+
+	@DatabaseField(generatedId = true)
+    @Getter private long id;
+
+    @DatabaseField(canBeNull = false)
     @Getter private String       enemyType;
 
     @SuppressWarnings("unused")

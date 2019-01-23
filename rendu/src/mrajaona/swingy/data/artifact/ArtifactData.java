@@ -1,5 +1,7 @@
 package mrajaona.swingy.data.artifact;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -10,35 +12,25 @@ import lombok.Getter;
 import lombok.Setter;
 import mrajaona.swingy.util.Util.ArtifactType;
 
-@DatabaseTable(tableName = "artifacts")
-public class ArtifactData {
-
-	@DatabaseField(generatedId = true)
-    @Getter private long id;
+public class ArtifactData implements Serializable {
 
     // TODO : localization
 
-	@DatabaseField(canBeNull = false)
-    @NotBlank
+	private static final long serialVersionUID = 5018899939736022531L;
+
+	@NotBlank
     @Getter @Setter private String name;
 
-	@DatabaseField(canBeNull = false)
 	@PositiveOrZero
     @Getter @Setter private int modifier;
 
-    private ArtifactType type;
+    @SuppressWarnings("unused")
+	private transient ArtifactType type;
 
     public static final String NO_ARTIFACT_KEY = "none";
 
     // necessary for ORMLite
     ArtifactData() {}
-
-    public ArtifactData(long id, String name, int modifier, ArtifactType type) {
-		this.id       = id;
-        this.name     = name;
-        this.modifier = modifier;
-        this.type     = type;
-    }
 
     public ArtifactData(String name, int modifier, ArtifactType type) {
         this.name     = name;

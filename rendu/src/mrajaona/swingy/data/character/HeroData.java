@@ -1,5 +1,6 @@
 package mrajaona.swingy.data.character;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -19,7 +20,9 @@ import mrajaona.swingy.data.artifact.WeaponData;
 @DatabaseTable(tableName = "heroes")
 public class HeroData extends CharacterData {
 
-    @DatabaseField(generatedId = true)
+	private static final long serialVersionUID = -3707747501395187023L;
+
+	@DatabaseField(generatedId = true)
     @Getter private long id;
 
     @DatabaseField(canBeNull = false)
@@ -28,13 +31,13 @@ public class HeroData extends CharacterData {
     @DatabaseField(canBeNull = false)
     @Getter private String  heroClass;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     @Getter @Setter private HelmData     helm;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     @Getter @Setter private ArmorData    armor;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     @Getter @Setter private WeaponData   weapon;
 
     // necessary for ORMLite

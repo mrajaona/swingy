@@ -18,7 +18,6 @@ import mrajaona.swingy.builder.SaveFileBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.SaveFileData;
-import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.model.SaveFileModel;
 
@@ -31,7 +30,6 @@ public class SaveManager {
 
     private static SaveManager          manager     = new SaveManager();
     private Dao<HeroData, Long>         heroDao     = null;
-    private Dao<ArtifactData, Long>     artifactDao = null;
     private Dao<GameMapData, Long>      mapDao      = null;
     private Dao<SaveFileData, Long>     saveDao     = null;
 
@@ -52,9 +50,6 @@ public class SaveManager {
 
         TableUtils.createTableIfNotExists(connectionSource, HeroData.class);
         heroDao = DaoManager.createDao(connectionSource, HeroData.class);
-
-        TableUtils.createTableIfNotExists(connectionSource, ArtifactData.class);
-        artifactDao = DaoManager.createDao(connectionSource, ArtifactData.class);
 
         TableUtils.createTableIfNotExists(connectionSource, GameMapData.class);
         mapDao = DaoManager.createDao(connectionSource, GameMapData.class);
@@ -92,10 +87,6 @@ public class SaveManager {
         }
 
         openConnection();
-
-        Dao.CreateOrUpdateStatus statusHelm   = artifactDao.createOrUpdate(hero.getHelm());
-        Dao.CreateOrUpdateStatus statusArmor  = artifactDao.createOrUpdate(hero.getArmor());
-        Dao.CreateOrUpdateStatus statusWeapon = artifactDao.createOrUpdate(hero.getWeapon());
 
         Dao.CreateOrUpdateStatus statusHero   = heroDao.createOrUpdate(hero);
         // DEBUG
@@ -138,10 +129,6 @@ public class SaveManager {
         HeroData hero = saveFile.getHero();
 
         if (hero != null) {
-            artifactDao.delete(hero.getHelm());
-            artifactDao.delete(hero.getArmor());
-            artifactDao.delete(hero.getWeapon());
-
             heroDao.delete(hero);
         }
 
@@ -162,15 +149,6 @@ public class SaveManager {
         // For medium sized or large tables, this may load a lot of objects into memory so you should consider using the iterator() method instead.
         // List<HeroData> heroList = heroDao.iterator();
         List<HeroData> heroList = heroDao.queryForAll();
-
-        Iterator<HeroData> heroIterator = heroList.iterator();
-        while (heroIterator.hasNext()) {
-            HeroData hero = heroIterator.next();
-
-            artifactDao.refresh(hero.getHelm());
-            artifactDao.refresh(hero.getArmor());
-            artifactDao.refresh(hero.getWeapon());
-        }
 
         closeConnection();
         return (heroList);
@@ -204,20 +182,14 @@ public class SaveManager {
         HeroData hero = saveFile.getHero();
         heroDao.refresh(hero);
 
-        if (hero != null) {
-            artifactDao.refresh(hero.getHelm());
-            artifactDao.refresh(hero.getArmor());
-            artifactDao.refresh(hero.getWeapon());
-        } else {
+        if (hero == null) {
             // TODO : Exception
         }
 
         GameMapData map = saveFile.getMap();
         mapDao.refresh(map);
 
-        if (map != null) {
-            // update enemies
-        } else {
+        if (map == null) {
             // TODO : Exception
         }
 

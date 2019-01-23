@@ -1,5 +1,7 @@
 package mrajaona.swingy.data.character;
 
+import java.io.Serializable;
+
 import com.j256.ormlite.field.DatabaseField;
 
 import lombok.Getter;
@@ -11,13 +13,13 @@ import lombok.Setter;
 ** Used in the Hero and Enemy datas
 */
 
-public class CharacterData {
-
-    // TODO : localization
+public class CharacterData implements Serializable {
 
     // members
 
-    @DatabaseField(canBeNull = false)
+	private static final long serialVersionUID = 2098570252469453413L;
+
+	@DatabaseField(canBeNull = false)
     // @Positive
     @Getter @Setter private int level;
 

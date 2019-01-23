@@ -3,12 +3,18 @@ package mrajaona.swingy.model;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.ResourceBundle;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+import mrajaona.swingy.builder.EnemyBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.ResourceMap;
+import mrajaona.swingy.util.Util;
 import mrajaona.swingy.view.helper.MainHelper;
 
 /*
@@ -39,25 +45,34 @@ public class GameMapModel {
     private static void generateEnemies() {
         int mapLevel = GameData.getData().getMap().getLevel();
         int mapSize  = GameData.getData().getMap().getSize();
-        HashMap<EnemyData, int[]> enemies = new HashMap<EnemyData, int[]>();
+        HashMap<Coord, EnemyData> enemies = new HashMap<Coord, EnemyData>();
 
-        // TODO
+        Random rand = new Random();
+
         for (int y = 0 ; y < mapSize ; y++) {
             for (int x = 0 ; x < mapSize ; x++) {
-//                if (conditions) {
+                // TODO
+                boolean create = rand.nextInt(10) == 0 ? true : false;
 
-//                    String enemyType = Util.enemyTypes[/*random*/ % Util.enemyTypes.length];
-//                    int enemyLevel = mapLevel + (/* +- rand 3 lvl */) // min 1
-/*
-                    enemies.add(
-                        new EnemyBuilder().newEnemy(type, level),
-                        new int[] = {x, y}
+                if (create) {
+                    String enemyType = Util.enemyTypes[rand.nextInt(Util.enemyTypes.length)];
+                    // set enemy level [mapLevel - 3, mapLevel + 3]
+                    int enemyLevel = mapLevel + ((rand.nextInt(6) + 1) - 3);
+                    // minimum enemy level is 1
+                    if (enemyLevel < 1)
+                        enemyLevel = 1;
+
+                    enemies.put(
+                        new Coord(x, y),
+                        new EnemyBuilder().newEnemy(enemyType, enemyLevel)
                     );
+
+                    // Debug
+                    System.out.println(String.format("lvl %1d %2$s at [%3$d, %4$d]", enemyLevel, enemyType, x, y));
                 }
-*/
 
             }
-        // GameData.getData().getMap().setEnemies(enemies);
+            GameData.getData().getMap().setEnemies(enemies);
         }
     }
 
@@ -69,17 +84,16 @@ public class GameMapModel {
         map.getEnemies().clear();
     }
 
-    public static boolean checkCoord(int[] coord) {
+    public static boolean checkCoord(Coord coord) {
         int size = GameData.getData().getMap().getSize();
         return (checkCoord(coord, size));
     }
 
-    public static boolean checkCoord(int[] coord, int size) {
+    public static boolean checkCoord(Coord coord, int size) {
         if (
             coord == null
-            || coord.length != 2
-            || !(coord[0] >= 0 && coord[0] < size)
-            || !(coord[1] >= 0 && coord[1] < size)
+            || !(coord.getX() >= 0 && coord.getX() < size)
+            || !(coord.getY() >= 0 && coord.getY() < size)
             )
             return (false);
         return (true);
@@ -147,18 +161,38 @@ public class GameMapModel {
     }
 
     private static boolean checkEnemy() {
+        HashMap<Coord, EnemyData> enemies = GameData.getData().getMap().getEnemies();
+
+        GameMapData map = GameData.getData().getMap();
+        EnemyData enemy = enemies.get(map.getHeroCoord());
+
+        if (enemy != null) {
+            // Todo : localize enemy type
+            String msg = String.format(
+                ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgEncounter"),
+                enemy.getLevel(), // %1$d
+                enemy.getEnemyType() // %2$s
+            );
+
+            MainHelper.printMsg(msg);
+            return (true);
+        } else {
+            MainHelper.printMsg("No enemy here.");
+        }
+
         return (false);
     }
 
     private static boolean checkWin() {
-    	GameMapData map = GameData.getData().getMap();
+        GameMapData map = GameData.getData().getMap();
 
         // check border
-        int x = map.getCoordX();
-        int y = map.getCoordY();
+        int x = map.getHeroCoord().getX();
+        int y = map.getHeroCoord().getY();
+        int max = GameData.getData().getMap().getSize() - 1;
         if (
-               x == 0 || x == (GameData.getData().getMap().getSize() - 1)
-            || y == 0 || y == (GameData.getData().getMap().getSize() - 1)
+               (x == 0 || x == max)
+            && (y == 0 || y == max)
         ) {
             return (true);
         }

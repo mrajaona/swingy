@@ -19,6 +19,7 @@ import lombok.Getter;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.model.GameMapModel;
+import mrajaona.swingy.util.Coord;
 
 public class GameMapBuilder {
 
@@ -31,14 +32,14 @@ public class GameMapBuilder {
     @Getter private int size;
 
     @Valid
-    @Getter private int[] heroCoord = new int[2];
-    @NotEmpty @Size(min=2, max=2)
-    @Getter private int[] prevCoord = new int[2];
+    @Getter private Coord heroCoord = new Coord();
+    @Valid
+    @Getter private Coord prevCoord = new Coord();
     /* x = 0 is west ** y = 0 is south */
 
     // TODO : enemies positions
     @NotNull
-    @Getter private HashMap<EnemyData, int[]> enemies;
+    @Getter private HashMap<Coord, EnemyData> enemies;
     // map.put(enemy, coord);
 
     public GameMapBuilder setId(long id) {
@@ -53,37 +54,29 @@ public class GameMapBuilder {
         return (this);
     }
 
-    public GameMapBuilder setHeroCoord(int[] coord) {
-        return (
-            setHeroCoord(
-                coord[0],
-                coord[1]
-                ));
-    }
-
-    public GameMapBuilder setPrevCoord(int[] coord) {
-        return (
-            setPrevCoord(
-                coord[0],
-                coord[1]
-                ));
-    }
-
     public GameMapBuilder setHeroCoord(int x, int y) {
-        heroCoord[0] = x;
-        heroCoord[1] = y;
+        heroCoord.setCoords(x, y);
         return (this);
     }
 
     public GameMapBuilder setPrevCoord(int x, int y) {
-        prevCoord[0] = x;
-        prevCoord[1] = y;
+            prevCoord.setCoords(x, y);
+        return (this);
+    }
+
+    public GameMapBuilder setHeroCoord(Coord newCoord) {
+        heroCoord = newCoord;
+        return (this);
+    }
+
+    public GameMapBuilder setPrevCoord(Coord newCoord) {
+        prevCoord = newCoord;
         return (this);
     }
 
     // TODO : enemies positions
-    public GameMapBuilder setEnemies(HashMap<EnemyData, int[]> enemies) {
-        this.enemies = new HashMap<EnemyData, int[]> (enemies);
+    public GameMapBuilder setEnemies(HashMap<Coord, EnemyData> enemies) {
+        this.enemies = new HashMap<Coord, EnemyData> (enemies);
         return (this);
     }
 
@@ -114,6 +107,16 @@ public class GameMapBuilder {
             error = true;
         }
 
+        if (
+            heroCoord.getX() >= size || prevCoord.getY() >= size
+            || heroCoord.getX() >= size || prevCoord.getY() >= size
+            )
+        {
+            // TODO : Exception
+            System.out.println("Invalid coordinates");
+            error = true;
+        }
+
         if (error == true)
             return (null);
         else {
@@ -125,7 +128,7 @@ public class GameMapBuilder {
 
     // TODO : enemies positions
     public GameMapData newMap() {
-        enemies = new HashMap<EnemyData, int[]>();
+        enemies = new HashMap<Coord, EnemyData>();
         return (
             setLevel(0)
             .setHeroCoord(0, 0)

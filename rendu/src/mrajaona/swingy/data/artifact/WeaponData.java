@@ -4,7 +4,9 @@ import mrajaona.swingy.util.Util.ArtifactType;
 
 public class WeaponData extends ArtifactData {
 
-    public WeaponData() {
+	private static final long serialVersionUID = 3406749058141226863L;
+
+	public WeaponData() {
         // TODO : generate random
         super("Random", 0, ArtifactType.WEAPON);
     }
@@ -14,7 +16,7 @@ public class WeaponData extends ArtifactData {
     }
 
     public WeaponData(WeaponData data) {
-        super(data.getId(), data.getName(), data.getModifier(), ArtifactType.WEAPON);
+        super(data.getName(), data.getModifier(), ArtifactType.WEAPON);
     }
 
 }

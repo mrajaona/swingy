@@ -2,6 +2,8 @@ package mrajaona.swingy.data;
 
 import java.util.HashMap;
 
+import javax.validation.Valid;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -10,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import mrajaona.swingy.builder.GameMapBuilder;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.util.Coord;
 
 /*
 ** Data for GameMap
@@ -28,18 +31,15 @@ public class GameMapData {
     @Getter @Setter private int size;
 
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
-    @Getter private int[] heroCoord = new int[2];
+    @Valid
+    @Getter private Coord heroCoord = new Coord();
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
-    @Getter private int[] prevCoord = new int[2];
-    /*
-    ** coord[x, y]
-    ** x = 0 is west
-    ** y = 0 is south
-    */
+    @Valid
+    @Getter private Coord prevCoord = new Coord();
 
     // TODO : enemies positions
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
-    @Getter private HashMap<EnemyData, int[]> enemies;
+    @Getter private HashMap<Coord, EnemyData> enemies;
 
     // necessary for ORMLite
     GameMapData() {}
@@ -50,58 +50,46 @@ public class GameMapData {
         this.level        = builder.getLevel();
         this.size         = builder.getSize();
 
-        int[] coord = builder.getHeroCoord();
+        this.heroCoord    = builder.getHeroCoord();
+        this.prevCoord    = builder.getPrevCoord();
 
-        this.heroCoord[0] = coord[0];
-        this.heroCoord[1] = coord[1];
-
-        coord = builder.getPrevCoord();
-
-        this.prevCoord[0] = coord[0];
-        this.prevCoord[1] = coord[1];
-
-        this.enemies      = new HashMap<EnemyData, int[]>(builder.getEnemies());
+        this.enemies      = new HashMap<Coord, EnemyData>(builder.getEnemies());
     }
 
-    public void setEnemies(HashMap<EnemyData, int[]> enemies) {
-        this.enemies = new HashMap<EnemyData, int[]>(enemies);
+    public void setEnemies(HashMap<Coord, EnemyData> enemies) {
+        this.enemies = new HashMap<Coord, EnemyData>(enemies);
     }
 
     public int getCoordX() {
-        return (heroCoord[0]);
+        return (heroCoord.getX());
     }
 
     public void setCoordX(int value) {
-        prevCoord[0] = heroCoord[0];
-        heroCoord[0] = value;
+        prevCoord.setX(heroCoord.getX());
+        heroCoord.setX(value);
     }
 
     public int getCoordY() {
-        return (heroCoord[1]);
+        return (heroCoord.getY());
     }
 
     public void setCoordY(int value) {
-        prevCoord[1] = heroCoord[1];
-        heroCoord[1] = value;
+        prevCoord.setY(heroCoord.getY());
+        heroCoord.setY(value);
     }
 
     public void goBack() {
-        heroCoord[0] = prevCoord[0];
-        heroCoord[1] = prevCoord[1];
+        heroCoord.setCoords(prevCoord);
     }
 
     public void cleanCoord() {
-        heroCoord[0] = 0;
-        heroCoord[1] = 0;
-        prevCoord[0] = 0;
-        prevCoord[1] = 0;
+        heroCoord.setCoords(0, 0);
+        prevCoord.setCoords(0, 0);
     }
 
     public void initCoord(int x, int y) {
-        heroCoord[0] = x;
-        heroCoord[1] = y;
-        prevCoord[0] = x;
-        prevCoord[1] = y;
+        heroCoord.setCoords(x, y);
+        prevCoord.setCoords(x, y);
     }
 
     public void enemyDied(EnemyData enemy) {

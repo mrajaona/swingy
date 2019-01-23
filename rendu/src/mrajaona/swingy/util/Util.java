@@ -33,7 +33,7 @@ public class Util {
             return null;
         }
 
-    } ;
+    };
 
     public enum ArtifactType {
         ARMOR,
@@ -67,7 +67,7 @@ public class Util {
         HERO_THIEF,
         HERO_MAGE,
         HERO_PRIEST
-    } ;
+    };
 
     // Hero base stats
 
@@ -107,7 +107,7 @@ public class Util {
     public static final String [] enemyTypes = {
             ENEMY_SLIME,
             ENEMY_GOBLIN
-    } ;
+    };
 
     // Enemy base stats
 

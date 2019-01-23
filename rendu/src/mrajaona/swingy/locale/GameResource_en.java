@@ -10,7 +10,7 @@ public class GameResource_en extends ListResourceBundle {
             {"msgGetInput",   "What do you want to do ?"},
             {"msgMove",       "%1$s moves %2$s (%3$d, %4$d)."}, // hero name, direction, x, y
 
-            {"msgEncounterA", "A wild level %1$d %2%s appeared !"}, // level, enemy type
+            {"msgEncounter", "A wild level %1$d %2$s appeared !"}, // level, enemy type
 
             {"msgRun",        "%1$s tries to run..."}, // hero name
             {"msgRunFail",    "...but fails."},
