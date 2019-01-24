@@ -17,7 +17,13 @@ public class InterfaceResource_fr extends ListResourceBundle {
 
             // New
             {"createButton", "Creer"},
-            {"cancelButton", "Annuler"}
+            {"cancelButton", "Annuler"},
+
+            // Main
+            {"fightButton",  "Combattre"},
+            {"runButton",    "Fuir"},
+            {"equipButton",  "Equiper"},
+            {"leaveButton",  "Laisser"},
         };
     }
 

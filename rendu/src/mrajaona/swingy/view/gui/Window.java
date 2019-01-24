@@ -3,11 +3,19 @@ package mrajaona.swingy.view.gui;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import lombok.Getter;
+import mrajaona.swingy.controller.MainGameController;
+import mrajaona.swingy.controller.MenuController;
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.util.Util.GameScreen;
 
 public class Window {
@@ -30,6 +38,18 @@ public class Window {
             private JPanel winPanel;
             private JPanel losePanel;
 
+            private JMenuBar menuBar;
+            private JMenu    menu;
+            private JMenu    langMenu;
+
+            private JMenuItem saveItem;
+            private JMenuItem consoleItem;
+            private JMenuItem enItem;
+            private JMenuItem frItem;
+            private JMenuItem helpItem;
+            private JMenuItem exitItem;
+
+
 
     private Window (String name) {
         {
@@ -49,7 +69,138 @@ public class Window {
         }
 
         {
-            //Create the "cards".
+            // Menu bar // TODO : localization
+            menuBar = new JMenuBar();
+            menu = new JMenu("Insert menu name");
+
+            // Menu items
+
+            {
+                saveItem = new JMenuItem("Save");
+                saveItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        try {
+                            String[] args = {
+                                "save"
+                            };
+                            MainGameController.run(args);
+                        }  catch (Exception e) {
+                            e.printStackTrace();
+                            System.exit(1);
+                        }
+                    }
+                });
+                menu.add(saveItem);
+            }
+
+            {
+                consoleItem = new JMenuItem("Console view");
+                consoleItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        try {
+                            String[] args = {
+                                "console"
+                            };
+                            MenuController.run(args);
+                        }  catch (Exception e) {
+                            e.printStackTrace();
+                            System.exit(1);
+                        }
+                    }
+                });
+                menu.add(consoleItem);
+            }
+
+            {
+                // Language submenu // TODO : disable selected
+                menu.addSeparator();
+                langMenu = new JMenu("Language");
+
+                {
+                    enItem = new JMenuItem("en");
+                    enItem.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent event) {
+                            try {
+                                String[] args = {
+                                    "language",
+                                    "en"
+                                };
+                                MenuController.run(args);
+                            }  catch (Exception e) {
+                                e.printStackTrace();
+                                System.exit(1);
+                            }
+                        }
+                    });
+                    langMenu.add(enItem);
+                }
+
+                {
+                    frItem = new JMenuItem("fr");
+                    frItem.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent event) {
+                            try {
+                                String[] args = {
+                                    "language",
+                                    "fr"
+                                };
+                                MenuController.run(args);
+                            }  catch (Exception e) {
+                                e.printStackTrace();
+                                System.exit(1);
+                            }
+                        }
+                    });
+                    langMenu.add(frItem);
+                }
+
+                menu.add(langMenu);
+            }
+
+
+
+            {
+                helpItem = new JMenuItem("Help");
+                helpItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        try {
+                            String[] args = {
+                                "help"
+                            };
+                            MenuController.run(args);
+                        }  catch (Exception e) {
+                            e.printStackTrace();
+                            System.exit(1);
+                        }
+                    }
+                });
+                menu.add(helpItem);
+            }
+
+            {
+                exitItem = new JMenuItem("Exit");
+                exitItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        try {
+                            String[] args = {
+                                "exit"
+                            };
+                            MenuController.run(args);
+                        }  catch (Exception e) {
+                            e.printStackTrace();
+                            System.exit(1);
+                        }
+                    }
+                });
+                menu.add(exitItem);
+            }
+
+            menuBar.add(menu);
+            frame.setJMenuBar(menuBar);
+        }
+
+        {
+            // Create the "cards".
             titlePanel   = new JPanel(new GridBagLayout());
                 GUITitle.getScreen().initPanel(titlePanel);
             newHeroPanel = new JPanel(new GridBagLayout());
@@ -57,9 +208,11 @@ public class Window {
             mainPanel    = new JPanel(new GridBagLayout());
                 GUIMain.getScreen().initPanel(mainPanel);
             winPanel     = new JPanel(new GridBagLayout());
+                GUIWin.getScreen().initPanel(winPanel);
             losePanel    = new JPanel(new GridBagLayout());
+                GUIGameOver.getScreen().initPanel(losePanel);
 
-            //Create the panel that contains the "cards".
+            // Create the panel that contains the "cards".
             cards = new JPanel(new CardLayout());
             {
                 cards.add(titlePanel,   GameScreen.TITLE.toString());
@@ -90,10 +243,7 @@ public class Window {
         // TODO reset previous screen data
         // Except menu - main
 
-        if (
-            screen.equals(GameScreen.MAIN)
-            || screen.equals(GameScreen.MENU)
-            ) {
+        if (screen.equals(GameScreen.MAIN)) {
             resize(800, 500);
         } else {
             resize(400, 300);
@@ -109,7 +259,24 @@ public class Window {
     }
 
     public void localize() {
-        // TODO
+        GUITitle.getScreen().localize();
+        GUINew.getScreen().localize();
+        GUIMain.getScreen().localize();
+        GUIWin.getScreen().localize();
+        GUIGameOver.getScreen().localize();
+
+        // TODO : localize menu
+
+    }
+
+    public void updateMenu() {
+        saveItem.setVisible( GameData.getData().getScreen() == GameScreen.MAIN ? true : false );
+        saveItem.setEnabled( GameData.getData().getScreen() == GameScreen.MAIN ? true : false );
+    }
+
+    public void update() {
+        updateMenu();
+        localize();
     }
 
 }

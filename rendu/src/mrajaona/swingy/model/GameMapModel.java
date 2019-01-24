@@ -15,6 +15,7 @@ import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.Util;
+import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.view.helper.MainHelper;
 
 /*
@@ -27,7 +28,7 @@ public class GameMapModel {
     @SuppressWarnings("unused")
     private GameMapModel() {}
 
-    public static void initMap() {
+    public static void initMap() throws SQLException, IOException {
         GameMapData map = GameData.getData().getMap();
         int level       = GameData.getData().getHero().getLevel();
 
@@ -40,6 +41,7 @@ public class GameMapModel {
         map.initCoord(size / 2, size / 2);
 
         generateEnemies();
+        checkInitPosition();
     }
 
     private static void generateEnemies() {
@@ -149,6 +151,19 @@ public class GameMapModel {
         checkPosition();
     }
 
+    public static void checkInitPosition() throws SQLException, IOException {
+        if (checkWin()) {
+            // TODO : win screen
+            // GameModel.changeScreen(GameScreen.WIN);
+            MainHelper.printMsg( "YOU WIN" );
+        } else if (checkEnemy()) {
+            MainHelper.changeSubScreen();
+            GameModel.changeScreen(GameScreen.MAIN);
+        } else {
+            GameModel.changeScreen(GameScreen.MAIN); // Keep playing
+        }
+    }
+
     private static void checkPosition() throws SQLException, IOException {
         if (checkWin()) {
             // TODO : win screen
@@ -192,7 +207,7 @@ public class GameMapModel {
         int max = GameData.getData().getMap().getSize() - 1;
         if (
                (x == 0 || x == max)
-            && (y == 0 || y == max)
+            || (y == 0 || y == max)
         ) {
             return (true);
         }

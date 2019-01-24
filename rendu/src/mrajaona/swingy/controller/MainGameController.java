@@ -7,11 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrajaona.swingy.model.character.HeroModel;
-import mrajaona.swingy.util.CommonCmd;
 import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.view.helper.MainHelper;
 
-public class MainGameController extends CommonCmd {
+public class MainGameController extends MenuController {
 
     @SuppressWarnings("unused")
     private MainGameController() {}
@@ -24,7 +23,7 @@ public class MainGameController extends CommonCmd {
     private static Map<String, Cmd> initMap() {
         Map<String, Cmd> map = new HashMap<String, Cmd>();
 
-        map.putAll(CommonCmd.getCommonCmdMap());
+        map.putAll(MenuController.getCommonCmdMap());
 
         // On the map
         map.put("move", new Cmd() {

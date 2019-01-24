@@ -3,6 +3,9 @@ package mrajaona.swingy.data;
 import java.util.HashMap;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -27,7 +30,10 @@ public class GameMapData {
     @Getter private long id;
 
     @DatabaseField(canBeNull = false)
+    @Range(min=0, max=100)
     @Getter @Setter private int level;
+
+    @Range(min=5, max=505)
     @Getter @Setter private int size;
 
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
@@ -39,6 +45,7 @@ public class GameMapData {
 
     // TODO : enemies positions
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+    @NotNull
     @Getter private HashMap<Coord, EnemyData> enemies;
 
     // necessary for ORMLite

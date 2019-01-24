@@ -20,9 +20,9 @@ public class GameResource_en extends ListResourceBundle {
             {"msgDamage",     "%1$s takes %2$d damage."}, // hero name / enemy type, damage
             {"msgDied",       "%1$s died."}, // hero name / enemy type
 
-            {"msgDrop",       "The enemy dropped a %1$s"}, // artifact name
-            {"msgEquip",      "%1$s equips the %2$s"}, // hero name, artifact name
-            {"msgUnequip",    "%1$s unequips the %1$s"}, // hero name, artifact name
+            {"msgDrop",       "The enemy dropped a %1$s."}, // artifact name
+            {"msgEquip",      "%1$s equips the %2$s."}, // hero name, artifact name
+            {"msgUnequip",    "%1$s unequips the %1$s."}, // hero name, artifact name
             {"msgLeave",      "The artifact magically vanishes."},
 
             {"msgLvlUp",      "%1$s is now level %2$d !"}, // hero name, level

@@ -2,6 +2,8 @@ package mrajaona.swingy.data.character;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -23,6 +25,7 @@ public class EnemyData extends CharacterData implements Serializable {
     @Getter private long id;
 
     @DatabaseField(canBeNull = false)
+    @NotBlank
     @Getter private String       enemyType;
 
     @SuppressWarnings("unused")

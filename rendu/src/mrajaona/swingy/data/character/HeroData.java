@@ -1,5 +1,9 @@
 package mrajaona.swingy.data.character;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -26,18 +30,23 @@ public class HeroData extends CharacterData {
     @Getter private long id;
 
     @DatabaseField(canBeNull = false)
+    @NotBlank @Pattern(regexp = "^[A-Za-z ]+$")
     @Getter private String  heroName;
 
     @DatabaseField(canBeNull = false)
+    @NotBlank
     @Getter private String  heroClass;
 
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+    @NotNull
     @Getter @Setter private HelmData     helm;
 
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+    @NotNull
     @Getter @Setter private ArmorData    armor;
 
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+    @NotNull
     @Getter @Setter private WeaponData   weapon;
 
     // necessary for ORMLite

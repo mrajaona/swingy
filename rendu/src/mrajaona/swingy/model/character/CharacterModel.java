@@ -23,6 +23,10 @@ public class CharacterModel {
     }
 
     public static void loseHP(CharacterData character, int amount) {
+        if (amount <= 0) {
+            amount = 1;
+        }
+
         String identity;
 
         if (character instanceof EnemyData)
@@ -73,6 +77,11 @@ public class CharacterModel {
     }
 
     public static void fight(CharacterData fighter1, CharacterData fighter2) {
+        if (fighter1 == null || fighter2 == null) {
+            // Exception
+            return ;
+        }
+
         attack(fighter1, fighter2);
         if (!isDead(fighter2))
             attack(fighter2, fighter1);

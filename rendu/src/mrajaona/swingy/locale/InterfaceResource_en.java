@@ -23,7 +23,7 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"fightButton",  "Fight"},
             {"runButton",    "Run"},
             {"equipButton",  "Equip"},
-            {"leaveButton", "Leave"},
+            {"leaveButton",  "Leave"},
        };
     }
 

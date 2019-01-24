@@ -7,11 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrajaona.swingy.model.GameModel;
-import mrajaona.swingy.util.CommonCmd;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.view.helper.TitleHelper;
 
-public class TitleScreenController extends CommonCmd {
+public class TitleScreenController extends MenuController {
 
     @SuppressWarnings("unused")
     private TitleScreenController() {}
@@ -24,7 +23,7 @@ public class TitleScreenController extends CommonCmd {
     private static Map<String, Cmd> initMap() {
         Map<String, Cmd> map = new HashMap<String, Cmd>();
 
-        map.putAll(CommonCmd.getCommonCmdMap());
+        map.putAll(MenuController.getCommonCmdMap());
 
         // Title screen
         map.put("new", new Cmd() {

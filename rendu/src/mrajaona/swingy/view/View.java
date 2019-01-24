@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import mrajaona.swingy.util.Util.GameScreen;
+import mrajaona.swingy.view.gui.Window;
 import mrajaona.swingy.view.helper.BuildHelper;
 import mrajaona.swingy.view.helper.MainHelper;
 import mrajaona.swingy.view.helper.TitleHelper;
@@ -16,6 +17,8 @@ public class View {
     public static void show() throws SQLException, IOException {
         GameScreen screen = GameData.getData().getScreen();
 
+        Window.getWindow().updateMenu();
+
         switch (screen) {
             case TITLE :
                 TitleHelper.show();
@@ -26,11 +29,6 @@ public class View {
             case MAIN :
                 MainHelper.show();
                 break;
-            /*
-            case MENU :
-                MenuHelper.show();
-                break;
-            */
             /*
             case WIN :
                 WinHelper.show();
@@ -46,4 +44,9 @@ public class View {
                 break;
         }
     }
+
+    public static void update() {
+        Window.getWindow().update();
+    }
+
 }

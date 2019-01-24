@@ -167,18 +167,27 @@ public class HeroModel {
         }
     }
 
-    public static void fight() {
+    public static void fight() throws SQLException, IOException {
         HeroData  hero  = GameData.getData().getHero();
         EnemyData enemy = GameData.getData().getEnemy();
+
+        if (hero == null || enemy == null) {
+            // Exception
+            return ;
+        }
 
         while (!CharacterModel.isDead(hero) && !CharacterModel.isDead(enemy)) {
             CharacterModel.fight(hero, enemy);
         }
 
-        if (CharacterModel.isDead(hero))
+        if (CharacterModel.isDead(hero)) {
             die();
-        else if (CharacterModel.isDead(enemy))
+            // TODO : GameOver Screen
+        }
+        else if (CharacterModel.isDead(enemy)) {
             EnemyModel.die();
+            MainHelper.waitForInput();
+        }
         else {
             // Exception
         }

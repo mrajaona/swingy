@@ -39,7 +39,7 @@ public class GameModel {
             Locale newLocale = new Locale.Builder().setLanguage(arg).build();
             setLocale(newLocale);
             // TODO : check supported language
-            // TODO : update view
+            View.update();
 
         } catch (IllformedLocaleException e) {
             // TODO : invalid language format
@@ -117,7 +117,8 @@ public class GameModel {
 
         if ( GameData.getData().getMap().getLevel() == 0 )
             GameMapModel.initMap();
-        changeScreen(GameScreen.MAIN);
+        else
+            GameMapModel.checkInitPosition();
     }
 
 

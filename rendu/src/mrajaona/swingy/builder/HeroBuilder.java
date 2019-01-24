@@ -68,7 +68,7 @@ public class HeroBuilder {
     @Getter private int attack        = 0;
     @PositiveOrZero
     @Getter private int defense       = 0;
-    @PositiveOrZero
+    @Positive
     @Getter private int maxHitPoints  = 0;
     @PositiveOrZero
     @Getter private int hitPoints     = 0;

@@ -1,4 +1,4 @@
-package mrajaona.swingy.util;
+package mrajaona.swingy.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import lombok.Getter;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.Util.ViewTypes;
 
-public class CommonCmd {
+public class MenuController {
 
     public interface Cmd {
         public void run()           throws SQLException, IOException;
@@ -21,7 +21,7 @@ public class CommonCmd {
         // error
     }
 
-    @Getter private static Map<String, Cmd> CommonCmdMap = initCommonMap();
+    @Getter private static Map<String, Cmd> commonCmdMap = initCommonMap();
     private static Map<String, Cmd> initCommonMap() {
         Map<String, Cmd> map = new HashMap<String, Cmd>();
 
@@ -48,6 +48,22 @@ public class CommonCmd {
                 public void run(String arg) { GameModel.setLocale(arg); }
             });
         return Collections.unmodifiableMap(map);
+    }
+
+    public static void run(String[] args) throws SQLException, IOException {
+        if (args.length <= 0 || args.length > 2) {
+            invalid();
+            return;
+        }
+
+        Cmd cmd = commonCmdMap.get(args[0]);
+
+        if (cmd != null && args.length == 1)
+            cmd.run();
+        else if (cmd != null && args.length == 2)
+            cmd.run(args[1]);
+        else
+            invalid();
     }
 
 }

@@ -2,10 +2,16 @@ package mrajaona.swingy.data.character;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
+import org.hibernate.validator.constraints.Range;
+
 import com.j256.ormlite.field.DatabaseField;
 
 import lombok.Getter;
 import lombok.Setter;
+import mrajaona.swingy.model.character.HeroModel;
 
 /*
 ** Data for Character
@@ -20,33 +26,37 @@ public class CharacterData implements Serializable {
     private static final long serialVersionUID = 2098570252469453413L;
 
     @DatabaseField(canBeNull = false)
-    // @Positive
+    @Range(min=1, max=HeroModel.HERO_MAX_LVL)
     @Getter @Setter private int level;
 
     @DatabaseField(canBeNull = false)
-    // @PositiveOrZero
+    @PositiveOrZero
     @Getter @Setter private double experience;
 
 
     @DatabaseField(canBeNull = false)
-    // @PositiveOrZero
+    @PositiveOrZero
     @Getter @Setter private int baseAttack;
 
     @DatabaseField(canBeNull = false)
-    // @PositiveOrZero
+    @PositiveOrZero
     @Getter @Setter private int baseDefense;
 
     @DatabaseField(canBeNull = false)
-    // @Positive
+    @Positive
     @Getter @Setter private int baseHitPoints;
 
 
+    @PositiveOrZero
     @Getter @Setter private int attack;
 
+    @PositiveOrZero
     @Getter @Setter private int defense;
 
+    @Positive
     @Getter @Setter private int maxHitPoints;
 
+    @PositiveOrZero
     @Getter @Setter private int hitPoints;
 
     // constructors

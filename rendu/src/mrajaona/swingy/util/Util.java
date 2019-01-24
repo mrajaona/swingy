@@ -46,8 +46,7 @@ public class Util {
         NEW,
         MAIN,
         WIN,
-        LOSE, // SubScreen ?
-        MENU // TODO
+        LOSE
     }
 
     public enum SubScreen {

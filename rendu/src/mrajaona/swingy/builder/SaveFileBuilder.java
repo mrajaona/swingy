@@ -3,6 +3,7 @@ package mrajaona.swingy.builder;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -17,10 +18,10 @@ public class SaveFileBuilder {
 
     @Getter private long id;
 
-    @NotNull
+    @NotNull @Valid
     @Getter private HeroData    hero;
 
-    @NotNull
+    @NotNull @Valid
     @Getter private GameMapData map;
 
     public SaveFileBuilder setId(long id) {
@@ -53,8 +54,13 @@ public class SaveFileBuilder {
 
         //Show errors
         if (fileConstraintViolations.size() > 0) {
+
             // TODO : Exception
             System.out.println("Invalid save file");
+            // Debug
+            for (ConstraintViolation<SaveFileBuilder> violation : fileConstraintViolations) {
+                System.out.println(violation.getMessage());
+            }
             error = true;
         }
 
