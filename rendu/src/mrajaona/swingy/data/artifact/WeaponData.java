@@ -6,9 +6,9 @@ public class WeaponData extends ArtifactData {
 
     private static final long serialVersionUID = 3406749058141226863L;
 
-    public WeaponData() {
-        // TODO : generate random
-        super("Random", 0, ArtifactType.WEAPON);
+    @SuppressWarnings("unused")
+    private WeaponData() {
+        super();
     }
 
     public WeaponData(String name, int modifier) {

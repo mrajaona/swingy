@@ -17,6 +17,7 @@ import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.artifact.ArmorModel;
 import mrajaona.swingy.model.artifact.HelmModel;
 import mrajaona.swingy.model.artifact.WeaponModel;
+import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.view.gui.GUIMain;
 import mrajaona.swingy.view.helper.MainHelper;
 
@@ -63,7 +64,7 @@ public class HeroModel {
         }
     }
 
-    public static void equip(ArtifactData artifact) {
+    public static void equip(ArtifactData artifact) throws SQLException, IOException {
         switch(artifact.getType()) {
             case HELM :
                 HelmModel.equip((HelmData) artifact);
@@ -78,8 +79,9 @@ public class HeroModel {
                 // Exception
                 break;
         }
-        GameModel.noDrop();
         updateStats();
+        GameModel.noDrop();
+        MainHelper.waitForInput();
     }
 
     public static void unequip(ArtifactData artifact) {
@@ -114,19 +116,24 @@ public class HeroModel {
 
     public static void viewStats() {
         HeroData hero = GameData.getData().getHero();
-        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+        ResourceBundle locale         = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+        ResourceBundle heroLocale     = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
         ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
+        ResourceMap    helmLocale     = (ResourceMap) artifactLocale.getObject( "HelmList" );
+        ResourceMap    armorLocale    = (ResourceMap) artifactLocale.getObject( "ArmorList" );
+        ResourceMap    weaponLocale   = (ResourceMap) artifactLocale.getObject( "WeaponList" );
+
 
         MainHelper.printMsg(
             System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
-            locale.getString("class")         + " : " + hero.getHeroClass() + System.lineSeparator() +
+            locale.getString("class")         + " : " + ((ResourceMap) heroLocale.getObject("ClassesList")).get(hero.getHeroClass()) + System.lineSeparator() +
             locale.getString("level")         + " : " + hero.getLevel() + System.lineSeparator() +
             locale.getString("experience")    + " : " + hero.getExperience() + System.lineSeparator() +
 
-            locale.getString("helm")          + " : " + artifactLocale.getString(hero.getHelm().getName())   + " (" + hero.getHelm().getModifier()   + ")" + System.lineSeparator() +
-            locale.getString("armor")         + " : " + artifactLocale.getString(hero.getArmor().getName())  + " (" + hero.getArmor().getModifier()  + ")" + System.lineSeparator() +
-            locale.getString("weapon")        + " : " + artifactLocale.getString(hero.getWeapon().getName()) + " (" + hero.getWeapon().getModifier() + ")" + System.lineSeparator() +
+            locale.getString("helm")          + " : " + helmLocale.get(hero.getHelm().getName())     + " (" + hero.getHelm().getModifier()   + ")" + System.lineSeparator() +
+            locale.getString("armor")         + " : " + armorLocale.get(hero.getArmor().getName())   + " (" + hero.getArmor().getModifier()  + ")" + System.lineSeparator() +
+            locale.getString("weapon")        + " : " + weaponLocale.get(hero.getWeapon().getName()) + " (" + hero.getWeapon().getModifier() + ")" + System.lineSeparator() +
 
             locale.getString("baseAttack")    + " : " + hero.getBaseAttack() + System.lineSeparator() +
             locale.getString("attack")        + " : " + hero.getAttack() + System.lineSeparator() +

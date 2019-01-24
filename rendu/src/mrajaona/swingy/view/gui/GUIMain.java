@@ -278,6 +278,7 @@ public class GUIMain {
                                 }
                             }
                         });
+                        equipButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                         equipButton.setAlignmentY(Component.CENTER_ALIGNMENT);
                     }
                     // leave button
@@ -296,6 +297,7 @@ public class GUIMain {
                                 }
                             }
                         });
+                        leaveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                         leaveButton.setAlignmentY(Component.CENTER_ALIGNMENT);
                     }
 
@@ -454,14 +456,17 @@ public class GUIMain {
 
             ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
             ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
+            ResourceMap    helmLocale     = (ResourceMap) artifactLocale.getObject( "HelmList" );
+            ResourceMap    armorLocale    = (ResourceMap) artifactLocale.getObject( "ArmorList" );
+            ResourceMap    weaponLocale   = (ResourceMap) artifactLocale.getObject( "WeaponList" );
 
             data[0][1] = hero.getHeroName();
             data[1][1] = ((ResourceMap) locale.getObject("ClassesList")).get(hero.getHeroClass());
             data[2][1] = Integer.toString(hero.getLevel()); // TODO : EXP to next level
             data[3][1] = format.format(hero.getExperience());
-            data[4][1] = artifactLocale.getString(hero.getHelm().getName())   + " (" + Integer.toString(hero.getHelm().getModifier())   + ")";
-            data[5][1] = artifactLocale.getString(hero.getArmor().getName())  + " (" + Integer.toString(hero.getArmor().getModifier())  + ")";
-            data[6][1] = artifactLocale.getString(hero.getWeapon().getName()) + " (" + Integer.toString(hero.getWeapon().getModifier()) + ")";
+            data[4][1] = helmLocale.get(hero.getHelm().getName())     + " (" + Integer.toString(hero.getHelm().getModifier())   + ")";
+            data[5][1] = armorLocale.get(hero.getArmor().getName())   + " (" + Integer.toString(hero.getArmor().getModifier())  + ")";
+            data[6][1] = weaponLocale.get(hero.getWeapon().getName()) + " (" + Integer.toString(hero.getWeapon().getModifier()) + ")";
             data[7][1] = Integer.toString(hero.getAttack());
             data[8][1] = Integer.toString(hero.getDefense());
             data[9][1] = Integer.toString(hero.getHitPoints()) + " / " + Integer.toString(hero.getBaseHitPoints() + hero.getWeapon().getModifier());

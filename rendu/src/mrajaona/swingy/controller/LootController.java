@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrajaona.swingy.controller.MenuController.Cmd;
+import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.model.GameModel;
+import mrajaona.swingy.model.character.HeroModel;
 
 public class LootController extends MenuController {
 
@@ -25,12 +28,14 @@ public class LootController extends MenuController {
 
         // loot
         map.put("equip", new Cmd() {
-                public void run()           { ; }
+                public void run()           throws SQLException, IOException
+                                            { HeroModel.equip(GameData.getData().getArtifact()); }
                 public void run(String arg) throws SQLException, IOException
                                             { invalid(); }
             });
         map.put("leave", new Cmd() {
-                public void run()           { ; }
+                public void run()           throws SQLException, IOException
+                                            { GameModel.noLoot(); }
                 public void run(String arg) throws SQLException, IOException
                 { invalid(); }
             });

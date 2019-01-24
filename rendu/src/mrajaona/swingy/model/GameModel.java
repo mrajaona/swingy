@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.IllformedLocaleException;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import mrajaona.swingy.builder.GameMapBuilder;
 import mrajaona.swingy.builder.HeroBuilder;
@@ -11,7 +12,9 @@ import mrajaona.swingy.builder.SaveFileBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.SaveManager;
+import mrajaona.swingy.util.Util.ArtifactType;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.View;
@@ -58,12 +61,65 @@ public class GameModel {
 
     public static void drop(ArtifactData artifact) {
         GameData.getData().setArtifact(artifact);
+        ArtifactType type = artifact.getType();
+
+        if (type == null) {
+            // Exception
+            return ;
+        }
+
+        String name = artifact.getName();
+        ResourceMap resMap;
+        switch (type) {
+            case HELM :
+                resMap = (ResourceMap) ResourceBundle.getBundle(
+                    "mrajaona.swingy.locale.ArtifactResource",
+                    GameData.getData().getLocale() )
+                .getObject("HelmList");
+                break ;
+            case ARMOR :
+                resMap = (ResourceMap) ResourceBundle.getBundle(
+                    "mrajaona.swingy.locale.ArtifactResource",
+                    GameData.getData().getLocale() )
+                .getObject("ArmorList");
+                break ;
+            case WEAPON :
+                resMap = (ResourceMap) ResourceBundle.getBundle(
+                    "mrajaona.swingy.locale.ArtifactResource",
+                    GameData.getData().getLocale() )
+                .getObject("WeaponList");
+                break ;
+            default :
+                // Exception
+                resMap = null;
+                break ;
+        }
+
+        if (resMap == null) {
+            // Exception
+            return ;
+        }
+
+        String msg = String.format(
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgDrop"),
+            resMap.get(name), //s
+            type.localizeType(), // %2$s
+            type.localizeStat(), // %3$s
+            artifact.getModifier() // %4$d
+        );
+        MainHelper.printMsg(msg);
         MainHelper.changeSubScreen();
     }
 
     public static void noDrop() {
         GameData.getData().setArtifact(null);
         MainHelper.changeSubScreen();
+    }
+
+    public static void noLoot() throws SQLException, IOException {
+        MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgLeave"));
+        noDrop();
+        MainHelper.waitForInput();
     }
 
     public static void createHero() throws SQLException, IOException {

@@ -1,5 +1,6 @@
 package mrajaona.swingy.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -33,8 +34,12 @@ public class ResourceMap {
         return null;
     }
 
-    public String get(String value) {
-        return (map.get(value));
+    public String get(String key) {
+        return (map.get(key));
+    }
+
+    public ArrayList<String> keyList() {
+        return (new ArrayList<String>(map.keySet()));
     }
 
 }

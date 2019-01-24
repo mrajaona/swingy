@@ -1,10 +1,15 @@
 package mrajaona.swingy.util;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 import lombok.Getter;
+import mrajaona.swingy.data.GameData;
 
 public class Util {
 
@@ -36,9 +41,44 @@ public class Util {
     };
 
     public enum ArtifactType {
-        ARMOR,
-        HELM,
-        WEAPON
+        ARMOR("armor", "defense"),
+        HELM("helm", "maxHitPoints"),
+        WEAPON("weapon", "attack");
+
+        String type;
+        String stat;
+
+        private ArtifactType(String type, String stat) {
+            this.type = type;
+            this.stat = stat;
+        }
+
+        private static final List<ArtifactType> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+        private static final int                SIZE   = VALUES.size();
+        private static final Random             RANDOM = new Random();
+
+        public static ArtifactType random()  {
+            return VALUES.get(RANDOM.nextInt(SIZE));
+        }
+
+        public String localizeType() {
+            return (
+                ResourceBundle.getBundle(
+                    "mrajaona.swingy.locale.ArtifactResource",
+                    GameData.getData().getLocale() )
+                .getString(type)
+                );
+        }
+
+        public String localizeStat() {
+            return (
+                ResourceBundle.getBundle(
+                    "mrajaona.swingy.locale.StatResource",
+                    GameData.getData().getLocale() )
+                .getString(stat)
+                );
+        }
+
     }
 
     public enum GameScreen {

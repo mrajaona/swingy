@@ -53,24 +53,24 @@ public class GameMapModel {
 
         for (int y = 0 ; y < mapSize ; y++) {
             for (int x = 0 ; x < mapSize ; x++) {
-                // TODO
-                boolean create = rand.nextInt(10) == 0 ? true : false;
+
+                boolean create = false;
+
+                if (!( (x == 0 || x == mapSize - 1)
+                    || (y == 0 || y == mapSize - 1) ))
+                create = rand.nextInt(10) == 0 ? true : false;
 
                 if (create) {
                     String enemyType = Util.enemyTypes[rand.nextInt(Util.enemyTypes.length)];
                     // set enemy level [mapLevel - 3, mapLevel + 3]
                     int enemyLevel = mapLevel + ((rand.nextInt(6) + 1) - 3);
                     // minimum enemy level is 1
-                    if (enemyLevel < 1)
-                        enemyLevel = 1;
+                   enemyLevel = enemyLevel < 1 ? 1 : enemyLevel;
 
                     enemies.put(
                         new Coord(x, y),
                         new EnemyBuilder().newEnemy(enemyType, enemyLevel)
                     );
-
-                    // Debug
-                    System.out.println(String.format("lvl %1d %2$s at [%3$d, %4$d]", enemyLevel, enemyType, x, y));
                 }
 
             }

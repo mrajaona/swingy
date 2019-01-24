@@ -6,9 +6,9 @@ public class HelmData extends ArtifactData {
 
     private static final long serialVersionUID = 2825389860641051359L;
 
-    public HelmData() {
-        // TODO : generate random
-        super("Random", 0, ArtifactType.HELM);
+    @SuppressWarnings("unused")
+    private HelmData() {
+        super();
     }
 
     public HelmData(String name, int modifier) {
