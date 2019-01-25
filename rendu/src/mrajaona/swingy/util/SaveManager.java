@@ -165,7 +165,7 @@ public class SaveManager {
         List<SaveFileData> result = queryBuilder.query();
 
         if (result == null || result.size() > 1)  {
-            // TODO : Exception
+            // Exception
             return (null);
         } else if (result.size() == 0) {
             // Wrong id ; possible in console view ;
@@ -183,14 +183,14 @@ public class SaveManager {
         heroDao.refresh(hero);
 
         if (hero == null) {
-            // TODO : Exception
+            // Exception
         }
 
         GameMapData map = saveFile.getMap();
         mapDao.refresh(map);
 
         if (map == null) {
-            // TODO : Exception
+            // Exception
         }
 
         closeConnection();

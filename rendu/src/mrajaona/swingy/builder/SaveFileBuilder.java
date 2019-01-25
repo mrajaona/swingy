@@ -55,7 +55,7 @@ public class SaveFileBuilder {
         //Show errors
         if (fileConstraintViolations.size() > 0) {
 
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid save file");
             // Debug
             for (ConstraintViolation<SaveFileBuilder> violation : fileConstraintViolations) {

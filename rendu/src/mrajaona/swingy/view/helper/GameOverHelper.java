@@ -22,7 +22,7 @@ public class GameOverHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -45,7 +45,7 @@ public class GameOverHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -65,7 +65,7 @@ public class GameOverHelper {
                 }
             });
         } else {
-            // TODO : Exception
+            // Exception
         }
 
         waitForInput();

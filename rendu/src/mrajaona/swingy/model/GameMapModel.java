@@ -123,6 +123,10 @@ public class GameMapModel {
         }
 
         GameMapData map = GameData.getData().getMap();
+        if (map == null) {
+            // Exception
+            return ;
+        }
 
         switch(dir) {
             case "north" :
@@ -138,7 +142,7 @@ public class GameMapModel {
                 map.setCoordY( map.getCoordY() - 1 );
                 break ;
             default :
-                ; // TODO : Exception
+                ; // Exception
                 break ;
         }
 
@@ -153,7 +157,7 @@ public class GameMapModel {
         MainHelper.printMsg(msg);
 
         if (!checkCoord(GameData.getData().getMap().getHeroCoord())) {
-            // TODO : Exception
+            // Exception
             return ;
         }
 

@@ -23,7 +23,7 @@ public class WinHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -46,7 +46,7 @@ public class WinHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -66,7 +66,7 @@ public class WinHelper {
                 }
             });
         } else {
-            // TODO : Exception
+            // Exception
         }
 
         waitForInput();

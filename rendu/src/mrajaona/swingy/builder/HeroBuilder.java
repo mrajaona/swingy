@@ -261,22 +261,22 @@ public class HeroBuilder {
 
         //Show errors
         if (helmConstraintViolations.size() > 0) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid helm");
             error = true;
         }
         if (armorConstraintViolations.size() > 0) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid armor");
             error = true;
         }
         if (weaponConstraintViolations.size() > 0) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid weapon");
             error = true;
         }
         if (heroConstraintViolations.size() > 0) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid hero");
             error = true;
         }

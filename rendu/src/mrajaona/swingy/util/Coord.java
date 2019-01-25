@@ -55,7 +55,7 @@ public class Coord implements Serializable {
     private void validate() {
         Set<ConstraintViolation<Coord>> coordConstraintViolations = validator.validate(this);
         if (coordConstraintViolations.size() > 0) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid coord");
         }
     }

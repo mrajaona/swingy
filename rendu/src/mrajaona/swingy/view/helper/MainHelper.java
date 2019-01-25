@@ -26,7 +26,7 @@ public class MainHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             GUIMain.getScreen().log(message);
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -55,7 +55,7 @@ public class MainHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -86,7 +86,7 @@ public class MainHelper {
                 }
             });
         } else {
-            // TODO : Exception
+            // Exception
         }
 
         waitForInput();

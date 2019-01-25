@@ -21,7 +21,7 @@ public class BuildHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // No place to print
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -33,7 +33,7 @@ public class BuildHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
         } else {
-            // TODO : Exception
+            // Exception
         }
         return (null);
     }
@@ -53,7 +53,7 @@ public class BuildHelper {
                 }
             });
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 

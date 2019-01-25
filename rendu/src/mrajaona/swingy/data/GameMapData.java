@@ -24,7 +24,6 @@ import mrajaona.swingy.util.Coord;
 
 @DatabaseTable(tableName = "maps")
 public class GameMapData {
-    // Todo : Enemies
 
     @DatabaseField(generatedId = true)
     @Getter private long id;
@@ -43,7 +42,6 @@ public class GameMapData {
     @Valid
     @Getter private Coord prevCoord = new Coord();
 
-    // TODO : enemies positions
     @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
     @NotNull
     @Getter private HashMap<Coord, EnemyData> enemies;

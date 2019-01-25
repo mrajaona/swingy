@@ -148,7 +148,6 @@ public class HeroModel {
     }
 
     public static void move(String direction) throws SQLException, IOException {
-        // TODO : check map exists
         GameMapModel.move(direction);
     }
 

@@ -34,18 +34,17 @@ public class GameModel {
 
     public static void setLocale(Locale newLocale) {
         GameData.getData().setLocale(newLocale);
-        // TODO : update view
+        View.update();
     }
 
     public static void setLocale(String arg) {
         try {
             Locale newLocale = new Locale.Builder().setLanguage(arg).build();
-            setLocale(newLocale);
             // TODO : check supported language
-            View.update();
+            setLocale(newLocale);
 
         } catch (IllformedLocaleException e) {
-            // TODO : invalid language format
+            // Exception : invalid language format
         }
     }
 
@@ -162,7 +161,7 @@ public class GameModel {
                     ));
 
         if (GameData.getData().getSaveFile() == null) {
-            System.out.println("Could not load file for Hero id " + heroId); // Debug // TODO : vrai message
+            System.err.println("Could not load file for Hero id " + heroId);
             return ;
         }
 
@@ -192,7 +191,7 @@ public class GameModel {
         ViewTypes tmp = ViewTypes.getKeyByValue(newType);
 
         if (tmp == null) {
-            ; // TODO : Exception
+            ; // Exception
         } else {
             changeViewType(tmp);
         }
@@ -200,7 +199,7 @@ public class GameModel {
 
     public static void changeViewType(ViewTypes newType) throws SQLException, IOException {
         if (newType == null) {
-            ; // TODO : Exception
+            ; // Exception
         } else {
             GameData.getData().setViewType(newType);
 

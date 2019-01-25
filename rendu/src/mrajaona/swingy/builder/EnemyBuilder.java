@@ -132,7 +132,7 @@ public class EnemyBuilder {
 
         //Show errors
         if (constraintViolations.size() > 0) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid enemy");
             return (null);
         } else {

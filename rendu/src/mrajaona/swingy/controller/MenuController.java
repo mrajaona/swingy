@@ -33,17 +33,17 @@ public class MenuController {
                 public void run()           { ; }
                 public void run(String arg) { invalid(); }
             });
-        map.put("gui", new Cmd() { // TODO
+        map.put("gui", new Cmd() {
                 public void run()           throws SQLException, IOException
                                             { GameModel.changeViewType(ViewTypes.GUI); }
                 public void run(String arg) { invalid(); }
             });
-        map.put("console", new Cmd() { // TODO
+        map.put("console", new Cmd() {
                 public void run()           throws SQLException, IOException
                                             { GameModel.changeViewType(ViewTypes.CONSOLE); }
                 public void run(String arg) { invalid(); }
             });
-        map.put("language", new Cmd() { // TODO
+        map.put("language", new Cmd() {
                 public void run()           { invalid(); }
                 public void run(String arg) { GameModel.setLocale(arg); }
             });

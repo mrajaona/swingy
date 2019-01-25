@@ -25,7 +25,7 @@ public class TitleHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // No place to print
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -63,7 +63,7 @@ public class TitleHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
         } else {
-            // TODO : Exception
+            // Exception
         }
     }
 
@@ -81,10 +81,11 @@ public class TitleHelper {
                 }
             });
         } else {
-            // TODO : Exception
+            // Exception
         }
 
         printMsg("<----- SWINGY ----->"); // Title // TODO
+        // TODO : list for console view // Mandatory
 
         waitForInput();
 

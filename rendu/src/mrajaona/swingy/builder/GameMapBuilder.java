@@ -37,10 +37,8 @@ public class GameMapBuilder {
     @Getter private Coord prevCoord = new Coord();
     /* x = 0 is west ** y = 0 is south */
 
-    // TODO : enemies positions
     @NotNull
     @Getter private HashMap<Coord, EnemyData> enemies;
-    // map.put(enemy, coord);
 
     public GameMapBuilder setId(long id) {
         this.id = id;
@@ -74,7 +72,6 @@ public class GameMapBuilder {
         return (this);
     }
 
-    // TODO : enemies positions
     public GameMapBuilder setEnemies(HashMap<Coord, EnemyData> enemies) {
         this.enemies = new HashMap<Coord, EnemyData> (enemies);
         return (this);
@@ -82,27 +79,27 @@ public class GameMapBuilder {
 
     public GameMapData build() {
 
-        //Create ValidatorFactory which returns validator
+        // Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 
-        //It validates bean instances
+        // It validates bean instances
         Validator validator = factory.getValidator();
 
-        //Validate bean
+        // Validate bean
         Set<ConstraintViolation<GameMapBuilder>> mapConstraintViolations = validator.validate(this);
 
         boolean error = false;
 
-        //Show errors
+        // Show errors
         if (mapConstraintViolations.size() > 0) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid map");
             error = true;
         } else if (
             !GameMapModel.checkCoord(heroCoord, size)
             || !GameMapModel.checkCoord(prevCoord, size)
             ) {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid map");
             error = true;
         }
@@ -112,7 +109,7 @@ public class GameMapBuilder {
             || heroCoord.getX() >= size || prevCoord.getY() >= size
             )
         {
-            // TODO : Exception
+            // Exception
             System.out.println("Invalid coordinates");
             error = true;
         }
@@ -126,7 +123,6 @@ public class GameMapBuilder {
 
     }
 
-    // TODO : enemies positions
     public GameMapData newMap() {
         enemies = new HashMap<Coord, EnemyData>();
         return (
@@ -137,7 +133,6 @@ public class GameMapBuilder {
             );
     }
 
-    // TODO : enemies positions
     public GameMapData loadMap(GameMapData loaded) {
         if (loaded == null)
             return (null);
