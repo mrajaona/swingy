@@ -9,6 +9,7 @@ import mrajaona.swingy.view.helper.BuildHelper;
 import mrajaona.swingy.view.helper.MainHelper;
 import mrajaona.swingy.view.helper.TitleHelper;
 import mrajaona.swingy.view.helper.WinHelper;
+import mrajaona.swingy.view.helper.GameOverHelper;
 import mrajaona.swingy.data.GameData;
 
 public class View {
@@ -34,11 +35,9 @@ public class View {
             case WIN :
                 WinHelper.show();
                 break;
-            /*
             case LOSE :
-                LoseHelper.show();
+                GameOverHelper.show();
                 break;
-            */
             default :
                 // exception
                 break;

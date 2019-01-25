@@ -41,8 +41,8 @@ public class WinController {
                 public void run()           throws SQLException, IOException
                                             {
                                                 GameMapModel.removeMap();
-                                            	SaveManager.getManager().save();
-                                            	GameModel.generateMap();
+                                                SaveManager.getManager().save();
+                                                GameModel.generateMap();
                                             }
                 public void run(String arg) throws SQLException, IOException
                 { invalid(); }

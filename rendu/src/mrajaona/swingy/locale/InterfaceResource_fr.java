@@ -29,6 +29,11 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"winLabel", "Felicitations, vous avez gagne !"},
             {"titleButton", "Sauvegarder et retourner à l'ecran titre"},
             {"continueButton", "Sauvegarder et commencer une nouvelle carte"},
+
+            //
+            {"loseLabel", "It seems you have died."},
+            {"giveUpButton", "Retourner à l'ecran titre"},
+            {"reloadButton", "Reprendre a la derniere sauvegarde"},
         };
     }
 

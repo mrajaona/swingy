@@ -4,18 +4,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import mrajaona.swingy.controller.WinController;
+import mrajaona.swingy.controller.GameOverController;
 import mrajaona.swingy.data.GameData;
-import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.console.ConsoleView;
-import mrajaona.swingy.view.gui.GUIWin;
+import mrajaona.swingy.view.gui.GUIGameOver;
 import mrajaona.swingy.view.gui.Window;
 
-public class WinHelper {
+public class GameOverHelper {
 
     @SuppressWarnings("unused")
-    private WinHelper() {}
+    private GameOverHelper() {}
 
     public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
@@ -39,7 +38,7 @@ public class WinHelper {
             String[] line;
 
             line = ConsoleView.getSplitInput();
-            WinController.run(line);
+            GameOverController.run(line);
 
             waitForInput();
 
@@ -51,13 +50,13 @@ public class WinHelper {
     }
 
     public static void show() throws SQLException, IOException {
-        GUIWin.getScreen().localize();
+        GUIGameOver.getScreen().localize();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
 
             // TODO
-            printMsg("You win !");
+            printMsg("You lose !");
 
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -72,5 +71,4 @@ public class WinHelper {
         waitForInput();
 
     }
-
 }

@@ -30,6 +30,11 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"titleButton", "Save and return to title"},
             {"continueButton", "Save and start a new map"},
 
+            // Game Over
+            {"loseLabel", "It seems you have died."},
+            {"giveUpButton", "Return to title"},
+            {"reloadButton", "Load last save"},
+
             // Menu
        };
     }

@@ -87,6 +87,7 @@ public class CharacterModel {
         attack(fighter1, fighter2);
         if (!isDead(fighter2))
             attack(fighter2, fighter1);
+        // update gui
     }
 
 }

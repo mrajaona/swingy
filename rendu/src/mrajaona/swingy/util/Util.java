@@ -151,8 +151,8 @@ public class Util {
     // Enemy base stats
 
     public static enum EnemyBaseStats {
-        SLIME_BASE_STATS(100, 1, 1, 10),
-        GOBLIN_BASE_STATS(250, 5, 5, 15);
+        SLIME_BASE_STATS(100, 2, 2, 10),
+        GOBLIN_BASE_STATS(250, 6, 5, 15);
 
         @Getter int exp;
         @Getter int atk;

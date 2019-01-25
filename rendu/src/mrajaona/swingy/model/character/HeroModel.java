@@ -18,6 +18,7 @@ import mrajaona.swingy.model.artifact.ArmorModel;
 import mrajaona.swingy.model.artifact.HelmModel;
 import mrajaona.swingy.model.artifact.WeaponModel;
 import mrajaona.swingy.util.ResourceMap;
+import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.view.gui.GUIMain;
 import mrajaona.swingy.view.helper.MainHelper;
 
@@ -193,7 +194,7 @@ public class HeroModel {
 
         if (CharacterModel.isDead(hero)) {
             die();
-            // TODO : GameOver Screen
+            GameModel.changeScreen(GameScreen.LOSE);
         }
         else if (CharacterModel.isDead(enemy)) {
             EnemyModel.die();
