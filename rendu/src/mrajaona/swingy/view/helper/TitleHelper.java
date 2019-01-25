@@ -23,7 +23,7 @@ public class TitleHelper {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            ; // No place to print
+            ; // TODO : modal
         } else {
             // Exception
         }
@@ -73,7 +73,7 @@ public class TitleHelper {
                                     GameData.getData().getLocale()
                                     );
 
-        printMsg(locale.getString("title"));
+        ConsoleView.println(locale.getString("title"));
 
         // TODO : list for console view // Mandatory
 
@@ -86,6 +86,7 @@ public class TitleHelper {
     public static void show() throws SQLException, IOException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
+            printConsoleScreen();
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {

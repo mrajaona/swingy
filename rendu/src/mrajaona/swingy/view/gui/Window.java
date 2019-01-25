@@ -70,7 +70,6 @@ public class Window {
         }
 
         {
-            // Menu bar // TODO : localization
             menuBar = new JMenuBar();
             menu = new JMenu();
 

@@ -55,7 +55,7 @@ public class GameOverHelper {
                                     GameData.getData().getLocale()
                                     );
 
-        printMsg(locale.getString("loseLabel"));
+        ConsoleView.println(locale.getString("loseLabel"));
     }
 
     public static void show() throws SQLException, IOException {

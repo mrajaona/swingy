@@ -371,9 +371,14 @@ public class GUIMain {
     }
 
     public void localize() {
-        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+        ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+        ResourceMap    dirLocale = (ResourceMap) ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() )
+                                   .getObject("DirectionList");
 
-        // TODO : direction buttons
+        northButton.setText(dirLocale.get("north"));
+        southButton.setText(dirLocale.get("south"));
+        eastButton.setText(dirLocale.get("east"));
+        westButton.setText(dirLocale.get("west"));
 
         fightButton.setText(locale.getString("fightButton"));
         runButton.setText(locale.getString("runButton"));
@@ -470,7 +475,7 @@ public class GUIMain {
 
             data[0][1] = hero.getHeroName();
             data[1][1] = ((ResourceMap) locale.getObject("ClassesList")).get(hero.getHeroClass());
-            data[2][1] = Integer.toString(hero.getLevel()); // TODO : EXP to next level
+            data[2][1] = Integer.toString(hero.getLevel()) + " / " + Double.toString(hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450);
             data[3][1] = format.format(hero.getExperience());
             data[4][1] = helmLocale.get(hero.getHelm().getName())     + " (" + Integer.toString(hero.getHelm().getModifier())   + ")";
             data[5][1] = armorLocale.get(hero.getArmor().getName())   + " (" + Integer.toString(hero.getArmor().getModifier())  + ")";

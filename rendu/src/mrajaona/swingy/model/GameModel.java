@@ -18,9 +18,11 @@ import mrajaona.swingy.util.Util.ArtifactType;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.View;
+import mrajaona.swingy.view.console.ConsoleView;
 import mrajaona.swingy.view.gui.GUIMain;
 import mrajaona.swingy.view.gui.Window;
 import mrajaona.swingy.view.helper.MainHelper;
+import mrajaona.swingy.view.helper.TitleHelper;
 
 public class GameModel {
 
@@ -28,7 +30,7 @@ public class GameModel {
     private GameModel() {}
 
     public static void init (Locale locale, String viewType) throws SQLException, IOException {
-        GameData.getData().setLocale(locale); // "en", "fr"
+        GameData.getData().setLocale(locale);
         changeViewType(viewType);
     }
 
@@ -39,8 +41,17 @@ public class GameModel {
 
     public static void setLocale(String arg) {
         try {
+            if (arg != "en" && arg != "fr") {
+                ConsoleView.println(
+                    ResourceBundle.getBundle(
+                        "mrajaona.swingy.locale.ErrorResource",
+                        GameData.getData().getLocale() )
+                    .getString("InvalidLanguage")
+                ); // only possible in console view
+                return ;
+            }
+
             Locale newLocale = new Locale.Builder().setLanguage(arg).build();
-            // TODO : check supported language
             setLocale(newLocale);
 
         } catch (IllformedLocaleException e) {
@@ -161,7 +172,7 @@ public class GameModel {
                     ));
 
         if (GameData.getData().getSaveFile() == null) {
-            System.err.println("Could not load file for Hero id " + heroId);
+            TitleHelper.printMsg("Could not load file for Hero id " + heroId);
             return ;
         }
 

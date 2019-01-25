@@ -56,7 +56,7 @@ public class WinHelper {
                                     GameData.getData().getLocale()
                                     );
 
-        printMsg(locale.getString("winLabel"));
+        ConsoleView.println(locale.getString("winLabel"));
     }
 
     public static void show() throws SQLException, IOException {
