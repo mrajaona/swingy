@@ -20,8 +20,6 @@ import mrajaona.swingy.util.Util;
 */
 public class EnemyBuilder {
 
-    // TODO : localization
-
     @NotBlank
     @Getter private String  enemyType;
 
@@ -133,10 +131,9 @@ public class EnemyBuilder {
         //Show errors
         if (constraintViolations.size() > 0) {
             // Exception
-            System.out.println("Invalid enemy");
+            System.err.println("Invalid enemy");
             return (null);
         } else {
-            System.out.println("Valid enemy"); // DEBUG
             return (new EnemyData(this));
         }
 

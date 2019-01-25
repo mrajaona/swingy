@@ -15,7 +15,7 @@ public class HelmModel {
     public static void equip(HelmData helm) {
         GameData.getData().getHero().getHelm().change(helm.getName(), helm.getModifier());
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgEquip"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgEquip"),
             GameData.getData().getHero().getHeroName(), // %1$s
             helm.getName() // %2$s
             );
@@ -25,7 +25,7 @@ public class HelmModel {
     public static void remove() {
         ArtifactData helm = GameData.getData().getHero().getHelm();
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgUnequip"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgUnequip"),
             GameData.getData().getHero().getHeroName(), // %1$s
             helm.getName() // %2$s
             );

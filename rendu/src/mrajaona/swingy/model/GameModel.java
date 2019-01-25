@@ -100,7 +100,7 @@ public class GameModel {
         }
 
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgDrop"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgDrop"),
             resMap.get(name), //s
             type.localizeType(), // %2$s
             type.localizeStat(), // %3$s
@@ -116,7 +116,7 @@ public class GameModel {
     }
 
     public static void noLoot() throws SQLException, IOException {
-        MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgLeave"));
+        MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgLeave"));
         noDrop();
         MainHelper.waitForInput();
     }

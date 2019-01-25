@@ -14,8 +14,6 @@ import mrajaona.swingy.util.Util.ArtifactType;
 
 public class ArtifactData implements Serializable {
 
-    // TODO : localization
-
     private static final long serialVersionUID = 5018899939736022531L;
 
     @NotBlank

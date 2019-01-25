@@ -48,7 +48,7 @@ public class TitleHelper {
     public static void waitForInput() throws SQLException, IOException {
         printMsg(
                 ResourceBundle.getBundle(
-                    "mrajaona.swingy.locale.GameResource",
+                    "mrajaona.swingy.locale.InterfaceResource",
                     GameData.getData().getLocale() )
                 .getString("msgGetInput")
                 );
@@ -67,6 +67,18 @@ public class TitleHelper {
         }
     }
 
+    private static void printConsoleScreen() {
+        ResourceBundle locale = ResourceBundle.getBundle(
+                                    "mrajaona.swingy.locale.InterfaceResource",
+                                    GameData.getData().getLocale()
+                                    );
+
+        printMsg(locale.getString("title"));
+
+        // TODO : list for console view // Mandatory
+
+    }
+
     public static void reload() throws SQLException, IOException {
         GUITitle.getScreen().initHeroList();
     }
@@ -83,10 +95,6 @@ public class TitleHelper {
         } else {
             // Exception
         }
-
-        printMsg("<----- SWINGY ----->"); // Title // TODO
-        // TODO : list for console view // Mandatory
-
         waitForInput();
 
     }

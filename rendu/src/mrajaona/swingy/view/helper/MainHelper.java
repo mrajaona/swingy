@@ -33,7 +33,7 @@ public class MainHelper {
     public static void waitForInput() throws SQLException, IOException {
         printMsg(
                 ResourceBundle.getBundle(
-                    "mrajaona.swingy.locale.GameResource",
+                    "mrajaona.swingy.locale.InterfaceResource",
                     GameData.getData().getLocale() )
                 .getString("msgGetInput")
                 );

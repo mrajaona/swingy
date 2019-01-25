@@ -36,8 +36,6 @@ public class HeroBuilder {
 
     @Getter private long id = 0;
 
-    // TODO : localization
-
     @NotBlank @Pattern(regexp = "^[A-Za-z ]+$")
     @Getter private String  heroName;
 
@@ -55,7 +53,7 @@ public class HeroBuilder {
     @Getter private int level         = 1;
 
     @PositiveOrZero
-    @Getter private double experience    = 0;
+    @Getter private double experience = 0;
 
     @PositiveOrZero
     @Getter private int baseAttack    = 0;
@@ -212,13 +210,19 @@ public class HeroBuilder {
 
     private HeroData build(boolean init) {
 
-        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
+        ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
+        ResourceBundle errLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() );
 
         // delocalize heroClass
         ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
         String      tmp = map.getKeyByValue(heroClass);
 
-        heroClass = tmp != null ? tmp : new String();
+        if (tmp == null) {
+            heroClass = new String();
+            BuildHelper.printMsg(errLocale.getString("invalidClass"));
+        } else {
+            heroClass = tmp;
+        }
 
         if (init == true) {
             Util.HeroBaseStats stats = Util.HERO_BASE_STATS_MAP.get(heroClass);
@@ -262,27 +266,27 @@ public class HeroBuilder {
         //Show errors
         if (helmConstraintViolations.size() > 0) {
             // Exception
-            System.out.println("Invalid helm");
+            System.err.println("Invalid helm");
             error = true;
         }
         if (armorConstraintViolations.size() > 0) {
             // Exception
-            System.out.println("Invalid armor");
+            System.err.println("Invalid armor");
             error = true;
         }
         if (weaponConstraintViolations.size() > 0) {
             // Exception
-            System.out.println("Invalid weapon");
+            System.err.println("Invalid weapon");
             error = true;
         }
         if (heroConstraintViolations.size() > 0) {
             // Exception
-            System.out.println("Invalid hero");
+            System.err.println("Invalid hero");
             error = true;
         }
 
         if (invalidName.size() > 0) {
-            System.out.println("Invalid name");
+            BuildHelper.printMsg(errLocale.getString("invalidName"));
             heroName = new String();
             error = true;
         }
@@ -291,7 +295,6 @@ public class HeroBuilder {
         if (error == true)
             return (null);
         else {
-            System.out.println("Valid hero"); // DEBUG
             return (new HeroData(this));
         }
 

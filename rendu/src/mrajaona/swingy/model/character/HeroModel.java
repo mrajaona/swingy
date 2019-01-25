@@ -56,7 +56,7 @@ public class HeroModel {
         if (hero.getLevel() < HERO_MAX_LVL) {
             hero.setLevel(hero.getLevel() + 1);
             String msg = String.format(
-                ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgLvlUp"),
+                ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgLvlUp"),
                 GameData.getData().getHero().getHeroName(), // %1$s
                 hero.getLevel() // %2$d
                 );
@@ -152,7 +152,7 @@ public class HeroModel {
     }
 
     public static void run() throws SQLException, IOException {
-        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
 
         {
             String msg = String.format(
@@ -207,7 +207,7 @@ public class HeroModel {
 
     public static void die() {
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgDied"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgDied"),
             GameData.getData().getHero().getHeroName() // %1$s
         );
         MainHelper.printMsg(msg);

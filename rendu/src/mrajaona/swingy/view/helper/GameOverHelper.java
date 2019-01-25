@@ -29,7 +29,7 @@ public class GameOverHelper {
     public static void waitForInput() throws SQLException, IOException {
         printMsg(
                 ResourceBundle.getBundle(
-                    "mrajaona.swingy.locale.GameResource",
+                    "mrajaona.swingy.locale.InterfaceResource",
                     GameData.getData().getLocale() )
                 .getString("msgGetInput")
                 );
@@ -49,15 +49,21 @@ public class GameOverHelper {
         }
     }
 
+    private static void printConsoleScreen() {
+        ResourceBundle locale = ResourceBundle.getBundle(
+                                    "mrajaona.swingy.locale.InterfaceResource",
+                                    GameData.getData().getLocale()
+                                    );
+
+        printMsg(locale.getString("loseLabel"));
+    }
+
     public static void show() throws SQLException, IOException {
         GUIGameOver.getScreen().localize();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
-
-            // TODO
-            printMsg("You lose !");
-
+            printConsoleScreen();
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {

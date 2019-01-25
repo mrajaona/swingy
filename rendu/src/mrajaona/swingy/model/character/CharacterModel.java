@@ -39,7 +39,7 @@ public class CharacterModel {
         }
 
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgDamage"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgDamage"),
             identity, // %1$s
             amount
         );
@@ -70,7 +70,7 @@ public class CharacterModel {
         // TODO : wait here
 
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgAttack"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgAttack"),
             identity // %1$s
         );
         MainHelper.printMsg(msg);

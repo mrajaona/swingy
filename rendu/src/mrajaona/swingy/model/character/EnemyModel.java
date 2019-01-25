@@ -87,7 +87,7 @@ public class EnemyModel {
 
     public static void die() {
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgDied"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgDied"),
             GameData.getData().getEnemy().getEnemyType() // %1$s
         );
         MainHelper.printMsg(msg);

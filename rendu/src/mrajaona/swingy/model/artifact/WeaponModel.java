@@ -15,7 +15,7 @@ public class WeaponModel {
     public static void equip(WeaponData weapon) {
         GameData.getData().getHero().getWeapon().change(weapon.getName(), weapon.getModifier());
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgEquip"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgEquip"),
             GameData.getData().getHero().getHeroName(), // %1$s
             weapon.getName() // %2$s
             );
@@ -25,7 +25,7 @@ public class WeaponModel {
     public static void remove() {
         ArtifactData weapon = GameData.getData().getHero().getWeapon();
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgUnequip"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgUnequip"),
             GameData.getData().getHero().getHeroName(), // %1$s
             weapon.getName() // %2$s
             );

@@ -113,12 +113,13 @@ public class GameMapModel {
     // move hero
     public static void move(String direction) throws SQLException, IOException {
         // delocalize direction
-        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
-        ResourceMap resMap    = (ResourceMap) locale.getObject("DirectionList");
-        String dir            = resMap.getKeyByValue(direction);
+        ResourceBundle errLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() );
+        ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
+        ResourceMap    resMap    = (ResourceMap) locale.getObject("DirectionList");
+        String dir               = resMap.getKeyByValue(direction);
 
         if (dir == null) {
-            ; // TODO : Error : bad input
+            MainHelper.printMsg(errLocale.getString("invalidDirection"));
             return ;
         }
 
@@ -147,7 +148,7 @@ public class GameMapModel {
         }
 
         String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgMove"),
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgMove"),
             GameData.getData().getHero().getHeroName(), // %1$s
             direction, // %2$s // localized
             map.getCoordX(), // %3$d
@@ -194,11 +195,14 @@ public class GameMapModel {
         if (enemy != null) {
             GameModel.enemyEncounter(enemy);
 
-            // Todo : localize enemy type
             String msg = String.format(
-                ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgEncounter"),
+                ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource",
+                    GameData.getData().getLocale()
+                ).getString("msgEncounter"),
                 enemy.getLevel(), // %1$d
-                enemy.getEnemyType() // %2$s
+                ResourceBundle.getBundle("mrajaona.swingy.locale.EnemyResource",
+                    GameData.getData().getLocale()
+                ).getString(enemy.getEnemyType()) // %2$s
             );
 
             MainHelper.printMsg(msg);

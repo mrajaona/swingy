@@ -30,7 +30,7 @@ public class WinHelper {
     public static void waitForInput() throws SQLException, IOException {
         printMsg(
                 ResourceBundle.getBundle(
-                    "mrajaona.swingy.locale.GameResource",
+                    "mrajaona.swingy.locale.InterfaceResource",
                     GameData.getData().getLocale() )
                 .getString("msgGetInput")
                 );
@@ -50,15 +50,21 @@ public class WinHelper {
         }
     }
 
+    private static void printConsoleScreen() {
+        ResourceBundle locale = ResourceBundle.getBundle(
+                                    "mrajaona.swingy.locale.InterfaceResource",
+                                    GameData.getData().getLocale()
+                                    );
+
+        printMsg(locale.getString("winLabel"));
+    }
+
     public static void show() throws SQLException, IOException {
         GUIWin.getScreen().localize();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
-
-            // TODO
-            printMsg("You win !");
-
+            printConsoleScreen();
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {

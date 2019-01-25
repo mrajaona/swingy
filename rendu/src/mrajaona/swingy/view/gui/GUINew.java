@@ -51,7 +51,7 @@ public class GUINew {
                 // Class setting
                 {
                     classLabel   = new JLabel();
-                    classField   = new JComboBox<String>(); // TODO : localize
+                    classField   = new JComboBox<String>();
                 }
                 // Name setting
                 {
