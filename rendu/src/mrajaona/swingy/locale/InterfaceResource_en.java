@@ -24,6 +24,13 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"runButton",    "Run"},
             {"equipButton",  "Equip"},
             {"leaveButton",  "Leave"},
+
+            // Win
+            {"winLabel", "Congratulations, you won !"},
+            {"titleButton", "Save and return to title"},
+            {"continueButton", "Save and start a new map"},
+
+            // Menu
        };
     }
 

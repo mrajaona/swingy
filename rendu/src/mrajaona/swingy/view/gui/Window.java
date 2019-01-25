@@ -239,18 +239,23 @@ public class Window {
         );
     }
 
-    public void show(GameScreen screen) {
-        // TODO reset previous screen data
-        // Except menu - main
+    public void resize() {
+        GameScreen screen = GameData.getData().getScreen();
 
         if (screen.equals(GameScreen.MAIN)) {
             resize(800, 500);
         } else {
             resize(400, 300);
         }
+    }
+
+    public void show() {
+        GameScreen screen = GameData.getData().getScreen();
 
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
+        resize();
+
         frame.setVisible(true);
     }
 

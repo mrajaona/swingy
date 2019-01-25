@@ -11,6 +11,7 @@ import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.console.ConsoleView;
+import mrajaona.swingy.view.gui.GUITitle;
 import mrajaona.swingy.view.gui.Window;
 
 public class TitleHelper {
@@ -66,20 +67,24 @@ public class TitleHelper {
         }
     }
 
+    public static void reload() throws SQLException, IOException {
+        GUITitle.getScreen().initHeroList();
+    }
+
     public static void show() throws SQLException, IOException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    Window.getWindow().show(GameScreen.TITLE);
+                    Window.getWindow().show();
                 }
             });
         } else {
             // TODO : Exception
         }
 
-        printMsg("< SWINGY >"); // Title // TODO
+        printMsg("<----- SWINGY ----->"); // Title // TODO
 
         waitForInput();
 

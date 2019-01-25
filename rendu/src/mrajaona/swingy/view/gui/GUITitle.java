@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
@@ -65,38 +67,12 @@ public class GUITitle {
 
             // Hero list
             {
-                heroListModel       = new DefaultListModel<HeroData>();
-                {
-                    Object[] list = TitleHelper.getHeroesList();
-                    if (list == null)
-                        ; // exception
-                    for (int i = 0 ; i < list.length ; i++) {
-                        heroListModel.addElement((HeroData) list[i]);
-                    }
-                }
-                heroList            = new JList<HeroData>(heroListModel);
-                {
-                    heroList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    heroList.setLayoutOrientation(JList.VERTICAL);
-                    heroList.setVisibleRowCount(-1);
-                    heroList.setCellRenderer(new HeroListCellRenderer());
-                    heroList.addListSelectionListener(new ListSelectionListener() {
-                        public void valueChanged(ListSelectionEvent e) {
-                            HeroData hero = heroList.getSelectedValue();
-
-                            loadButton.setEnabled(hero == null ? false : true);
-                            deleteButton.setEnabled(hero == null ? false : true);
-
-                            statsTable.updateTable(hero);
-                        }
-                    });
-                }
-                heroListScrollPane  = new JScrollPane(heroList);
+                initHeroList();
             }
 
             // Panel for hero info
             {
-                    loadPanel = new JSplitPane(
+                loadPanel = new JSplitPane(
                     JSplitPane.HORIZONTAL_SPLIT,
                     false,
                     heroListScrollPane,
@@ -220,6 +196,36 @@ public class GUITitle {
             c.insets  = new Insets(0, 0, 0, 0);
             panel.add(controlPanel, c);
         }
+    }
+
+    public void initHeroList() throws SQLException, IOException {
+        heroListModel       = new DefaultListModel<HeroData>();
+        {
+            Object[] list = TitleHelper.getHeroesList();
+            if (list == null)
+                ; // exception
+            for (int i = 0 ; i < list.length ; i++) {
+                heroListModel.addElement((HeroData) list[i]);
+            }
+        }
+        heroList            = new JList<HeroData>(heroListModel);
+        {
+            heroList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            heroList.setLayoutOrientation(JList.VERTICAL);
+            heroList.setVisibleRowCount(-1);
+            heroList.setCellRenderer(new HeroListCellRenderer());
+            heroList.addListSelectionListener(new ListSelectionListener() {
+                public void valueChanged(ListSelectionEvent e) {
+                    HeroData hero = heroList.getSelectedValue();
+
+                    loadButton.setEnabled(hero == null ? false : true);
+                    deleteButton.setEnabled(hero == null ? false : true);
+
+                    statsTable.updateTable(hero);
+                }
+            });
+        }
+        heroListScrollPane  = new JScrollPane(heroList);
     }
 
     // Class for statsField custom table

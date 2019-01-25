@@ -163,6 +163,8 @@ public class HeroModel {
 
         Random rand = new Random();
 
+        // TODO : wait here
+
         if ( rand.nextInt(2) == 0) { // 1/2
             String msg = locale.getString("msgRunSuccess");
             MainHelper.printMsg(msg);
@@ -170,6 +172,7 @@ public class HeroModel {
         } else {
             String msg = locale.getString("msgRunFail");
             MainHelper.printMsg(msg);
+            CharacterModel.attack(GameData.getData().getEnemy(), GameData.getData().getHero()); // Enemy gets initiative
             fight();
         }
     }

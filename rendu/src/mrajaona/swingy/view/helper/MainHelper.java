@@ -59,13 +59,17 @@ public class MainHelper {
         }
     }
 
+    public static void clean() {
+        GUIMain.getScreen().clean();
+    }
+
     public static void changeSubScreen() {
-            if (GameData.getData().getEnemy() != null)
-                GUIMain.getScreen().show(SubScreen.BATTLE);
-            else if (GameData.getData().getArtifact() != null)
-                GUIMain.getScreen().show(SubScreen.LOOT);
-            else
-                GUIMain.getScreen().show(SubScreen.MAIN);
+        if (GameData.getData().getEnemy() != null)
+            GUIMain.getScreen().show(SubScreen.BATTLE);
+        else if (GameData.getData().getArtifact() != null)
+            GUIMain.getScreen().show(SubScreen.LOOT);
+        else
+            GUIMain.getScreen().show(SubScreen.MAIN);
     }
 
     public static void show() throws SQLException, IOException {
@@ -76,7 +80,7 @@ public class MainHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    Window.getWindow().show(GameScreen.MAIN);
+                    Window.getWindow().show();
                 }
             });
         } else {

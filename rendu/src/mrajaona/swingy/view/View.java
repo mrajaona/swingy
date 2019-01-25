@@ -8,6 +8,7 @@ import mrajaona.swingy.view.gui.Window;
 import mrajaona.swingy.view.helper.BuildHelper;
 import mrajaona.swingy.view.helper.MainHelper;
 import mrajaona.swingy.view.helper.TitleHelper;
+import mrajaona.swingy.view.helper.WinHelper;
 import mrajaona.swingy.data.GameData;
 
 public class View {
@@ -18,6 +19,7 @@ public class View {
         GameScreen screen = GameData.getData().getScreen();
 
         Window.getWindow().updateMenu();
+        Window.getWindow().resize();
 
         switch (screen) {
             case TITLE :
@@ -29,11 +31,9 @@ public class View {
             case MAIN :
                 MainHelper.show();
                 break;
-            /*
             case WIN :
                 WinHelper.show();
                 break;
-            */
             /*
             case LOSE :
                 LoseHelper.show();

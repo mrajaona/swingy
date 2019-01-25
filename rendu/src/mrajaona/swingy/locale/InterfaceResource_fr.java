@@ -24,6 +24,11 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"runButton",    "Fuir"},
             {"equipButton",  "Equiper"},
             {"leaveButton",  "Laisser"},
+
+            // Win
+            {"winLabel", "Felicitations, vous avez gagne !"},
+            {"titleButton", "Sauvegarder et retourner à l'ecran titre"},
+            {"continueButton", "Sauvegarder et commencer une nouvelle carte"},
         };
     }
 

@@ -155,7 +155,6 @@ public class GUIMain {
                         });
                     }
 
-                    // TODO : icons
                     GridBagConstraints c = new GridBagConstraints();
                     {
                         c.fill      = GridBagConstraints.NONE;
@@ -320,7 +319,7 @@ public class GUIMain {
 
             // Panel for hero info and controls
             {
-                    utilPane = new JSplitPane(
+                utilPane = new JSplitPane(
                     JSplitPane.VERTICAL_SPLIT,
                     false,
                     heroStatsScrollPane,
@@ -343,7 +342,7 @@ public class GUIMain {
                 mainPane.setDividerLocation(500);
             }
 
-        localize();
+            localize();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -367,6 +366,8 @@ public class GUIMain {
     public void localize() {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
 
+        // TODO : direction buttons
+
         fightButton.setText(locale.getString("fightButton"));
         runButton.setText(locale.getString("runButton"));
 
@@ -378,6 +379,10 @@ public class GUIMain {
 
     public void log(String msg) {
         consoleArea.append(msg + System.lineSeparator());
+    }
+
+    public void clean() {
+        consoleArea.setText("");
     }
 
     public void initPanel(JPanel panel) {

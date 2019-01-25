@@ -67,6 +67,8 @@ public class CharacterModel {
             return ;
         }
 
+        // TODO : wait here
+
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() ).getString("msgAttack"),
             identity // %1$s

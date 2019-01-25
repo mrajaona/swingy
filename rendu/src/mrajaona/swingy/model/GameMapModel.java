@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 import mrajaona.swingy.builder.EnemyBuilder;
+import mrajaona.swingy.builder.GameMapBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
@@ -27,6 +28,14 @@ public class GameMapModel {
 
     @SuppressWarnings("unused")
     private GameMapModel() {}
+
+    public static void removeMap() {
+        GameMapBuilder builder = new GameMapBuilder();
+        GameMapData map = builder.newMap();
+        GameData.getData().setMap(map);
+        GameData.getData().setEnemy(null);
+        GameData.getData().setArtifact(null);
+    }
 
     public static void initMap() throws SQLException, IOException {
         GameMapData map = GameData.getData().getMap();
@@ -153,9 +162,7 @@ public class GameMapModel {
 
     public static void checkInitPosition() throws SQLException, IOException {
         if (checkWin()) {
-            // TODO : win screen
-            // GameModel.changeScreen(GameScreen.WIN);
-            MainHelper.printMsg( "YOU WIN" );
+            GameModel.changeScreen(GameScreen.WIN);
         } else if (checkEnemy()) {
             MainHelper.changeSubScreen();
             GameModel.changeScreen(GameScreen.MAIN);
@@ -166,8 +173,7 @@ public class GameMapModel {
 
     private static void checkPosition() throws SQLException, IOException {
         if (checkWin()) {
-            // TODO : win screen
-            MainHelper.printMsg( "YOU WIN" );
+            GameModel.changeScreen(GameScreen.WIN);
         } else if (checkEnemy()) {
             MainHelper.changeSubScreen();
         } else {

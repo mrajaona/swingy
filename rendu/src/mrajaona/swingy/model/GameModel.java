@@ -177,6 +177,12 @@ public class GameModel {
             GameMapModel.checkInitPosition();
     }
 
+    public static void title() throws SQLException, IOException {
+        MainHelper.clean();
+        GameMapModel.removeMap();
+        GameData.getData().setHero(null);
+        changeScreen(GameScreen.TITLE);
+    }
 
     public static void deleteHero(long id) throws SQLException, IOException {
         SaveManager.getManager().delete(id);
@@ -214,6 +220,7 @@ public class GameModel {
 
     public static void generateMap() throws SQLException, IOException {
         GameMapModel.initMap();
+        MainHelper.clean();
         changeScreen(GameScreen.MAIN);
     }
 
