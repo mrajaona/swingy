@@ -7,6 +7,7 @@ public class StatResource_fr extends ListResourceBundle {
     protected Object[][] getContents() {
         return new Object[][] {
             /* Strings */
+            {"id",            "Id"},
             {"name",          "Nom"},   // Hero
             {"class",         "Classe"},  // Hero
             {"type",          "Type"},   // Enemy

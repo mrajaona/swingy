@@ -203,7 +203,7 @@ public class GUITitle {
         {
             Object[] list = TitleHelper.getHeroesList();
             if (list == null)
-                ; // exception
+                ; // Exception // Empty != null
             for (int i = 0 ; i < list.length ; i++) {
                 heroListModel.addElement((HeroData) list[i]);
             }
@@ -298,9 +298,9 @@ public class GUITitle {
             data[4][1] = helmLocale.get(hero.getHelm().getName())     + " (" + Integer.toString(hero.getHelm().getModifier())   + ")";
             data[5][1] = armorLocale.get(hero.getArmor().getName())   + " (" + Integer.toString(hero.getArmor().getModifier())  + ")";
             data[6][1] = weaponLocale.get(hero.getWeapon().getName()) + " (" + Integer.toString(hero.getWeapon().getModifier()) + ")";
-            data[7][1] = Integer.toString(hero.getBaseAttack())    + " + " + Integer.toString(hero.getHelm().getModifier());
-            data[8][1] = Integer.toString(hero.getBaseDefense())   + " + " + Integer.toString(hero.getArmor().getModifier());
-            data[9][1] = Integer.toString(hero.getBaseHitPoints()) + " + " + Integer.toString(hero.getWeapon().getModifier());
+            data[7][1] = Integer.toString(hero.getAttack());
+            data[8][1] = Integer.toString(hero.getDefense());
+            data[9][1] = Integer.toString(hero.getMaxHitPoints());
 
             fireTableDataChanged();
         }

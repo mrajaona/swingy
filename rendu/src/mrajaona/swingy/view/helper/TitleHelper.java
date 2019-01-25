@@ -2,11 +2,14 @@ package mrajaona.swingy.view.helper;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.TitleScreenController;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.model.GameModel;
+import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
@@ -67,16 +70,44 @@ public class TitleHelper {
         }
     }
 
-    private static void printConsoleScreen() {
+    private static void heroStats(HeroData hero) {
+        ResourceBundle locale         = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+        ResourceBundle heroLocale     = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
+        ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
+
+        MainHelper.printMsg(
+            System.lineSeparator() +
+            locale.getString("id")            + " : " + Long.toString(hero.getId()) + System.lineSeparator() +
+            locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
+            locale.getString("class")         + " : " + ((ResourceMap) heroLocale.getObject("ClassesList")).get(hero.getHeroClass()) + System.lineSeparator() +
+            locale.getString("level")         + " : " + hero.getLevel() + System.lineSeparator() +
+            locale.getString("experience")    + " : " + hero.getExperience() + System.lineSeparator() +
+
+            locale.getString("attack")        + " : " + Integer.toString(hero.getBaseAttack())    + " + " + Integer.toString(hero.getWeapon().getModifier()) + System.lineSeparator() +
+            locale.getString("defense")       + " : " + Integer.toString(hero.getBaseDefense())   + " + " + Integer.toString(hero.getArmor().getModifier())  + System.lineSeparator() +
+            locale.getString("hitPoints")     + " : " + Integer.toString(hero.getBaseHitPoints()) + " + " + Integer.toString(hero.getHelm().getModifier())   + System.lineSeparator()
+
+        );
+    }
+
+
+    private static void listHeroes() throws SQLException, IOException {
+        List<HeroData> heroList = SaveManager.getManager().listHeroes();
+        if (heroList == null)
+            ; // Exception // Empty != null
+        for (HeroData hero : heroList) {
+            heroStats(hero);
+        }
+    }
+
+    private static void printConsoleScreen() throws SQLException, IOException {
         ResourceBundle locale = ResourceBundle.getBundle(
                                     "mrajaona.swingy.locale.InterfaceResource",
                                     GameData.getData().getLocale()
                                     );
 
         ConsoleView.println(locale.getString("title"));
-
-        // TODO : list for console view // Mandatory
-
+        listHeroes();
     }
 
     public static void reload() throws SQLException, IOException {

@@ -482,7 +482,7 @@ public class GUIMain {
             data[6][1] = weaponLocale.get(hero.getWeapon().getName()) + " (" + Integer.toString(hero.getWeapon().getModifier()) + ")";
             data[7][1] = Integer.toString(hero.getAttack());
             data[8][1] = Integer.toString(hero.getDefense());
-            data[9][1] = Integer.toString(hero.getHitPoints()) + " / " + Integer.toString(hero.getBaseHitPoints() + hero.getWeapon().getModifier());
+            data[9][1] = Integer.toString(hero.getHitPoints()) + " / " + Integer.toString(hero.getMaxHitPoints());
 
             fireTableDataChanged();
         }

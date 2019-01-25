@@ -125,7 +125,6 @@ public class HeroModel {
         ResourceMap    armorLocale    = (ResourceMap) artifactLocale.getObject( "ArmorList" );
         ResourceMap    weaponLocale   = (ResourceMap) artifactLocale.getObject( "WeaponList" );
 
-
         MainHelper.printMsg(
             System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
@@ -137,14 +136,11 @@ public class HeroModel {
             locale.getString("armor")         + " : " + armorLocale.get(hero.getArmor().getName())   + " (" + hero.getArmor().getModifier()  + ")" + System.lineSeparator() +
             locale.getString("weapon")        + " : " + weaponLocale.get(hero.getWeapon().getName()) + " (" + hero.getWeapon().getModifier() + ")" + System.lineSeparator() +
 
-            locale.getString("baseAttack")    + " : " + hero.getBaseAttack() + System.lineSeparator() +
-            locale.getString("attack")        + " : " + hero.getAttack() + System.lineSeparator() +
-            locale.getString("baseDefense")   + " : " + hero.getBaseDefense() + System.lineSeparator() +
-            locale.getString("defense")       + " : " + hero.getDefense() + System.lineSeparator() +
-            locale.getString("baseHitPoints") + " : " + hero.getBaseHitPoints() + System.lineSeparator() +
-            locale.getString("maxHitPoints")  + " : " + hero.getMaxHitPoints() + System.lineSeparator() +
-            locale.getString("hitPoints")     + " : " + hero.getHitPoints() + System.lineSeparator()
+            locale.getString("attack")        + " : " + Integer.toString(hero.getAttack()) + System.lineSeparator() +
+            locale.getString("defense")       + " : " + Integer.toString(hero.getDefense()) + System.lineSeparator() +
+            locale.getString("hitPoints")     + " : " + hero.getHitPoints() + " / " + hero.getMaxHitPoints() + System.lineSeparator()
         );
+
     }
 
     public static void move(String direction) throws SQLException, IOException {
