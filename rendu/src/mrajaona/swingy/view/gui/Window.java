@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -71,12 +72,12 @@ public class Window {
         {
             // Menu bar // TODO : localization
             menuBar = new JMenuBar();
-            menu = new JMenu("Insert menu name");
+            menu = new JMenu();
 
             // Menu items
 
             {
-                saveItem = new JMenuItem("Save");
+                saveItem = new JMenuItem();
                 saveItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent event) {
                         try {
@@ -94,7 +95,7 @@ public class Window {
             }
 
             {
-                consoleItem = new JMenuItem("Console view");
+                consoleItem = new JMenuItem();
                 consoleItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent event) {
                         try {
@@ -114,10 +115,10 @@ public class Window {
             {
                 // Language submenu // TODO : disable selected
                 menu.addSeparator();
-                langMenu = new JMenu("Language");
+                langMenu = new JMenu();
 
                 {
-                    enItem = new JMenuItem("en");
+                    enItem = new JMenuItem();
                     enItem.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
@@ -136,7 +137,7 @@ public class Window {
                 }
 
                 {
-                    frItem = new JMenuItem("fr");
+                    frItem = new JMenuItem();
                     frItem.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             try {
@@ -160,7 +161,7 @@ public class Window {
 
 
             {
-                helpItem = new JMenuItem("Help");
+                helpItem = new JMenuItem();
                 helpItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent event) {
                         try {
@@ -178,7 +179,7 @@ public class Window {
             }
 
             {
-                exitItem = new JMenuItem("Exit");
+                exitItem = new JMenuItem();
                 exitItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent event) {
                         try {
@@ -270,7 +271,20 @@ public class Window {
         GUIWin.getScreen().localize();
         GUIGameOver.getScreen().localize();
 
-        // TODO : localize menu
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+
+        menu.setText(locale.getString("menu"));
+
+        saveItem.setText(locale.getString("saveItem"));
+        consoleItem.setText(locale.getString("consoleItem"));
+        helpItem.setText(locale.getString("helpItem"));
+        exitItem.setText(locale.getString("exitItem"));
+
+        langMenu.setText(locale.getString("langMenu"));
+
+        enItem.setText(locale.getString("enItem"));
+        frItem.setText(locale.getString("frItem"));
+
 
     }
 

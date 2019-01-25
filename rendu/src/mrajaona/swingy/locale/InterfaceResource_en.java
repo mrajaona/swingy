@@ -37,6 +37,16 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"reloadButton", "Load last save"},
 
             // Menu
+            {"menu", "Menu"},
+            {"saveItem", "Save"},
+            {"consoleItem", "Console view"},
+            {"helpItem", "Help"},
+            {"exitItem", "Exit"},
+
+            {"langMenu", "Language"},
+            {"enItem", "English"},
+            {"frItem", "French"},
+
 
             /** log messages **/
 

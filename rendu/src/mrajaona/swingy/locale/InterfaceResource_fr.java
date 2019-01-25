@@ -36,6 +36,15 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"reloadButton", "Reprendre a la derniere sauvegarde"},
 
             // Menu
+            {"menu", "Menu"},
+            {"saveItem", "Sauvegarder"},
+            {"consoleItem", "Vue console"},
+            {"helpItem", "Aide"},
+            {"exitItem", "Quitter"},
+
+            {"langMenu", "Langue"},
+            {"enItem", "Anglais"},
+            {"frItem", "Francais"},
 
             /** log messages **/
 
