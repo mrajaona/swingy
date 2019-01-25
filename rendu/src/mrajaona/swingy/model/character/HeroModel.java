@@ -60,6 +60,7 @@ public class HeroModel {
                 hero.getLevel() // %2$d
                 );
             MainHelper.printMsg(msg);
+            System.out.println(msg);
             CharacterModel.fullRecover(hero);
         }
     }

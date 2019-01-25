@@ -360,7 +360,14 @@ public class GUIMain {
     }
 
     public void reset() {
+        consoleArea.setText("");
         statsTable.resetTable();
+        resetDividers();
+    }
+
+    public void resetDividers() {
+        utilPane.setDividerLocation(300);
+        mainPane.setDividerLocation(500);
     }
 
     public void localize() {
@@ -379,10 +386,6 @@ public class GUIMain {
 
     public void log(String msg) {
         consoleArea.append(msg + System.lineSeparator());
-    }
-
-    public void clean() {
-        consoleArea.setText("");
     }
 
     public void initPanel(JPanel panel) {

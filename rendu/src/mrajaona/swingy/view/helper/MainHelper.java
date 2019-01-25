@@ -60,7 +60,7 @@ public class MainHelper {
     }
 
     public static void clean() {
-        GUIMain.getScreen().clean();
+        GUIMain.getScreen().reset();
     }
 
     public static void changeSubScreen() {
@@ -74,6 +74,7 @@ public class MainHelper {
 
     public static void show() throws SQLException, IOException {
         changeSubScreen();
+        GUIMain.getScreen().updateTable();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
@@ -81,6 +82,7 @@ public class MainHelper {
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     Window.getWindow().show();
+                    GUIMain.getScreen().resetDividers();
                 }
             });
         } else {
