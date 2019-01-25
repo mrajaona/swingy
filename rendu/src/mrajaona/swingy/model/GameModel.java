@@ -34,19 +34,19 @@ public class GameModel {
         changeViewType(viewType);
     }
 
-    public static void setLocale(Locale newLocale) {
+    public static void setLocale(Locale newLocale) throws SQLException, IOException {
         GameData.getData().setLocale(newLocale);
         View.update();
     }
 
-    public static void setLocale(String arg) {
+    public static void setLocale(String arg) throws SQLException, IOException {
         try {
-            if (arg != "en" && arg != "fr") {
+            if (!arg.equals("en") && !arg.equals("fr")) {
                 ConsoleView.println(
                     ResourceBundle.getBundle(
                         "mrajaona.swingy.locale.ErrorResource",
                         GameData.getData().getLocale() )
-                    .getString("InvalidLanguage")
+                    .getString("invalidLanguage")
                 ); // only possible in console view
                 return ;
             }

@@ -22,7 +22,17 @@ public class MainHelper {
 
     public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
             ConsoleView.println(message);
+            ConsoleView.println(locale.getString("menuCmds"));
+
+            if (GameData.getData().getEnemy() != null)
+                ConsoleView.println(locale.getString("battleCmds"));
+            else if (GameData.getData().getArtifact() != null)
+                ConsoleView.println(locale.getString("lootCmds"));
+            else
+                ConsoleView.println(locale.getString("mainCmds"));
+
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             GUIMain.getScreen().log(message);
         } else {

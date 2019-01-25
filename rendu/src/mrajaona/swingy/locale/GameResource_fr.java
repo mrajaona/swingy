@@ -8,25 +8,42 @@ public class GameResource_fr extends ListResourceBundle {
         return new Object[][] {
             /* commands */
             // common
-            {"exit",     ""},
-            {"help",     ""},
-            {"gui",      ""},
-            {"console",  ""},
-            {"language", ""},
+            {"menuCmds",     "-- aide, gui, langue en/fr, quitter"},
+            {"quitter",      "exit"},
+            {"aide",         "help"},
+            {"gui",          "gui"},
+            {"console",      "console"},
+            {"langue",       "language"},
 
             // title
-            {"new",      ""},
-            {"load",     ""},
-            {"delete",   ""},
+            {"titleCmds",    "-- nouveau, charger <id>, supprimer <id>"},
+            {"nouveau",      "new"},
+            {"charger",      "load"},
+            {"supprimer",    "delete"},
 
             // new
-            {"create",   ""},
+            {"creer",        "create"},
 
             // main
-            {"move",     ""},
-            {"status",   ""},
-            {"save",     ""},
-       };
+            {"mainCmds",     "-- sauvegarder, aller nord/sud/est/ouest, statut"},
+            {"battleCmds",   "-- sauvegarder, combattre, fuir"},
+            {"lootCmds",     "-- sauvegarder, equipr, lisser"},
+
+            {"aller",        "move"},
+            {"statut",       "status"},
+            {"sauvegarder",  "save"},
+
+            // win
+            {"winCmds",      "-- titre, continuer (nouvelle carte) (votre partie sera sauvegardee)"},
+            {"continuer",    "continue"},
+
+            // game over
+            {"gameOverCmds", "-- titre, recharger (votre partie ne sera pas sauvegardee)"},
+            {"recharger",    "reload"},
+
+            {"titre",        "title"}
+
+        };
     }
 
 }

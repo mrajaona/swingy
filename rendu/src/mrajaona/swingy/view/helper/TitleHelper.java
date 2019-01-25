@@ -24,7 +24,10 @@ public class TitleHelper {
 
     public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
             ConsoleView.println(message);
+            ConsoleView.println(locale.getString("menuCmds"));
+            ConsoleView.println(locale.getString("titleCmds"));
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // TODO : modal
         } else {
@@ -75,7 +78,7 @@ public class TitleHelper {
         ResourceBundle heroLocale     = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
         ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
 
-        MainHelper.printMsg(
+        ConsoleView.println(
             System.lineSeparator() +
             locale.getString("id")            + " : " + Long.toString(hero.getId()) + System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +

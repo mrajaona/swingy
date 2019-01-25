@@ -45,7 +45,8 @@ public class MenuController {
             });
         map.put("language", new Cmd() {
                 public void run()           { invalid(); }
-                public void run(String arg) { GameModel.setLocale(arg); }
+                public void run(String arg) throws SQLException, IOException
+                                            { GameModel.setLocale(arg); }
             });
         return Collections.unmodifiableMap(map);
     }

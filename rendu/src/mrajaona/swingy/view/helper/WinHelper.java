@@ -19,7 +19,10 @@ public class WinHelper {
 
     public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
             ConsoleView.println(message);
+            ConsoleView.println(locale.getString("menuCmds"));
+            ConsoleView.println(locale.getString("winCmds"));
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
