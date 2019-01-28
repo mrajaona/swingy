@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.GameOverController;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.Util.ViewTypes;
 import mrajaona.swingy.view.console.ConsoleView;
 import mrajaona.swingy.view.gui.GUIGameOver;
@@ -27,9 +28,15 @@ public class GameOverHelper {
     }
 
     public static void printPrompt() {
+        Coord heroCoord = GameData.getData().getMap().getHeroCoord();
         printMsg(
-            ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
-            .getString("msgGetInput"));
+            String.format(
+                ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
+                    .getString("msgGetInput"),
+                    heroCoord.getX(), // %1$d
+                    heroCoord.getY() // %2$d
+            )
+        );
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );

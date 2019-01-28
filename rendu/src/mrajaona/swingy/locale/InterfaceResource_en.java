@@ -51,8 +51,9 @@ public class InterfaceResource_en extends ListResourceBundle {
             /** log messages **/
 
             /* Strings */
-            {"msgGetInput",   "What do you want to do ?"},
-            {"msgMove",       "%1$s moves %2$s (%3$d, %4$d)."}, // hero name, direction, x, y
+            {"msgTitleInput", "What do you want to do ?"},
+            {"msgGetInput",   "You are at position [%1$d, %2$d]. What do you want to do ?"}, // x, y
+            {"msgMove",       "%1$s moves %2$s."}, // hero name, direction
 
             {"msgEncounter", "A wild level %1$d %2$s appeared !"}, // level, enemy type
 

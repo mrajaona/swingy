@@ -8,6 +8,7 @@ import mrajaona.swingy.controller.BattleController;
 import mrajaona.swingy.controller.LootController;
 import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.SubScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
@@ -31,9 +32,15 @@ public class MainHelper {
     }
 
     public static void printPrompt() {
-            printMsg(
+        Coord heroCoord = GameData.getData().getMap().getHeroCoord();
+        printMsg(
+            String.format(
                 ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
-                .getString("msgGetInput"));
+                    .getString("msgGetInput"),
+                    heroCoord.getX(), // %1$d
+                    heroCoord.getY() // %2$d
+            )
+        );
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale());

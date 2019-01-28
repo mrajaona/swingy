@@ -157,9 +157,7 @@ public class GameMapModel {
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgMove"),
             GameData.getData().getHero().getHeroName(), // %1$s
-            dir, // %2$s // localized
-            map.getCoordX(), // %3$d
-            map.getCoordY() // %4$d
+            dir // %2$s // localized
         );
 
         MainHelper.printMsg(msg);

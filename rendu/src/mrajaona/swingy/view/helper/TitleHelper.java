@@ -24,10 +24,7 @@ public class TitleHelper {
 
     public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
-            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
             ConsoleView.println(message);
-            ConsoleView.println(locale.getString("menuCmds"));
-            ConsoleView.println(locale.getString("titleCmds"));
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // TODO : modal
         } else {
@@ -38,7 +35,7 @@ public class TitleHelper {
     public static void printPrompt() {
         printMsg(
             ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
-            .getString("msgGetInput"));
+            .getString("msgTitleInput"));
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
@@ -65,12 +62,7 @@ public class TitleHelper {
     }
 
     public static void waitForInput() throws SQLException, IOException {
-        printMsg(
-                ResourceBundle.getBundle(
-                    "mrajaona.swingy.locale.InterfaceResource",
-                    GameData.getData().getLocale() )
-                .getString("msgGetInput")
-                );
+        printPrompt();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             String[] line;
