@@ -22,8 +22,21 @@ public class MainHelper {
 
     public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
-            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
             ConsoleView.println(message);
+        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
+            GUIMain.getScreen().log(message);
+        } else {
+            // Exception
+        }
+    }
+
+    public static void printPrompt() {
+            ConsoleView.println(
+                ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
+                .getString("msgGetInput"));
+
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale());
             ConsoleView.println(locale.getString("menuCmds"));
 
             if (GameData.getData().getEnemy() != null)
@@ -32,21 +45,11 @@ public class MainHelper {
                 ConsoleView.println(locale.getString("lootCmds"));
             else
                 ConsoleView.println(locale.getString("mainCmds"));
-
-        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            GUIMain.getScreen().log(message);
-        } else {
-            // Exception
         }
     }
 
     public static void waitForInput() throws SQLException, IOException {
-        printMsg(
-                ResourceBundle.getBundle(
-                    "mrajaona.swingy.locale.InterfaceResource",
-                    GameData.getData().getLocale() )
-                .getString("msgGetInput")
-                );
+        printPrompt();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             String[] line;
@@ -54,11 +57,11 @@ public class MainHelper {
             line = ConsoleView.getSplitInput();
 
             if (GameData.getData().getEnemy() != null)
-                BattleController.run(line);
+                BattleController.delocalize(line);
             else if (GameData.getData().getArtifact() != null)
-                LootController.run(line);
+                LootController.delocalize(line);
             else
-                MainGameController.run(line);
+                MainGameController.delocalize(line);
 
             waitForInput();
 

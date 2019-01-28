@@ -214,15 +214,18 @@ public class HeroBuilder {
         ResourceBundle errLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() );
 
         // delocalize heroClass
-        ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
-        String      tmp = map.getKeyByValue(heroClass);
+        if (init) {
+            ResourceMap map = (ResourceMap) locale.getObject("ClassesList");
+            String      tmp = map.getKeyByValue(heroClass);
 
-        if (tmp == null) {
-            heroClass = new String();
-            BuildHelper.printMsg(errLocale.getString("invalidClass"));
-        } else {
-            heroClass = tmp;
+            if (tmp == null) {
+                heroClass = new String();
+                BuildHelper.printMsg(errLocale.getString("invalidClass"));
+            } else {
+                heroClass = tmp;
+            }
         }
+
 
         if (init == true) {
             Util.HeroBaseStats stats = Util.HERO_BASE_STATS_MAP.get(heroClass);

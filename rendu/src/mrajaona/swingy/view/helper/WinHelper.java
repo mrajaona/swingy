@@ -19,10 +19,7 @@ public class WinHelper {
 
     public static void printMsg(String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
-            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
             ConsoleView.println(message);
-            ConsoleView.println(locale.getString("menuCmds"));
-            ConsoleView.println(locale.getString("winCmds"));
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
@@ -30,19 +27,26 @@ public class WinHelper {
         }
     }
 
+    public static void printPrompt() {
+        ConsoleView.println(
+            ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
+            .getString("msgGetInput"));
+
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
+            ConsoleView.println(locale.getString("menuCmds"));
+            ConsoleView.println(locale.getString("winCmds"));
+        }
+    }
+
     public static void waitForInput() throws SQLException, IOException {
-        printMsg(
-                ResourceBundle.getBundle(
-                    "mrajaona.swingy.locale.InterfaceResource",
-                    GameData.getData().getLocale() )
-                .getString("msgGetInput")
-                );
+        printPrompt();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             String[] line;
 
             line = ConsoleView.getSplitInput();
-            WinController.run(line);
+            WinController.delocalize(line);
 
             waitForInput();
 

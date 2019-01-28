@@ -59,7 +59,9 @@ public class SaveFileBuilder {
             System.out.println("Invalid save file");
             // Debug
             for (ConstraintViolation<SaveFileBuilder> violation : fileConstraintViolations) {
-                System.out.println(violation.getMessage());
+                System.out.println("Save : " + violation.getMessage());
+                System.out.println(violation.getRootBean());
+                System.out.println(violation.getPropertyPath());
             }
             error = true;
         }

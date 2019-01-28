@@ -5,8 +5,11 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.MenuController.Cmd;
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.util.SaveManager;
@@ -65,6 +68,22 @@ public class WinController {
             cmd.run(args[1]);
         else
             invalid();
+    }
+
+    public static void delocalize(String[] args) throws SQLException, IOException {
+        if (args.length <= 0 || args.length > 2) {
+            invalid();
+            return;
+        }
+
+        try {
+            ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
+            args[0] = locale.getString(args[0]);
+        } catch (MissingResourceException e) {
+            args[0] = null;
+        }
+
+        run(args);
     }
 
 }

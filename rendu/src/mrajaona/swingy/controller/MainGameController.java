@@ -5,8 +5,12 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
+import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.model.character.HeroModel;
+import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.view.helper.MainHelper;
 
@@ -70,5 +74,31 @@ public class MainGameController extends MenuController {
         else
             invalid();
     }
+
+    public static void delocalize(String[] args) throws SQLException, IOException {
+        if (args.length <= 0 || args.length > 2) {
+            invalid();
+            return;
+        }
+
+        try {
+            ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
+            args[0] = locale.getString(args[0]);
+        } catch (MissingResourceException e) {
+            args[0] = null;
+        }
+
+
+        if (args.length == 2) {
+            // move cmd
+            ResourceMap subLocale = (ResourceMap) ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() )
+                .getObject("DirectionList");
+            String tmp = subLocale.getKeyByValue(args[1]);
+            args[1]    = tmp == null ? args[1] : tmp;
+        }
+
+        run(args);
+    }
+
 
 }

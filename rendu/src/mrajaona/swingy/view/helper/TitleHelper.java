@@ -35,6 +35,19 @@ public class TitleHelper {
         }
     }
 
+    public static void printPrompt() {
+        ConsoleView.println(
+            ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
+            .getString("msgGetInput"));
+
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ResourceBundle locale = ResourceBundle.getBundle("mrajaona.swingy.locale.GameResource", GameData.getData().getLocale() );
+            ConsoleView.println(locale.getString("menuCmds"));
+            ConsoleView.println(locale.getString("titleCmds"));
+        }
+    }
+
+
     public static Object[] getHeroesList() throws SQLException, IOException {
         return ( SaveManager.getManager().listHeroes().toArray() );
     }
@@ -64,7 +77,7 @@ public class TitleHelper {
 
             while (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
                 line = ConsoleView.getSplitInput();
-                TitleScreenController.run(line);
+                TitleScreenController.delocalize(line);
             }
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere

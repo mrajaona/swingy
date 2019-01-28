@@ -119,7 +119,7 @@ public class GameMapModel {
         String dir               = resMap.getKeyByValue(direction);
 
         if (dir == null) {
-            MainHelper.printMsg(errLocale.getString("invalidDirection"));
+            MainHelper.printMsg(errLocale.getString("invalidDirection : " + direction));
             return ;
         }
 
