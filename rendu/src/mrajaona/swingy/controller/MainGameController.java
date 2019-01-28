@@ -76,8 +76,6 @@ public class MainGameController extends MenuController {
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {
-        System.out.println("main");
-
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;
@@ -92,7 +90,7 @@ public class MainGameController extends MenuController {
 
         if (args.length == 2) {
             // move cmd
-            if(args[1].equals("move")) {
+            if(args[0].equals(new String("move"))) {
                 ResourceMap subLocale = (ResourceMap) ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() )
                     .getObject("DirectionList");
                 args[1] = subLocale.getKeyByValue(args[1]);

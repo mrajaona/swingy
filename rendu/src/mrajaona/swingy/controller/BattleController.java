@@ -61,8 +61,6 @@ public class BattleController extends MenuController {
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {
-        System.out.println("battle");
-
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;

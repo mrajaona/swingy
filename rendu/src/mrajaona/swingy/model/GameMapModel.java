@@ -136,20 +136,21 @@ public class GameMapModel {
                 map.setCoordY( map.getCoordY() - 1 );
                 break ;
             default :
-                MainHelper.printMsg(errLocale.getString("invalidDirection") + "1");
+                MainHelper.printMsg(errLocale.getString("invalidDirection"));
                 isValid = false;
                 break ;
         }
 
-        if (!isValid)
+        if (!isValid) {
             return ;
+        }
 
         ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
         ResourceMap    resMap    = (ResourceMap) locale.getObject("DirectionList");
         String dir               = resMap.get(direction);
 
         if (dir == null) {
-            MainHelper.printMsg(errLocale.getString("invalidDirection") + "2"); // Exception
+            MainHelper.printMsg(errLocale.getString("invalidDirection")); // Exception
             return ;
         }
 

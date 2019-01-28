@@ -119,7 +119,7 @@ public class HeroModel {
     public static void viewStats() {
         HeroData hero = GameData.getData().getHero();
         ResourceBundle locale         = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
-        ResourceBundle heroLocale     = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
+        ResourceBundle heroLocale     = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
         ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
         ResourceMap    helmLocale     = (ResourceMap) artifactLocale.getObject( "HelmList" );
         ResourceMap    armorLocale    = (ResourceMap) artifactLocale.getObject( "ArmorList" );
