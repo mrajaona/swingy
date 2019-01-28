@@ -154,6 +154,17 @@ public class GUIWin {
         return (screen);
     }
 
+    public void initPanel(JPanel panel) {
+        GridBagConstraints c = new GridBagConstraints();
+        {
+            c.fill      = GridBagConstraints.BOTH;
+            c.weightx   = 1;
+            c.weighty   = 1;
+            c.anchor    = GridBagConstraints.CENTER;
+            panel.add(mainPanel, c);
+        }
+    }
+
     public void localize() {
         ResourceBundle uiLocale   = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
         winLabel.setText(uiLocale.getString("winLabel"));
@@ -175,14 +186,4 @@ public class GUIWin {
             );
     }
 
-    public void initPanel(JPanel panel) {
-        GridBagConstraints c = new GridBagConstraints();
-        {
-            c.fill      = GridBagConstraints.BOTH;
-            c.weightx   = 1;
-            c.weighty   = 1;
-            c.anchor    = GridBagConstraints.CENTER;
-            panel.add(mainPanel, c);
-        }
-    }
 }

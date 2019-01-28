@@ -163,21 +163,6 @@ public class GUITitle {
         return (screen);
     }
 
-    public void reset() {
-        heroList.clearSelection();
-        statsTable.resetTable();
-    }
-
-    public void localize() {
-        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
-
-        newButton.setText(locale.getString("newButton"));
-        loadButton.setText(locale.getString("loadButton"));
-        deleteButton.setText(locale.getString("deleteButton"));
-
-        statsTable.updateLocale(heroList.getSelectedValue());
-    }
-
     public void initPanel(JPanel panel) {
         GridBagConstraints c = new GridBagConstraints();
         {
@@ -196,6 +181,21 @@ public class GUITitle {
             c.insets  = new Insets(0, 0, 0, 0);
             panel.add(controlPanel, c);
         }
+    }
+
+    public void reset() {
+        heroList.clearSelection();
+        statsTable.resetTable();
+    }
+
+    public void localize() {
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+
+        newButton.setText(locale.getString("newButton"));
+        loadButton.setText(locale.getString("loadButton"));
+        deleteButton.setText(locale.getString("deleteButton"));
+
+        statsTable.updateLocale(heroList.getSelectedValue());
     }
 
     public void initHeroList() throws SQLException, IOException {

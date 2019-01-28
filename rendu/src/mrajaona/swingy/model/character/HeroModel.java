@@ -34,6 +34,8 @@ public class HeroModel {
 
     public final static int HERO_MAX_LVL = 100;
 
+    // XP
+
     public static void earnExp(double amount) {
         HeroData hero = GameData.getData().getHero();
         double exp      = hero.getExperience() + amount;
@@ -65,6 +67,8 @@ public class HeroModel {
             CharacterModel.fullRecover(hero);
         }
     }
+
+    // Equipment
 
     public static void equip(ArtifactData artifact) throws SQLException, IOException {
         switch(artifact.getType()) {
@@ -108,6 +112,7 @@ public class HeroModel {
         GameModel.noDrop();
     }
 
+    // Stats
 
     private static void updateStats() {
         HeroData hero = GameData.getData().getHero();
@@ -148,6 +153,8 @@ public class HeroModel {
 
     }
 
+    // move
+
     public static void move(String direction) throws SQLException, IOException {
         GameMapModel.move(direction);
     }
@@ -178,6 +185,8 @@ public class HeroModel {
             fight();
         }
     }
+
+    // battle
 
     public static void fight() throws SQLException, IOException {
         HeroData  hero  = GameData.getData().getHero();
@@ -211,10 +220,6 @@ public class HeroModel {
             GameData.getData().getHero().getHeroName() // %1$s
         );
         MainHelper.printMsg(msg);
-    }
-
-    private static void updateUI() {
-        GUIMain.getScreen().updateTable();
     }
 
 }

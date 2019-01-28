@@ -12,6 +12,8 @@ public class CharacterModel {
 
     private CharacterModel() {}
 
+    // manage HP
+
     public static void fullRecover(CharacterData character) {
         character.setHitPoints(character.getMaxHitPoints());
     }
@@ -54,6 +56,8 @@ public class CharacterModel {
     public static boolean isDead(CharacterData character) {
         return (character.getHitPoints() == 0 ? true : false);
     }
+
+    // battle
 
     public static void attack(CharacterData attacker, CharacterData target) {
         String identity;

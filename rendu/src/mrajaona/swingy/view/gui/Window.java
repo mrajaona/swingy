@@ -50,8 +50,6 @@ public class Window {
             private JMenuItem helpItem;
             private JMenuItem exitItem;
 
-
-
     private Window (String name) {
         {
             frame = new JFrame(name);

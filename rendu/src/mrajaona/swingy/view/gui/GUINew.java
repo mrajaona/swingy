@@ -196,6 +196,26 @@ public class GUINew {
         return (screen);
     }
 
+    public void initPanel(JPanel panel) {
+        GridBagConstraints c = new GridBagConstraints();
+        {
+            c.fill    = GridBagConstraints.HORIZONTAL;
+            c.gridy   = 0;
+            c.weightx = 0;
+            c.weighty = 0;
+            c.insets  = new Insets(0,0,0,0);
+            panel.add(paramsPanel, c);
+        }
+        {
+            c.fill    = GridBagConstraints.HORIZONTAL;
+            c.gridy   = 1;
+            c.weightx = 0;
+            c.weighty = 0;
+            c.insets  = new Insets(0,0,0,0);
+            panel.add(controlPanel, c);
+        }
+    }
+
     public void reset() {
         classField.setSelectedIndex(0);
         nameField.setText(new String());
@@ -228,26 +248,6 @@ public class GUINew {
         }
 
         classField.setSelectedIndex(index);
-    }
-
-    public void initPanel(JPanel panel) {
-        GridBagConstraints c = new GridBagConstraints();
-        {
-            c.fill    = GridBagConstraints.HORIZONTAL;
-            c.gridy   = 0;
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets  = new Insets(0,0,0,0);
-            panel.add(paramsPanel, c);
-        }
-        {
-            c.fill    = GridBagConstraints.HORIZONTAL;
-            c.gridy   = 1;
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets  = new Insets(0,0,0,0);
-            panel.add(controlPanel, c);
-        }
     }
 
 }

@@ -10,15 +10,7 @@ public class ConsoleView {
         System.out.println(message);
     }
 
-    public static void print(String message) {
-        System.out.print(message);
-    }
-
     // Input
-
-    public static String getRawInput() {
-        return (GameData.getData().getInputScanner().nextLine());
-    }
 
     public static String getLowerCaseInput() {
         return (GameData.getData().getInputScanner().nextLine().toLowerCase(GameData.getData().getLocale()));

@@ -354,6 +354,17 @@ public class GUIMain {
         return (screen);
     }
 
+    public void initPanel(JPanel panel) {
+        GridBagConstraints c = new GridBagConstraints();
+        {
+            c.fill      = GridBagConstraints.BOTH;
+            c.weightx   = 1;
+            c.weighty   = 1;
+            c.anchor    = GridBagConstraints.CENTER;
+            panel.add(mainPane, c);
+        }
+    }
+
     public void show(SubScreen screen) {
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
@@ -391,17 +402,6 @@ public class GUIMain {
 
     public void log(String msg) {
         consoleArea.append(msg + System.lineSeparator());
-    }
-
-    public void initPanel(JPanel panel) {
-        GridBagConstraints c = new GridBagConstraints();
-        {
-            c.fill      = GridBagConstraints.BOTH;
-            c.weightx   = 1;
-            c.weighty   = 1;
-            c.anchor    = GridBagConstraints.CENTER;
-            panel.add(mainPane, c);
-        }
     }
 
     public void updateTable() {
