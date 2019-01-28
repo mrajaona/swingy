@@ -70,7 +70,7 @@ public class TitleHelper {
             line = ConsoleView.getSplitInput();
             TitleScreenController.delocalize(line);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            ; // GUI waits for user to click somewhere
+            mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
         } else {
             // Exception
         }
@@ -133,7 +133,6 @@ public class TitleHelper {
         } else {
             // Exception
         }
-
     }
 
 }

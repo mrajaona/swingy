@@ -83,7 +83,6 @@ public class HeroModel {
         }
         updateStats();
         GameModel.noDrop();
-        MainHelper.waitForInput();
     }
 
     public static void unequip(ArtifactData artifact) {
@@ -103,6 +102,12 @@ public class HeroModel {
         }
         updateStats();
     }
+
+    public static void noLoot() throws SQLException, IOException {
+        MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgLeave"));
+        GameModel.noDrop();
+    }
+
 
     private static void updateStats() {
         HeroData hero = GameData.getData().getHero();
@@ -193,7 +198,6 @@ public class HeroModel {
         }
         else if (CharacterModel.isDead(enemy)) {
             EnemyModel.die();
-            MainHelper.waitForInput();
         }
         else {
             // Exception

@@ -29,13 +29,7 @@ public class GameMapModel {
     @SuppressWarnings("unused")
     private GameMapModel() {}
 
-    public static void removeMap() {
-        GameMapBuilder builder = new GameMapBuilder();
-        GameMapData map = builder.newMap();
-        GameData.getData().setMap(map);
-        GameData.getData().setEnemy(null);
-        GameData.getData().setArtifact(null);
-    }
+    // add data
 
     public static void initMap() throws SQLException, IOException {
         GameMapData map = GameData.getData().getMap();
@@ -87,6 +81,8 @@ public class GameMapModel {
         }
     }
 
+    // remove data
+
     public static void clear() {
         GameMapData map = GameData.getData().getMap();
 
@@ -94,6 +90,21 @@ public class GameMapModel {
         map.cleanCoord();
         map.getEnemies().clear();
     }
+
+    public static void removeMap() {
+        GameMapBuilder builder = new GameMapBuilder();
+        GameMapData map = builder.newMap();
+        GameData.getData().setMap(map);
+        GameData.getData().setEnemy(null);
+        GameData.getData().setArtifact(null);
+    }
+
+    public static void enemyDied() {
+        GameModel.enemyEncounterEnd(); // remove from game data
+        GameData.getData().getMap().removeEnemy();
+    }
+
+    // check data
 
     public static boolean checkCoord(Coord coord) {
         int size = GameData.getData().getMap().getSize();
@@ -108,6 +119,70 @@ public class GameMapModel {
             )
             return (false);
         return (true);
+    }
+
+    public static void checkInitPosition() throws SQLException, IOException {
+        MainHelper.clean();
+
+        if (checkWin()) {
+            GameModel.changeScreen(GameScreen.WIN);
+        } else if (checkEnemy()) {
+            MainHelper.changeSubScreen();
+            GameModel.changeScreen(GameScreen.MAIN);
+        } else {
+            GameModel.changeScreen(GameScreen.MAIN); // Keep playing
+        }
+    }
+
+    private static void checkPosition() throws SQLException, IOException {
+        if (checkWin()) {
+            GameModel.changeScreen(GameScreen.WIN);
+        } else if (checkEnemy()) {
+            MainHelper.changeSubScreen();
+        }
+    }
+
+    private static boolean checkEnemy() {
+        HashMap<Coord, EnemyData> enemies = GameData.getData().getMap().getEnemies();
+
+        GameMapData map = GameData.getData().getMap();
+        EnemyData enemy = enemies.get(map.getHeroCoord());
+
+        if (enemy != null) {
+            GameModel.enemyEncounter(enemy);
+
+            String msg = String.format(
+                ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource",
+                    GameData.getData().getLocale()
+                ).getString("msgEncounter"),
+                enemy.getLevel(), // %1$d
+                ResourceBundle.getBundle("mrajaona.swingy.locale.EnemyResource",
+                    GameData.getData().getLocale()
+                ).getString(enemy.getEnemyType()) // %2$s
+            );
+
+            MainHelper.printMsg(msg);
+            return (true);
+        }
+
+        return (false);
+    }
+
+    private static boolean checkWin() {
+        GameMapData map = GameData.getData().getMap();
+
+        // check border
+        int x = map.getHeroCoord().getX();
+        int y = map.getHeroCoord().getY();
+        int max = GameData.getData().getMap().getSize() - 1;
+        if (
+               (x == 0 || x == max)
+            || (y == 0 || y == max)
+        ) {
+            return (true);
+        }
+
+        return (false);
     }
 
     // move hero
@@ -170,79 +245,12 @@ public class GameMapModel {
         checkPosition();
     }
 
-    public static void checkInitPosition() throws SQLException, IOException {
-        if (checkWin()) {
-            GameModel.changeScreen(GameScreen.WIN);
-        } else if (checkEnemy()) {
-            MainHelper.changeSubScreen();
-            GameModel.changeScreen(GameScreen.MAIN);
-        } else {
-            GameModel.changeScreen(GameScreen.MAIN); // Keep playing
-        }
-    }
-
-    private static void checkPosition() throws SQLException, IOException {
-        if (checkWin()) {
-            GameModel.changeScreen(GameScreen.WIN);
-        } else if (checkEnemy()) {
-            MainHelper.changeSubScreen();
-        } else {
-            MainHelper.waitForInput(); // Keep playing
-        }
-    }
-
-    private static boolean checkEnemy() {
-        HashMap<Coord, EnemyData> enemies = GameData.getData().getMap().getEnemies();
-
-        GameMapData map = GameData.getData().getMap();
-        EnemyData enemy = enemies.get(map.getHeroCoord());
-
-        if (enemy != null) {
-            GameModel.enemyEncounter(enemy);
-
-            String msg = String.format(
-                ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource",
-                    GameData.getData().getLocale()
-                ).getString("msgEncounter"),
-                enemy.getLevel(), // %1$d
-                ResourceBundle.getBundle("mrajaona.swingy.locale.EnemyResource",
-                    GameData.getData().getLocale()
-                ).getString(enemy.getEnemyType()) // %2$s
-            );
-
-            MainHelper.printMsg(msg);
-            return (true);
-        }
-
-        return (false);
-    }
-
-    private static boolean checkWin() {
-        GameMapData map = GameData.getData().getMap();
-
-        // check border
-        int x = map.getHeroCoord().getX();
-        int y = map.getHeroCoord().getY();
-        int max = GameData.getData().getMap().getSize() - 1;
-        if (
-               (x == 0 || x == max)
-            || (y == 0 || y == max)
-        ) {
-            return (true);
-        }
-
-        return (false);
-    }
-
     public static void goBack() throws SQLException, IOException {
         GameData.getData().getMap().goBack();
         GameModel.enemyEncounterEnd();
         checkPosition();
     }
 
-    public static void enemyDied() {
-        GameModel.enemyEncounterEnd(); // remove from game data
-        GameData.getData().getMap().removeEnemy();
-    }
+
 
 }

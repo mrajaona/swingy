@@ -18,9 +18,7 @@ public class GameOverController {
     @SuppressWarnings("unused")
     private GameOverController() {}
 
-    private static void invalid() {
-        // error
-    }
+    private static void invalid() {}
 
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
@@ -28,7 +26,7 @@ public class GameOverController {
 
         map.putAll(MenuController.getCommonCmdMap());
 
-        // loot
+        // lose
         map.put("title", new Cmd() {
                 public void run()           throws SQLException, IOException
                                             {
@@ -66,6 +64,8 @@ public class GameOverController {
             cmd.run(args[1]);
         else
             invalid();
+
+        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {

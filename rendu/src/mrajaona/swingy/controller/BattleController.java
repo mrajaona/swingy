@@ -17,9 +17,7 @@ public class BattleController extends MenuController {
     @SuppressWarnings("unused")
     private BattleController() {}
 
-    private static void invalid() {
-        // error
-    }
+    private static void invalid() {}
 
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
@@ -58,6 +56,8 @@ public class BattleController extends MenuController {
             cmd.run(args[1]);
         else
             invalid();
+
+        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {

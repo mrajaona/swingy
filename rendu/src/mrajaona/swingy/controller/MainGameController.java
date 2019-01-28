@@ -19,9 +19,7 @@ public class MainGameController extends MenuController {
     @SuppressWarnings("unused")
     private MainGameController() {}
 
-    private static void invalid() throws SQLException, IOException {
-        MainHelper.waitForInput();
-    }
+    private static void invalid() {}
 
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
@@ -38,20 +36,14 @@ public class MainGameController extends MenuController {
             });
         map.put("status", new Cmd() {
                 public void run()           throws SQLException, IOException
-                {
-                    HeroModel.viewStats();
-                    MainHelper.waitForInput();
-                }
+                { HeroModel.viewStats(); }
                 public void run(String arg) throws SQLException, IOException
                 { invalid(); }
             });
 
         map.put("save", new Cmd() {
                 public void run()           throws SQLException, IOException
-                {
-                    SaveManager.getManager().save();
-                    MainHelper.waitForInput();
-                }
+                { SaveManager.getManager().save(); }
                 public void run(String arg) throws SQLException, IOException
                 { invalid(); }
             });
@@ -73,6 +65,8 @@ public class MainGameController extends MenuController {
             cmd.run(args[1]);
         else
             invalid();
+
+        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {

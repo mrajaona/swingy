@@ -9,6 +9,7 @@ public class NewHeroController {
 
     public static void create(String heroClass, String heroName) throws SQLException, IOException {
         GameModel.createHero(heroClass, heroName);
+        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
 }

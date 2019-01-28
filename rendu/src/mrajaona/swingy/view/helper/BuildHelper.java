@@ -31,7 +31,7 @@ public class BuildHelper {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             return (ConsoleView.getLowerCaseInput());
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            ; // GUI waits for user to click somewhere
+            mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
         } else {
             // Exception
         }

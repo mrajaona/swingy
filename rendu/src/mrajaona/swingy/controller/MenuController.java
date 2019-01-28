@@ -20,9 +20,7 @@ public class MenuController {
         public void run(String arg) throws SQLException, IOException;
     }
 
-    private static void invalid() {
-        // error
-    }
+    private static void invalid() {}
 
     @Getter private static Map<String, Cmd> commonCmdMap = initCommonMap();
     private static Map<String, Cmd> initCommonMap() {
@@ -68,6 +66,8 @@ public class MenuController {
             cmd.run(args[1]);
         else
             invalid();
+
+        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {

@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.MenuController.Cmd;
 import mrajaona.swingy.data.GameData;
-import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.character.HeroModel;
 
 public class LootController extends MenuController {
@@ -18,9 +17,7 @@ public class LootController extends MenuController {
     @SuppressWarnings("unused")
     private LootController() {}
 
-    private static void invalid() {
-        // error
-    }
+    private static void invalid() {}
 
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
@@ -37,7 +34,7 @@ public class LootController extends MenuController {
             });
         map.put("leave", new Cmd() {
                 public void run()           throws SQLException, IOException
-                                            { GameModel.noLoot(); }
+                                            { HeroModel.noLoot(); }
                 public void run(String arg) throws SQLException, IOException
                 { invalid(); }
             });
@@ -59,6 +56,8 @@ public class LootController extends MenuController {
             cmd.run(args[1]);
         else
             invalid();
+
+        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {

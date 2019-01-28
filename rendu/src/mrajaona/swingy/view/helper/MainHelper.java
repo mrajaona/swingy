@@ -25,17 +25,7 @@ public class MainHelper {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-
-        try {
-            javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
-                public void run() {
-                    GUIMain.getScreen().log(message);;
-                }
-            });
-        }
-        catch (InterruptedException e) {}
-        catch (java.lang.reflect.InvocationTargetException e) {}
-
+            GUIMain.getScreen().log(message);
         } else {
             // Exception
         }
@@ -81,7 +71,7 @@ public class MainHelper {
                 MainGameController.delocalize(line);
 
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            ; // GUI waits for user to click somewhere
+            mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
         } else {
             // Exception
         }
@@ -116,7 +106,6 @@ public class MainHelper {
         } else {
             // Exception
         }
-
     }
 
 }

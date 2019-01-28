@@ -51,6 +51,7 @@ public class View {
 
     public static void waitForInput() throws SQLException, IOException {
         GameScreen screen = GameData.getData().getScreen();
+
         switch (screen) {
             case TITLE :
                 TitleHelper.waitForInput();

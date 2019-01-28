@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.MenuController.Cmd;
 import mrajaona.swingy.data.GameData;
-import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.GameMapModel;
+import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.SaveManager;
 
 public class WinController {
@@ -19,9 +19,7 @@ public class WinController {
     @SuppressWarnings("unused")
     private WinController() {}
 
-    private static void invalid() {
-        // error
-    }
+    private static void invalid() {}
 
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
@@ -29,7 +27,7 @@ public class WinController {
 
         map.putAll(MenuController.getCommonCmdMap());
 
-        // loot
+        // win
         map.put("title", new Cmd() {
                 public void run()           throws SQLException, IOException
                                             {
@@ -45,7 +43,7 @@ public class WinController {
                                             {
                                                 GameMapModel.removeMap();
                                                 SaveManager.getManager().save();
-                                                GameModel.generateMap();
+                                                GameMapModel.initMap();
                                             }
                 public void run(String arg) throws SQLException, IOException
                 { invalid(); }
@@ -68,6 +66,8 @@ public class WinController {
             cmd.run(args[1]);
         else
             invalid();
+
+        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException {
