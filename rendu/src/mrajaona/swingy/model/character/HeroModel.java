@@ -51,7 +51,7 @@ public class HeroModel {
         }
 
         hero.setExperience(exp);
-        updateUI();
+        GUIMain.getScreen().updateTable();
     }
 
     public static void levelUp(HeroData hero) {
@@ -123,7 +123,7 @@ public class HeroModel {
         if (hero.getHitPoints() > hero.getMaxHitPoints())
             hero.setHitPoints(hero.getMaxHitPoints());
 
-        updateUI();
+        GUIMain.getScreen().updateTable();
     }
 
     public static void viewStats() {
