@@ -32,7 +32,7 @@ public class GameOverHelper {
         printMsg(
             String.format(
                 ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
-                    .getString("msgGetInput"),
+                    .getString("msgTitleInput"),
                     heroCoord.getX(), // %1$d
                     heroCoord.getY() // %2$d
             )
@@ -53,8 +53,6 @@ public class GameOverHelper {
 
             line = ConsoleView.getSplitInput();
             GameOverController.delocalize(line);
-
-            waitForInput();
 
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
@@ -87,8 +85,6 @@ public class GameOverHelper {
         } else {
             // Exception
         }
-
-        waitForInput();
 
     }
 }

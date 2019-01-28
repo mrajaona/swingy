@@ -21,11 +21,21 @@ public class MainHelper {
     @SuppressWarnings("unused")
     private MainHelper() {}
 
-    public static void printMsg(String message) {
+    public static void printMsg(final String message) {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            GUIMain.getScreen().log(message);
+
+        try {
+            javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    GUIMain.getScreen().log(message);;
+                }
+            });
+        }
+        catch (InterruptedException e) {}
+        catch (java.lang.reflect.InvocationTargetException e) {}
+
         } else {
             // Exception
         }
@@ -70,8 +80,6 @@ public class MainHelper {
             else
                 MainGameController.delocalize(line);
 
-            waitForInput();
-
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
         } else {
@@ -108,8 +116,6 @@ public class MainHelper {
         } else {
             // Exception
         }
-
-        waitForInput();
 
     }
 

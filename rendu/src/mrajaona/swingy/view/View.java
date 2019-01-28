@@ -44,8 +44,12 @@ public class View {
         }
     }
 
-    public static void update() throws SQLException, IOException {
+    public static void update() {
         Window.getWindow().update();
+
+    }
+
+    public static void waitForInput() throws SQLException, IOException {
         GameScreen screen = GameData.getData().getScreen();
         switch (screen) {
             case TITLE :

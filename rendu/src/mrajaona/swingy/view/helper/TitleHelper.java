@@ -67,10 +67,8 @@ public class TitleHelper {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             String[] line;
 
-            while (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
-                line = ConsoleView.getSplitInput();
-                TitleScreenController.delocalize(line);
-            }
+            line = ConsoleView.getSplitInput();
+            TitleScreenController.delocalize(line);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
         } else {
@@ -135,7 +133,6 @@ public class TitleHelper {
         } else {
             // Exception
         }
-        waitForInput();
 
     }
 

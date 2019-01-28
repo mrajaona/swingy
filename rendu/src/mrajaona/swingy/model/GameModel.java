@@ -185,6 +185,8 @@ public class GameModel {
             GameMapModel.initMap();
         else
             GameMapModel.checkInitPosition();
+
+        System.out.println("done loading");
     }
 
     public static void title() throws SQLException, IOException {

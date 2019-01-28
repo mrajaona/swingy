@@ -69,7 +69,6 @@ public class SaveFileBuilder {
         if (error == true)
             return (null);
         else {
-            System.out.println("Valid SaveFileData"); // DEBUG
             return (new SaveFileData(this));
         }
 

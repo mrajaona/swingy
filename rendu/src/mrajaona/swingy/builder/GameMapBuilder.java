@@ -117,7 +117,6 @@ public class GameMapBuilder {
         if (error == true)
             return (null);
         else {
-            System.out.println("Valid map"); // DEBUG
             return (new GameMapData(this));
         }
 
