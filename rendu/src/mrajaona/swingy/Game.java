@@ -28,8 +28,6 @@ public class Game {
         public void run() {
             try {
                 while (true) {
-                    System.out.println("loop");
-
                     View.waitForInput();
 
                     if (waiting) {
@@ -37,8 +35,6 @@ public class Game {
                             gameThread.wait();
                         }
                     }
-                    System.out.println("loop end");
-
                 }
             }
             catch (InterruptedException e) {}

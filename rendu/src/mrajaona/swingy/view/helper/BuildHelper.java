@@ -31,11 +31,21 @@ public class BuildHelper {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             return (ConsoleView.getLowerCaseInput());
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
+            ;
         } else {
             // Exception
         }
         return (null);
+    }
+
+    public static void waitForInput() throws SQLException, IOException {
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
+            ;
+        } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
+            mrajaona.swingy.Game.getGame().waiting(true);
+        } else {
+            // Exception
+        }
     }
 
     public static void prev() throws SQLException, IOException {

@@ -27,12 +27,13 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"leaveButton",  "Leave"},
 
             // Win
-            {"winLabel", "Congratulations, you won !"},
-            {"titleButton", "Save and return to title"},
-            {"continueButton", "Save and start a new map"},
+            {"winLabel",       "Congratulations, you won !"},
+            {"autoSaveLabel",  "Your game will be saved."},
+            {"titleButton",    "Title"},
+            {"continueButton", "New map"},
 
             // Game Over
-            {"loseLabel", "It seems you have died."},
+            {"loseLabel", "It seems your hero has fallen."},
             {"giveUpButton", "Return to title"},
             {"reloadButton", "Load last save"},
 

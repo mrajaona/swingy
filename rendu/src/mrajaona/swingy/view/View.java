@@ -57,7 +57,7 @@ public class View {
                 TitleHelper.waitForInput();
                 break;
             case NEW :
-                // BuildHelper.waitForInput();
+                BuildHelper.waitForInput();
                 break;
             case MAIN :
                 MainHelper.waitForInput();

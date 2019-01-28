@@ -26,6 +26,7 @@ public class GUIWin {
 
     private JPanel winPanel;
     private JLabel winLabel;
+    private JLabel autoSaveLabel;
 
     private JPanel heroPanel;
     private JLabel heroLabel;
@@ -49,7 +50,12 @@ public class GUIWin {
                 winLabel.setHorizontalAlignment(JLabel.CENTER);
                 winLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+                autoSaveLabel = new JLabel();
+                autoSaveLabel.setHorizontalAlignment(JLabel.CENTER);
+                autoSaveLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
                 winPanel.add(winLabel);
+                winPanel.add(autoSaveLabel);
             }
 
             // hero info panel
@@ -168,6 +174,7 @@ public class GUIWin {
     public void localize() {
         ResourceBundle uiLocale   = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
         winLabel.setText(uiLocale.getString("winLabel"));
+        autoSaveLabel.setText(uiLocale.getString("autoSaveLabel"));
         titleButton.setText(uiLocale.getString("titleButton"));
         continueButton.setText(uiLocale.getString("continueButton"));
 

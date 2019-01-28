@@ -27,13 +27,14 @@ public class InterfaceResource_fr extends ListResourceBundle {
 
             // Win
             {"winLabel", "Felicitations, vous avez gagne !"},
-            {"titleButton", "Sauvegarder et retourner à l'ecran titre"},
-            {"continueButton", "Sauvegarder et commencer une nouvelle carte"},
+            {"titleButton", "Ecran titre"},
+            {"continueButton", "Nouvelle carte"},
 
             // Game Over
-            {"loseLabel", "It seems you have died."},
-            {"giveUpButton", "Retourner à l'ecran titre"},
-            {"reloadButton", "Reprendre a la derniere sauvegarde"},
+            {"loseLabel",      "Votre heros est vaincu."},
+            {"autoSaveLabel",  "Votre partie va etre enregistree."},
+            {"giveUpButton",   "Ecran titre"},
+            {"reloadButton",   "Derniere sauvegarde"},
 
             // Menu
             {"menu", "Menu"},

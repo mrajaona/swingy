@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -20,6 +21,7 @@ import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.SaveFileData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.model.SaveFileModel;
+import mrajaona.swingy.view.helper.MainHelper;
 
 /*
 ** Singleton
@@ -88,31 +90,14 @@ public class SaveManager {
 
         openConnection();
 
-        Dao.CreateOrUpdateStatus statusHero   = heroDao.createOrUpdate(hero);
-        // DEBUG
-        System.out.println(
-            "Hero" + System.lineSeparator() +
-            "created: " + statusHero.isCreated() + System.lineSeparator() +
-            "updated: " + statusHero.isUpdated() + System.lineSeparator() +
-            "modified: " + statusHero.getNumLinesChanged()
-            );
-
-        Dao.CreateOrUpdateStatus statusMap    = mapDao.createOrUpdate(map);
-        // DEBUG
-        System.out.println(
-            "Map" + System.lineSeparator() +
-            "created: " + statusMap.isCreated() + System.lineSeparator() +
-            "updated: " + statusMap.isUpdated() + System.lineSeparator() +
-            "modified: " + statusMap.getNumLinesChanged()
-            );
-        Dao.CreateOrUpdateStatus statusSave   = saveDao.createOrUpdate(saveFile);
-        // DEBUG
-        System.out.println(
-            "Save" + System.lineSeparator() +
-            "created: " + statusSave.isCreated() + System.lineSeparator() +
-            "updated: " + statusSave.isUpdated() + System.lineSeparator() +
-            "modified: " + statusSave.getNumLinesChanged()
-            );
+        heroDao.createOrUpdate(hero);
+        mapDao.createOrUpdate(map);
+        Dao.CreateOrUpdateStatus statusSave = saveDao.createOrUpdate(saveFile);
+        if (statusSave.isCreated() || statusSave.isUpdated()) {
+            MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgSave"));
+        } else {
+            MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() ).getString("error")); // TODO
+        }
 
         closeConnection();
     }
