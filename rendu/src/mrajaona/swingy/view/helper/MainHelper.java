@@ -31,7 +31,7 @@ public class MainHelper {
     }
 
     public static void printPrompt() {
-            ConsoleView.println(
+            printMsg(
                 ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
                 .getString("msgGetInput"));
 

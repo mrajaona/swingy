@@ -28,7 +28,7 @@ public class WinHelper {
     }
 
     public static void printPrompt() {
-        ConsoleView.println(
+        printMsg(
             ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
             .getString("msgGetInput"));
 

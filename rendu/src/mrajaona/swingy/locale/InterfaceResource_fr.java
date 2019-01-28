@@ -61,9 +61,9 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"msgDamage",     "%1$s recoit %2$d degats."}, // hero name / enemy type, damage
             {"msgDied",       "%1$s est mort."}, // hero name / enemy type
 
-            {"msgDrop",       "L'ennemi a fait tomber un %1$s."}, // artifact name
-            {"msgEquip",      "%1$s equipe le %2$s."}, // hero name, artifact name
-            {"msgUnequip",    "%1$s desequipe le %1$s."}, // hero name, artifact name
+            {"msgDrop",       "L'ennemi a fait tomber un/une %1$s. (%2$s : %3$s + %4$d)"}, // artifact name, type, stat, modifier
+            {"msgEquip",      "%1$s equipe le/la %2$s."}, // hero name, artifact name
+            {"msgUnequip",    "%1$s desequipe le/la %1$s."}, // hero name, artifact name
             {"msgLeave",      "L'artefact disparait dans un nuage magique."},
 
             {"msgLvlUp",      "%1$s est monte au niveau %2$d !"}, // hero name, level

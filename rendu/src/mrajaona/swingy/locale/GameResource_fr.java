@@ -27,11 +27,17 @@ public class GameResource_fr extends ListResourceBundle {
             // main
             {"mainCmds",     "-- sauvegarder, aller nord/sud/est/ouest, statut"},
             {"battleCmds",   "-- sauvegarder, combattre, fuir"},
-            {"lootCmds",     "-- sauvegarder, equipr, lisser"},
+            {"lootCmds",     "-- sauvegarder, equiper, laisser"},
 
             {"aller",        "move"},
             {"statut",       "status"},
             {"sauvegarder",  "save"},
+
+            {"combattre",    "fight"},
+            {"fuir",         "run"},
+
+            {"equiper",      "equip"},
+            {"laisser",      "leave"},
 
             // win
             {"winCmds",      "-- titre, continuer (nouvelle carte) (votre partie sera sauvegardee)"},

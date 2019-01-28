@@ -224,6 +224,7 @@ public class Window {
         }
 
         frame.setContentPane(cards);
+        localize();
     }
 
     private void resize(int w, int h) {
@@ -283,8 +284,6 @@ public class Window {
 
         enItem.setText(locale.getString("enItem"));
         frItem.setText(locale.getString("frItem"));
-
-
     }
 
     public void updateMenu() {

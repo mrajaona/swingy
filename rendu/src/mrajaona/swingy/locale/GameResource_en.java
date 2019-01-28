@@ -33,6 +33,12 @@ public class GameResource_en extends ListResourceBundle {
             {"status",       "status"},
             {"save",         "save"},
 
+            {"fight",        "fight"},
+            {"run",          "run"},
+
+            {"equip",        "equip"},
+            {"leave",        "leave"},
+
             // win
             {"winCmds",      "-- title, continue (new map) (your game will be saved)"},
             {"continue",     "continue"},

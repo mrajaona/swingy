@@ -112,16 +112,7 @@ public class GameMapModel {
 
     // move hero
     public static void move(String direction) throws SQLException, IOException {
-        // delocalize direction
         ResourceBundle errLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() );
-        ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
-        ResourceMap    resMap    = (ResourceMap) locale.getObject("DirectionList");
-        String dir               = resMap.getKeyByValue(direction);
-
-        if (dir == null) {
-            MainHelper.printMsg(errLocale.getString("invalidDirection : " + direction));
-            return ;
-        }
 
         GameMapData map = GameData.getData().getMap();
         if (map == null) {
@@ -129,7 +120,9 @@ public class GameMapModel {
             return ;
         }
 
-        switch(dir) {
+        boolean isValid = true;
+
+        switch(direction) {
             case "north" :
                 map.setCoordX( map.getCoordX() + 1 );
                 break ;
@@ -143,14 +136,27 @@ public class GameMapModel {
                 map.setCoordY( map.getCoordY() - 1 );
                 break ;
             default :
-                ; // Exception
+                MainHelper.printMsg(errLocale.getString("invalidDirection") + "1");
+                isValid = false;
                 break ;
+        }
+
+        if (!isValid)
+            return ;
+
+        ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.DirectionResource", GameData.getData().getLocale() );
+        ResourceMap    resMap    = (ResourceMap) locale.getObject("DirectionList");
+        String dir               = resMap.get(direction);
+
+        if (dir == null) {
+            MainHelper.printMsg(errLocale.getString("invalidDirection") + "2"); // Exception
+            return ;
         }
 
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgMove"),
             GameData.getData().getHero().getHeroName(), // %1$s
-            direction, // %2$s // localized
+            dir, // %2$s // localized
             map.getCoordX(), // %3$d
             map.getCoordY() // %4$d
         );
