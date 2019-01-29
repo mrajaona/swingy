@@ -1,11 +1,8 @@
 package mrajaona.swingy;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.concurrent.SynchronousQueue;
 
-import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.view.View;
 
