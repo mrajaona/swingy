@@ -14,6 +14,7 @@ import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.exception.BuilderException;
+import mrajaona.swingy.exception.DataException;
 import mrajaona.swingy.exception.EnemyBuilderException;
 import mrajaona.swingy.exception.InvalidCoordException;
 import mrajaona.swingy.exception.InvalidViewTypeException;
@@ -196,8 +197,7 @@ public class GameMapModel {
 
         GameMapData map = GameData.getData().getMap();
         if (map == null) {
-            // Exception
-            return ;
+            throw (new DataException());
         }
 
         boolean isValid = true;
@@ -230,7 +230,7 @@ public class GameMapModel {
         String dir               = resMap.get(direction);
 
         if (dir == null) {
-            MainHelper.printMsg(errLocale.getString("invalidDirection")); // Exception
+            MainHelper.printMsg(errLocale.getString("invalidDirection"));
             return ;
         }
 
@@ -243,8 +243,7 @@ public class GameMapModel {
         MainHelper.printMsg(msg);
 
         if (!checkCoord(GameData.getData().getMap().getHeroCoord())) {
-            // Exception
-            return ;
+            throw (new InvalidCoordException());
         }
 
         checkPosition();

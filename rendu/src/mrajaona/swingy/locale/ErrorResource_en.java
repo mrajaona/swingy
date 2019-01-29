@@ -17,25 +17,22 @@ public class ErrorResource_en extends ListResourceBundle {
             {"invalidLanguage", "Invalid language (en, fr)."},
 
             /* exceptions */
-            {"builderException", ""},
-            {"enemyBuilderException", ""},
-            {"heroBuilderException", ""},
-            {"gameMapBuilderException", ""},
-            {"saveFileBuilderException", ""},
+            {"builderException",         "Could not build valid Object."},
+            {"enemyBuilderException",    "Could not build valid enemy."},
+            {"gameMapBuilderException",  "Could not build valid map."},
+            {"heroBuilderException",     "Could not build valid hero."},
+            {"saveFileBuilderException", "Could not build valid save file."},
 
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"loadHeroListException", ""},
+            {"invalidArtifactException", "Invalid artifact."},
+            {"invalidCoordException",    "Invalid coordinates."},
+            {"invalidSaveFileException", "Invalid save file."},
+            {"invalidScreenException",   "Invalid screen."},
+            {"invalidViewTypeException", "Invalid view type."},
 
-            {"invalidSaveFileException", ""},
-            {"invalidScreenException", ""},
-            {"invalidViewtypeException", ""}
+            {"loadHeroListException",    "Could not load hero list."},
+            {"resourceMapException",     "Could not load resource."},
+            {"dataException",            "Problem loading data."}
+
        };
     }
 

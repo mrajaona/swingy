@@ -12,6 +12,8 @@ import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.DataException;
+import mrajaona.swingy.exception.InvalidArtifactException;
 import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameMapModel;
@@ -72,7 +74,7 @@ public class HeroModel {
 
     // Equipment
 
-    public static void equip(ArtifactData artifact) throws SQLException, IOException, InvalidViewTypeException {
+    public static void equip(ArtifactData artifact) throws SQLException, IOException, SwingyException {
         switch(artifact.getType()) {
             case HELM :
                 HelmModel.equip((HelmData) artifact);
@@ -84,14 +86,13 @@ public class HeroModel {
                 WeaponModel.equip((WeaponData) artifact);
                 break ;
             default :
-                // Exception
-                break;
+                throw (new InvalidArtifactException());
         }
         updateStats();
         GameModel.noDrop();
     }
 
-    public static void unequip(ArtifactData artifact) {
+    public static void unequip(ArtifactData artifact) throws InvalidArtifactException {
         switch(artifact.getType()) {
             case HELM :
                 ((HelmData) artifact).remove();
@@ -103,8 +104,7 @@ public class HeroModel {
                 ((WeaponData) artifact).remove();
                 break ;
             default :
-                // Exception
-                break;
+                throw (new InvalidArtifactException());
         }
         updateStats();
     }
@@ -195,8 +195,7 @@ public class HeroModel {
         EnemyData enemy = GameData.getData().getEnemy();
 
         if (hero == null || enemy == null) {
-            // Exception
-            return ;
+            throw (new DataException());
         }
 
         while (!CharacterModel.isDead(hero) && !CharacterModel.isDead(enemy)) {
@@ -206,12 +205,10 @@ public class HeroModel {
         if (CharacterModel.isDead(hero)) {
             die();
             GameModel.changeScreen(GameScreen.LOSE);
-        }
-        else if (CharacterModel.isDead(enemy)) {
+        } else if (CharacterModel.isDead(enemy)) {
             EnemyModel.die();
-        }
-        else {
-            // Exception
+        } else {
+            throw (new DataException());
         }
 
     }

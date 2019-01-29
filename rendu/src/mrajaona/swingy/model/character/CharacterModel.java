@@ -6,6 +6,7 @@ import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.CharacterData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.DataException;
 import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.view.helper.MainHelper;
 
@@ -25,7 +26,7 @@ public class CharacterModel {
             character.setHitPoints(character.getMaxHitPoints());
     }
 
-    public static void loseHP(CharacterData character, int amount) throws InvalidViewTypeException {
+    public static void loseHP(CharacterData character, int amount) throws InvalidViewTypeException, DataException {
         if (amount <= 0) {
             amount = 1;
         }
@@ -37,8 +38,7 @@ public class CharacterModel {
         else if (character instanceof HeroData)
             identity = ((HeroData) character).getHeroName();
         else {
-            // Exception
-            return ;
+            throw (new DataException());
         }
 
         String msg = String.format(
@@ -60,7 +60,7 @@ public class CharacterModel {
 
     // battle
 
-    public static void attack(CharacterData attacker, CharacterData target) throws InvalidViewTypeException {
+    public static void attack(CharacterData attacker, CharacterData target) throws InvalidViewTypeException, DataException {
         String identity;
 
         if (attacker instanceof EnemyData)
@@ -68,8 +68,7 @@ public class CharacterModel {
         else if (attacker instanceof HeroData)
             identity = ((HeroData) attacker).getHeroName();
         else {
-            // Exception
-            return ;
+            throw (new DataException());
         }
 
         // TODO : wait here
@@ -83,16 +82,14 @@ public class CharacterModel {
         loseHP(target, attacker.getAttack() - target.getDefense());
     }
 
-    public static void fight(CharacterData fighter1, CharacterData fighter2) throws InvalidViewTypeException {
+    public static void fight(CharacterData fighter1, CharacterData fighter2) throws InvalidViewTypeException, DataException {
         if (fighter1 == null || fighter2 == null) {
-            // Exception
-            return ;
+            throw (new DataException());
         }
 
         attack(fighter1, fighter2);
         if (!isDead(fighter2))
             attack(fighter2, fighter1);
-        // update gui
     }
 
 }

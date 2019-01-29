@@ -12,7 +12,9 @@ import mrajaona.swingy.builder.SaveFileBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.exception.InvalidArtifactException;
 import mrajaona.swingy.exception.InvalidViewTypeException;
+import mrajaona.swingy.exception.ResourceMapException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.SaveManager;
@@ -101,13 +103,12 @@ public class GameModel {
         MainHelper.changeSubScreen();
     }
 
-    public static void drop(ArtifactData artifact) throws InvalidViewTypeException {
+    public static void drop(ArtifactData artifact) throws SwingyException {
         GameData.getData().setArtifact(artifact);
         ArtifactType type = artifact.getType();
 
         if (type == null) {
-            // Exception
-            return ;
+            throw (new InvalidArtifactException());
         }
 
         String name = artifact.getName();
@@ -132,14 +133,11 @@ public class GameModel {
                 .getObject("WeaponList");
                 break ;
             default :
-                // Exception
-                resMap = null;
-                break ;
+                throw (new InvalidArtifactException());
         }
 
         if (resMap == null) {
-            // Exception
-            return ;
+            throw (new ResourceMapException());
         }
 
         String msg = String.format(
@@ -199,7 +197,13 @@ public class GameModel {
             setLocale(newLocale);
 
         } catch (IllformedLocaleException e) {
-            // Exception : invalid language format
+            // Error : invalid language format
+            ConsoleView.println(
+                ResourceBundle.getBundle(
+                    "mrajaona.swingy.locale.ErrorResource",
+                    GameData.getData().getLocale() )
+                .getString("invalidLanguage")
+            );
         }
     }
 
@@ -207,7 +211,7 @@ public class GameModel {
         ViewTypes tmp = ViewTypes.getKeyByValue(newType);
 
         if (tmp == null) {
-            ; // Exception
+            throw (new InvalidViewTypeException());
         } else {
             changeViewType(tmp);
         }
@@ -215,7 +219,7 @@ public class GameModel {
 
     public static void changeViewType(ViewTypes newType) throws SQLException, IOException, SwingyException {
         if (newType == null) {
-            ; // Exception
+            throw (new InvalidViewTypeException());
         } else {
             GameData.getData().setViewType(newType);
 

@@ -9,7 +9,9 @@ import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
-import mrajaona.swingy.exception.InvalidViewTypeException;
+import mrajaona.swingy.exception.InvalidArtifactException;
+import mrajaona.swingy.exception.ResourceMapException;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.ResourceMap;
@@ -26,7 +28,7 @@ public class EnemyModel {
     @SuppressWarnings("unused")
     private EnemyModel() {}
 
-    public static ArtifactData generateArtifact() {
+    public static ArtifactData generateArtifact() throws InvalidArtifactException, ResourceMapException {
         ArtifactType type = ArtifactType.random();
 
         ResourceMap resMap;
@@ -50,13 +52,10 @@ public class EnemyModel {
                 .getObject("WeaponList");
                 break ;
             default :
-                // Exception
-                resMap = null;
-                break ;
+                throw (new InvalidArtifactException());
         }
         if (resMap == null) {
-            // Exception
-            return null;
+            throw (new ResourceMapException());
         }
         ArrayList<String> keyList = resMap.keyList();
         keyList.remove("none");
@@ -79,14 +78,12 @@ public class EnemyModel {
                 artifact = new WeaponData(name, modifier);
                 break ;
             default :
-                // Exception
-                artifact = null;
-                break ;
+                throw (new InvalidArtifactException());
         }
         return (artifact);
     }
 
-    public static void die() throws InvalidViewTypeException {
+    public static void die() throws SwingyException {
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgDied"),
             GameData.getData().getEnemy().getEnemyType() // %1$s
