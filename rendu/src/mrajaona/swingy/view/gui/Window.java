@@ -262,6 +262,10 @@ public class Window {
         frame.setVisible(false);
     }
 
+    public void close() {
+        frame.dispose();
+    }
+
     public void localize() {
         GUITitle.getScreen().localize();
         GUINew.getScreen().localize();

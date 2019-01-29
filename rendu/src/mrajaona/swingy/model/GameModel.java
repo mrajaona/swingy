@@ -174,6 +174,11 @@ public class GameModel {
         MainHelper.changeSubScreen();
     }
 
+    public static void exitGame() {
+        Window.getWindow().close();
+        mrajaona.swingy.Game.getGame().exitGame();
+    }
+
     // Edit view
 
     public static void setLocale(Locale newLocale) throws SQLException, IOException {

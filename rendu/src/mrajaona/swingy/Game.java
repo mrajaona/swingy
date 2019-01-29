@@ -14,6 +14,7 @@ public class Game {
     private static Game game = new Game();
 
     private boolean waiting = false;
+    private boolean exit    = false;
     private Thread  gameThread;
 
     private Game() {
@@ -28,7 +29,7 @@ public class Game {
     Runnable gameLoop = new Runnable() {
         public void run() {
             try {
-                while (true) {
+                while (!exit) {
                     View.waitForInput();
 
                     // wait for GUI
@@ -56,6 +57,10 @@ public class Game {
                 gameThread.notify();
             }
         }
+    }
+
+    public void exitGame() {
+        exit = true;
     }
 
     public void play(String[] args) {
