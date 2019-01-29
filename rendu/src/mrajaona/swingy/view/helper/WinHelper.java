@@ -57,7 +57,7 @@ public class WinHelper {
             WinController.delocalize(line);
 
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
+            ; // GUI waits for user to click somewhere
         } else {
             throw (new InvalidViewTypeException());
         }

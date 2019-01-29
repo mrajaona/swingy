@@ -44,7 +44,7 @@ public class BuildHelper {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ;
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            mrajaona.swingy.Game.getGame().waiting(true);
+            ;
         } else {
             throw (new InvalidViewTypeException());
         }

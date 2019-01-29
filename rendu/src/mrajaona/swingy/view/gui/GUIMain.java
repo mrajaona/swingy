@@ -210,10 +210,14 @@ public class GUIMain {
                         fightButton.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent event) {
                                 try {
+                                    fightButton.setEnabled(false);
+                                    runButton.setEnabled(false);
+
                                     String[] args = {
                                         "fight"
                                     };
                                     BattleController.run(args);
+
                                 }  catch (Exception e) {
                                     e.printStackTrace();
                                     System.exit(1);
@@ -229,10 +233,14 @@ public class GUIMain {
                         runButton.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent event) {
                                 try {
+                                    fightButton.setEnabled(false);
+                                    runButton.setEnabled(false);
+
                                     String[] args = {
                                         "run"
                                     };
                                     BattleController.run(args);
+
                                 }  catch (Exception e) {
                                     e.printStackTrace();
                                     System.exit(1);
@@ -366,6 +374,9 @@ public class GUIMain {
     }
 
     public void show(SubScreen screen) {
+        fightButton.setEnabled(true);
+        runButton.setEnabled(true);
+
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
     }

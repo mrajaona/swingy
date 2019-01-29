@@ -9,6 +9,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import lombok.Getter;
+import mrajaona.swingy.Game;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
@@ -49,22 +50,41 @@ public class MenuController {
         return Collections.unmodifiableMap(map);
     }
 
-    public static void run(String[] args) throws SQLException, IOException, SwingyException {
+    public static void run(final String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;
         }
 
-        Cmd cmd = commonCmdMap.get(args[0]);
+        final Cmd cmd = commonCmdMap.get(args[0]);
 
-        if (cmd != null && args.length == 1)
-            cmd.run();
-        else if (cmd != null && args.length == 2)
-            cmd.run(args[1]);
+        if (cmd != null && args.length == 1) {
+            Game.getGame().insertToQueue(
+                new Runnable() {
+                        public void run() {
+                            try {
+                                cmd.run();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                );
+        } else if (cmd != null && args.length == 2) {
+            Game.getGame().insertToQueue(
+                new Runnable() {
+                        public void run() {
+                            try {
+                                cmd.run(args[1]);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                );
+        }
         else
             invalid();
-
-        mrajaona.swingy.Game.getGame().waiting(false);
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {

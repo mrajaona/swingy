@@ -2,6 +2,8 @@ package mrajaona.swingy.model.character;
 
 import java.util.ResourceBundle;
 
+import javax.swing.SwingUtilities;
+
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.CharacterData;
 import mrajaona.swingy.data.character.EnemyData;
@@ -60,7 +62,17 @@ public class CharacterModel {
 
     // battle
 
-    public static void attack(CharacterData attacker, CharacterData target) throws InvalidViewTypeException, DataException {
+    private static void doAttack(CharacterData attacker, CharacterData target, String identity) throws InvalidViewTypeException, DataException {
+        String msg = String.format(
+            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgAttack"),
+            identity // %1$s
+        );
+        MainHelper.printMsg(msg);
+
+        loseHP(target, attacker.getAttack() - target.getDefense());
+    }
+
+    public static void attack(final CharacterData attacker, final CharacterData target) throws InvalidViewTypeException, DataException {
         String identity;
 
         if (attacker instanceof EnemyData)
@@ -71,15 +83,17 @@ public class CharacterModel {
             throw (new DataException());
         }
 
-        // TODO : wait here
+        if (SwingUtilities.isEventDispatchThread()) { // sleep freezes the GUI
+            doAttack(attacker, target, identity);
+        } else {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+            doAttack(attacker, target, identity);
+        }
 
-        String msg = String.format(
-            ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgAttack"),
-            identity // %1$s
-        );
-        MainHelper.printMsg(msg);
 
-        loseHP(target, attacker.getAttack() - target.getDefense());
+
     }
 
     public static void fight(CharacterData fighter1, CharacterData fighter2) throws InvalidViewTypeException, DataException {

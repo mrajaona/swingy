@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import javax.swing.SwingUtilities;
+
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.ArtifactData;
@@ -165,18 +167,26 @@ public class HeroModel {
 
     public static void run() throws SQLException, IOException, SwingyException {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+        String msg = String.format(
+            locale.getString("msgRun"),
+            GameData.getData().getHero().getHeroName() // %1$s
+            );
+        MainHelper.printMsg(msg);
 
-        {
-            String msg = String.format(
-                locale.getString("msgRun"),
-                GameData.getData().getHero().getHeroName() // %1$s
-                );
-            MainHelper.printMsg(msg);
+        if (SwingUtilities.isEventDispatchThread()) { // sleep freezes the GUI
+            runResult();
+        } else {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+            runResult();
         }
 
-        Random rand = new Random();
+    }
 
-        // TODO : wait here
+    private static void runResult() throws SQLException, IOException, SwingyException {
+        ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
+        Random rand = new Random();
 
         if ( rand.nextInt(2) == 0) { // 1/2
             String msg = locale.getString("msgRunSuccess");

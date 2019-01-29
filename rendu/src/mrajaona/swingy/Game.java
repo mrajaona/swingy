@@ -1,6 +1,7 @@
 package mrajaona.swingy;
 
 import java.util.Locale;
+import java.util.concurrent.SynchronousQueue;
 
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.view.View;
@@ -13,9 +14,11 @@ public class Game {
 
     private static Game game = new Game();
 
-    private boolean waiting = false;
     private boolean exit    = false;
     private Thread  gameThread;
+
+    private SynchronousQueue<Runnable> queue;
+
 
     private Game() {
         Locale.setDefault(new Locale("en"));
@@ -31,13 +34,7 @@ public class Game {
             try {
                 while (!exit) {
                     View.waitForInput();
-
-                    // wait for GUI
-                    if (waiting) {
-                        synchronized (gameThread) {
-                            gameThread.wait();
-                        }
-                    }
+                    consume(queue.take());
                 }
             }
             catch (InterruptedException e) {}
@@ -48,15 +45,12 @@ public class Game {
         }
     };
 
-    public void waiting(boolean isWaiting) {
-        if (isWaiting) {
-            waiting = true;
-        } else if (waiting) {
-            waiting = false;
-            synchronized (gameThread) {
-                gameThread.notify();
-            }
-        }
+    private void consume(Runnable command) {
+        command.run();
+    }
+
+    public void insertToQueue(Runnable command) {
+        queue.offer(command);
     }
 
     public void exitGame() {
@@ -68,6 +62,7 @@ public class Game {
         if (args.length != 1)
             return ;
 
+        queue = new SynchronousQueue<Runnable>();
 
         try {
             GameModel.init(new Locale("en"), args[0]);

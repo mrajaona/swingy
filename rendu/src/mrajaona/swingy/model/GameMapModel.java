@@ -67,7 +67,7 @@ public class GameMapModel {
 
                 if (!( (x == 0 || x == mapSize - 1)
                     || (y == 0 || y == mapSize - 1) ))
-                create = rand.nextInt(10) == 0 ? true : false;
+                create = rand.nextInt(5) == 0 ? true : false;
 
                 if (create) {
                     String enemyType = Util.enemyTypes[rand.nextInt(Util.enemyTypes.length)];
@@ -195,13 +195,18 @@ public class GameMapModel {
     public static void move(String direction) throws SQLException, IOException, SwingyException {
         ResourceBundle errLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() );
 
+        if (direction == null) {
+            MainHelper.printMsg(errLocale.getString("invalidDirection"));
+            return ;
+        }
+        
         GameMapData map = GameData.getData().getMap();
         if (map == null) {
             throw (new DataException());
         }
 
         boolean isValid = true;
-
+        
         switch(direction) {
             case "north" :
                 map.setCoordX( map.getCoordX() + 1 );
