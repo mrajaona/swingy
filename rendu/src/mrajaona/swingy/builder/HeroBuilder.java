@@ -1,5 +1,6 @@
 package mrajaona.swingy.builder;
 
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -190,6 +191,14 @@ public class HeroBuilder {
     public HeroData loadHero(HeroData loaded) throws HeroBuilderException, InvalidViewTypeException {
         if (loaded == null)
             return (null);
+
+        if (
+            (loaded.getHeroClass() == null || loaded.getHeroClass().trim().isEmpty())
+            || (loaded.getHeroName() == null || loaded.getHeroName().trim().isEmpty())
+            || Arrays.asList(Util.heroTypes).contains(loaded.getHeroClass()) == false
+        ) {
+            throw (new HeroBuilderException());
+        }
 
         return (
         setId(loaded.getId())
