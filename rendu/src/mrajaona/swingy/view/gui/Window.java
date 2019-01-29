@@ -110,7 +110,6 @@ public class Window {
 
             {
                 // Language submenu // TODO : disable selected
-                menu.addSeparator();
                 langMenu = new JMenu();
 
                 {

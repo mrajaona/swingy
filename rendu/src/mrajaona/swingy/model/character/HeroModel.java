@@ -2,6 +2,7 @@ package mrajaona.swingy.model.character;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -136,13 +137,14 @@ public class HeroModel {
         ResourceMap    helmLocale     = (ResourceMap) artifactLocale.getObject( "HelmList" );
         ResourceMap    armorLocale    = (ResourceMap) artifactLocale.getObject( "ArmorList" );
         ResourceMap    weaponLocale   = (ResourceMap) artifactLocale.getObject( "WeaponList" );
+        DecimalFormat  format         = new DecimalFormat("#");
 
         MainHelper.printMsg(
             System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
             locale.getString("class")         + " : " + ((ResourceMap) heroLocale.getObject("ClassesList")).get(hero.getHeroClass()) + System.lineSeparator() +
             locale.getString("level")         + " : " + hero.getLevel() + System.lineSeparator() +
-            locale.getString("experience")    + " : " + hero.getExperience() + System.lineSeparator() +
+            locale.getString("experience")    + " : " + format.format(hero.getExperience()) + " / " + format.format(hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450) + System.lineSeparator() +
 
             locale.getString("helm")          + " : " + helmLocale.get(hero.getHelm().getName())     + " (" + hero.getHelm().getModifier()   + ")" + System.lineSeparator() +
             locale.getString("armor")         + " : " + armorLocale.get(hero.getArmor().getName())   + " (" + hero.getArmor().getModifier()  + ")" + System.lineSeparator() +
