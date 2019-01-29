@@ -1,8 +1,11 @@
 package mrajaona.swingy;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.concurrent.SynchronousQueue;
 
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.view.View;
 
@@ -14,11 +17,32 @@ public class Game {
 
     private static Game game = new Game();
 
-    private boolean exit    = false;
-    private Thread  gameThread;
-
+    private boolean exit      = false;
     private SynchronousQueue<Runnable> queue;
 
+    private Thread waiterThread;
+    private Runnable waiter = new Runnable() {
+        public void run() {
+
+            while (!exit) {
+                synchronized (lock) {
+                    try {
+                        View.waitForInput();
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        Thread.currentThread().interrupt();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    
+                }
+            }
+
+        }
+    };
+
+    private static Object lock = new Object();
 
     private Game() {
         Locale.setDefault(new Locale("en"));
@@ -28,25 +52,11 @@ public class Game {
         return (game);
     }
 
-    // Game Loop
-    Runnable gameLoop = new Runnable() {
-        public void run() {
-            try {
-                while (!exit) {
-                    View.waitForInput();
-                    consume(queue.take());
-                }
-            }
-            catch (InterruptedException e) {}
-            catch (Exception e) {
-                e.printStackTrace();
-                System.exit(1);
-            }
-        }
-    };
-
     private void consume(Runnable command) {
-        command.run();
+        synchronized (lock) {
+            command.run();
+            lock.notify();
+        }
     }
 
     public void insertToQueue(Runnable command) {
@@ -70,13 +80,20 @@ public class Game {
 
         try {
             GameModel.init(new Locale("en"), args[0]);
-        } catch (Exception e) {
+
+            waiterThread = new Thread(waiter, "waiter");
+            waiterThread.start();
+
+            while (!exit) {
+                consume(queue.take());
+            }
+
+        }
+        catch (InterruptedException e) {}
+        catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
-
-        gameThread = new Thread(gameLoop);
-        gameThread.start();
 
     }
 
