@@ -19,6 +19,7 @@ import lombok.Getter;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.exception.GameMapBuilderException;
+import mrajaona.swingy.exception.InvalidCoordException;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.util.Coord;
 
@@ -53,13 +54,13 @@ public class GameMapBuilder {
         return (this);
     }
 
-    public GameMapBuilder setHeroCoord(int x, int y) {
+    public GameMapBuilder setHeroCoord(int x, int y) throws InvalidCoordException {
         heroCoord.setCoords(x, y);
         return (this);
     }
 
-    public GameMapBuilder setPrevCoord(int x, int y) {
-            prevCoord.setCoords(x, y);
+    public GameMapBuilder setPrevCoord(int x, int y) throws InvalidCoordException {
+        prevCoord.setCoords(x, y);
         return (this);
     }
 
@@ -104,7 +105,7 @@ public class GameMapBuilder {
 
     }
 
-    public GameMapData newMap() throws GameMapBuilderException {
+    public GameMapData newMap() throws GameMapBuilderException, InvalidCoordException {
         enemies = new HashMap<Coord, EnemyData>();
         return (
             setLevel(0)
@@ -114,7 +115,7 @@ public class GameMapBuilder {
             );
     }
 
-    public GameMapData loadMap(GameMapData loaded) throws GameMapBuilderException {
+    public GameMapData loadMap(GameMapData loaded) throws GameMapBuilderException, InvalidCoordException {
         if (loaded == null)
             return (null);
 

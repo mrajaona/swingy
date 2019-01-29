@@ -6,6 +6,7 @@ import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.CharacterData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.view.helper.MainHelper;
 
 public class CharacterModel {
@@ -24,7 +25,7 @@ public class CharacterModel {
             character.setHitPoints(character.getMaxHitPoints());
     }
 
-    public static void loseHP(CharacterData character, int amount) {
+    public static void loseHP(CharacterData character, int amount) throws InvalidViewTypeException {
         if (amount <= 0) {
             amount = 1;
         }
@@ -59,7 +60,7 @@ public class CharacterModel {
 
     // battle
 
-    public static void attack(CharacterData attacker, CharacterData target) {
+    public static void attack(CharacterData attacker, CharacterData target) throws InvalidViewTypeException {
         String identity;
 
         if (attacker instanceof EnemyData)
@@ -82,7 +83,7 @@ public class CharacterModel {
         loseHP(target, attacker.getAttack() - target.getDefense());
     }
 
-    public static void fight(CharacterData fighter1, CharacterData fighter2) {
+    public static void fight(CharacterData fighter1, CharacterData fighter2) throws InvalidViewTypeException {
         if (fighter1 == null || fighter2 == null) {
             // Exception
             return ;

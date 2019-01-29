@@ -14,6 +14,8 @@ import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.SaveFileData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.exception.BuilderException;
+import mrajaona.swingy.exception.InvalidCoordException;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SaveFileBuilderException;
 
 public class SaveFileBuilder {
@@ -68,7 +70,7 @@ public class SaveFileBuilder {
         return (build());
     }
 
-    public SaveFileData loadFile(SaveFileData loaded) throws BuilderException {
+    public SaveFileData loadFile(SaveFileData loaded) throws BuilderException, InvalidViewTypeException, InvalidCoordException {
         if (loaded == null)
             return (null);
 

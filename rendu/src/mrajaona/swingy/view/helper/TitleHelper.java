@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import mrajaona.swingy.controller.TitleScreenController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
+import mrajaona.swingy.exception.LoadHeroListException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.ResourceMap;
@@ -23,17 +25,17 @@ public class TitleHelper {
     @SuppressWarnings("unused")
     private TitleHelper() {}
 
-    public static void printMsg(String message) {
+    public static void printMsg(String message) throws InvalidViewTypeException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // TODO : modal
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
-    public static void printPrompt() {
+    public static void printPrompt() throws InvalidViewTypeException {
         printMsg(
             ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
             .getString("msgTitleInput"));
@@ -73,7 +75,7 @@ public class TitleHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
@@ -98,16 +100,16 @@ public class TitleHelper {
     }
 
 
-    private static void listHeroes() throws SQLException, IOException {
+    private static void listHeroes() throws SQLException, IOException, LoadHeroListException {
         List<HeroData> heroList = SaveManager.getManager().listHeroes();
         if (heroList == null)
-            ; // Exception // Empty != null
+            throw (new LoadHeroListException()); // Empty != null
         for (HeroData hero : heroList) {
             heroStats(hero);
         }
     }
 
-    private static void printConsoleScreen() throws SQLException, IOException {
+    private static void printConsoleScreen() throws SQLException, IOException, LoadHeroListException  {
         ResourceBundle locale = ResourceBundle.getBundle(
                                     "mrajaona.swingy.locale.InterfaceResource",
                                     GameData.getData().getLocale()
@@ -117,11 +119,11 @@ public class TitleHelper {
         listHeroes();
     }
 
-    public static void reload() throws SQLException, IOException {
+    public static void reload() throws SQLException, IOException, LoadHeroListException {
         GUITitle.getScreen().initHeroList();
     }
 
-    public static void show() throws SQLException, IOException {
+    public static void show() throws SQLException, IOException, InvalidViewTypeException, LoadHeroListException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
             printConsoleScreen();
@@ -132,7 +134,7 @@ public class TitleHelper {
                 }
             });
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 

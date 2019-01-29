@@ -22,6 +22,7 @@ public class ErrorResource_en extends ListResourceBundle {
             {"heroBuilderException", ""},
             {"gameMapBuilderException", ""},
             {"saveFileBuilderException", ""},
+
             {"", ""},
             {"", ""},
             {"", ""},
@@ -30,8 +31,11 @@ public class ErrorResource_en extends ListResourceBundle {
             {"", ""},
             {"", ""},
             {"", ""},
-            {"", ""},
-            {"", ""},
+            {"loadHeroListException", ""},
+
+            {"invalidSaveFileException", ""},
+            {"invalidScreenException", ""},
+            {"invalidViewtypeException", ""}
        };
     }
 

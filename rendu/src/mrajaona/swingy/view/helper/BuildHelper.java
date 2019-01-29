@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.Util.GameScreen;
@@ -16,17 +17,17 @@ public class BuildHelper {
     @SuppressWarnings("unused")
     private BuildHelper() {}
 
-    public static void printMsg(String message) {
+    public static void printMsg(String message) throws InvalidViewTypeException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // No place to print
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
-    public static String ask(String message) {
+    public static String ask(String message) throws InvalidViewTypeException {
         printMsg(message);
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
@@ -34,7 +35,7 @@ public class BuildHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
         return (null);
     }
@@ -45,7 +46,7 @@ public class BuildHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             mrajaona.swingy.Game.getGame().waiting(true);
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
@@ -64,7 +65,7 @@ public class BuildHelper {
                 }
             });
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 

@@ -28,12 +28,12 @@ public class LootController extends MenuController {
 
         // loot
         map.put("equip", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                                             { HeroModel.equip(GameData.getData().getArtifact()); }
                 public void run(String arg) { invalid(); }
             });
         map.put("leave", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                                             { HeroModel.noLoot(); }
                 public void run(String arg) { invalid(); }
             });

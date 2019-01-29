@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.view.helper.MainHelper;
 
@@ -13,7 +14,7 @@ public class HelmModel {
     @SuppressWarnings("unused")
     private HelmModel() {}
 
-    public static void equip(HelmData helm) {
+    public static void equip(HelmData helm) throws InvalidViewTypeException {
         GameData.getData().getHero().getHelm().change(helm.getName(), helm.getModifier());
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgEquip"),
@@ -24,7 +25,7 @@ public class HelmModel {
         MainHelper.printMsg(msg);
     }
 
-    public static void remove() {
+    public static void remove() throws InvalidViewTypeException {
         ArtifactData helm = GameData.getData().getHero().getHelm();
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgUnequip"),

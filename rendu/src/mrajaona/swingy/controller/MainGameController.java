@@ -35,7 +35,7 @@ public class MainGameController extends MenuController {
                                             { HeroModel.move(arg); }
             });
         map.put("status", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                                             { HeroModel.viewStats(); }
                 public void run(String arg) { invalid(); }
             });

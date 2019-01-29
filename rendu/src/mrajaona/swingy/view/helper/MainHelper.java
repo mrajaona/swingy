@@ -8,6 +8,7 @@ import mrajaona.swingy.controller.BattleController;
 import mrajaona.swingy.controller.LootController;
 import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.Util.GameScreen;
@@ -22,17 +23,17 @@ public class MainHelper {
     @SuppressWarnings("unused")
     private MainHelper() {}
 
-    public static void printMsg(final String message) {
+    public static void printMsg(final String message) throws InvalidViewTypeException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             GUIMain.getScreen().log(message);
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
-    public static void printPrompt() {
+    public static void printPrompt() throws InvalidViewTypeException {
         Coord heroCoord = GameData.getData().getMap().getHeroCoord();
         printMsg(
             String.format(
@@ -74,7 +75,7 @@ public class MainHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
@@ -91,7 +92,7 @@ public class MainHelper {
             GUIMain.getScreen().show(SubScreen.MAIN);
     }
 
-    public static void show() throws SQLException, IOException {
+    public static void show() throws SQLException, IOException, InvalidViewTypeException {
         changeSubScreen();
         GUIMain.getScreen().updateTable();
 
@@ -105,7 +106,7 @@ public class MainHelper {
                 }
             });
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 

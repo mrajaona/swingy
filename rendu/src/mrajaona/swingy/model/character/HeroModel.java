@@ -12,6 +12,7 @@ import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.GameModel;
@@ -37,7 +38,7 @@ public class HeroModel {
 
     // XP
 
-    public static void earnExp(double amount) {
+    public static void earnExp(double amount) throws InvalidViewTypeException {
         HeroData hero = GameData.getData().getHero();
         double exp      = hero.getExperience() + amount;
         double expToLvl = hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450;
@@ -55,7 +56,7 @@ public class HeroModel {
         GUIMain.getScreen().updateTable();
     }
 
-    public static void levelUp(HeroData hero) {
+    public static void levelUp(HeroData hero) throws InvalidViewTypeException {
         if (hero.getLevel() < HERO_MAX_LVL) {
             hero.setLevel(hero.getLevel() + 1);
             String msg = String.format(
@@ -71,7 +72,7 @@ public class HeroModel {
 
     // Equipment
 
-    public static void equip(ArtifactData artifact) throws SQLException, IOException {
+    public static void equip(ArtifactData artifact) throws SQLException, IOException, InvalidViewTypeException {
         switch(artifact.getType()) {
             case HELM :
                 HelmModel.equip((HelmData) artifact);
@@ -108,7 +109,7 @@ public class HeroModel {
         updateStats();
     }
 
-    public static void noLoot() throws SQLException, IOException {
+    public static void noLoot() throws SQLException, IOException, InvalidViewTypeException {
         MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgLeave"));
         GameModel.noDrop();
     }
@@ -127,7 +128,7 @@ public class HeroModel {
         GUIMain.getScreen().updateTable();
     }
 
-    public static void viewStats() {
+    public static void viewStats() throws InvalidViewTypeException {
         HeroData hero = GameData.getData().getHero();
         ResourceBundle locale         = ResourceBundle.getBundle( "mrajaona.swingy.locale.StatResource", GameData.getData().getLocale() );
         ResourceBundle heroLocale     = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
@@ -215,7 +216,7 @@ public class HeroModel {
 
     }
 
-    public static void die() {
+    public static void die() throws InvalidViewTypeException {
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgDied"),
             GameData.getData().getHero().getHeroName() // %1$s

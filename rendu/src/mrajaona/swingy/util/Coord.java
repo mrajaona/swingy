@@ -11,6 +11,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
 import lombok.Setter;
+import mrajaona.swingy.exception.InvalidCoordException;
 
 public class Coord implements Serializable {
 
@@ -33,30 +34,28 @@ public class Coord implements Serializable {
     public Coord() {
         x = 0;
         y = 0;
-        validate();
     }
 
-    public Coord(int x, int y) {
+    public Coord(int x, int y) throws InvalidCoordException {
         setCoords(x, y);
     }
 
-    public void setCoords(Coord newCoord) {
+    public void setCoords(Coord newCoord) throws InvalidCoordException {
         this.x = newCoord.x;
         this.y = newCoord.y;
         validate();
     }
 
-    public void setCoords(int x, int y) {
+    public void setCoords(int x, int y) throws InvalidCoordException {
         this.x = x;
         this.y = y;
         validate();
     }
 
-    private void validate() {
+    private void validate() throws InvalidCoordException {
         Set<ConstraintViolation<Coord>> coordConstraintViolations = validator.validate(this);
         if (coordConstraintViolations.size() > 0) {
-            // Exception
-            System.out.println("Invalid coord");
+            throw (new InvalidCoordException());
         }
     }
 

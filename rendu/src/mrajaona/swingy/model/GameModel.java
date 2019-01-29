@@ -12,6 +12,7 @@ import mrajaona.swingy.builder.SaveFileBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.SaveManager;
@@ -100,7 +101,7 @@ public class GameModel {
         MainHelper.changeSubScreen();
     }
 
-    public static void drop(ArtifactData artifact) {
+    public static void drop(ArtifactData artifact) throws InvalidViewTypeException {
         GameData.getData().setArtifact(artifact);
         ArtifactType type = artifact.getType();
 

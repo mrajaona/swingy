@@ -23,6 +23,7 @@ import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.HeroData;
 import mrajaona.swingy.exception.HeroBuilderException;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.model.character.HeroModel;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.Util;
@@ -151,7 +152,7 @@ public class HeroBuilder {
 
     // Creation
 
-    public HeroData newHero() throws HeroBuilderException {
+    public HeroData newHero() throws HeroBuilderException, InvalidViewTypeException {
 
         HeroData hero = null;
 
@@ -170,7 +171,7 @@ public class HeroBuilder {
         return (hero);
     }
 
-    public HeroData newHero(String heroClass, String heroName) throws HeroBuilderException {
+    public HeroData newHero(String heroClass, String heroName) throws HeroBuilderException, InvalidViewTypeException {
 
         HeroData hero = null;
 
@@ -186,7 +187,7 @@ public class HeroBuilder {
         return (hero);
     }
 
-    public HeroData loadHero(HeroData loaded) throws HeroBuilderException {
+    public HeroData loadHero(HeroData loaded) throws HeroBuilderException, InvalidViewTypeException {
         if (loaded == null)
             return (null);
 
@@ -209,7 +210,7 @@ public class HeroBuilder {
         .build(false));
     }
 
-    private HeroData build(boolean init) throws HeroBuilderException {
+    private HeroData build(boolean init) throws HeroBuilderException, InvalidViewTypeException  {
 
         ResourceBundle locale    = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
         ResourceBundle errLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() );

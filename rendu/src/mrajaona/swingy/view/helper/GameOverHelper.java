@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.GameOverController;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.Util.ViewTypes;
@@ -18,17 +19,17 @@ public class GameOverHelper {
     @SuppressWarnings("unused")
     private GameOverHelper() {}
 
-    public static void printMsg(String message) {
+    public static void printMsg(String message) throws InvalidViewTypeException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ;
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
-    public static void printPrompt() {
+    public static void printPrompt() throws InvalidViewTypeException {
         Coord heroCoord = GameData.getData().getMap().getHeroCoord();
         printMsg(
             String.format(
@@ -58,7 +59,7 @@ public class GameOverHelper {
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             mrajaona.swingy.Game.getGame().waiting(true); // GUI waits for user to click somewhere
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 
@@ -71,7 +72,7 @@ public class GameOverHelper {
         ConsoleView.println(locale.getString("loseLabel"));
     }
 
-    public static void show() throws SQLException, IOException {
+    public static void show() throws SQLException, IOException, InvalidViewTypeException  {
         GUIGameOver.getScreen().localize();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
@@ -84,7 +85,7 @@ public class GameOverHelper {
                 }
             });
         } else {
-            // Exception
+            throw (new InvalidViewTypeException());
         }
     }
 }

@@ -9,6 +9,7 @@ import mrajaona.swingy.data.artifact.ArmorData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.ResourceMap;
@@ -85,7 +86,7 @@ public class EnemyModel {
         return (artifact);
     }
 
-    public static void die() {
+    public static void die() throws InvalidViewTypeException {
         String msg = String.format(
             ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgDied"),
             GameData.getData().getEnemy().getEnemyType() // %1$s

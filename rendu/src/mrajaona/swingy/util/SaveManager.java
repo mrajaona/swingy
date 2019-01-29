@@ -20,6 +20,7 @@ import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.SaveFileData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.InvalidSaveFileException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.SaveFileModel;
 import mrajaona.swingy.view.helper.MainHelper;
@@ -140,7 +141,7 @@ public class SaveManager {
         return (heroList);
     }
 
-    public SaveFileData load(long heroId) throws SQLException, IOException {
+    public SaveFileData load(long heroId) throws SQLException, IOException, InvalidSaveFileException {
         openConnection();
 
         QueryBuilder<SaveFileData, Long> queryBuilder = saveDao.queryBuilder();
@@ -150,8 +151,7 @@ public class SaveManager {
         List<SaveFileData> result = queryBuilder.query();
 
         if (result == null || result.size() > 1)  {
-            // Exception
-            return (null);
+            throw (new InvalidSaveFileException());
         } else if (result.size() == 0) {
             // Wrong id ; possible in console view ;
             return (null);
@@ -168,14 +168,14 @@ public class SaveManager {
         heroDao.refresh(hero);
 
         if (hero == null) {
-            // Exception
+            throw (new InvalidSaveFileException());
         }
 
         GameMapData map = saveFile.getMap();
         mapDao.refresh(map);
 
         if (map == null) {
-            // Exception
+            throw (new InvalidSaveFileException());
         }
 
         closeConnection();

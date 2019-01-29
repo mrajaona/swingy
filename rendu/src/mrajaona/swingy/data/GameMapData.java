@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import mrajaona.swingy.builder.GameMapBuilder;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.exception.InvalidCoordException;
 import mrajaona.swingy.util.Coord;
 
 /*
@@ -83,16 +84,16 @@ public class GameMapData {
         heroCoord.setY(value);
     }
 
-    public void goBack() {
+    public void goBack() throws InvalidCoordException {
         heroCoord.setCoords(prevCoord);
     }
 
-    public void cleanCoord() {
+    public void cleanCoord() throws InvalidCoordException {
         heroCoord.setCoords(0, 0);
         prevCoord.setCoords(0, 0);
     }
 
-    public void initCoord(int x, int y) {
+    public void initCoord(int x, int y) throws InvalidCoordException {
         heroCoord.setCoords(x, y);
         prevCoord.setCoords(x, y);
     }

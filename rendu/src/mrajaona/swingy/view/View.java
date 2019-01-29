@@ -11,6 +11,7 @@ import mrajaona.swingy.view.helper.TitleHelper;
 import mrajaona.swingy.view.helper.WinHelper;
 import mrajaona.swingy.view.helper.GameOverHelper;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.InvalidScreenException;
 import mrajaona.swingy.exception.SwingyException;
 
 public class View {
@@ -40,8 +41,7 @@ public class View {
                 GameOverHelper.show();
                 break;
             default :
-                // exception
-                break;
+                throw (new InvalidScreenException());
         }
     }
 
@@ -70,8 +70,7 @@ public class View {
                 GameOverHelper.waitForInput();
                 break;
             default :
-                // exception
-                break;
+                throw (new InvalidScreenException());
         }
     }
 

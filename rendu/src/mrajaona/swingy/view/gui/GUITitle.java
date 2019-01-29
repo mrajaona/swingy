@@ -28,6 +28,7 @@ import javax.swing.table.AbstractTableModel;
 import mrajaona.swingy.controller.TitleScreenController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.LoadHeroListException;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.view.helper.TitleHelper;
 
@@ -198,12 +199,12 @@ public class GUITitle {
         statsTable.updateLocale(heroList.getSelectedValue());
     }
 
-    public void initHeroList() throws SQLException, IOException {
+    public void initHeroList() throws SQLException, IOException, LoadHeroListException {
         heroListModel       = new DefaultListModel<HeroData>();
         {
             Object[] list = TitleHelper.getHeroesList();
             if (list == null)
-                ; // Exception // Empty != null
+                throw (new LoadHeroListException()); // Empty != null
             for (int i = 0 ; i < list.length ; i++) {
                 heroListModel.addElement((HeroData) list[i]);
             }

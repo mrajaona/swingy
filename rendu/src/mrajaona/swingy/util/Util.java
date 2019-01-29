@@ -13,7 +13,7 @@ import mrajaona.swingy.data.GameData;
 
 public class Util {
 
-    public void printErr(String message) {
+    public static void printErr(String message) {
         System.err.println(message);
     }
 

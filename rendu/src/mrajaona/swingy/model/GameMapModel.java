@@ -15,6 +15,8 @@ import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.exception.BuilderException;
 import mrajaona.swingy.exception.EnemyBuilderException;
+import mrajaona.swingy.exception.InvalidCoordException;
+import mrajaona.swingy.exception.InvalidViewTypeException;
 import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.ResourceMap;
@@ -50,7 +52,7 @@ public class GameMapModel {
         checkInitPosition();
     }
 
-    private static void generateEnemies() throws EnemyBuilderException {
+    private static void generateEnemies() throws EnemyBuilderException, InvalidCoordException {
         int mapLevel = GameData.getData().getMap().getLevel();
         int mapSize  = GameData.getData().getMap().getSize();
         HashMap<Coord, EnemyData> enemies = new HashMap<Coord, EnemyData>();
@@ -86,7 +88,7 @@ public class GameMapModel {
 
     // remove data
 
-    public static void clear() {
+    public static void clear() throws InvalidCoordException {
         GameMapData map = GameData.getData().getMap();
 
         map.setLevel(0);
@@ -94,7 +96,7 @@ public class GameMapModel {
         map.getEnemies().clear();
     }
 
-    public static void removeMap() throws BuilderException {
+    public static void removeMap() throws BuilderException, InvalidCoordException  {
         GameMapBuilder builder = new GameMapBuilder();
         GameMapData map = builder.newMap();
         GameData.getData().setMap(map);
@@ -145,7 +147,7 @@ public class GameMapModel {
         }
     }
 
-    private static boolean checkEnemy() {
+    private static boolean checkEnemy() throws InvalidViewTypeException {
         HashMap<Coord, EnemyData> enemies = GameData.getData().getMap().getEnemies();
 
         GameMapData map = GameData.getData().getMap();
