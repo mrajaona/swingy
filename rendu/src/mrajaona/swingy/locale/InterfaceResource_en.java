@@ -41,7 +41,6 @@ public class InterfaceResource_en extends ListResourceBundle {
             {"menu", "Menu"},
             {"saveItem", "Save"},
             {"consoleItem", "Console view"},
-            {"helpItem", "Help"},
             {"exitItem", "Exit"},
 
             {"langMenu", "Language"},

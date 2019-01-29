@@ -47,7 +47,6 @@ public class Window {
             private JMenuItem consoleItem;
             private JMenuItem enItem;
             private JMenuItem frItem;
-            private JMenuItem helpItem;
             private JMenuItem exitItem;
 
     private Window (String name) {
@@ -155,26 +154,6 @@ public class Window {
                 menu.add(langMenu);
             }
 
-
-
-            {
-                helpItem = new JMenuItem();
-                helpItem.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent event) {
-                        try {
-                            String[] args = {
-                                "help"
-                            };
-                            MenuController.run(args);
-                        }  catch (Exception e) {
-                            e.printStackTrace();
-                            System.exit(1);
-                        }
-                    }
-                });
-                menu.add(helpItem);
-            }
-
             {
                 exitItem = new JMenuItem();
                 exitItem.addActionListener(new ActionListener() {
@@ -279,7 +258,6 @@ public class Window {
 
         saveItem.setText(locale.getString("saveItem"));
         consoleItem.setText(locale.getString("consoleItem"));
-        helpItem.setText(locale.getString("helpItem"));
         exitItem.setText(locale.getString("exitItem"));
 
         langMenu.setText(locale.getString("langMenu"));

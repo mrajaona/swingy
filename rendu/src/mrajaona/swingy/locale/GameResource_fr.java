@@ -8,9 +8,8 @@ public class GameResource_fr extends ListResourceBundle {
         return new Object[][] {
             /* commands */
             // common
-            {"menuCmds",     "-- aide, gui, langue en/fr, quitter"},
+            {"menuCmds",     "-- gui, langue en/fr, quitter"},
             {"quitter",      "exit"},
-            {"aide",         "help"},
             {"gui",          "gui"},
             {"console",      "console"},
             {"langue",       "language"},

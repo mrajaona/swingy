@@ -31,10 +31,6 @@ public class MenuController {
                 public void run()           { GameModel.exitGame(); }
                 public void run(String arg) { invalid(); }
             });
-        map.put("help", new Cmd() { // TODO
-                public void run()           { ; }
-                public void run(String arg) { invalid(); }
-            });
         map.put("gui", new Cmd() {
                 public void run()           throws SQLException, IOException, SwingyException
                                             { GameModel.changeViewType(ViewTypes.GUI); }

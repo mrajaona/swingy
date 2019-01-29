@@ -40,7 +40,6 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"menu", "Menu"},
             {"saveItem", "Sauvegarder"},
             {"consoleItem", "Vue console"},
-            {"helpItem", "Aide"},
             {"exitItem", "Quitter"},
 
             {"langMenu", "Langue"},
