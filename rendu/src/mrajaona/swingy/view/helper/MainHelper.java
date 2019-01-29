@@ -8,6 +8,7 @@ import mrajaona.swingy.controller.BattleController;
 import mrajaona.swingy.controller.LootController;
 import mrajaona.swingy.controller.MainGameController;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.SubScreen;
@@ -55,7 +56,7 @@ public class MainHelper {
         }
     }
 
-    public static void waitForInput() throws SQLException, IOException {
+    public static void waitForInput() throws SQLException, IOException, SwingyException {
         printPrompt();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {

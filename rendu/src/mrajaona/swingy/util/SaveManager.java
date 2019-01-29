@@ -20,6 +20,7 @@ import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.SaveFileData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.SaveFileModel;
 import mrajaona.swingy.view.helper.MainHelper;
 
@@ -68,7 +69,7 @@ public class SaveManager {
 
     // ----- Edit db
 
-    public void save() throws SQLException, IOException {
+    public void save() throws SQLException, IOException, SwingyException {
         HeroData     hero     = GameData.getData().getHero();
         if (hero == null)
             return ;
@@ -144,8 +145,7 @@ public class SaveManager {
 
         QueryBuilder<SaveFileData, Long> queryBuilder = saveDao.queryBuilder();
 
-        Where<SaveFileData, Long> query = queryBuilder.where()
-          .eq("hero_id", heroId);
+        queryBuilder.where().eq("hero_id", heroId);
 
         List<SaveFileData> result = queryBuilder.query();
 

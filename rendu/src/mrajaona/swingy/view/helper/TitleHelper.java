@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import mrajaona.swingy.controller.TitleScreenController;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.SaveManager;
@@ -49,11 +50,11 @@ public class TitleHelper {
         return ( SaveManager.getManager().listHeroes().toArray() );
     }
 
-    public static void newHero() throws SQLException, IOException {
+    public static void newHero() throws SQLException, IOException, SwingyException {
         GameModel.changeScreen(GameScreen.NEW);
     }
 
-    public static void loadHero(long id) throws SQLException, IOException {
+    public static void loadHero(long id) throws SQLException, IOException, SwingyException {
         GameModel.loadFile(id);
     }
 
@@ -61,7 +62,7 @@ public class TitleHelper {
         GameModel.deleteHero(id);
     }
 
-    public static void waitForInput() throws SQLException, IOException {
+    public static void waitForInput() throws SQLException, IOException, SwingyException {
         printPrompt();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {

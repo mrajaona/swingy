@@ -13,6 +13,9 @@ import mrajaona.swingy.builder.GameMapBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.exception.BuilderException;
+import mrajaona.swingy.exception.EnemyBuilderException;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.Util;
@@ -31,7 +34,7 @@ public class GameMapModel {
 
     // add data
 
-    public static void initMap() throws SQLException, IOException {
+    public static void initMap() throws SQLException, IOException, SwingyException {
         GameMapData map = GameData.getData().getMap();
         int level       = GameData.getData().getHero().getLevel();
 
@@ -47,7 +50,7 @@ public class GameMapModel {
         checkInitPosition();
     }
 
-    private static void generateEnemies() {
+    private static void generateEnemies() throws EnemyBuilderException {
         int mapLevel = GameData.getData().getMap().getLevel();
         int mapSize  = GameData.getData().getMap().getSize();
         HashMap<Coord, EnemyData> enemies = new HashMap<Coord, EnemyData>();
@@ -91,7 +94,7 @@ public class GameMapModel {
         map.getEnemies().clear();
     }
 
-    public static void removeMap() {
+    public static void removeMap() throws BuilderException {
         GameMapBuilder builder = new GameMapBuilder();
         GameMapData map = builder.newMap();
         GameData.getData().setMap(map);
@@ -121,7 +124,7 @@ public class GameMapModel {
         return (true);
     }
 
-    public static void checkInitPosition() throws SQLException, IOException {
+    public static void checkInitPosition() throws SQLException, IOException, SwingyException {
         MainHelper.clean();
 
         if (checkWin()) {
@@ -134,7 +137,7 @@ public class GameMapModel {
         }
     }
 
-    private static void checkPosition() throws SQLException, IOException {
+    private static void checkPosition() throws SQLException, IOException, SwingyException {
         if (checkWin()) {
             GameModel.changeScreen(GameScreen.WIN);
         } else if (checkEnemy()) {
@@ -186,7 +189,7 @@ public class GameMapModel {
     }
 
     // move hero
-    public static void move(String direction) throws SQLException, IOException {
+    public static void move(String direction) throws SQLException, IOException, SwingyException {
         ResourceBundle errLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() );
 
         GameMapData map = GameData.getData().getMap();
@@ -245,7 +248,7 @@ public class GameMapModel {
         checkPosition();
     }
 
-    public static void goBack() throws SQLException, IOException {
+    public static void goBack() throws SQLException, IOException, SwingyException {
         GameData.getData().getMap().goBack();
         GameModel.enemyEncounterEnd();
         checkPosition();

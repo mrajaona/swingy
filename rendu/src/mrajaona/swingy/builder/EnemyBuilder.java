@@ -12,6 +12,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Getter;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.exception.EnemyBuilderException;
 import mrajaona.swingy.util.Util;
 
 /*
@@ -99,12 +100,12 @@ public class EnemyBuilder {
 
     // Creation
 
-    public EnemyData newEnemy(final String enemyType, final int enemyLevel) {
+    public EnemyData newEnemy(final String enemyType, final int enemyLevel) throws EnemyBuilderException {
         Util.EnemyBaseStats stats = Util.ENEMY_BASE_STATS_MAP.get(enemyType);
         if (stats == null)
             return (null);
 
-        return this.setEnemyType(enemyType)
+        return ( this.setEnemyType(enemyType)
         .setLevel(enemyLevel)
         .setExperience((1 + level/5) * stats.getExp())
         .setBaseAttack((1 + level/5) * stats.getAtk())
@@ -114,10 +115,10 @@ public class EnemyBuilder {
         .setDefense(baseDefense)
         .setMaxHitPoints(baseHitPoints)
         .setHitPoints(baseHitPoints)
-        .build();
+        .build() );
     }
 
-    public EnemyData build() {
+    public EnemyData build() throws EnemyBuilderException {
 
         //Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -130,9 +131,7 @@ public class EnemyBuilder {
 
         //Show errors
         if (constraintViolations.size() > 0) {
-            // Exception
-            System.err.println("Invalid enemy");
-            return (null);
+            throw (new EnemyBuilderException());
         } else {
             return (new EnemyData(this));
         }

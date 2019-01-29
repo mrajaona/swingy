@@ -24,12 +24,14 @@ public class Game {
         return (game);
     }
 
+    // Game Loop
     Runnable gameLoop = new Runnable() {
         public void run() {
             try {
                 while (true) {
                     View.waitForInput();
 
+                    // wait for GUI
                     if (waiting) {
                         synchronized (gameThread) {
                             gameThread.wait();

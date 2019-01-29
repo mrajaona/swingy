@@ -13,6 +13,8 @@ import lombok.Getter;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.SaveFileData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.BuilderException;
+import mrajaona.swingy.exception.SaveFileBuilderException;
 
 public class SaveFileBuilder {
 
@@ -39,7 +41,7 @@ public class SaveFileBuilder {
         return (this);
     }
 
-    public SaveFileData build() {
+    public SaveFileData build() throws BuilderException {
 
         //Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -50,38 +52,23 @@ public class SaveFileBuilder {
         //Validate bean
         Set<ConstraintViolation<SaveFileBuilder>> fileConstraintViolations = validator.validate(this);
 
-        boolean error = false;
-
         //Show errors
         if (fileConstraintViolations.size() > 0) {
-
-            // Exception
-            System.out.println("Invalid save file");
-            // Debug
-            for (ConstraintViolation<SaveFileBuilder> violation : fileConstraintViolations) {
-                System.out.println("Save : " + violation.getMessage());
-                System.out.println(violation.getRootBean());
-                System.out.println(violation.getPropertyPath());
-            }
-            error = true;
+            throw (new SaveFileBuilderException());
         }
 
-        if (error == true)
-            return (null);
-        else {
-            return (new SaveFileData(this));
-        }
+        return (new SaveFileData(this));
 
     }
 
-    public SaveFileData newFile(HeroData hero, GameMapData map) {
+    public SaveFileData newFile(HeroData hero, GameMapData map) throws BuilderException {
         this.hero = hero;
         this.map  = map;
 
         return (build());
     }
 
-    public SaveFileData loadFile(SaveFileData loaded) {
+    public SaveFileData loadFile(SaveFileData loaded) throws BuilderException {
         if (loaded == null)
             return (null);
 

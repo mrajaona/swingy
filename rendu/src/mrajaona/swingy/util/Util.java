@@ -13,6 +13,10 @@ import mrajaona.swingy.data.GameData;
 
 public class Util {
 
+    public void printErr(String message) {
+        System.err.println(message);
+    }
+
     // UI
 
     public enum ViewTypes {

@@ -9,9 +9,9 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.Util.GameScreen;
-import mrajaona.swingy.view.helper.TitleHelper;
 
 public class TitleScreenController extends MenuController {
 
@@ -28,27 +28,24 @@ public class TitleScreenController extends MenuController {
 
         // Title screen
         map.put("new", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                 { GameModel.changeScreen(GameScreen.NEW); }
-                public void run(String arg) throws SQLException, IOException
-                                            { invalid(); }
+                public void run(String arg) { invalid(); }
             });
         map.put("load", new Cmd() {
-                public void run()           throws SQLException, IOException
-                { invalid(); }
-                public void run(String arg) throws SQLException, IOException
-                { GameModel.loadFile(Long.parseLong(arg)); }
+                public void run()           { invalid(); }
+                public void run(String arg) throws SQLException, IOException, SwingyException
+                                            { GameModel.loadFile(Long.parseLong(arg)); }
             });
         map.put("delete", new Cmd() {
-                public void run()           throws SQLException, IOException
-                { invalid(); }
+                public void run()           { invalid(); }
                 public void run(String arg) throws SQLException, IOException
-                { GameModel.deleteHero(Long.parseLong(arg)); }
+                                            { GameModel.deleteHero(Long.parseLong(arg)); }
             });
         return Collections.unmodifiableMap(map);
     }
 
-    public static void run(String[] args) throws SQLException, IOException {
+    public static void run(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;
@@ -66,7 +63,7 @@ public class TitleScreenController extends MenuController {
         mrajaona.swingy.Game.getGame().waiting(false);
     }
 
-    public static void delocalize(String[] args) throws SQLException, IOException {
+    public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;

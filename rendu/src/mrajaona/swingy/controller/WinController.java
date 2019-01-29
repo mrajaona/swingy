@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.MenuController.Cmd;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.SaveManager;
@@ -29,30 +30,28 @@ public class WinController {
 
         // win
         map.put("title", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                                             {
                                                 GameMapModel.removeMap();
                                             	SaveManager.getManager().save();
                                             	GameModel.title();
                                             }
-                public void run(String arg) throws SQLException, IOException
-                                            { invalid(); }
+                public void run(String arg) { invalid(); }
             });
         map.put("continue", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                                             {
                                                 GameMapModel.removeMap();
                                                 SaveManager.getManager().save();
                                                 GameMapModel.initMap();
                                             }
-                public void run(String arg) throws SQLException, IOException
-                { invalid(); }
+                public void run(String arg) { invalid(); }
             });
 
         return Collections.unmodifiableMap(map);
     }
 
-    public static void run(String[] args) throws SQLException, IOException {
+    public static void run(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;
@@ -70,7 +69,7 @@ public class WinController {
         mrajaona.swingy.Game.getGame().waiting(false);
     }
 
-    public static void delocalize(String[] args) throws SQLException, IOException {
+    public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;

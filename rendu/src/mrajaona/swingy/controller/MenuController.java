@@ -10,14 +10,15 @@ import java.util.ResourceBundle;
 
 import lombok.Getter;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.Util.ViewTypes;
 
 public class MenuController {
 
     public interface Cmd {
-        public void run()           throws SQLException, IOException;
-        public void run(String arg) throws SQLException, IOException;
+        public void run()           throws SQLException, IOException, SwingyException;
+        public void run(String arg) throws SQLException, IOException, SwingyException;
     }
 
     private static void invalid() {}
@@ -35,12 +36,12 @@ public class MenuController {
                 public void run(String arg) { invalid(); }
             });
         map.put("gui", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                                             { GameModel.changeViewType(ViewTypes.GUI); }
                 public void run(String arg) { invalid(); }
             });
         map.put("console", new Cmd() {
-                public void run()           throws SQLException, IOException
+                public void run()           throws SQLException, IOException, SwingyException
                                             { GameModel.changeViewType(ViewTypes.CONSOLE); }
                 public void run(String arg) { invalid(); }
             });
@@ -52,7 +53,7 @@ public class MenuController {
         return Collections.unmodifiableMap(map);
     }
 
-    public static void run(String[] args) throws SQLException, IOException {
+    public static void run(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;
@@ -70,7 +71,7 @@ public class MenuController {
         mrajaona.swingy.Game.getGame().waiting(false);
     }
 
-    public static void delocalize(String[] args) throws SQLException, IOException {
+    public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;

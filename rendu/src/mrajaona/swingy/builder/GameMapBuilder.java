@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Range;
 import lombok.Getter;
 import mrajaona.swingy.data.GameMapData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.exception.GameMapBuilderException;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.util.Coord;
 
@@ -77,7 +78,7 @@ public class GameMapBuilder {
         return (this);
     }
 
-    public GameMapData build() {
+    public GameMapData build() throws GameMapBuilderException {
 
         // Create ValidatorFactory which returns validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -88,41 +89,22 @@ public class GameMapBuilder {
         // Validate bean
         Set<ConstraintViolation<GameMapBuilder>> mapConstraintViolations = validator.validate(this);
 
-        boolean error = false;
-
         // Show errors
-        if (mapConstraintViolations.size() > 0) {
-            // Exception
-            System.out.println("Invalid map");
-            error = true;
-        } else if (
-            !GameMapModel.checkCoord(heroCoord, size)
-            || !GameMapModel.checkCoord(prevCoord, size)
-            ) {
-            // Exception
-            System.out.println("Invalid map");
-            error = true;
-        }
-
         if (
-            heroCoord.getX() >= size || prevCoord.getY() >= size
-            || heroCoord.getX() >= size || prevCoord.getY() >= size
-            )
-        {
-            // Exception
-            System.out.println("Invalid coordinates");
-            error = true;
+            // invalid data
+            mapConstraintViolations.size() > 0
+            // invaliid coordinates for this map
+            || !GameMapModel.checkCoord(heroCoord, size)
+            || !GameMapModel.checkCoord(prevCoord, size)
+        ) {
+            throw (new GameMapBuilderException());
         }
 
-        if (error == true)
-            return (null);
-        else {
-            return (new GameMapData(this));
-        }
+        return (new GameMapData(this));
 
     }
 
-    public GameMapData newMap() {
+    public GameMapData newMap() throws GameMapBuilderException {
         enemies = new HashMap<Coord, EnemyData>();
         return (
             setLevel(0)
@@ -132,7 +114,7 @@ public class GameMapBuilder {
             );
     }
 
-    public GameMapData loadMap(GameMapData loaded) {
+    public GameMapData loadMap(GameMapData loaded) throws GameMapBuilderException {
         if (loaded == null)
             return (null);
 

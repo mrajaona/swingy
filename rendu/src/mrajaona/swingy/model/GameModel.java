@@ -12,6 +12,7 @@ import mrajaona.swingy.builder.SaveFileBuilder;
 import mrajaona.swingy.data.GameData;
 import mrajaona.swingy.data.artifact.ArtifactData;
 import mrajaona.swingy.data.character.EnemyData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.ResourceMap;
 import mrajaona.swingy.util.SaveManager;
 import mrajaona.swingy.util.Util.ArtifactType;
@@ -29,14 +30,14 @@ public class GameModel {
     @SuppressWarnings("unused")
     private GameModel() {}
 
-    public static void init (Locale locale, String viewType) throws SQLException, IOException {
+    public static void init (Locale locale, String viewType) throws SQLException, IOException, SwingyException {
         GameData.getData().setLocale(locale);
         changeViewType(viewType);
     }
 
     // Init hero and map
 
-    public static void createHero() throws SQLException, IOException {
+    public static void createHero() throws SQLException, IOException, SwingyException {
         HeroBuilder hBuilder = new HeroBuilder();
         GameData.getData().setHero(
             hBuilder.newHero()
@@ -52,7 +53,7 @@ public class GameModel {
         GameMapModel.initMap();
     }
 
-    public static void createHero(String heroClass, String heroName) throws SQLException, IOException {
+    public static void createHero(String heroClass, String heroName) throws SQLException, IOException, SwingyException {
         HeroBuilder hBuilder = new HeroBuilder();
         GameData.getData().setHero(
             hBuilder.newHero(heroClass, heroName)
@@ -69,7 +70,7 @@ public class GameModel {
     }
 
 
-    public static void loadFile(long heroId) throws SQLException, IOException {
+    public static void loadFile(long heroId) throws SQLException, IOException, SwingyException {
         SaveFileBuilder sfBuilder = new SaveFileBuilder();
         GameData.getData().setSaveFile(
             sfBuilder.loadFile(
@@ -157,7 +158,7 @@ public class GameModel {
         SaveManager.getManager().delete(id);
     }
 
-    public static void title() throws SQLException, IOException {
+    public static void title() throws SQLException, IOException, SwingyException {
         MainHelper.clean();
         GameMapModel.removeMap();
         GameData.getData().setHero(null);
@@ -201,7 +202,7 @@ public class GameModel {
         }
     }
 
-    public static void changeViewType(String newType) throws SQLException, IOException {
+    public static void changeViewType(String newType) throws SQLException, IOException, SwingyException {
         ViewTypes tmp = ViewTypes.getKeyByValue(newType);
 
         if (tmp == null) {
@@ -211,7 +212,7 @@ public class GameModel {
         }
     }
 
-    public static void changeViewType(ViewTypes newType) throws SQLException, IOException {
+    public static void changeViewType(ViewTypes newType) throws SQLException, IOException, SwingyException {
         if (newType == null) {
             ; // Exception
         } else {
@@ -225,7 +226,7 @@ public class GameModel {
         }
     }
 
-    public static void changeScreen(GameScreen screen) throws SQLException, IOException {
+    public static void changeScreen(GameScreen screen) throws SQLException, IOException, SwingyException {
         GameData.getData().setScreen(screen);
         View.show();
     }

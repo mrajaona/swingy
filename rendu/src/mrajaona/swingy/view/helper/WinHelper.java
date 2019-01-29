@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.WinController;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.util.Coord;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
@@ -46,7 +47,7 @@ public class WinHelper {
         }
     }
 
-    public static void waitForInput() throws SQLException, IOException {
+    public static void waitForInput() throws SQLException, IOException, SwingyException {
         printPrompt();
 
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.util.Util.ViewTypes;
@@ -38,7 +39,7 @@ public class BuildHelper {
         return (null);
     }
 
-    public static void waitForInput() throws SQLException, IOException {
+    public static void waitForInput() throws SQLException, IOException, SwingyException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ;
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
@@ -48,11 +49,11 @@ public class BuildHelper {
         }
     }
 
-    public static void prev() throws SQLException, IOException {
+    public static void prev() throws SQLException, IOException, SwingyException {
         GameModel.changeScreen(GameScreen.TITLE);
     }
 
-    public static void show() throws SQLException, IOException {
+    public static void show() throws SQLException, IOException, SwingyException {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             Window.getWindow().hide();
             GameModel.createHero();

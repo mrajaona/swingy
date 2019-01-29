@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.MenuController.Cmd;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.character.HeroModel;
 
 public class LootController extends MenuController {
@@ -29,20 +30,18 @@ public class LootController extends MenuController {
         map.put("equip", new Cmd() {
                 public void run()           throws SQLException, IOException
                                             { HeroModel.equip(GameData.getData().getArtifact()); }
-                public void run(String arg) throws SQLException, IOException
-                                            { invalid(); }
+                public void run(String arg) { invalid(); }
             });
         map.put("leave", new Cmd() {
                 public void run()           throws SQLException, IOException
                                             { HeroModel.noLoot(); }
-                public void run(String arg) throws SQLException, IOException
-                { invalid(); }
+                public void run(String arg) { invalid(); }
             });
 
         return Collections.unmodifiableMap(map);
     }
 
-    public static void run(String[] args) throws SQLException, IOException {
+    public static void run(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;
@@ -60,7 +59,7 @@ public class LootController extends MenuController {
         mrajaona.swingy.Game.getGame().waiting(false);
     }
 
-    public static void delocalize(String[] args) throws SQLException, IOException {
+    public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;

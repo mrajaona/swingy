@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.MenuController.Cmd;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.character.HeroModel;
 
 public class BattleController extends MenuController {
@@ -27,22 +28,20 @@ public class BattleController extends MenuController {
 
         // enemy encounter
         map.put("run", new Cmd() {
-                public void run() throws    SQLException, IOException
+                public void run() throws    SQLException, IOException, SwingyException
                                             { HeroModel.run(); }
-                public void run(String arg) throws SQLException, IOException
-                                            { invalid(); }
+                public void run(String arg) { invalid(); }
                 });
         map.put("fight", new Cmd() {
-                public void run() throws    SQLException, IOException
+                public void run() throws    SQLException, IOException, SwingyException
                                             { HeroModel.fight(); }
-                public void run(String arg) throws SQLException, IOException
-                                            { invalid(); }
+                public void run(String arg) { invalid(); }
             });
 
         return Collections.unmodifiableMap(map);
     }
 
-    public static void run(String[] args) throws SQLException, IOException {
+    public static void run(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;
@@ -60,7 +59,7 @@ public class BattleController extends MenuController {
         mrajaona.swingy.Game.getGame().waiting(false);
     }
 
-    public static void delocalize(String[] args) throws SQLException, IOException {
+    public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {
         if (args.length <= 0 || args.length > 2) {
             invalid();
             return;

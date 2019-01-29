@@ -11,12 +11,13 @@ import mrajaona.swingy.view.helper.TitleHelper;
 import mrajaona.swingy.view.helper.WinHelper;
 import mrajaona.swingy.view.helper.GameOverHelper;
 import mrajaona.swingy.data.GameData;
+import mrajaona.swingy.exception.SwingyException;
 
 public class View {
     @SuppressWarnings("unused")
     private View() {}
 
-    public static void show() throws SQLException, IOException {
+    public static void show() throws SQLException, IOException, SwingyException {
         GameScreen screen = GameData.getData().getScreen();
 
         Window.getWindow().updateMenu();
@@ -49,7 +50,7 @@ public class View {
 
     }
 
-    public static void waitForInput() throws SQLException, IOException {
+    public static void waitForInput() throws SQLException, IOException, SwingyException {
         GameScreen screen = GameData.getData().getScreen();
 
         switch (screen) {

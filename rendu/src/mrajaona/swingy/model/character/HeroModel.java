@@ -12,6 +12,7 @@ import mrajaona.swingy.data.artifact.HelmData;
 import mrajaona.swingy.data.artifact.WeaponData;
 import mrajaona.swingy.data.character.EnemyData;
 import mrajaona.swingy.data.character.HeroData;
+import mrajaona.swingy.exception.SwingyException;
 import mrajaona.swingy.model.GameMapModel;
 import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.model.artifact.ArmorModel;
@@ -155,11 +156,11 @@ public class HeroModel {
 
     // move
 
-    public static void move(String direction) throws SQLException, IOException {
+    public static void move(String direction) throws SQLException, IOException, SwingyException {
         GameMapModel.move(direction);
     }
 
-    public static void run() throws SQLException, IOException {
+    public static void run() throws SQLException, IOException, SwingyException {
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() );
 
         {
@@ -188,7 +189,7 @@ public class HeroModel {
 
     // battle
 
-    public static void fight() throws SQLException, IOException {
+    public static void fight() throws SQLException, IOException, SwingyException {
         HeroData  hero  = GameData.getData().getHero();
         EnemyData enemy = GameData.getData().getEnemy();
 
