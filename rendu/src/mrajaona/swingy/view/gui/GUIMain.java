@@ -18,6 +18,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.text.DefaultCaret;
 
 import mrajaona.swingy.controller.BattleController;
 import mrajaona.swingy.controller.LootController;
@@ -66,6 +67,8 @@ public class GUIMain {
             // Console
             {
                 consoleArea = new JTextArea();
+                DefaultCaret caret = (DefaultCaret) consoleArea.getCaret();
+                caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
                 consolePane = new JScrollPane(consoleArea);
             }
 

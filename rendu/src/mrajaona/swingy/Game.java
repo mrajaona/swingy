@@ -50,7 +50,11 @@ public class Game {
     }
 
     public void insertToQueue(Runnable command) {
-        queue.offer(command);
+        try {
+            queue.put(command);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void exitGame() {
