@@ -59,6 +59,7 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"msgRunSuccess", "...et réussit !"},
 
             {"msgAttack",     "%1$s attaque."}, // hero name / enemy type
+            {"msgMissed",     "%1$s rate la cible."}, // hero name / enemy type
             {"msgDamage",     "%1$s reçoit %2$d dégâts."}, // hero name / enemy type, damage
             {"msgDied",       "%1$s est mort."}, // hero name / enemy type
 

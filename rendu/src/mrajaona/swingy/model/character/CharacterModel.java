@@ -1,5 +1,6 @@
 package mrajaona.swingy.model.character;
 
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javax.swing.SwingUtilities;
@@ -69,7 +70,17 @@ public class CharacterModel {
         );
         MainHelper.printMsg(msg);
 
-        loseHP(target, attacker.getAttack() - target.getDefense());
+        Random rand     = new Random();
+
+        if (rand.nextInt(10) == 0) { // miss
+            msg = String.format(
+                ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgMissed"),
+                identity // %1$s
+            );
+            MainHelper.printMsg(msg);
+        } else {
+            loseHP(target, attacker.getAttack() - target.getDefense());
+        }
     }
 
     public static void attack(final CharacterData attacker, final CharacterData target) throws InvalidViewTypeException, DataException {

@@ -28,7 +28,7 @@ public class EnemyModel {
     @SuppressWarnings("unused")
     private EnemyModel() {}
 
-    public static ArtifactData generateArtifact() throws InvalidArtifactException, ResourceMapException {
+    public static ArtifactData generateArtifact(int enemyLevel) throws InvalidArtifactException, ResourceMapException {
         ArtifactType type = ArtifactType.random();
 
         ResourceMap resMap;
@@ -62,8 +62,8 @@ public class EnemyModel {
 
         Random rand     = new Random();
         String name     = keyList.get(rand.nextInt(keyList.size()));
-        int    mapLevel = GameData.getData().getMap().getLevel();
-        int    modifier = (mapLevel/2) + ((rand.nextInt(6) + 1) - 3);
+
+        int    modifier = (enemyLevel/2) + ((rand.nextInt(6) + 1) - 3);
         modifier = modifier < 1 ? 3 : modifier * 3;
 
         ArtifactData artifact;
@@ -92,13 +92,15 @@ public class EnemyModel {
 
         HeroModel.earnExp(GameData.getData().getEnemy().getExperience());
 
+        int enemyLevel = GameData.getData().getEnemy().getLevel();
+
         GameMapModel.enemyDied();
 
         Random rand  = new Random();
         boolean drop = rand.nextInt(10) == 0 ? false : true;
 
         if (drop)
-            GameModel.drop(generateArtifact());
+            GameModel.drop(generateArtifact(enemyLevel));
         else
             GameModel.noDrop();
     }
