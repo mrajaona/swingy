@@ -98,7 +98,7 @@ public class SaveManager {
         if (statusSave.isCreated() || statusSave.isUpdated()) {
             MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgSave"));
         } else {
-            MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() ).getString("error")); // TODO
+            MainHelper.printMsg(ResourceBundle.getBundle( "mrajaona.swingy.locale.ErrorResource", GameData.getData().getLocale() ).getString("saveError"));
         }
 
         closeConnection();

@@ -32,7 +32,7 @@ public class TitleHelper {
         if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE)) {
             ConsoleView.println(message);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
-            ; // TODO : modal
+            ;
         } else {
             throw (new InvalidViewTypeException());
         }

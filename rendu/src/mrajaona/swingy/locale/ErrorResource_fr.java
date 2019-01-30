@@ -15,6 +15,7 @@ public class ErrorResource_fr extends ListResourceBundle {
             {"invalidName", "Nom invalide : lettres (sans accents) et espaces seulement."},
             {"invalidDirection", "Direction invalide (nord, sud, est, ouest)."},
             {"invalidLanguage", "Langue invalide (en, fr)."},
+            {"saveError", "Sauvegarde impossible."},
 
             /* Exceptions */
             {"builderException",         "Impossible de creer un Objet valide."},

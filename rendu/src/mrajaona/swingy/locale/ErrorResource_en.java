@@ -15,6 +15,7 @@ public class ErrorResource_en extends ListResourceBundle {
             {"invalidName", "Not a valid name : only letters and spaces allowed."},
             {"invalidDirection", "Invalid direction (north, south east, west)."},
             {"invalidLanguage", "Invalid language (en, fr)."},
+            {"saveError", "Could not save."},
 
             /* exceptions */
             {"builderException",         "Could not build valid Object."},

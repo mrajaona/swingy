@@ -37,7 +37,7 @@ public class MenuController {
     private static Map<String, Cmd> initCommonMap() {
         Map<String, Cmd> map = new HashMap<String, Cmd>();
 
-        map.put("exit", new Cmd() { // TODO
+        map.put("exit", new Cmd() {
                 public void run()           { GameModel.exitGame(); }
                 public void run(String arg) { invalid(); }
             });

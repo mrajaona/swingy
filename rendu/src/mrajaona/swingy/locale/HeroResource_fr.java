@@ -4,8 +4,6 @@ import java.util.ListResourceBundle;
 
 import mrajaona.swingy.util.ResourceMap;
 
-// TODO : accents
-
 public class HeroResource_fr extends ListResourceBundle {
 
     protected Object[][] getContents() {

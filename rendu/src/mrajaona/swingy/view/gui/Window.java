@@ -109,7 +109,7 @@ public class Window {
             }
 
             {
-                // Language submenu // TODO : disable selected
+                // Language submenu
                 langMenu = new JMenu();
 
                 {
