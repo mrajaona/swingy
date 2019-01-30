@@ -158,9 +158,10 @@ public class GameModel {
     }
 
     public static void title() throws SQLException, IOException, SwingyException {
-        MainHelper.clean();
         GameMapModel.removeMap();
         GameData.getData().setHero(null);
+        MainHelper.clean();
+        TitleHelper.reloadHeroes();
         changeScreen(GameScreen.TITLE);
     }
 

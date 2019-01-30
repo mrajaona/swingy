@@ -51,7 +51,7 @@ public class GUITitle {
     private JButton                    loadButton;
     private JButton                    deleteButton;
 
-    private DecimalFormat              format = new DecimalFormat("#");
+    private static DecimalFormat       format = new DecimalFormat("#");
 
     private GUITitle() {
         try {
@@ -227,6 +227,19 @@ public class GUITitle {
             });
         }
         heroListScrollPane  = new JScrollPane(heroList);
+    }
+
+    public void updateHeroList() throws SQLException, IOException, LoadHeroListException {
+        heroListModel.removeAllElements();
+        {
+            Object[] list = TitleHelper.getHeroesList();
+            if (list == null)
+                throw (new LoadHeroListException()); // Empty != null
+            for (int i = 0 ; i < list.length ; i++) {
+                heroListModel.addElement((HeroData) list[i]);
+            }
+        }
+
     }
 
     // Class for statsField custom table

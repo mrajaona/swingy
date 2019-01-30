@@ -3,6 +3,7 @@ package mrajaona.swingy.view.helper;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import mrajaona.swingy.controller.TitleScreenController;
@@ -22,6 +23,8 @@ import mrajaona.swingy.view.gui.Window;
 
 public class TitleHelper {
 
+    private static DecimalFormat   format = new DecimalFormat("#");
+
     @SuppressWarnings("unused")
     private TitleHelper() {}
 
@@ -35,7 +38,10 @@ public class TitleHelper {
         }
     }
 
-    public static void printPrompt() throws InvalidViewTypeException {
+    public static void printPrompt() throws SQLException, IOException, LoadHeroListException, InvalidViewTypeException {
+        if (GameData.getData().getViewType().equals(ViewTypes.CONSOLE))
+            listHeroes();
+
         printMsg(
             ResourceBundle.getBundle("mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale())
             .getString("msgTitleInput"));
@@ -47,6 +53,9 @@ public class TitleHelper {
         }
     }
 
+    public static void reloadHeroes() throws LoadHeroListException, SQLException, IOException {
+        GUITitle.getScreen().updateHeroList();
+    }
 
     public static Object[] getHeroesList() throws SQLException, IOException {
         return ( SaveManager.getManager().listHeroes().toArray() );
@@ -71,6 +80,7 @@ public class TitleHelper {
             String[] line;
 
             line = ConsoleView.getSplitInput();
+            System.out.println("input: " + line == null ? "(null)" : line.length);
             TitleScreenController.delocalize(line);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
@@ -89,13 +99,12 @@ public class TitleHelper {
             locale.getString("id")            + " : " + Long.toString(hero.getId()) + System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
             locale.getString("class")         + " : " + ((ResourceMap) heroLocale.getObject("ClassesList")).get(hero.getHeroClass()) + System.lineSeparator() +
-            locale.getString("level")         + " : " + hero.getLevel() + System.lineSeparator() +
+            locale.getString("level")         + " : " + format.format(hero.getExperience()) + " / " + format.format(hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450) + System.lineSeparator() +
             locale.getString("experience")    + " : " + hero.getExperience() + System.lineSeparator() +
 
-            locale.getString("attack")        + " : " + Integer.toString(hero.getBaseAttack())    + " + " + Integer.toString(hero.getWeapon().getModifier()) + System.lineSeparator() +
-            locale.getString("defense")       + " : " + Integer.toString(hero.getBaseDefense())   + " + " + Integer.toString(hero.getArmor().getModifier())  + System.lineSeparator() +
-            locale.getString("hitPoints")     + " : " + Integer.toString(hero.getBaseHitPoints()) + " + " + Integer.toString(hero.getHelm().getModifier())   + System.lineSeparator()
-
+            locale.getString("attack")        + " : " + Integer.toString(hero.getAttack())     + System.lineSeparator() +
+            locale.getString("defense")       + " : " + Integer.toString(hero.getDefense())    + System.lineSeparator() +
+            locale.getString("hitPoints")     + " : " + Integer.toString(hero.getHitPoints())  + " / " + Integer.toString(hero.getMaxHitPoints()) + System.lineSeparator()
         );
     }
 
@@ -116,7 +125,6 @@ public class TitleHelper {
                                     );
 
         ConsoleView.println(locale.getString("title"));
-        listHeroes();
     }
 
     public static void reload() throws SQLException, IOException, LoadHeroListException {

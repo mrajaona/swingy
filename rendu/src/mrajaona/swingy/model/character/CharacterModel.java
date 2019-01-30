@@ -92,8 +92,8 @@ public class CharacterModel {
             doAttack(attacker, target, identity);
         }
 
-
-
+        if (target instanceof HeroData)
+            MainHelper.update();
     }
 
     public static void fight(CharacterData fighter1, CharacterData fighter2) throws InvalidViewTypeException, DataException {

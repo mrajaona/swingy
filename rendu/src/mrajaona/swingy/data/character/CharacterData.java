@@ -47,15 +47,19 @@ public class CharacterData implements Serializable {
     @Getter @Setter private int baseHitPoints;
 
 
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero
     @Getter @Setter private int attack;
 
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero
     @Getter @Setter private int defense;
 
+    @DatabaseField(canBeNull = false)
     @Positive
     @Getter @Setter private int maxHitPoints;
 
+    @DatabaseField(canBeNull = false)
     @PositiveOrZero
     @Getter @Setter private int hitPoints;
 

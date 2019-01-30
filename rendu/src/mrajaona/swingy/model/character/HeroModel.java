@@ -25,6 +25,7 @@ import mrajaona.swingy.model.artifact.ArmorModel;
 import mrajaona.swingy.model.artifact.HelmModel;
 import mrajaona.swingy.model.artifact.WeaponModel;
 import mrajaona.swingy.util.ResourceMap;
+import mrajaona.swingy.util.Util;
 import mrajaona.swingy.util.Util.GameScreen;
 import mrajaona.swingy.view.gui.GUIMain;
 import mrajaona.swingy.view.helper.MainHelper;
@@ -64,6 +65,13 @@ public class HeroModel {
     public static void levelUp(HeroData hero) throws InvalidViewTypeException {
         if (hero.getLevel() < HERO_MAX_LVL) {
             hero.setLevel(hero.getLevel() + 1);
+
+            Util.HeroBaseStats stats = Util.HERO_BASE_STATS_MAP.get(hero.getHeroClass());
+
+            hero.setBaseAttack( (5 + hero.getLevel() - 1) * stats.getAtk() );
+            hero.setBaseDefense( (5 + hero.getLevel() - 1) * stats.getDef() );
+            hero.setBaseHitPoints( (5 + hero.getLevel() - 1) * stats.getHp() * 5 );
+
             String msg = String.format(
                 ResourceBundle.getBundle( "mrajaona.swingy.locale.InterfaceResource", GameData.getData().getLocale() ).getString("msgLvlUp"),
                 GameData.getData().getHero().getHeroName(), // %1$s
@@ -72,6 +80,9 @@ public class HeroModel {
             MainHelper.printMsg(msg);
             System.out.println(msg);
             CharacterModel.fullRecover(hero);
+
+            updateStats();
+
         }
     }
 

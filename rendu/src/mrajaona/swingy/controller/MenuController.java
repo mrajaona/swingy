@@ -23,6 +23,15 @@ public class MenuController {
     }
 
     private static void invalid() {}
+    private static void noCmd() {
+        Game.getGame().insertToQueue(
+            new Runnable() {
+                    public void run() {
+                        invalid();
+                    }
+                }
+            );
+    }
 
     @Getter private static Map<String, Cmd> commonCmdMap = initCommonMap();
     private static Map<String, Cmd> initCommonMap() {
@@ -51,8 +60,8 @@ public class MenuController {
     }
 
     public static void run(final String[] args) throws SQLException, IOException, SwingyException {
-        if (args.length <= 0 || args.length > 2) {
-            invalid();
+        if (args == null || args.length <= 0 || args.length > 2) {
+            noCmd();
             return;
         }
 
@@ -84,12 +93,12 @@ public class MenuController {
                 );
         }
         else
-            invalid();
+            noCmd();
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {
-        if (args.length <= 0 || args.length > 2) {
-            invalid();
+        if (args == null || args.length <= 0 || args.length > 2) {
+            noCmd();
             return;
         }
 

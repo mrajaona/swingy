@@ -21,6 +21,15 @@ public class GameOverController {
     private GameOverController() {}
 
     private static void invalid() {}
+    private static void noCmd() {
+        Game.getGame().insertToQueue(
+            new Runnable() {
+                    public void run() {
+                        invalid();
+                    }
+                }
+            );
+    }
 
     private static Map<String, Cmd> cmdMap = initMap();
     private static Map<String, Cmd> initMap() {
@@ -40,6 +49,7 @@ public class GameOverController {
         map.put("reload", new Cmd() {
                 public void run()           throws SQLException, IOException, SwingyException
                                             {
+                                                GameMapModel.removeMap();
                                                 GameModel.loadFile(
                                                     GameData.getData().getHero().getId()
                                                 );
@@ -51,8 +61,8 @@ public class GameOverController {
     }
 
     public static void run(final String[] args) throws SQLException, IOException, SwingyException {
-        if (args.length <= 0 || args.length > 2) {
-            invalid();
+        if (args == null || args.length <= 0 || args.length > 2) {
+            noCmd();
             return;
         }
 
@@ -84,12 +94,12 @@ public class GameOverController {
                 );
         }
         else
-            invalid();
+            noCmd();
     }
 
     public static void delocalize(String[] args) throws SQLException, IOException, SwingyException {
-        if (args.length <= 0 || args.length > 2) {
-            invalid();
+        if (args == null || args.length <= 0 || args.length > 2) {
+            noCmd();
             return;
         }
 

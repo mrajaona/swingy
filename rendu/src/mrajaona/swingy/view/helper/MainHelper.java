@@ -79,6 +79,10 @@ public class MainHelper {
         }
     }
 
+    public static void update() {
+        GUIMain.getScreen().updateTable();
+    }
+
     public static void clean() {
         GUIMain.getScreen().reset();
     }

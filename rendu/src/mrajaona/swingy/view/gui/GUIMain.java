@@ -59,7 +59,7 @@ public class GUIMain {
     private JButton         equipButton;
     private JButton         leaveButton;
 
-    private DecimalFormat   format = new DecimalFormat("#");
+    private static DecimalFormat format = new DecimalFormat("#");
 
     private GUIMain() {
         try {
@@ -494,9 +494,9 @@ public class GUIMain {
             data[4][1] = helmLocale.get(hero.getHelm().getName())     + " (" + Integer.toString(hero.getHelm().getModifier())   + ")";
             data[5][1] = armorLocale.get(hero.getArmor().getName())   + " (" + Integer.toString(hero.getArmor().getModifier())  + ")";
             data[6][1] = weaponLocale.get(hero.getWeapon().getName()) + " (" + Integer.toString(hero.getWeapon().getModifier()) + ")";
-            data[7][1] = Integer.toString(hero.getAttack());
-            data[8][1] = Integer.toString(hero.getDefense());
-            data[9][1] = Integer.toString(hero.getHitPoints()) + " / " + Integer.toString(hero.getMaxHitPoints());
+            data[7][1] = Integer.toString(hero.getBaseAttack());
+            data[8][1] = Integer.toString(hero.getBaseDefense());
+            data[9][1] = Integer.toString(hero.getBaseHitPoints()) + " / " + Integer.toString(hero.getMaxHitPoints());
 
             fireTableDataChanged();
         }

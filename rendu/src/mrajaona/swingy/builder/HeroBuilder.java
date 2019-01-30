@@ -200,6 +200,15 @@ public class HeroBuilder {
             throw (new HeroBuilderException());
         }
 
+        if (
+               loaded.getAttack()       != loaded.getBaseAttack()   + loaded.getWeapon().getModifier()
+            || loaded.getDefense()      != loaded.getBaseDefense()  + loaded.getArmor().getModifier()
+            || loaded.getMaxHitPoints() != loaded.getMaxHitPoints() + loaded.getHelm().getModifier()
+            || loaded.getHitPoints() > loaded.getMaxHitPoints()
+            ) {
+            throw (new HeroBuilderException());
+        }
+
         return (
         setId(loaded.getId())
         .setHeroName      (loaded.getHeroName())
@@ -212,9 +221,9 @@ public class HeroBuilder {
         .setHelm          (new HelmData(loaded.getHelm()))
         .setArmor         (new ArmorData(loaded.getArmor()))
         .setWeapon        (new WeaponData(loaded.getWeapon()))
-        .setAttack        (baseAttack + weapon.getModifier())
-        .setDefense       (baseDefense + armor.getModifier())
-        .setMaxHitPoints  (baseHitPoints + helm.getModifier())
+        .setAttack        (loaded.getAttack())
+        .setDefense       (loaded.getDefense())
+        .setMaxHitPoints  (loaded.getHitPoints())
         .setHitPoints     (maxHitPoints)
         .build(false));
     }
@@ -248,11 +257,11 @@ public class HeroBuilder {
             if (stats == null) {
                 heroClass = new String();
             } else {
-                baseAttack    = stats.getAtk() * 5;
+                baseAttack    = 5 * stats.getAtk();
                 attack        = baseAttack;
-                baseDefense   = stats.getDef() * 5;
+                baseDefense   = 5 * stats.getDef();
                 defense       = baseDefense;
-                baseHitPoints = stats.getHp() * 5 * 5;
+                baseHitPoints = 5 * stats.getHp() * 5;
                 maxHitPoints  = baseHitPoints;
                 hitPoints     = baseHitPoints;
             }

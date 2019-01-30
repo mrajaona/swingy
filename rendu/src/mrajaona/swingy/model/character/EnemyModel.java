@@ -64,7 +64,7 @@ public class EnemyModel {
         String name     = keyList.get(rand.nextInt(keyList.size()));
         int    mapLevel = GameData.getData().getMap().getLevel();
         int    modifier = (mapLevel/2) + ((rand.nextInt(6) + 1) - 3);
-        modifier = modifier < 1 ? 1 : modifier;
+        modifier = modifier < 1 ? 3 : modifier * 3;
 
         ArtifactData artifact;
         switch (type) {

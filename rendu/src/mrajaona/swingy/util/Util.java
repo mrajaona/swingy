@@ -141,18 +141,30 @@ public class Util {
 
     // Enemy types
 
-    public static final String ENEMY_SLIME   = "slime";
-    public static final String ENEMY_GOBLIN  = "goblin";
+    public static final String ENEMY_SLIME       = "slime";
+    public static final String ENEMY_GOBLIN      = "goblin";
+    public static final String ENEMY_KOBOLD      = "kobold";
+    public static final String ENEMY_PIXIE       = "pixie";
+    public static final String ENEMY_METAL_SLIME = "metal slime";
+    public static final String ENEMY_ORC         = "orc";
     public static final String [] enemyTypes = {
-            ENEMY_SLIME,
-            ENEMY_GOBLIN
+        ENEMY_SLIME,
+        ENEMY_GOBLIN,
+        ENEMY_KOBOLD,
+        ENEMY_PIXIE,
+        ENEMY_METAL_SLIME,
+        ENEMY_ORC
     };
 
     // Enemy base stats
 
     public static enum EnemyBaseStats {
-        SLIME_BASE_STATS(100, 2, 2, 10),
-        GOBLIN_BASE_STATS(250, 6, 5, 15);
+        SLIME_BASE_STATS       (100, 0, 0,  1),
+        GOBLIN_BASE_STATS      (250, 6, 2,  2),
+        KOBOLD_BASE_STATS      (270, 7, 2,  3),
+        PIXIE_BASE_STATS       (200, 3, 1,  5),
+        METAL_SLIME_BASE_STATS (500, 0, 10, 5),
+        ORC_BASE_STATS         (300, 8, 5,  2);
 
         @Getter int exp;
         @Getter int atk;

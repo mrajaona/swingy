@@ -18,8 +18,12 @@ public class ArtifactResource_fr extends ListResourceBundle {
                 "ArmorList",
                 new ResourceMap(
                     new String[][] {
-            			{"none",   "rien"},
-            			{"shirt",  "chemise"}
+            			{"none", "rien"},
+                        {"shirt", "chemise"},
+                        {"robe", "robe"},
+                        {"tunic", "tunique"},
+                        {"suit and tie", "costard cravate"},
+                        {"swimsuit", "maillot de bain"}
                     }
                 )
             },
@@ -28,8 +32,11 @@ public class ArtifactResource_fr extends ListResourceBundle {
                 "HelmList",
                 new ResourceMap(
                     new String[][] {
-            			{"none",   "rien"},
-            			{"hat",    "chapeau"}
+            			{"none", "rien"},
+                        {"hat", "chapeau"},
+                        {"straw hat", "chapeau de paille"},
+                        {"winged cap", "casquette à ailes"},
+                        {"night cap", "bonnet de nuit"}
                     }
                 )
             },
@@ -38,8 +45,12 @@ public class ArtifactResource_fr extends ListResourceBundle {
                 "WeaponList",
                 new ResourceMap(
                     new String[][] {
-            			{"none",   "rien"},
-            			{"sword",  "épée"}
+            			{"none", "rien"},
+                        {"sword", "épée"},
+                        {"master sword", "épée de légende"},
+                        {"lance", "lance"},
+                        {"axe", "hache"},
+                        {"bow", "arc"}
                     }
                 )
             },
