@@ -240,7 +240,7 @@ public class GUINew {
             // Panel for hero info
             {
                 mainPanel = new JSplitPane(
-                    JSplitPane.VERTICAL_SPLIT,
+                    JSplitPane.HORIZONTAL_SPLIT,
                     false,
                     heroStatsScrollPane,
                     inputPanel
