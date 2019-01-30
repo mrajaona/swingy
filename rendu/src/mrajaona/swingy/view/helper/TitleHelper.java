@@ -80,7 +80,6 @@ public class TitleHelper {
             String[] line;
 
             line = ConsoleView.getSplitInput();
-            System.out.println("input: " + line == null ? "(null)" : line.length);
             TitleScreenController.delocalize(line);
         } else if (GameData.getData().getViewType().equals(ViewTypes.GUI)) {
             ; // GUI waits for user to click somewhere
