@@ -152,8 +152,10 @@ public class GUITitle {
                 controlPanel.add(loadButton);
                 controlPanel.add(deleteButton);
 
-                localize();
             }
+
+            localize();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -282,7 +284,7 @@ public class GUITitle {
             data[6][0] = locale.getString("weapon");
             data[7][0] = locale.getString("attack");
             data[8][0] = locale.getString("defense");
-            data[9][0] = locale.getString("maxHitPoints");
+            data[9][0] = locale.getString("hitPoints");
 
             updateTable(hero);
         }

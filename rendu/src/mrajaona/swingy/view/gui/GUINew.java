@@ -107,7 +107,6 @@ public class GUINew {
                                 createButton.doClick();
                         }
                     });
-
                 }
 
                 {
@@ -143,6 +142,7 @@ public class GUINew {
                     paramsPanel.add(nameField, c);
                 }
             }
+
             // Panel for buttons
             {
                 controlPanel = new JPanel();

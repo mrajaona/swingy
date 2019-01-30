@@ -67,6 +67,7 @@ public class GUIMain {
             // Console
             {
                 consoleArea = new JTextArea();
+                consoleArea.setEditable(false);
                 DefaultCaret caret = (DefaultCaret) consoleArea.getCaret();
                 caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
                 consolePane = new JScrollPane(consoleArea);

@@ -161,9 +161,11 @@ public class HeroBuilder {
 
         while (hero == null) {
             if (heroClass == null || heroClass.trim().isEmpty()) {
+                BuildHelper.listClasses();
                 heroClass = BuildHelper.ask(locale.getString("msgCreateHeroClass"));
             }
             if (heroName == null || heroName.trim().isEmpty()) {
+                BuildHelper.listClasses();
                 heroName = BuildHelper.ask(locale.getString("msgCreateHeroName"));
             }
             hero = build(true);

@@ -12,6 +12,10 @@ public class HeroResource_fr extends ListResourceBundle {
             {"msgCreateHeroClass", "Choisissez votre classe (guerrier, voleur, magicien, prêtre) :"},
             {"msgCreateHeroName", "Nommez votre héro :"},
 
+            {"msgListClasses", "Voici les classes disponibles :"},
+            {"msgClass", "> %1$s : ATQ %2$d, DEF %3$d, PV %4$d"},// class, atk, def, hp
+            {"msgLevel", "Tous les héros commencent au niveau 1, avec 0 EXP."},
+
             /* Objects */
             // Classes
             {

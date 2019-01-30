@@ -15,7 +15,7 @@ public class StatResource_fr extends ListResourceBundle {
             {"armor",         "Armure"},
             {"weapon",        "Arme"},
             {"level",         "Niveau"},
-            {"experience",    "XP"},
+            {"experience",    "EXP"},
             {"baseAttack",    "ATQ de base"},
             {"baseDefense",   "DEF de base"},
             {"baseHitPoints", "PV de base"},
