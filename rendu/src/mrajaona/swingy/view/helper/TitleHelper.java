@@ -95,7 +95,6 @@ public class TitleHelper {
         ResourceBundle artifactLocale = ResourceBundle.getBundle( "mrajaona.swingy.locale.ArtifactResource", GameData.getData().getLocale() );
 
         ConsoleView.println(
-            System.lineSeparator() +
             locale.getString("id")            + " : " + Long.toString(hero.getId()) + System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
             locale.getString("class")         + " : " + ((ResourceMap) heroLocale.getObject("ClassesList")).get(hero.getHeroClass()) + System.lineSeparator() +
@@ -124,7 +123,7 @@ public class TitleHelper {
                                     GameData.getData().getLocale()
                                     );
 
-        ConsoleView.println(locale.getString("title"));
+        ConsoleView.println(locale.getString("title") + System.lineSeparator());
     }
 
     public static void reload() throws SQLException, IOException, LoadHeroListException {
