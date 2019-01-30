@@ -16,7 +16,7 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"deleteButton", "Supprimer"},
 
             // New
-            {"createButton", "Creer"},
+            {"createButton", "Créer"},
             {"cancelButton", "Annuler"},
 
             // Main
@@ -26,15 +26,15 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"leaveButton",  "Laisser"},
 
             // Win
-            {"winLabel", "Felicitations, vous avez gagne !"},
+            {"winLabel", "Félicitations, vous avez gagné !"},
+            {"autoSaveLabel",  "Votre partie va etre enregistrée."},
             {"titleButton", "Ecran titre"},
             {"continueButton", "Nouvelle carte"},
 
             // Game Over
-            {"loseLabel",      "Votre heros est vaincu."},
-            {"autoSaveLabel",  "Votre partie va etre enregistree."},
+            {"loseLabel",      "Votre héros est vaincu."},
             {"giveUpButton",   "Ecran titre"},
-            {"reloadButton",   "Derniere sauvegarde"},
+            {"reloadButton",   "Dernière sauvegarde"},
 
             // Menu
             {"menu", "Menu"},
@@ -52,24 +52,24 @@ public class InterfaceResource_fr extends ListResourceBundle {
             {"msgGetInput",   "Vous êtes en position [%1$d, %2$d]. Que voulez-vous faire ?"}, // x, y
             {"msgMove",       "%1$s va dans la direction %2$s."}, // hero name, direction
 
-            {"msgEncounter", "Un %2$s de niveau %1$d apparait !"}, // level, enemy type
+            {"msgEncounter", "Un %2$s de niveau %1$d apparaît !"}, // level, enemy type
 
             {"msgRun",        "%1$s tente de fuir..."}, // hero name
-            {"msgRunFail",    "...mais echoue."},
-            {"msgRunSuccess", "...et reussit !"},
+            {"msgRunFail",    "...mais échoue."},
+            {"msgRunSuccess", "...et réussit !"},
 
             {"msgAttack",     "%1$s attaque."}, // hero name / enemy type
-            {"msgDamage",     "%1$s recoit %2$d degats."}, // hero name / enemy type, damage
+            {"msgDamage",     "%1$s reçoit %2$d dégâts."}, // hero name / enemy type, damage
             {"msgDied",       "%1$s est mort."}, // hero name / enemy type
 
             {"msgDrop",       "L'ennemi a fait tomber un/une %1$s. (%2$s : %3$s + %4$d)"}, // artifact name, type, stat, modifier
-            {"msgEquip",      "%1$s equipe le/la %2$s."}, // hero name, artifact name
-            {"msgUnequip",    "%1$s desequipe le/la %1$s."}, // hero name, artifact name
+            {"msgEquip",      "%1$s équipe le/la %2$s."}, // hero name, artifact name
+            {"msgUnequip",    "%1$s déséquipe le/la %1$s."}, // hero name, artifact name
             {"msgLeave",      "L'artefact disparait dans un nuage magique."},
 
-            {"msgLvlUp",      "%1$s est monte au niveau %2$d !"}, // hero name, level
+            {"msgLvlUp",      "%1$s est monté au niveau %2$d !"}, // hero name, level
 
-            {"msgSave",       "Partie enregistree."},
+            {"msgSave",       "Partie enregistrée."},
 
         };
     }

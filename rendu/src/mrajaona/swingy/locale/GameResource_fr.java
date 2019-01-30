@@ -21,12 +21,12 @@ public class GameResource_fr extends ListResourceBundle {
             {"supprimer",    "delete"},
 
             // new
-            {"creer",        "create"},
+            {"créer",        "create"},
 
             // main
             {"mainCmds",     "-- sauvegarder, aller nord/sud/est/ouest, statut"},
             {"battleCmds",   "-- sauvegarder, combattre, fuir"},
-            {"lootCmds",     "-- sauvegarder, equiper, laisser"},
+            {"lootCmds",     "-- sauvegarder, équiper, laisser"},
 
             {"aller",        "move"},
             {"statut",       "status"},
@@ -35,15 +35,15 @@ public class GameResource_fr extends ListResourceBundle {
             {"combattre",    "fight"},
             {"fuir",         "run"},
 
-            {"equiper",      "equip"},
+            {"équiper",      "equip"},
             {"laisser",      "leave"},
 
             // win
-            {"winCmds",      "-- titre, continuer (nouvelle carte) (votre partie sera sauvegardee)"},
+            {"winCmds",      "-- titre, continuer (nouvelle carte) (votre partie sera sauvegardée)"},
             {"continuer",    "continue"},
 
             // game over
-            {"gameOverCmds", "-- titre, recharger (votre partie ne sera pas sauvegardee)"},
+            {"gameOverCmds", "-- titre, recharger (votre partie ne sera pas sauvegardée)"},
             {"recharger",    "reload"},
 
             {"titre",        "title"}

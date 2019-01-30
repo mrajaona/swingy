@@ -39,7 +39,7 @@ public class ArtifactResource_fr extends ListResourceBundle {
                 new ResourceMap(
                     new String[][] {
             			{"none",   "rien"},
-            			{"sword",  "epee"}
+            			{"sword",  "épée"}
                     }
                 )
             },
