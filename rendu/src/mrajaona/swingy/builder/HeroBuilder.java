@@ -178,9 +178,9 @@ public class HeroBuilder {
 
         HeroData hero = null;
 
-            if ( (heroClass == null || heroClass.trim().isEmpty())
-                || (heroName == null || heroName.trim().isEmpty()) )
-                return null;
+        if ( (heroClass == null || heroClass.trim().isEmpty())
+            || (heroName == null || heroName.trim().isEmpty()) )
+            return null;
 
         this.heroClass = heroClass;
         this.heroName = heroName;

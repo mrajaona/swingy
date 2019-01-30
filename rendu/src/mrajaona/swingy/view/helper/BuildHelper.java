@@ -47,10 +47,10 @@ public class BuildHelper {
 
     public static void listClasses() throws InvalidViewTypeException {
         List<String> typeList = Arrays.asList(Util.heroTypes);
-        String msg;
-        Util.HeroBaseStats stats;
         ResourceBundle locale = ResourceBundle.getBundle( "mrajaona.swingy.locale.HeroResource", GameData.getData().getLocale() );
         printMsg(locale.getString("msgListClasses"));
+        String msg;
+        Util.HeroBaseStats stats;
 
         for (String type : typeList) {
             stats = Util.HERO_BASE_STATS_MAP.get(type);
