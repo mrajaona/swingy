@@ -216,6 +216,7 @@ public class GUIMain {
                                 try {
                                     fightButton.setEnabled(false);
                                     runButton.setEnabled(false);
+                                    Window.getWindow().enableMenu(false);
 
                                     String[] args = {
                                         "fight"
@@ -239,6 +240,7 @@ public class GUIMain {
                                 try {
                                     fightButton.setEnabled(false);
                                     runButton.setEnabled(false);
+                                    Window.getWindow().enableMenu(false);
 
                                     String[] args = {
                                         "run"
@@ -380,6 +382,9 @@ public class GUIMain {
     public void show(SubScreen screen) {
         fightButton.setEnabled(true);
         runButton.setEnabled(true);
+        Window window =  Window.getWindow();
+        if (window != null)
+            window.enableMenu(true);
 
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
@@ -497,7 +502,7 @@ public class GUIMain {
             data[6][1] = weaponLocale.get(hero.getWeapon().getName()) + " (" + Integer.toString(hero.getWeapon().getModifier()) + ")";
             data[7][1] = Integer.toString(hero.getBaseAttack());
             data[8][1] = Integer.toString(hero.getBaseDefense());
-            data[9][1] = Integer.toString(hero.getBaseHitPoints()) + " / " + Integer.toString(hero.getMaxHitPoints());
+            data[9][1] = Integer.toString(hero.getHitPoints()) + " / " + Integer.toString(hero.getMaxHitPoints());
 
             fireTableDataChanged();
         }

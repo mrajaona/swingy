@@ -205,10 +205,10 @@ public class HeroBuilder {
         if (
                loaded.getAttack()       != loaded.getBaseAttack()   + loaded.getWeapon().getModifier()
             || loaded.getDefense()      != loaded.getBaseDefense()  + loaded.getArmor().getModifier()
-            || loaded.getMaxHitPoints() != loaded.getMaxHitPoints() + loaded.getHelm().getModifier()
+            || loaded.getMaxHitPoints() != loaded.getBaseHitPoints() + loaded.getHelm().getModifier()
             || loaded.getHitPoints() > loaded.getMaxHitPoints()
             ) {
-            throw (new HeroBuilderException());
+           throw (new HeroBuilderException());
         }
 
         return (

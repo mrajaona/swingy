@@ -203,6 +203,10 @@ public class Window {
         localize();
     }
 
+    public void enableMenu(boolean b) {
+        menu.setEnabled(b);
+    }
+    
     private void resize(int w, int h) {
         frame.setSize(
             w, // width
@@ -233,6 +237,7 @@ public class Window {
         layout.show(cards, screen.toString());
         resize();
 
+        enableMenu(true);
         frame.setVisible(true);
     }
 

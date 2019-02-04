@@ -129,6 +129,19 @@ public class SaveManager {
         closeConnection();
     }
 
+    public void deleteMap(long id) throws SQLException, IOException {
+        openConnection();
+
+        GameMapData map = mapDao.queryForId(id);
+
+        if (map == null) {
+            return ;
+        }
+        mapDao.delete(map);
+
+        closeConnection();
+    }
+
     // ----- Find in db
 
     public List<HeroData> listHeroes() throws SQLException, IOException {

@@ -70,12 +70,11 @@ public class GameMapModel {
                 create = rand.nextInt(5) == 0 ? true : false;
 
                 if (create) {
-                    String enemyType = Util.enemyTypes[rand.nextInt(Util.enemyTypes.length)];
-                    // set enemy level [mapLevel - 3, mapLevel + 3]
-                    int enemyLevel = mapLevel + ((rand.nextInt(6) + 1) - 3);
+                    String enemyType = Util.enemyTypes[rand.nextInt(mapLevel < 5 ? 4 : Util.enemyTypes.length)];
+                    // set enemy level [mapLevel - 3, mapLevel]
+                    int enemyLevel = mapLevel + (rand.nextInt(3 + 1) - 3);
                     // minimum enemy level is 1
-                   enemyLevel = enemyLevel < 1 ? 1 : enemyLevel;
-
+                    enemyLevel = enemyLevel < 1 ? 1 : enemyLevel;
                     enemies.put(
                         new Coord(x, y),
                         new EnemyBuilder().newEnemy(enemyType, enemyLevel)

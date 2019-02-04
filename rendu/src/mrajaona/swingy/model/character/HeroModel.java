@@ -78,7 +78,8 @@ public class HeroModel {
                 hero.getLevel() // %2$d
                 );
             MainHelper.printMsg(msg);
-            System.out.println(msg);
+
+            hero.setMaxHitPoints(hero.getBaseHitPoints() + hero.getHelm().getModifier());
             CharacterModel.fullRecover(hero);
 
             updateStats();
