@@ -160,11 +160,11 @@ public class Util {
 
     public static enum EnemyBaseStats {
         SLIME_BASE_STATS       (100, 0, 0,  1),
-        GOBLIN_BASE_STATS      (250, 6, 2,  2),
-        KOBOLD_BASE_STATS      (270, 7, 2,  3),
-        PIXIE_BASE_STATS       (200, 3, 1,  5),
-        METAL_SLIME_BASE_STATS (500, 0, 10, 5),
-        ORC_BASE_STATS         (300, 8, 5,  2);
+        GOBLIN_BASE_STATS      (200, 5, 2,  2),
+        KOBOLD_BASE_STATS      (230, 5, 3,  2),
+        PIXIE_BASE_STATS       (150, 3, 1,  1),
+        METAL_SLIME_BASE_STATS (600, 0, 10, 3),
+        ORC_BASE_STATS         (300, 6, 5,  2);
 
         @Getter int exp;
         @Getter int atk;
@@ -183,9 +183,12 @@ public class Util {
     private static final Map <String, EnemyBaseStats> initEnemyBaseStatsMap() {
         Map <String, EnemyBaseStats> newMap = new HashMap <String, EnemyBaseStats> (enemyTypes.length);
 
-        newMap.put(ENEMY_SLIME,  EnemyBaseStats.SLIME_BASE_STATS);
-        newMap.put(ENEMY_GOBLIN, EnemyBaseStats.GOBLIN_BASE_STATS);
-
+        newMap.put(ENEMY_SLIME,       EnemyBaseStats.SLIME_BASE_STATS);
+        newMap.put(ENEMY_GOBLIN,      EnemyBaseStats.GOBLIN_BASE_STATS);
+        newMap.put(ENEMY_KOBOLD,      EnemyBaseStats.KOBOLD_BASE_STATS);
+        newMap.put(ENEMY_PIXIE,       EnemyBaseStats.PIXIE_BASE_STATS);
+        newMap.put(ENEMY_METAL_SLIME, EnemyBaseStats.METAL_SLIME_BASE_STATS);
+        newMap.put(ENEMY_ORC,         EnemyBaseStats.ORC_BASE_STATS);
         return (Collections.unmodifiableMap(newMap));
     }
 

@@ -42,6 +42,7 @@ public class WinController {
         map.put("title", new Cmd() {
                 public void run()           throws SQLException, IOException, SwingyException
                                             {
+                                                SaveManager.getManager().deleteMap(GameData.getData().getMap().getId());
                                                 GameMapModel.removeMap();
                                             	SaveManager.getManager().save();
                                             	GameModel.title();
@@ -51,6 +52,7 @@ public class WinController {
         map.put("continue", new Cmd() {
                 public void run()           throws SQLException, IOException, SwingyException
                                             {
+                                                SaveManager.getManager().deleteMap(GameData.getData().getMap().getId());
                                                 GameMapModel.removeMap();
                                                 SaveManager.getManager().save();
                                                 GameMapModel.initMap();

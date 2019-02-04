@@ -75,7 +75,10 @@ public class GameMapBuilder {
     }
 
     public GameMapBuilder setEnemies(HashMap<Coord, EnemyData> enemies) {
-        this.enemies = new HashMap<Coord, EnemyData> (enemies);
+        if (enemies != null)
+            this.enemies = new HashMap<Coord, EnemyData> (enemies);
+        else
+            this.enemies = new HashMap<Coord, EnemyData> ();
         return (this);
     }
 
