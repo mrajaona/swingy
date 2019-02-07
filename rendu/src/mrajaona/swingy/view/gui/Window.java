@@ -206,7 +206,7 @@ public class Window {
     public void enableMenu(boolean b) {
         menu.setEnabled(b);
     }
-    
+
     private void resize(int w, int h) {
         frame.setSize(
             w, // width
