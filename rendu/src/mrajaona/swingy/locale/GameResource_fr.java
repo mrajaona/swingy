@@ -25,8 +25,8 @@ public class GameResource_fr extends ListResourceBundle {
 
             // main
             {"mainCmds",     "-- sauvegarder, aller nord/sud/est/ouest, statut"},
-            {"battleCmds",   "-- sauvegarder, combattre, fuir"},
-            {"lootCmds",     "-- sauvegarder, équiper, laisser"},
+            {"battleCmds",   "-- combattre, fuir"},
+            {"lootCmds",     "-- équiper, laisser"},
 
             {"aller",        "move"},
             {"statut",       "status"},

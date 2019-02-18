@@ -97,8 +97,8 @@ public class TitleHelper {
             locale.getString("id")            + " : " + Long.toString(hero.getId()) + System.lineSeparator() +
             locale.getString("name")          + " : " + hero.getHeroName() + System.lineSeparator() +
             locale.getString("class")         + " : " + ((ResourceMap) heroLocale.getObject("ClassesList")).get(hero.getHeroClass()) + System.lineSeparator() +
-            locale.getString("level")         + " : " + format.format(hero.getExperience()) + " / " + format.format(hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450) + System.lineSeparator() +
-            locale.getString("experience")    + " : " + hero.getExperience() + System.lineSeparator() +
+            locale.getString("level")         + " : " + hero.getLevel() + System.lineSeparator() +
+            locale.getString("experience")    + " : " + format.format(hero.getExperience()) + " / " + format.format(hero.getLevel() * 1000 + Math.pow( (hero.getLevel() - 1), 2) * 450) + System.lineSeparator() +
 
             locale.getString("attack")        + " : " + Integer.toString(hero.getAttack())     + System.lineSeparator() +
             locale.getString("defense")       + " : " + Integer.toString(hero.getDefense())    + System.lineSeparator() +

@@ -25,8 +25,8 @@ public class GameResource_en extends ListResourceBundle {
 
             // main
             {"mainCmds",     "-- save, move north/south/east/west, status"},
-            {"battleCmds",   "-- save, fight, run"},
-            {"lootCmds",     "-- save, equip, leave"},
+            {"battleCmds",   "-- fight, run"},
+            {"lootCmds",     "-- equip, leave"},
 
             {"move",         "move"},
             {"status",       "status"},

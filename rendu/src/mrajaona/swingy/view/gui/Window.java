@@ -203,8 +203,9 @@ public class Window {
         localize();
     }
 
-    public void enableMenu(boolean b) {
-        menu.setEnabled(b);
+    public void enableMenu(boolean bMenu, boolean bSave) {
+        menu.setEnabled(bMenu);
+        saveItem.setEnabled(bSave);
     }
 
     private void resize(int w, int h) {
@@ -237,7 +238,7 @@ public class Window {
         layout.show(cards, screen.toString());
         resize();
 
-        enableMenu(true);
+        enableMenu(true, true);
         frame.setVisible(true);
     }
 
@@ -271,8 +272,13 @@ public class Window {
     }
 
     public void updateMenu() {
-        saveItem.setVisible( GameData.getData().getScreen() == GameScreen.MAIN ? true : false );
-        saveItem.setEnabled( GameData.getData().getScreen() == GameScreen.MAIN ? true : false );
+        if (GameData.getData().getScreen() == GameScreen.MAIN) {
+            saveItem.setVisible(true);
+            saveItem.setEnabled(true);
+        } else {
+            saveItem.setVisible(false);
+            saveItem.setEnabled(false);
+        }
     }
 
     public void update() {

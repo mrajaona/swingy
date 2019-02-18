@@ -216,7 +216,7 @@ public class GUIMain {
                                 try {
                                     fightButton.setEnabled(false);
                                     runButton.setEnabled(false);
-                                    Window.getWindow().enableMenu(false);
+                                    Window.getWindow().enableMenu(false, false);
 
                                     String[] args = {
                                         "fight"
@@ -240,7 +240,7 @@ public class GUIMain {
                                 try {
                                     fightButton.setEnabled(false);
                                     runButton.setEnabled(false);
-                                    Window.getWindow().enableMenu(false);
+                                    Window.getWindow().enableMenu(false, false);
 
                                     String[] args = {
                                         "run"
@@ -384,7 +384,7 @@ public class GUIMain {
         runButton.setEnabled(true);
         Window window =  Window.getWindow();
         if (window != null)
-            window.enableMenu(true);
+            window.enableMenu(true, screen == SubScreen.MAIN ? true : false);
 
         CardLayout layout = (CardLayout) cards.getLayout();
         layout.show(cards, screen.toString());
