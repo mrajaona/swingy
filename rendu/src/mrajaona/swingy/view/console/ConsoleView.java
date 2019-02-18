@@ -1,5 +1,8 @@
 package mrajaona.swingy.view.console;
 
+import java.util.Scanner;
+
+import mrajaona.swingy.model.GameModel;
 import mrajaona.swingy.data.GameData;
 
 public class ConsoleView {
@@ -13,7 +16,15 @@ public class ConsoleView {
     // Input
 
     public static String getLowerCaseInput() {
-        return (GameData.getData().getInputScanner().nextLine().toLowerCase(GameData.getData().getLocale()));
+        Scanner scan = GameData.getData().getInputScanner();
+
+        if (!scan.hasNextLine()) { // ctrl-d
+            GameModel.exitGame();
+            return ("");
+        }
+
+
+        return (scan.nextLine().toLowerCase(GameData.getData().getLocale()));
     }
 
     public static String[] getSplitInput() {
